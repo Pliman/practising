@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>td-text-align.html</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			#bars {
+				border-collapse: collapse;
+			}
+			
+			#bars td {
+				border-top: 1px solid red;
+				border-bottom: 1px solid red;
+				width: 100px;
+				height: 50px;
+				text-align: right;
+			}
+			
+			#bars td .bar {
+				width: 2px;
+				height: 50px;
+				cursor: pointer;
+				background-color: #cccccc;
+				text-align: -moz-right !important;
+				text-align: right;
+				float: right;
+			}
+		</style>
+		<script>
+		function enableDrag (div,td){
+			alert(td);
+			this.resizer = new $XResizer( {
+				showGhost : true
+			});
+		
+			this.resizer.track(div);
+			this.resizer.setVisible(true);
+			
+			/* 拖动 */
+			this.dragger = new $XDrag(div, td);
+			this.dragger.addListener("drag_end", function() {
+				if (this.resizable) {
+					this.resizer.reposition();
+				}
+			}.bind(this));
+		};
+		</script>
+
+	</head>
+
+	<body>
+		<table id="bars">
+			<tr>
+				<td id="1st">
+					<div class="bar" onclick="enableDrag(this,this.parent)"></div>
+				</td>
+				<td id="2nd">
+					<div class="bar"></div>
+				</td>
+				<td id="3rd">
+					<div class="bar"></div>
+				</td>
+				<td id="4th">
+					<div class="bar"></div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

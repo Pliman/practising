@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<?xml-stylesheet type="text/xsl" href="book.xsl"?>
+<shoppingcart>
+	<customer>
+		<name>赵子龙</name>
+		<email>Henry@12.com</email>
+		<zipcode>361021</zipcode>
+		<address>成都</address>
+	</customer>
+	<shoppingItem>
+		<item>
+			<itemNo>1001</itemNo>
+			<itemName>三国演义</itemName>
+			<price>30.00</price>
+			<publisher>文艺出版社</publisher>
+		</item>
+		<item>
+			<itemNo>1002</itemNo>
+			<itemName>红楼梦</itemName>
+			<price>120.00</price>
+			<publisher>文艺出版社</publisher>
+		</item>
+	</shoppingItem>
+</shoppingcart>

@@ -1,0 +1,119 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>其他标记与学习总结</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:VML标记学习总结</span>
+
+直到现在，你已经经历了前面24章节VML标记、属性的学习，如果过程中你用心学了、动脑思考了、动手反复测试了、并自认为对VML标记已经很了解了。如果你真是这么想…………，那么我很高兴的告诉你，你已经精通了VML语言、已经熟悉或精通了VML所有标记/属性的50%-95%、具备去教别人的水准了。而我对你的期望值，是你至少已经掌握前面24章节所有涉及的知识、标记、属性的70%，这70%凝聚着VML所有最简单的、最实用的、最重要的。而剩下的那25%很复杂的、不实用的、不重要的，你精通了更好，不精通也没有关系，因为以后你很少会用得到。
+
+前面24章节提及的约70%（较简单、实用的我建议一定精通或掌握）+25%（建议有一定认识/了解），还有剩下的5%（VML最复杂难懂、shape高精度数学/函数绘图相关、最不可能用到的），我会在本章节下面简单的说一说
+
+假如我所描述的70%（例如就包括专用属性参考表红色标识的重要属性），你已经掌握，那么你现在即算完成“精通VML标记”这一大章的学业，已经算是一位VML高手了，否则我劝你在从头到尾、重新温习一下前面所有的24章节，直到会了全部的70%、或对自己有信心了为止。
+
+如果你有更高的追求，可以进阶修行“DVML编程”这一大章，从VML静态绘图向DVML动态编程继续前进、从小用VML跨越到VML与用户互动、动画开发、游戏开发、服务器端程序开发等等。在以后你就可以凭借你的“VML标记知识+DVML编程知识+FlashVml(闪耀之星)”开发任何基于VML的WEB大小应用了。
+
+否则你现在就可以直接使用FlashVml+你所学到的VML标记知识，进行普通的VMLWEB应用了。
+
+<span>2:VML的其他标记</span>
+
+我曾说过VML的强大功用、成熟与完善，前面24节所提及的概念、知识、标记、属性。是综合了我对VML的所有概念、知识、标记、属性的所学，然后精挑细选后又一一整理，按照我认为的难度、逻辑、实用程度进行课程排序。对今后你会较常用到的进行了深入/通俗的分析、讲解，不常用到的也给出了抽象/简单的范例、说明。
+
+另外我所知的VML标记、属性还有一些，有些是不会用到的、意义不大的，还有些有一定应用意义但这些有不少连我也不熟悉、个别的甚至不知怎么用/是什么概念，更不可能在详细的教育、分析于你听了。我只能整理整理，不懂的就全且用W3C提供的英文说明，待汝有用之日来取。
+
+<span>3:path规则与路径 - 二级标记</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=12%>属性名</td><td width=5%>默认值</td><td width=9%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">v</td><td>m l e</td><td>string</td><td>描述shapetype形状模版的路径</td></tr>
+<tr><td>limo</td><td>0,0</td><td>vector2D</td><td>A point along the x and y dimensions of a shape where the shape will limo stretch.</td></tr>
+<tr><td>fillok</td><td>true</td><td>boolean</td><td>暗示一级标记是否有填充</td></tr>
+<tr><td>strokeok</td><td>true</td><td>boolean</td><td>暗示一级标记是否有边框</td></tr>
+<tr><td>shadowok</td><td>true</td><td>boolean</td><td>暗示一级标记是否支持阴影</td></tr>
+<tr><td>arrowok</td><td>false</td><td>boolean</td><td>暗示一级标记是否支持箭头</td></tr>
+<tr><td>gradientshapeok</td><td>false</td><td>boolean</td><td>暗示fill是否依照比例描述gradientradial渐变</td></tr>
+<tr><td style="color:red">textpathok</td><td>false</td><td>boolean</td><td>暗示一级标记是否支持文本路径</td></tr>
+<tr><td>textboxrect</td><td>null</td><td>string</td><td>描述textbox内容与容器内边界的距离</td></tr>
+</table>
+
+该标记还算是有些用处、在某些时候甚至于必须使用，不过有用的概念、知识、实例，前面shape、shapetype、textbox相关的章节已经提及了，在这里不在阐述。
+
+<span>4:formulas - shape、shapetype、path_v函数计算实例</span>
+
+This sub-element may appear inside a shape or a shapetype to define formulas that can vary the path of a shape, its inscribed text rectangles, and connection sites.  Formula values change as the adj values change on the shape.  Formulas can reference other formulas defined earlier in the same formulas element.
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:shape style="Z-INDEX:1;LEFT:271;WIDTH:200;POSITION:absolute;TOP:225;HEIGHT:200" coordsize="21600,21600" filled="t" fillcolor="white" path="m0@0l@1@0@1,0@2,0@2@0,21600@0,10800,21600xe">
+<v:formulas>
+   <v:f eqn="sum #0 0 0"/>
+   <v:f eqn="sum #1 0 0"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+</v:shape>
+</textarea>
+
+<span>5:handles - 计算公式与输出规则定义</span>
+
+This sub-element may appear inside a shape or a shapetype to define user interface elements which can vary the adj values on the shape, thereby changing the value of formulas and the rendering of a path based on formulas and adj values.
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:shape style="Z-INDEX:1;LEFT:271;WIDTH:200;POSITION:absolute;TOP:225;HEIGHT:200" coordsize="21600,21600" filled="t" fillcolor="white" path="m0@0l@1@0@1,0@2,0@2@0,21600@0,10800,21600xe">
+
+<v:handles>
+<v:h position=null polar=null map="0, 1000" invx="false" 
+invy="false" switch="false" xrange="0, 1000" 
+yrange="0, 1000" radiusrange="0, 1000"/>
+</v:handles>
+
+<v:formulas>
+   <v:f eqn="sum #0 0 0"/>
+   <v:f eqn="sum #1 0 0"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+
+</v:shape>
+
+</textarea>
+
+<span>6:office skew歪斜艺术 - 二级标记</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=15%>属性名</td><td width=15%>默认值</td><td width=35%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td>on</td><td>false</td><td>boolean</td><td>暗示一级标记是否支持歪斜</td></tr>
+<tr><td>ext</td><td>view</td><td>edit,view,backwardCompatible</td><td>暗示歪斜被显示的方式</td></tr>
+<tr><td>matrix</td><td>1,0,0,1,0,0</td><td>string</td><td>为歪斜定义一种远景变换</td></tr>
+<tr><td>offset</td><td>0,0</td><td>-0.5-0.5,-0.5-0.5</td><td>描述歪斜的抵销值</td></tr>
+<tr><td>origin</td><td>0,0</td><td>-0.5-0.5,-0.5-0.5</td><td>描述歪斜的起源</td></tr>
+</table>
+
+使用该标记必须定义xmlns:o="urn:schemas-microsoft-com:office:office"名域命名
+
+<span>7:更全面的英文参考 - 来自MSDN、W3C</span>
+
+<a href='http://msdn.microsoft.com/library/default.asp?url=/workshop/author/vml/default.asp'>MSDN-VML首页</a>
+
+<a href='http://msdn.microsoft.com/workshop/author/VML/Shape/introduction.asp'>MSDN-VML参考</a>
+
+<a href='http://www.w3.org/TR/NOTE-VML'>W3C-VML1998最初草案</a>
+
+<center><span>《VML极道教程》第一卷[精通VML语言] 全文完！
+
+2005-2-19 0:42:57 - 沐缘华</span>
+
+</center><p>

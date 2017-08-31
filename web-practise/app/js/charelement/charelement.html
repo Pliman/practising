@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script type="text/javascript" src="../../bower_components/jquery/jquery.js"></script>
+</head>
+<body>
+
+<div id="aa">1<span>2</span></div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		console.log($('#aa').text());
+		console.log($('#aa')[0].firstChild.nodeValue);
+	});
+</script>
+</body>
+</html>

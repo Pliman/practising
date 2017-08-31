@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>Combobox的基本使用方法</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/radiogroup.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+            .thumb {
+                background: #dddddd;
+                padding: 3px;
+            } .thumb table {
+                height: 120px;
+                width: 120px;
+            } .thumb img {
+                border: 1px solid white;
+            } .thumb-wrap {
+                float: left;
+                margin: 4px;
+                margin-right: 0;
+                padding: 5px;
+                width: 130px;
+                height: 144px;
+            } .thumb-wrap span {
+                display: block;
+                overflow: hidden;
+                text-align: center;
+                height: 24px;
+                line-height: 24px;
+            } .x-view-over {
+                border: 1px solid #dddddd;
+                background: #efefef url(../lib/ext/resources/images/default/grid/row-over.gif) repeat-x left top;
+                padding: 4px;
+            } .x-view-selected {
+                background: #eff5fb url(./images/selected.gif) no-repeat right bottom;
+                border: 1px solid #99bbe8;
+                padding: 4px;
+            } .x-view-selected .thumb {
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">Combobox的基本使用方法</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                var datas = [[1, '小学'], [2, '初中'], [3, '高中'], [4, '中专'], [5, '大专'], [6, '大学']];
+                
+                var store = new Ext.data.SimpleStore({
+                    fields: ["retrunValue", "displayText"],
+                    data: datas
+                })
+                
+                var store1 = new Ext.data.Store({
+                    url: 'dataview_action.ashx?act=gridlist',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'filename'
+                    }, {
+                        name: 'classid'
+                    }, {
+                        name: 'filesize',
+                        type: 'int'
+                    }, {
+                        name: 'createtime'
+                    }, {
+                        name: 'width'
+                    }, {
+                        name: 'height'
+                    }, {
+                        name: 'sortorder',
+                        type: "int"
+                    }]),
+                    remoteSort: true
+                }) //store
+                var tpl = new Ext.XTemplate('<tpl for=".">', '<div class="thumb-wrap" id="{id}">', '<div class="thumb"><table border="0"><tr><td align="center" valign="middle">', '<img class="thumb-img" style="width:100px" src="./images/{filename}">', '</td></tr></table></div>', '<span>{title:ellipsis(10)}</span></div>', '</tpl>', '<div class="x-clear"></div>');//tpl
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 860,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: 'Combobox的基本使用方法',
+                    items: [{
+                        xtype: 'combo',
+                        store: store,
+                        valueField: "displayText",
+                        displayField: "displayText",
+                        mode: 'local',
+                        forceSelection: false,
+                        blankText: '请选择学历',
+                        emptyText: '选择学历',
+                        editable: false,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        fieldLabel: '显示值与正式值相同',
+                        name: 'education1',
+                        anchor: '90%',
+                        value: '小学'
+                    }, {
+                        xtype: 'combo',
+                        store: store,
+                        valueField: "retrunValue",
+                        displayField: "displayText",
+                        mode: 'local',
+                        forceSelection: true,
+                        blankText: '请选择学历',
+                        emptyText: '选择学历',
+                        hiddenName: 'education3',
+                        editable: true,
+                        typeAhead: true,
+                        selectOnFocus: true,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        fieldLabel: '显示值与正式值不同',
+                        name: 'education2',
+                        anchor: '90%',
+                        value: 5
+                    }, {
+                        xtype: 'combo',
+                        store: datas,
+                        mode: 'local',
+                        forceSelection: true,
+                        blankText: '请选择学历',
+                        emptyText: '选择学历',
+                        hiddenName: 'education5',
+                        editable: true,
+                        typeAhead: true,
+                        selectOnFocus: true,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        fieldLabel: '数组作为数据源',
+                        name: 'education4',
+                        anchor: '90%'
+                    }, {
+                        xtype: 'combo',
+                        store: store1,
+                        mode: 'remote',
+                        overClass: 'x-view-over',
+                        selectedClass: 'x-view-selected',
+                        itemSelector: 'div.thumb-wrap',
+                        tpl: tpl,
+                        pageSize: 10,
+                        blankText: '请选择图片',
+                        emptyText: '选择图片',
+                        editable: true,
+                        typeAhead: true,
+                        selectOnFocus: true,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        resizable: true,
+                        fieldLabel: '远程数据和模板',
+                        name: 'image',
+                        anchor: '90%',
+                        onSelect: function(record, index){
+                            this.setValue('./images/' + record.data.filename);
+                            this.collapse();
+                            this.fireEvent('select', this, record, index);
+                        }
+                    }, {
+                        layout: 'column',
+                        border: false,
+                        items: [{
+                            columnWidth: .4,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'button',
+                                text: "form.setValues({education1:'高中',education3:3})",
+                                scope: this,
+                                handler: function(){
+                                    frm.form.setValues({
+                                        education1: '高中',
+                                        education3: 3
+                                    });
+                                    Ext.get('op').dom.value += "执行：frm.form.setValues({education1:'高中',education3:3})\n";
+                                }
+                            }]
+                        }, {
+                            columnWidth: .4,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'button',
+                                text: "form.setValues({education1:'高中',education2:3})",
+                                scope: this,
+                                handler: function(){
+                                    frm.form.setValues({
+                                        education1: '高中',
+                                        education2: 3
+                                    });
+                                    Ext.get('op').dom.value += "执行：frm.form.setValues({education1:'高中',education2:3})\n";
+                                }
+                            }]
+                        }, {
+                            columnWidth: .2,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'button',
+                                text: "form.getValues()",
+                                scope: this,
+                                handler: function(){
+                                    Ext.get('op').dom.value += "执行：frm.form.getValues()\n" +
+                                    '结果：' +
+                                    Ext.encode(frm.form.getValues()) +
+                                    '\n';
+                                }
+                            }]
+                        }]
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+            })
+        </script>
+    </body>
+</html>

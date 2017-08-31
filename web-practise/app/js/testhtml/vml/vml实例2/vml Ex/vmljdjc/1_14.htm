@@ -1,0 +1,122 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>shape与curve曲线</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:shape曲线 - 详解</span>
+
+也许你会问我：“shape你不是说是多边形么？怎么又成了曲线？”，其实，shape翻译中文的意思即是“形状”，也就是说它能绘制圆形、矩形、圆角矩形、多边型、甚至于曲线！等等形状……，不过它的形状用标记参数描述起来很复杂，而且VML又有专门用于设计圆形oval、矩形rect、圆角矩形roundrect、曲线curve、多边形polyline的标记。
+
+我是挑选了相对较复杂、有一定缺陷(像不支持CSS的width、height定义宽高度)的polyline(多边形)做写照，在前面章节内讲解shape绘制多边形的例子（你发现，跟polyline绘制出的效果差不多吧？）
+
+说到这里，你不会骂我错教了你吧？其实那，这也就是我取名《VML极道教程》所谓的“极道”特征之一。让你循序渐进、让你掌握知识、让你不知不觉间已有很大的长进。而你长进到此时，在突然告诉你其实XX标记还有更深层的知识，使你不至于一开始就接触这些难于理解、难于学习的“深层知识”。好了，现在就告诉你shape怎么绘制曲线
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:shape style="Z-INDEX:1;LEFT:100;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 c130,-90,30,90,150,180 e"/>
+<v:shape style="Z-INDEX:1;LEFT:271;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 c130,-90,30,90,160,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:500;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 c130,-90,30,90,160,0,-80,50,30,190,220,-50 x e"/>
+<v:shape style="Z-INDEX:1;LEFT:350;WIDTH:100;POSITION:absolute;TOP:400;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l50,-60,100,0,50,60,0,0 c-130,-90,-30,90,130,180 e"/>
+</textarea>
+
+结合你以前学的shape绘制多边型的知识，看看此次path的参数有何异同（别急着就去分析 0,0,50,60等等，先看看英文字母）？显然不同的是m l e换成了m c e！呵呵，聪明人、或者IT精英也许现在该看出来了…………，l其实就是line、而c其实就是curve的简写形式……。而相同的m表示偏移XY交点多少像素，我们姑且可以理解为开始绘制形状、最后e即表示结束绘制
+
+在注意看第三个标记，e结束语句前多了个x字母，而运行效果很明显的说明了这个x字母的作用，即是关闭当前正绘制的曲线，并自动创建最后一条线与其点相连。
+
+在看最后一个标记，是m l c e的混血结构，也就是说即有多边型又有曲线…………
+
+好了，path还有更多有用的字母，而且用途各异，参考表是（该参考表转载自WWW最高协会网站，只有E文的资料。我之前研究时费了很大力气、更不懂英文，只是参透像m l c x e t r v at ar nf nr等，有几个的实在没能在参透……，所谓 名师亦非神人也、诸葛也败祁山间，这就要看你自己的学习、理解了）。篇幅问题只提供参考表目，不一一提供演示（shape的path属性如果要一一详细解释起来？至少要撰写5个章节，况且shape在实际应用相当难于编写、而VML又有可以替代它的更好用的图形标记。以下表目主要针对提供给VML高级开发人员）
+
+<div style='height:300;overflow-y:scroll'>
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='border-Collapse:collapse;text-align:center;overflow-y:scroll'><tr><td>字母</td><td>名称</td><td>参数序列 *代表支持延伸</td><td width=50%>说明</td></tr>
+<tr><td style="color:red">m</td><td>moveto</td><td>2</td><td align=left>Start a new sub-path at the given (x,y) coordinate</td></tr>
+<tr><td style="color:red">l</td><td>lineto</td><td>2*</td><td align=left>Draw a line from the current point to the given (x,y) coordinate which becomes the new current point. A number of coordinate pairs may be specified to form a polyline.</td></tr>
+<tr><td style="color:red">c</td><td>curveto</td><td>6*</td><td align=left>Draw a cubic bézier curve from the current point to the coordinate given by the final two parameters, the control points given by the first four parameters. The current point becomes the end point of the bézier.</td></tr>
+<tr><td style="color:red">x</td><td>close</td><td>0</td><td align=left>Close the current sub-path by drawing a straight line from the current point to the original moveto point.</td></tr>
+<tr><td style="color:red">e</td><td>end</td><td>0</td><td align=left>End the current set of sub-paths. A given set of sub-paths (as delimited by end) is filled using eofill. Subsequent sets of sub-paths are filled independently and superimposed on existing ones.</td></tr>
+<tr><td>t</td><td>rmoveto</td><td>2*</td><td align=left>Start a new sub-path at the coordinate (cpx+x, cpy+y).</td></tr>
+<tr><td>r</td><td>rlineto</td><td>2*</td><td align=left>Draw a line from the current point to the given relative coordinate (cpx+x, cpy+y).</td></tr>
+<tr><td>v</td><td>rcurveto</td><td>6*</td><td align=left>Cubic bézier curve using the given coordinate relative to the current point.</td></tr>
+<tr><td style="color:red">nf</td><td>nofill</td><td>0</td><td align=left>The current set of sub-paths (delimited by end - e) will not be filled.</td></tr>
+<tr><td style="color:red">ns</td><td>nostroke</td><td>0</td><td align=left>The current set of sub-paths (delimited by end - e) will not be filled.</td></tr>
+<tr><td>ae</td><td>angleellipseto</td><td>6*</td><td align=left>center (x,y) size(w,h) start-angle, end-angle. Draw a segment of an ellipse as describes using these parameters. A straight line is drawn from the current point to the start point of the segment.</td></tr>
+<tr><td>al</td><td>angleellipse</td><td>6*</td><td align=left>Same as angleellipseto except that there is an implied moveto the starting point of the segment.</td></tr>
+<tr><td>at</td><td>arcto</td><td>8*</td><td align=left>left, top, right, bottom start(x,y) end(x,y). The first four values define the bounding box of an ellipse. The last four define two radial vectors. A segment of the ellipse is drawn which starts at the angle defined by the start radius vector and ends at the angle defined by the end vector. A straight line is drawn from the current point to the start of the arc. The arc is always drawn in a counterclockwise direction.</td></tr>
+<tr><td style="color:red">ar</td><td>arc</td><td>8*</td><td align=left>left, top, right, bottom start(x,y) end(x,y). Same as arcto however a new sub-path is started by an implied moveto the start point of the arc.</td></tr>
+<tr><td>wa</td><td>clockwisearcto</td><td>8*</td><td align=left>left, top, right, bottom start(x,y) end(x,y). Same as arcto but the arc is drawn in a clockwise direction.</td></tr>
+<tr><td>wr</td><td>clockwisearc</td><td>8*</td><td align=left>left, top, right, bottom start(x,y) end(x,y). Same as arc but the arc is drawn in a clockwise direction</td></tr>
+<tr><td>qx</td><td>ellipticalqaudrantx</td><td>2*</td><td align=left>end(x,y). 
+A quarter ellipse is drawn from the current point to the given end point. The elliptical segment is initially tangential to a line parallel to the x-axis. (i.e. the segment starts out horizontal)
+</td></tr>
+<tr><td>qy</td><td>ellipticalquadranty</td><td>2*</td><td align=left>end(x,y). 
+Same as ellipticalquadrantx except that the elliptical segment is initially tangential to a line parallel to the y-axis. (i.e. the segment starts out vertical)
+</td></tr>
+<tr><td>qb</td><td>quadraticbezier</td><td>2+2*</td><td align=left>(controlpoint(x,y))*, end(x,y) 
+Defines one or more quadratic bézier curves by means of control points and an end point.  Intermediate (on-curve) points are obtained by interpolation between successive control points as in the OpenType font specification.  The sub-path need not be started in which case the sub-path will be closed.  In this case the last point of the sub-path defines the start point of the quadratic bézier.
+</td></tr>
+</table>
+</div>
+
+<span>2:curve曲线 - 专用属性</span>
+
+<table width=100%><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td>from</td><td>null</td><td>Vector2D</td><td>描述曲线起点偏移XY交接点位置</td></tr>
+<tr><td style="color:red">control1</td><td>null</td><td>Vector2D</td><td>描述曲线的第一个曲度</td></tr>
+<tr><td style="color:red">control2</td><td>null</td><td>Vector2D</td><td>描述曲线的第二个曲度</td></tr>
+<tr><td style="color:red">to</td><td>null</td><td>Vector2D</td><td>描述曲线偏移from的X2Y2终点</td></tr>
+</table>
+
+<span>3:curve曲线 - 介绍</span>
+
+curve标记是专门用于创建流畅且线条优美的贝塞尔曲线的，这在现代电脑绘图工作中是不可或缺的绘图算法技术，女性的脸袋、优美的身体曲线、头发、瀑布等等。。但也许你一看到curve的专用属性就会感觉头晕，不过没关系（彼此彼此、正常人的正常反映）。你也许记的初学VML标记时讲的line线，link线也有from、to属性。这里我要告诉你，绘制贝塞尔曲线的第一步就是创建一条线，如下！
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:curve style="Z-INDEX:1;LEFT:300;POSITION:absolute;TOP:200" from="0,0" to="150px,0px" strokecolor="green"/>
+</textarea>
+
+这看起来跟line的写法差不多，而且输出效果也基本一致（from="0,0"可以省略，因为默认就是0,0，我们调整它的意义不大）。不同的就在于control1和control2这两个线条曲度调整属性，请看下面的例子
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:100" to="150px,0px" strokecolor="green" control1="100,50"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:200" to="150px,0px" strokecolor="green" control1="150px,50px"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:300" to="150px,0px" strokecolor="green" control1="0,50"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:400" to="150px,0px" strokecolor="green" control1="-50,50"/>
+</textarea>
+
+请仔细仔细的分析上边的代码，这是单曲度的例子，不难看出control1="100,50"其中的100即表示第一个曲度的X差值为100px、y即表示第一个曲度的Y差值为50px
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:100" to="150px,0px" strokecolor="green" control2="100,50"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:200" to="150px,0px" strokecolor="green" control2="150px,50px"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:300" to="150px,0px" strokecolor="green" control2="0,50"/>
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:400" to="150px,0px" strokecolor="green" control2="-50,50"/>
+</textarea>
+
+请仔细仔细的分析上边的代码，这是单曲度的例子，不难看出control2="100,50"其中的100即表示第二个曲度的X差值为100px、y即表示第二个曲度的Y差值为50px
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:100" to="150px,0px" fillcolor="yellow" control1="75,50" control2="75,-50"/>
+<v:curve style="Z-INDEX:1;LEFT:350;POSITION:absolute;TOP:100" to="0,150px" control1="50,75" control2="-50,75"/>
+
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:300" to="150px,0px" filled='f' control1="75,150" control2="75,-150"/>
+<v:curve style="Z-INDEX:1;LEFT:300;POSITION:absolute;TOP:300" to="150px,0px" fillcolor="green" control1="110,150" control2="110,-150"/>
+
+<v:curve style="Z-INDEX:1;LEFT:100;POSITION:absolute;TOP:500" to="150px,0px" strokeweight=2 control1="300,150" control2="300,0"/>
+<v:curve style="Z-INDEX:1;LEFT:500;POSITION:absolute;TOP:500" to="150px,0px" fillcolor="blue" stroked=f control1="-110,-150" control2="-110,-150"/>
+</textarea>
+
+在请仔细揣摩上边的双曲度例子，这个很难说清楚，如果你不懂曲线学的话，我想我越说只会使你越糊涂……。
+
+也许你会说，这太难掌握了，让我怎么去划画、去实际应用？回答是FlashVml有专门的curve贝塞尔曲线可视化设计工具，通过该工具，你可以“玩转”贝塞尔曲线了。同时也是最好的control1、control2“讲解”工具，你可以边设计曲线、边观察图型VML源码的变化，从而分析出自己的理解、结论，算是你的第二个、不像我一样爱罗嗦的“VML老师”了~。

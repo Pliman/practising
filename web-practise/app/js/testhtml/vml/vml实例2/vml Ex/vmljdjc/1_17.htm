@@ -1,0 +1,93 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>vmlframe图形引用</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:vmlframe图形引用 - 专用属性</span>
+
+<table width=100%><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td style="color:red">src</td><td>#</td><td>idstring</td><td>暗示引用的图形id名称</td></tr>
+<tr><td>clip</td><td>false</td><td>boolean</td><td>当被引用图形较大时，是否裁剪</td></tr>
+<tr><td>size</td><td>0,0</td><td>Vector2D</td><td>当clip=true时，设定裁剪度</td></tr>
+<tr><td>Origin</td><td>0,0</td><td>Vector2D</td><td>不详</td></tr>
+</table>
+
+<span>2:vmlframe图形引用 - 在本页引用</span>
+
+综合前面章节我们所讲述的shape图形知识、shapetype摸版知识，知道其实可以在shapetype摸版内定义任何形状，而后用shape随意引用。但总有它的不足，也许有人会问了，能不能把一个常用的oval圆、rect矩形、curve曲线等当作模版形状隐藏存储起来？而后需要时在引用？
+
+回答是肯定的 - 能，请先看下边的例子运行效果、在仔细分析代码
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<div style="display:none">
+
+<v:rect id="vml01" style="width:20;height:20" fillcolor="red" strokeweight="1px"/>
+<v:oval id="vml02" style="width:20;height:20" fillcolor="blue"/>
+<v:curve id="vml03" from="0,0" control1="-2,-35" control2="50,-10" to="38,-50" filled="t" fillcolor="yellow"/>
+<v:line id="vml04" style="position:absolute;left:150;top:120;" from="0,0" to="50px,0" strokecolor="green"/>
+<v:image id="vml05" style="width:50;height:50" src="shili/fyw1.jpg"/>
+
+</div>
+
+<v:vmlframe src="#vml01" style="width:100;height:100"/>
+<v:vmlframe src="#vml02" style="width:200;height:150"/>
+<v:vmlframe src="#vml03" style="position:absolute;left:350;top:200;width:300;height:300"/>
+<v:vmlframe src="#vml04" style="position:absolute;width:300;height:300"/>
+<v:vmlframe src="#vml05" style="position:absolute;left:20;top:200;width:50;height:50"/>
+<v:vmlframe src="#vml05" style="position:absolute;left:20;top:270;width:100;height:100"/>
+</textarea>
+
+效果证实，不但可以引用，而且还支持控制被引用图形X位置、Y位置、Vector2D/Vector3D输出、大小缩放。首先在&lt;div>内定义了一些常用图形，并用display:none;设置其本身、及所包含的图形全部隐藏。所包含的图形均有一个id命名如vml01，以后就可以用vmlframe标记指定src为#vml01，即表示引用该id对应的图形。
+
+注意vml05那个图像的width宽度为50、height高度为50。第一个vmlframe引用它的标记width、height同样也都是50，即表示不使用缩放。而第二个vmlframe引用它的标记width、height均为100，即表示宽度缩放1倍、高度缩放1倍，所以我们看到的第二个图像就比第一个宽度、高度正好大了一倍。如果相反，模版内图形定义的width、height均比vmlframe引用时定义的高，那么就变成缩放-缩小。或者如果clip属性为true时，配合size进行裁剪等操作。而其距离页面的X、Y位置、position:;等，也均在vmlframe中给予定义。
+
+<span>3:vmlframe图形引用 - 引用其他文件图形</span>
+
+也许又会有人问，VML常用图形可不可以保存为固定文件？然后在其他的页面可以引用它？回答也是肯定的 - 能！
+
+请运行下边的代码
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:vmlframe src="vml1.vml#vml01" style="width:100;height:100"/>
+<v:vmlframe src="vml1.vml#vml02" style="width:200;height:150"/>
+<v:vmlframe src="vml1.vml#vml03" style="position:absolute;left:350;top:200;width:300;height:300"/>
+<v:vmlframe src="vml1.vml#vml04" style="position:absolute;width:300;height:300"/>
+<v:vmlframe src="vml1.vml#vml05" style="position:absolute;left:20;top:200;width:50;height:50"/>
+<v:vmlframe src="vml1.vml#vml05" style="position:absolute;left:20;top:270;width:100;height:100"/>
+</textarea>
+
+你也许很吃惊与第一例的运行效果一样吧，其实你可以打开《VML极道教程》所在的目录，找到vml1.vml文件，打开它看一看你就一目了然了。vml1.vml文件的内容如下
+
+<textarea no>
+<xml xmlns:v="urn:schemas-microsoft-com:vml">
+<v:rect id="vml01" style="width:20;height:20" fillcolor="red" strokeweight="1px"/>
+<v:oval id="vml02" style="width:20;height:20" fillcolor="blue"/>
+<v:curve id="vml03" from="0,0" control1="-2,-35" control2="50,-10" to="38,-50" filled="t" fillcolor="yellow"/>
+<v:line id="vml04" style="position:absolute;left:150;top:120;" from="0,0" to="50px,0" strokecolor="green"/>
+<v:image id="vml05" style="width:50;height:50" src="shili/fyw1.jpg"/>
+</xml>
+</textarea>
+
+vml1.vml文件的内容最简可以写成这种形式
+
+<textarea no>
+<xml>
+<v:rect id="vml01" style="width:20;height:20" fillcolor="red" strokeweight="1px"/>
+<v:oval id="vml02" style="width:20;height:20" fillcolor="blue"/>
+<v:curve id="vml03" from="0,0" control1="-2,-35" control2="50,-10" to="38,-50" filled="t" fillcolor="yellow"/>
+<v:line id="vml04" style="position:absolute;left:150;top:120;" from="0,0" to="50px,0" strokecolor="green"/>
+<v:image id="vml05" style="width:50;height:50" src="shili/fyw1.jpg"/>
+</xml>
+</textarea>
+
+而且不一定非要用.vml做为文件后缀，你完全可以用txt、htm等后缀，只要其内容是如上格式即可，不过为了分类文件明晰，我还是建议你用.vml作为vml图形存储文件的后缀。

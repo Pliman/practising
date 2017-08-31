@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>内部方法之间的调用</title>
+
+  </head>
+  
+  <body>
+    <table id="operatortable">
+    		<tr>
+				<td id=target>
+					111
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input onclick="" type="button" id="innerCall"
+						name="innerCall" value="内部方法之间的调用"
+						style="background: #999999 url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+	</table>
+  </body>
+</html>
+<script type="text/javascript">
+  		var innerCall = function(){
+  			this.aa = '234' ;
+  			this.target = '' ;
+  			this.initaa = function(a,obj){
+  				//this 方法内的this，指向对象  alert(this.aa) ;
+  				this.aa = a ;
+  				this.target = obj ;
+  				var _this = this ; //这里_this 是initaa方法（对象）的一个私有变量而已,改变this，也会改变_this
+  				_this.temp = '456' ;
+  				//_this.aasub = this.aasub ;
+  				//_this.aa = this.aa ;
+  				this.target.attachEvent('onclick', function(){alert(_this.temp + '111');});
+  				this.target.attachEvent('onclick', function(){_this.aasub(_this.aa)}); //此处不能用this.aasub，因为this指向initaa对象，没有aasub方法
+  				this.target.attachEvent('onclick', function(){alert('222');});
+  			}
+  			this.aasub=function(aa){
+  				var sliced = aa.slice(2) ;
+  				alert(sliced) ;
+  			}
+  		}
+  		var callcal = new innerCall() ;
+  		callcal.initaa('hjkl',document.getElementById('innerCall')) ;
+  	</script>

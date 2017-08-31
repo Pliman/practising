@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+	<head>
+		<link href="tab.css" type="text/css" rel="stylesheet">
+		<style>
+			/*html {filter: Gray;}*/
+		<!--
+		-->
+		</style>
+		<script language="Javascript">
+			function changeContent(content){
+				document.getElementById('content').innerHTML = content;
+				//document.getElementById('tabnav').style.borderBottom = '0px solid #11a3ff' ;
+				document.getElementById('menu1').style.borderBottom = '1px solid #11a3ff' ;
+				document.getElementById('menu2').style.borderBottom = '1px solid #11a3ff' ;
+				document.getElementById('menu3').style.borderBottom = '1px solid #11a3ff' ;
+				document.getElementById('menu4').style.borderBottom = '1px solid #11a3ff' ;
+				document.getElementById('menu5').style.borderBottom = '1px solid #11a3ff' ;
+				document.getElementById(content).style.borderBottom = '1px solid #FFFFFF' ;
+			}
+		</script>
+		<title>tab</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body id="home">
+		<ul id="tabnav">
+			<li id="menu1"><a href="#" onclick="changeContent('menu1')">菜单1</a></li>
+			<li id="menu2"><a href="#" onclick="changeContent('menu2')">菜单2</a></li>
+			<li id="menu3"><a href="#" onclick="changeContent('menu3')">菜单3</a></li>
+			<li id="menu4"><a href="#" onclick="changeContent('menu4')">菜单4</a></li>
+			<li id="menu5"><a href="#" onclick="changeContent('menu5')">菜单5</a></li>
+		</ul>
+		<div id="content">
+			inner
+		</div>
+	</body>
+</html>

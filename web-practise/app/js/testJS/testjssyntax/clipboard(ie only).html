@@ -1,0 +1,24 @@
+<HTML> 
+<HEAD> 
+<TITLE>测试操作剪贴板</TITLE> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</HEAD> 
+<script> 
+function copyToClipboard() 
+{ 
+  var d=document.all("source").value; 
+  window.clipboardData.setData('text', d); 
+} 
+
+</script> 
+<BODY > 
+
+<button onclick="copyToClipboard();">拷贝</button> 
+<input type="text" size=20 id="source" value="测试数据"> 
+<br> 
+<button onclick="alert(window.clipboardData.getData('text'));">显示</button> 
+<button onclick="window.clipboardData.clearData('text');">清空</button> 
+
+
+</BODY> 
+</HTML> 

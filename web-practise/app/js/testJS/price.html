@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>阶段2</title>
+<script type="text/javascript">
+alert("here");
+	function count1(){
+		//alert("here");
+		var num=document.myform.num.value;
+		var price=document.myform.price.value;
+		var yunfei=document.myform.yunfei.value;
+		var count1=parseInt(num)*parseFloat(price)+parseFloat(yunfei);
+		document.myform.count.value=count1;
+	}
+</script>
+</head>
+<body>
+<form name="myform" action="" method="post">
+<table border=1 align=center>
+	<tr>
+		<td colspan=5 align=center><b>简易购物车</b></td>
+	</tr>
+	<tr align=center>
+		<td>商品名称</td>
+		<td>数量(件)</td>
+		<td>单价(美元)</td>
+		<td>运费(美元)</td>
+		<td>
+		<input type="button" name="getfeji" value="合计" onclick="count1()">
+		</td>
+	</tr>
+	<tr align=center>
+		<td>跑跑道具</td>
+		<td>
+		<input type="text" name="num">
+		</td>
+		<td>
+		<input type="text" name="price">
+		</td>
+		<td>
+		<input type="text" name="yunfei">
+		</td>
+		<td>
+		<input type="text" name="count">美元
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+<html>

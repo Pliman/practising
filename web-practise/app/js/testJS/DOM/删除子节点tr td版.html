@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+
+		<title></title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<style type="text/css">
+			table td {
+				width:100px;
+				height:100px;
+				background-color:orange;
+				border:1px solid #blue;
+				border-collapse:collapse;
+				margin : 0;
+				padding : 0;
+				text-align:center;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<table>
+			<tr id="container">
+				<td onclick="selectChild(this)">1</td>
+				<td onclick="selectChild(this)">2</td>
+				<td onclick="selectChild(this)">3</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="addChild()" type="button" value="添加子节点" />
+					<input onclick="showCurrentChild()" type="button" value="查看当前节点 " />
+					<input id="remove_button" type="button" value="删除子节点" />
+				</td>
+			</tr>
+		</table>
+	</body>
+	
+	<script type="text/javascript">
+		var parent = document.getElementById('container');
+		
+		function deleteSelectedChild(){
+			var child = arguments[0];
+			alert(child);
+			parent.removeChild(child);
+		};
+		var remove_button = document.getElementById('remove_button');
+		
+		if(remove_button.attachEvent){
+			remove_button.attachEvent('onclick',function(){
+				deleteSelectedChild(selectedChild);
+			});
+		}else{
+			remove_button.addEventListener('click',function(){
+				deleteSelectedChild(selectedChild);
+			},false);
+		}
+		
+		var selectedChild = null;
+		
+		function selectChild(child){
+			selectedChild = child;
+		}
+		
+		function addChild(){
+			var child = document.createElement('div');
+			child.className = 'child';
+			child.onclick = function(){selectChild(child)};
+			parent.appendChild(child);
+		}
+		
+		function showCurrentChild(){
+			alert(selectedChild.innerHTML);
+		}
+ 	</script>
+</html>

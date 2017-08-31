@@ -1,0 +1,71 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HistoryStatistic.aspx.cs" Inherits="VmlProject.HistoryStatistic" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head id="Head1" runat="server">
+    <style type="text/css">
+        v\:*
+        {
+            behavior: url(#default#VML);
+        }
+        o\:*
+        {
+            behavior: url(#default#VML);
+        }
+        body
+        {
+            font-family: arial;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; Charset=UTF-8" />
+    <title>vml柱状3</title>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/PieChart.js" type="text/javascript"></script>
+    <script src="js/RectChart3D.js" type="text/javascript"></script>
+    <script src="js/RectChart.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <div id="div1" style="position:relative; float:left;"></div>
+    <div id="div2" style="position:relative; float:left;margin-left:10px;"></div>
+    <div id="div3" style="position:relative; margin-top:10px; float:left; width:500px; height:300px;"></div>
+    <div id="div4" style="position:relative; float:left;margin-top:10px; margin-left:10px;"></div>
+    </div>
+    <script language="javascript" type="text/javascript">
+    var pData = new Array();
+    for(i=0;i<10;i++)
+    {
+       var   oData=new   Object();   
+       oData[0]=i*100;   
+       oData[1]=Math.random()*10;    
+       pData[i]=oData;
+    } 
+     DrawPieChart("div1",500,300,pData,"3D饼图","元","3D"); 
+     DrawPieChart("div2",500,300,pData,"2D饼图","元","2D");
+     DrawRectChart("div4",pData,500,300,"2D柱图", "天", "元","2D")
+     //////////////////////////////////////////////////////////
+    pData = new Array();
+    var oData;
+    for(i=0;i<16;i++)
+    {
+       oData=new   Object();   
+       oData[0]=i;   
+       oData[1]=i*3;
+       oData[2]=i*6; 
+       oData[3]=i*2; 
+       oData[4]=i*4;       
+       pData[i]=oData;
+    } 
+     var aaa = new RectChart3D('div3',500,300,null,false,null);
+     aaa.SetCaptionAtt('实时监测柱状图',null,null);
+     aaa.SetxAxisAtt('时间',null,null,null,null);
+     aaa.SetyAxisAtt(0,100,2,'值',null,null,null,6,null);
+     aaa.SetData(pData,pData,5,oData);
+     aaa.Draw();
+     aaa.AddRect();
+    </script>
+    </form>
+    </body>
+</html>

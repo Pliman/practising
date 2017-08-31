@@ -1,0 +1,121 @@
+;;; TOOL: run-objdump
+;;; FLAGS: -v --dump-verbose
+(module
+  (type $t (func (param i32)))
+  (func (type $t))
+  (func (param i32 i64))
+  (func (result f64) 
+    f64.const 0)
+  (table anyfunc (elem 0 0 1 2)))
+(;; STDOUT ;;;
+0000000: 0061 736d                                 ; WASM_BINARY_MAGIC
+0000004: 0100 0000                                 ; WASM_BINARY_VERSION
+; section "Type" (1)
+0000008: 01                                        ; section code
+0000009: 00                                        ; section size (guess)
+000000a: 03                                        ; num types
+; type 0
+000000b: 60                                        ; func
+000000c: 01                                        ; num params
+000000d: 7f                                        ; i32
+000000e: 00                                        ; num results
+; type 1
+000000f: 60                                        ; func
+0000010: 02                                        ; num params
+0000011: 7f                                        ; i32
+0000012: 7e                                        ; i64
+0000013: 00                                        ; num results
+; type 2
+0000014: 60                                        ; func
+0000015: 00                                        ; num params
+0000016: 01                                        ; num results
+0000017: 7c                                        ; f64
+0000009: 0e                                        ; FIXUP section size
+; section "Function" (3)
+0000018: 03                                        ; section code
+0000019: 00                                        ; section size (guess)
+000001a: 03                                        ; num functions
+000001b: 00                                        ; function 0 signature index
+000001c: 01                                        ; function 1 signature index
+000001d: 02                                        ; function 2 signature index
+0000019: 04                                        ; FIXUP section size
+; section "Table" (4)
+000001e: 04                                        ; section code
+000001f: 00                                        ; section size (guess)
+0000020: 01                                        ; num tables
+; table 0
+0000021: 70                                        ; anyfunc
+0000022: 01                                        ; limits: flags
+0000023: 04                                        ; limits: initial
+0000024: 04                                        ; limits: max
+000001f: 05                                        ; FIXUP section size
+; section "Elem" (9)
+0000025: 09                                        ; section code
+0000026: 00                                        ; section size (guess)
+0000027: 01                                        ; num elem segments
+; elem segment header 0
+0000028: 00                                        ; table index
+0000029: 41                                        ; i32.const
+000002a: 00                                        ; i32 literal
+000002b: 0b                                        ; end
+000002c: 04                                        ; num function indices
+000002d: 00                                        ; function index
+000002e: 00                                        ; function index
+000002f: 01                                        ; function index
+0000030: 02                                        ; function index
+0000026: 0a                                        ; FIXUP section size
+; section "Code" (10)
+0000031: 0a                                        ; section code
+0000032: 00                                        ; section size (guess)
+0000033: 03                                        ; num functions
+; function body 0
+0000034: 00                                        ; func body size (guess)
+0000035: 00                                        ; local decl count
+0000036: 0b                                        ; end
+0000034: 02                                        ; FIXUP func body size
+; function body 1
+0000037: 00                                        ; func body size (guess)
+0000038: 00                                        ; local decl count
+0000039: 0b                                        ; end
+0000037: 02                                        ; FIXUP func body size
+; function body 2
+000003a: 00                                        ; func body size (guess)
+000003b: 00                                        ; local decl count
+000003c: 44                                        ; f64.const
+000003d: 0000 0000 0000 0000                       ; f64 literal
+0000045: 0b                                        ; end
+000003a: 0b                                        ; FIXUP func body size
+0000032: 13                                        ; FIXUP section size
+
+table.wasm:	file format wasm 0x1
+
+Section Details:
+
+Type:
+ - type[0] (i32) -> nil
+ - type[1] (i32, i64) -> nil
+ - type[2] () -> f64
+Function:
+ - func[0] sig=0
+ - func[1] sig=1
+ - func[2] sig=2
+Table:
+ - table[0] type=anyfunc initial=4 max=4
+Elem:
+ - segment[0] table=0
+ - init i32=0
+  - elem[0] = func[0]
+  - elem[1] = func[0]
+  - elem[2] = func[1]
+  - elem[3] = func[2]
+
+Code Disassembly:
+
+000034 func[0]:
+ 000036: 0b                         | end
+000037 func[1]:
+ 000039: 0b                         | end
+00003a func[2]:
+ 00003c: 44 00 00 00 00 00 00 00 00 | f64.const 0x0p+0
+ 000045: 0b                         | end
+;;; STDOUT ;;)

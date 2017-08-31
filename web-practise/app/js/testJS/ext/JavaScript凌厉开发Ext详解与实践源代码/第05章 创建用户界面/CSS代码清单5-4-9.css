@@ -1,0 +1,8 @@
+/*节点展开时所引用的图标定义*/
+.x-tree-node img.oa-tree-myDesktop-Mail{
+	background:url(myoffice_Mail.gif) no-repeat;
+}
+/*节点闭合时所引用的图标定义*/
+.x-tree-node-collapsed img.oa-tree-myDesktop-Mail{
+	background:url(/myoffice_Mail_collapsed.gif) no-repeat;
+}

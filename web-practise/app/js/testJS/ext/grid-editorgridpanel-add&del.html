@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
+<html> 
+<head> 
+   <title> New Document </title> 
+    <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head> 
+
+<body> 
+
+<br> 
+  <script> 
+
+	Ext.onReady(function(){ 
+	
+	    var cm = new Ext.grid.ColumnModel([ 
+			{header:'编号',dataIndex:'id',editor: new Ext.form.TextField({allowBlank:false}),sortable:true}, 
+			{header:'名称',dataIndex:'name',editor: new Ext.form.TextField({allowBlank:false})}, 
+			{header:'描述',dataIndex:'descn',editor: new Ext.form.TextField({allowBlank:false})} 
+		]); 
+	
+		var data = [ 
+			['1','d','descn1'], 
+			['2','dfg','descn2'], 
+			['3','fg','descn3'], 
+			['4','f','descn4'], 
+			['5','dfg','descn5'] 
+		]; 
+		
+		var store = new Ext.data.Store({ 
+			proxy: new Ext.data.MemoryProxy(data), 
+			reader: new Ext.data.ArrayReader({}, [ 
+			{name:'id'}, 
+			{name:'name'}, 
+			{name:'descn'} 
+			]) 
+		}); 
+		store.load(); 
+		var Record = new Ext.data.Record.create([ 
+			{name:'id',type:'int'}, 
+			{name:'name',type:'string'}, 
+			{name:'descn',type:'string'} 
+		]); 
+		
+		var grid = new Ext.grid.EditorGridPanel({ 
+			renderTo: 'grid', 
+			store: store, 
+			width: 400, 
+			height:200, 
+			cm: cm, 
+			tbar: new Ext.Toolbar(['-', { 
+				text:'添加一行', 
+				handler:function() { 
+					var p = new Record({ 
+					id:'', 
+					name:'', 
+					descn:'' 
+					}); 
+					grid.stopEditing(); 
+					store.insert(0,p); 
+					grid.startEditing(0, 0); 
+				} 
+			},'-', { 
+			text:'删除一行', 
+			handler:function() { 
+				Ext.Msg.confirm('信息','确定要删除？',function(btn) { 
+					if(btn == 'yes') { 
+					var sm = grid.getSelectionModel(); 
+					var cell = sm.getSelectedCell(); 
+					
+					var record = store.getAt(cell[0]); 
+					store.remove(record); 
+					} 
+				}); 
+			} 
+			}, '-']) 
+		}); 
+	}); 
+
+    </script> 
+    <div id="grid"> 
+</div> 
+
+</body> 
+</html> 

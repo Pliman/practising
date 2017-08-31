@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		function appendA(){
+  			//var str = '<a href="http://g.cn">Google</a>' ;
+  			//document.getElementById('target').innerHTML =  str;
+  			var anchorTest =  document.createElement('A') ;
+  			anchorTest.href = 'http://g.cn' ;
+  			anchorTest.innerHTML = 'Google' ;
+  			document.getElementById('target').appendChild(anchorTest) ;
+  		}
+  	</script>
+    <title>appendA</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <table id="operatortable">
+    		<tr>
+				<td id=target>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input onclick="appendA()" type="button" id="idappendA"
+						name="appendA" value="appendA"
+						style="background: #999999 url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+  </body>
+</html>

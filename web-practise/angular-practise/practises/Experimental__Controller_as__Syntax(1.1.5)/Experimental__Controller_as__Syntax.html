@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+</head>
+<body>
+
+<div ng-app="app"ng-controller="RoomCtrl as room">
+	<div class="button" ng-click="room.openDoor()">
+		Open
+	</div>
+
+	<div>{{buttonTitle}}
+		<div ng-controller="OtherCtrl as other">
+			{{room.foo}}
+			{{other.foo}}
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular1.2.0.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

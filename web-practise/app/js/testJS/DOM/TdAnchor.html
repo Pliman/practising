@@ -1,0 +1,57 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>TdAnchor</title>
+		<script type="text/javascript">
+			function ev_add(){
+				var _oprTable = document.getElementById("toobar");
+				var _rows = _oprTable.rows;
+				var _tds = _rows[0].cells;
+				var _td1st = _tds[0];
+				
+				 
+				
+				var _anchors = _td1st.getElementsByTagName("A");
+				var _td1stTagName = _td1st.tagName;
+				var _anchorslen = _anchors.length;
+				for(var i = 0; i < _anchorslen; i++){
+					var element = _anchors[i];
+					var HTMLtype = _anchors[i].tagName;
+					var elementName = element.name;
+					if(HTMLtype == 'A'){
+						var fomerInnerHTML = element.innerHTML;
+						var textToAdd = '</a> <a href="#" id="added">added';
+						element.innerHTML = fomerInnerHTML +  '</a> <a href="#" id="added">added';
+					}
+				}
+				var _anchor1st = _anchors[5];
+				var TOVIEWLAST = "";
+			}
+
+			function ev_delete(){
+				var test = document.getElementById("toobar");
+				var typeEle = typeof test;
+				var TOVIEWLAST = "";
+			}
+		</script>
+	</head>
+	<body>
+		<table id="toobar">
+			<tr>
+				<td>
+				 	<a href="#" id="1" name="1">1</a>
+				 	<a href="#" id="2" name="2">2</a>
+				 	<a href="#" id="3" name="3">3</a>
+				 	<a href="#" id="4" name="4">4</a>
+				 	<a href="#" id="5" name="5">5</a>
+			 	</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="添加" onclick="ev_add()" />
+					<input type="button" value="删除" onclick="ev_delete()" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

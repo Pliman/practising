@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body ng-app="app">
+
+<div ng-controller="AppCtrl">
+	<input type="file" ng-change="aa()" ng-model="a"/>
+	<div>1.3.x?后，对type=file失去作用了</div>
+	<hr />
+	<input ng-model="photo"
+	       onchange="angular.element(this).scope().aa(this)"
+	       type="file" accept="image/*" />
+	<div>使用此方法，可以hack</div>
+	<hr />
+	<input type="text" ng-change="aa1()" ng-model="a"/>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular1.3.8.js"></script>
+<script type="text/javascript" src="ngchange.js"></script>
+</body>
+</html>

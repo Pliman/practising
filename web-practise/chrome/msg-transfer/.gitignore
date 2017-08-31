@@ -1,0 +1,9 @@
+.classpath
+.idea
+.settings
+.gradle
+bin
+build
+.project
+npm-debug.log
+uploads

@@ -1,0 +1,135 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>textpath文本路径</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:textpath文本路径 - 专用属性参考表</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=7%>属性名</td><td width=5%>默认值</td><td width=9%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">on</td><td>false</td><td>boolean</td><td>设置处理是否起效</td></tr>
+<tr><td style="color:red">string</td><td>null</td><td>string</td><td>描述使用的文本</td></tr>
+<tr><td style="color:red">fitpath</td><td>false</td><td>boolean</td><td>描述是否自动缩放文本已占满路径</td></tr>
+<tr><td>fitshape</td><td>false</td><td>boolean</td><td>Stretches the text path out to the edges of the shapebox.</td></tr>
+<tr><td>trim</td><td>false</td><td>boolean</td><td>Removes any additional space reserved for ascenders and descenders if not used.</td></tr>
+<tr><td style="color:red">xscale</td><td>false</td><td>boolean</td><td>Use straight x measurement instead of measuring along the path.</td></tr>
+</table>
+
+<span>2:textpath文本路径 - 实例讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:1;LEFT:149;WIDTH:107;POSITION:absolute;TOP:137;HEIGHT:99" fillcolor="yellow" strokecolor="red" strokeweight="1.5pt"/>
+
+<v:oval style="Z-INDEX:1;LEFT:290;WIDTH:107;POSITION:absolute;TOP:131;HEIGHT:99" filled="t" fillcolor="white" strokecolor="red" strokeweight="1.5pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-SIZE:30;FONT-FAMILY:黑体" on="t" fitpath="f" string="路径文字化"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:477;WIDTH:107;POSITION:absolute;TOP:136;HEIGHT:99" filled="t" fillcolor="white" strokecolor="red" strokeweight="1.5pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-SIZE:30;FONT-FAMILY:宋体" on="t" fitpath="t" string="路径文字化"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:660;WIDTH:107;POSITION:absolute;TOP:140;HEIGHT:99" filled="t" fillcolor="white" strokecolor="red" strokeweight="1.5pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-SIZE:30;FONT-FAMILY:宋体" on="t" fitpath="t" string="IIIIIIIIII"/>
+</v:oval>
+</textarea>
+
+textpath文本路径处理功能是VML一个很实用、很有用的二级标记，也许你还很陌生，所以这一章节我要详细的讲述它。
+
+对于以上代码的分析：
+1:应用textpath文本路径，必须增加&lt;path textpathok="t"/>这个二级标记，它表示生成该图形文本路径，否则不行。
+2:文字的颜色，继承其载体(oval)的strokecolor边框颜色属性
+3:文字的粗度，继承其载体的strokeweight边框粗度属性
+4:文字的背景，继承其载体的fillcolor填充属性，只是未放大看不出来，不过我会在接下的例子演示
+5:第一个处理的fitpath="f"，表示文字不自动缩放占满整个路径，文字大小以CSS的font-size:;定义为30px，由于字数少所以它未占满
+6:而其他的fitpath="t"的，运行效果表示，它们都可以自动缩放占满整个路径，而相对CSS定义的font-size字大小为50px就无效了
+7:由于其on属性默认为false，所以我们必须增加on="t"表示textpath文本路径处理起作用
+
+在继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:line style="Z-INDEX:1;LEFT:220;POSITION:absolute;TOP:128" from="0,0" to="135pt,-11.25pt" filled="t" fillcolor="#f9ec18" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath on="t" fitpath="t" string="VML极道教程"/>
+</v:line>
+
+<v:line style="Z-INDEX:1;LEFT:212;POSITION:absolute;TOP:211" from="0,0" to="346.5pt,-37.5pt" filled="t" fillcolor="#f9ec18" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath on="t" fitpath="t" string="VML极道教程"/>
+</v:line>
+
+<v:rect style="Z-INDEX:1;LEFT:232;WIDTH:269;POSITION:absolute;TOP:302;HEIGHT:167" filled="t" fillcolor="#5aea81" strokecolor="#2174ff" strokeweight=".75pt"> <v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Wingdings" on="t" fitpath="t" string="dasjkvklGHBGJGT"/>
+<v:fill type="gradientRadial" opacity=".8" color2="#f32098"/>
+</v:rect>
+</textarea>
+
+对于以上代码的分析：
+1:这次你应该看出文字的背景是继承其载体fillcolor="yellow"黄色的
+2:而且line线也支持路径（其实curve,shape,roundrect等均支持文本路径，只有image,textbox不支持文本路径）
+3:最后一个输出了好多的图形，这是因为CSS用FONT-FAMILY:;将它的字体定义为“Wingdings”。Wingdings是一种图形字体，其他还有“Wingdings 2、Wingdings 3、Webdings、Marlett”字体均为图形字体
+4:最后一个还追加了fill填充渐变颜色效果，使图形字体看起来更好看
+
+在继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:curve style="Z-INDEX:1;LEFT:199;POSITION:absolute;TOP:175" control1="15pt,-90pt" control2="271.5pt,73.5pt" to="405.75pt,-26.25pt" filled="t" fillcolor="#f9ec18" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Wingdings" on="t" fitpath="t" string="JKLMNOPQ"/>
+</v:curve>
+
+<v:curve style="Z-INDEX:1;LEFT:194;POSITION:absolute;TOP:280" control1="15pt,-90pt" control2="271.5pt,73.5pt" to="405.75pt,-26.25pt" filled="t" fillcolor="#2b2ae3" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Wingdings" on="t" fitpath="t" string="JKLMNOPQ"/>
+<v:extrusion on="t" backdepth="20pt" color="#e9fd92" diffusity="1.1"/>
+<v:fill type="gradientRadial" opacity=".8" color2="#fa7b4c"/>
+</v:curve>
+
+<v:curve style="Z-INDEX:1;LEFT:203;POSITION:absolute;TOP:409" from="0,0" control1="15pt,-90pt" control2="271.5pt,73.5pt" to="405.75pt,-26.25pt" filled="t" fillcolor="#2b2ae3" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Wingdings" on="t" fitpath="t" string="JKLMNOPQ"/>
+<v:extrusion on="t" backdepth="20pt" color="#e9fd92" diffusity="1.1" rotationangle="14,-84"/>
+<v:fill type="gradientRadial" opacity=".8" color2="#fa7b4c"/>
+</v:curve>
+</textarea>
+
+对于以上代码的分析：
+1:这次你看到的就是更多的图形字体，并演示他们按照曲线的轨迹路径排列
+2:第二个则同时增加了填充、立体效果，使图形更加的好看
+3:第三个则使用了extrusion的rotationangle属性让立体以不同的角度呈现
+
+在继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:1;LEFT:286;WIDTH:147;POSITION:absolute;TOP:5;HEIGHT:163" filled="t" fillcolor="#f9ec18" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Webdings" on="t" fitpath="t" string="&#251;"/>
+<v:extrusion on="t" foredepth="0" backdepth="15pt" color="#e9fd92" diffusity="1.1"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:284;WIDTH:153;POSITION:absolute;TOP:258;HEIGHT:155" filled="t" fillcolor="yellow" strokecolor="#2174ff" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:Webdings" on="t" fitpath="t" string="&#251;"/>
+<v:fill src="shili\fyw2.jpg" type="frame" opacity=".8"/>
+<v:extrusion on="t" foredepth="0" backdepth="15pt" color="#e9fd92" diffusity="1.1"/>
+</v:oval>
+</textarea>
+
+对于以上代码的分析：
+1:也许你惊呼“VML世界地图”！？其实也没什么好惊讶的，这只不过是textpath使用了Webdings字体而且只用了一个字母，而后我们给它增加了立体，使它有立体感
+2:而第二个我们又给其增加了fill背景填充，它更加好看了而已，你甚至还可以换成gif动画……
+3:综合以上所有例子，由次可见textpath的有用之处了吧？？？
+4:你如果想知道所有的“Wingdings、Wingdings 2、Wingdings 3、Webdings、Marlett”字体，可以从LD5的“工具”菜单选择“综合工具包”，该工具包里即有这方面资料。或者你直接点击<a href="tools.html" target="_blank">此处</a>打开（我以将该工具追加于VML极道教程之中^-^）。

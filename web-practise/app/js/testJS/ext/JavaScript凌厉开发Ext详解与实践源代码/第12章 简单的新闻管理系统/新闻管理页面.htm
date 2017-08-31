@@ -1,0 +1,736 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>新闻管理页面</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" xmlns="" />
+        <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/application.css" />
+    </head>
+    <script type="text/javascript" src="lib/ext/ext-base.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/ext-all.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/Ext.ux.treecombobox.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/RowExpander.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/searchfield.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/ux/miframe-min.js">
+    </script>
+    <script type="text/javascript" src="lib/tiny_mce/tiny_mce.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/Ext.ux.TinyMCE.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/locale/ext-lang-zh_CN.js">
+    </script>
+    <body scroll="no">
+        <div id="loading-mask">
+        </div>
+        <div id="loading">
+            <div class="loading-indicator">
+                <img alt="" src="lib/ext/resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle"/>正在加载...
+            </div>
+        </div>
+        <script type="text/javascript">
+            
+            var app = {}
+            Ext.ux.TinyMCE.initTinyMCE({
+                language: "zh"
+            });
+            
+            Ext.onReady(function(){
+                Ext.BLANK_IMAGE_URL = 'lib/ext/resources/images/default/s.gif';
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                Ext.Msg.minWidth = 300;
+                
+                app.store = new Ext.data.Store({
+                    url: 'news_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id',
+                        type: 'int'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'publishtime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }]),
+                    remoteSort: true
+                }) //store
+                app.currentFormValue = {};
+                
+                app.dataAction = [new Ext.Action({
+                    text: '增加',
+                    handler: function(){
+                        app.hasChange = false;
+                        app.currentFormValue.act = "add";
+                        app.currentFormValue.id = "";
+                        app.currentFormValue.title = "";
+                        app.currentFormValue.publishtime = new Date();
+                        app.currentFormValue.classid = {
+                            id: 0,
+                            text: ""
+                        };
+                        app.currentFormValue.content = "";
+                        app.editWin.show();
+                        
+                        
+                        
+                    }
+                }), new Ext.Action({
+                    text: '编辑',
+                    disabled: true,
+                    handler: function(){
+                        app.hasChange = false;
+                        if (app.grid.getSelectionModel().hasSelection()) {
+                            app.grid.getSelectionModel().lock();
+                            var rec = app.grid.getSelectionModel().getSelected();
+                            Ext.Ajax.request({
+                                url: 'news_action.ashx?act=details',
+                                scope: this,
+                                success: function(response, options){
+                                    var msg = response.responseText;
+                                    var obj = Ext.decode(msg);
+                                    if (obj) {
+                                        if (obj.success == "true") {
+                                            var data = obj.data;
+                                            app.currentFormValue.act = "edit";
+                                            app.currentFormValue.id = data.id;
+                                            app.currentFormValue.title = data.title;
+                                            app.currentFormValue.publishtime = data.publishtime;
+                                            app.currentFormValue.classid = data.classnode;
+                                            app.currentFormValue.content = data.content;
+                                            app.grid.getSelectionModel().unlock();
+                                            app.editWin.show();
+                                            msg = "";
+                                        }
+                                    }
+                                    app.grid.getSelectionModel().unlock();
+                                    if (msg != "") 
+                                        Ext.Msg.alert("信息", msg);
+                                },
+                                failure: function(response, options){
+                                    Ext.Msg.alert("错误", "编辑新闻失败！<br>错误信息：" + response.responseText);
+                                    app.grid.getSelectionModel().unlock();
+                                },
+                                params: {
+                                    id: rec.id
+                                }
+                            });
+                        }
+                        else {
+                            Ext.Msg.alert('编辑新闻', '请选择要编辑的新闻！');
+                        }
+                    }
+                }), new Ext.Action({
+                    text: '删除',
+                    disabled: true,
+                    handler: function(){
+                        if (app.grid.getSelectionModel().hasSelection()) {
+                            app.grid.getSelectionModel().lock();
+                            var recs = app.grid.getSelectionModel().getSelections();
+                            var ids = '';
+                            var titles = '';
+                            for (var i = 0; i < recs.length; i++) {
+                                var data = recs[i].data;
+                                ids += data.id + ',';
+                                titles += data.title + '<br>';
+                            }
+                            ids = ids.substr(0, ids.length - 1);
+                            Ext.MessageBox.confirm('删除新闻', '确定删除以下新闻？<br><font color="red">' + titles + '</font>', function(btn){
+                                if (btn == 'yes') {
+                                    Ext.Ajax.request({
+                                        url: 'news_action.ashx?act=del',
+                                        scripts: true,
+                                        success: function(response, options){
+                                            var msg = response.responseText;
+                                            var obj = Ext.decode(msg);
+                                            if (obj) {
+                                                if (obj.success == "true") {
+                                                    msg = obj.data;
+                                                    app.store.reload();
+                                                }
+                                            }
+                                            app.grid.getSelectionModel().unlock();
+                                            if (msg != "") 
+                                                Ext.Msg.alert("信息", msg);
+                                        },
+                                        failure: function(response, options){
+                                            Ext.Msg.alert("错误", "删除新闻失败！<br>错误信息：" + response.responseText);
+                                            app.grid.getSelectionModel().unlock();
+                                        },
+                                        params: {
+                                            value: ids
+                                        }
+                                    })
+                                }
+                            });
+                        }
+                        else {
+                            Ext.Msg.alert('删除新闻', '请选择要删除的新闻！');
+                        }
+                    }
+                }), new Ext.Action({
+                    text: '查看',
+                    disabled: true,
+                    handler: function(){
+                        if (app.grid.getSelectionModel().hasSelection()) {
+                            var rec = app.grid.getSelectionModel().getSelected();
+                            app.grid.getSelectionModel().lock();
+                            Ext.Ajax.request({
+                                url: 'news_action.ashx?act=details',
+                                scope: this,
+                                success: function(response, options){
+                                    var msg = response.responseText;
+                                    var obj = Ext.decode(msg);
+                                    if (obj) {
+                                        if (obj.success == "true") {
+                                            var data = obj.data;
+                                            var html = String.format("<div style='font-size:14px;padding:10px;line-height:20px;'>" +
+                                            "<p><b>编　　号：</b>{0}</p>" +
+                                            "<p><b>标　　题：</b>{1}</p>" +
+                                            "<p><b>发布时间：</b>{2}</p>" +
+                                            "<p><b>新闻类别：</b>{3}</p>" +
+                                            "<p><b>内　　容：</b></p><br>" +
+                                            "<p>{4}</p></div>", data.id, data.title, data.publishtime, data.classnode.text, data.content);
+                                            window.parent.app.addTab(data.title, html);
+                                            msg = "";
+                                        }
+                                    }
+                                    app.grid.getSelectionModel().lock();
+                                    if (msg != "") 
+                                        Ext.Msg.alert("信息", msg);
+                                },
+                                failure: function(response, options){
+                                    Ext.Msg.alert("错误", "查看新闻失败！<br>错误信息：" + response.responseText);
+                                    app.grid.getSelectionModel().unlock();
+                                },
+                                params: {
+                                    id: rec.id
+                                }
+                            });
+                        }
+                        else {
+                            Ext.Msg.alert('编辑新闻', '请选择要查看的新闻！');
+                        }
+                    }
+                })];
+                
+                app.grid = new Ext.grid.GridPanel({
+                    tbar: app.pageToolbar,
+                    width: 600,
+                    store: app.store,
+                    autoExpandColumn: 1,
+                    columns: [{
+                        id: 'id',
+                        header: "编号",
+                        width: 120,
+                        dataIndex: 'id',
+                        sortable: true
+                    }, {
+                        header: "标题",
+                        width: 120,
+                        dataIndex: 'title',
+                        sortable: true
+                    }, {
+                        header: "创建时间",
+                        width: 160,
+                        dataIndex: 'publishtime',
+                        sortable: true,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                    }],
+                    listeners: {
+                        click: function(){
+                            if (app.grid.getSelectionModel().hasSelection()) {
+                                app.dataAction[1].enable();
+                                app.dataAction[2].enable();
+                                app.dataAction[3].enable();
+                            }
+                            else {
+                                app.dataAction[1].disable();
+                                app.dataAction[2].disable();
+                                app.dataAction[3].disable();
+                            }
+                        }
+                    }
+                })
+                
+                
+                app.pageToolbar = new Ext.PagingToolbar({
+                    pageSize: 1,
+                    displayInfo: true,
+                    store: app.store,
+                    items: [app.dataAction[0], app.dataAction[1], app.dataAction[2], app.dataAction[3], '-', new Ext.app.SearchField({
+                        store: app.store,
+                        width: 110
+                    })]
+                });
+                
+                
+                app.dataPanel = new Ext.Panel({
+                    id: 'mainpanel',
+                    region: 'center',
+                    layout: 'fit',
+                    autoScroll: true,
+                    closable: true,
+                    tbar: app.pageToolbar,
+                    items: app.grid
+                });
+                
+                
+                app.treeEanbleChange = true;
+                
+                app.tree = new Ext.tree.TreePanel({
+                    title: '新闻类别',
+                    actionUrl: '',
+                    animate: false,
+                    region: 'west',
+                    split: true,
+                    width: 200,
+                    minSize: 175,
+                    maxSize: 400,
+                    collapsible: true,
+                    hideCollapseTool: true,
+                    collapseMode: 'mini',
+                    margins: '0 0 5 0',
+                    rootVisible: true,
+                    autoScroll: true,
+                    border: false,
+                    tools: [{
+                        id: "plus",
+                        scope: this,
+                        handler: function(e, toolEl, panel){
+                            var parentID = 0;
+                            var node = app.tree.getSelectionModel().getSelectedNode();
+                            if (node) {
+                                if (parseInt(node.id) >= 0) 
+                                    parentID = node.id;
+                            }
+                            Ext.Ajax.request({
+                                url: 'newsclass_action.ashx?act=add',
+                                scope: this,
+                                success: function(response, options){
+                                    var msg = response.responseText;
+                                    var obj = Ext.decode(msg);
+                                    if (obj) {
+                                        if (obj.success == "true") {
+                                            var data = Ext.decode(obj.data);
+                                            if ((!isNaN(data.id)) & (!isNaN(data.pid))) {
+                                                var parentNode = app.tree.getNodeById(data.pid);
+                                                if (parseInt(parentNode.id) == 0) {
+                                                    var lastNode = app.tree.getNodeById('-1');
+                                                    parentNode.insertBefore(new Ext.tree.TreeNode({
+                                                        id: data.id,
+                                                        text: '新的类别'
+                                                    }), lastNode);
+                                                }
+                                                else {
+                                                    parentNode.appendChild(new Ext.tree.TreeNode({
+                                                        id: data.id,
+                                                        text: '新的类别'
+                                                    }));
+                                                }
+                                                msg = "";
+                                            }
+                                        }
+                                    }
+                                    if (msg != "") 
+                                        Ext.Msg.alert("信息", msg);
+                                },
+                                failure: function(response, options){
+                                    Ext.Msg.alert("错误", "增加新闻类别失败！<br>错误信息：" + response.responseText);
+                                },
+                                params: {
+                                    pid: parentID
+                                }
+                            });
+                        }
+                    }, {
+                        id: "minus",
+                        scope: this,
+                        handler: function(e, toolEl, panel){
+                            var node = app.tree.getSelectionModel().getSelectedNode();
+                            if (node) {
+                                if (parseInt(node.id) > 0) {
+                                    Ext.MessageBox.confirm('信息', '确定删除新闻类别“' + node.text + '”？<br><font color="red">警告：当前类别下所以子类别将被删除，所属类别的新闻将变成未分类新闻！', function(btn){
+                                        if (btn == 'yes') {
+                                            Ext.Ajax.request({
+                                                url: 'newsclass_action.ashx?act=del',
+                                                scope: this,
+                                                success: function(response, options){
+                                                    var msg = response.responseText;
+                                                    var obj = Ext.decode(response.responseText);
+                                                    if (obj) {
+                                                        if (obj.success == "true") {
+                                                            var id = obj.data;
+                                                            var node = app.tree.getNodeById(id);
+                                                            var pnode = node.parentNode;
+                                                            if (node) 
+                                                                node.remove();
+                                                            msg = "新闻类别“" + node.text + "”及其子类别已被删除！";
+                                                            if (parseInt(pnode.id) > 0) {
+                                                                pnode.select();
+                                                            }
+                                                            else {
+                                                                var node = app.tree.getNodeById('-99');
+                                                                if (node) 
+                                                                    node.select();
+                                                            }
+                                                            
+                                                        }
+                                                        else {
+                                                            msg = obj.data;
+                                                        }
+                                                    }
+                                                    if (msg != "") 
+                                                        Ext.Msg.alert("信息", msg);
+                                                },
+                                                failure: function(response, options){
+                                                    Ext.Msg.alert("错误", "删除新闻类别失败！<br>错误信息：" + response.responseText);
+                                                },
+                                                params: {
+                                                    id: node.id
+                                                }
+                                            });
+                                        }
+                                    }, this); //confirm
+                                }
+                                else {
+                                    Ext.Msg.alert("信息", "不允许删除新闻类别：" + node.text);
+                                }
+                            }
+                            else {
+                                Ext.Msg.alert("信息", "请选择要删除的新闻类别！");
+                            }
+                        }
+                    }, {
+                        id: "refresh",
+                        scope: this,
+                        handler: function(e, toolEl, panel){
+                            app.tree.root.reload();
+                        }
+                    }],
+                    rootVisible: false,
+                    root: new Ext.tree.AsyncTreeNode({
+                        text: '新闻类别',
+                        id: '0',
+                        expanded: true,
+                        allowDrag: false,
+                        allowDrop: false,
+                        loader: new Ext.tree.TreeLoader({
+                            dataUrl: 'newsclass_action.ashx?act=list',
+                            clearOnLoad: true
+                        })
+                    }),
+                    listeners: {
+                        scope: this,
+                        textchange: function(node, text, oldText){
+                            if (app.treeEanbleChange) {
+                                if (parseInt(node.id) > 0) {
+                                    if (text != oldText | text.trim() == "") {
+                                        app.selectedNode = node;
+                                        app.nodeOldText = oldText;
+                                        this.nodeNewText = text;
+                                        Ext.Ajax.request({
+                                            scope: this,
+                                            url: 'newsclass_action.ashx?act=edit',
+                                            success: function(response, options){
+                                                var msg = response.responseText;
+                                                var obj = Ext.decode(response.responseText);
+                                                if (obj) {
+                                                    if (obj.data == 'true') {
+                                                        msg = obj.data;
+                                                        app.treeEanbleChange = false;
+                                                        app.selectedNode.setText(app.nodeOldText);
+                                                    }
+                                                    else {
+                                                        msg = "";
+                                                    }
+                                                }
+                                                if (msg != "") 
+                                                    Ext.Msg.alert("信息", msg);
+                                            },
+                                            failure: function(response, options){
+                                                Ext.Msg.alert("错误", "修改新闻类别失败！<br>错误信息：" + response.responseText);
+                                            },
+                                            params: {
+                                                id: node.id,
+                                                value: text
+                                            }
+                                        });
+                                    }
+                                }
+                                else {
+                                    Ext.Msg.alert('信息', '节点' + node.text + '不允许修改！')
+                                    app.treeEanbleChange = false;
+                                    node.setText(oldText);
+                                }
+                            }
+                            else {
+                                app.treeEanbleChange = true;
+                            }
+                        },
+                        click: function(node, e){
+                            app.store.baseParams.classid = node.id;
+                            app.store.baseParams.query = "";
+                            app.store.load();
+                        }
+                    }
+                });
+                
+                app.ge = new Ext.tree.TreeEditor(app.tree, {
+                    allowBlank: false,
+                    blankText: '新的类别',
+                    selectOnFocus: true
+                });
+                
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'border',
+                    items: [app.tree, app.dataPanel]
+                });
+                
+                app.editWin = new Ext.Window({
+                    width: 700,
+                    height: 480,
+                    title: '',
+                    plain: true,
+                    closable: true,
+                    resizable: false,
+                    frame: true,
+                    layout: 'fit',
+                    closeAction: 'hide',
+                    border: false,
+                    modal: true,
+                    hideMode: "offsets",
+                    constrainHeader: true,
+                    items: [app.editForm = new Ext.form.FormPanel({
+                        labelAlign: 'left',
+                        buttonAlign: 'center',
+                        bodyStyle: 'padding:5px',
+                        frame: true,
+                        labelWidth: 80,
+                        items: [{
+                            xtype: 'hidden',
+                            name: 'act',
+                            value: 'add'
+                        }, {
+                            xtype: 'hidden',
+                            name: 'id',
+                            value: ''
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'textfield',
+                                    labelSeparator: '：',
+                                    fieldLabel: '标题',
+                                    name: 'title',
+                                    anchor: '90%',
+                                    allowBlank: false,
+                                    maxLength: 200
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span id='txt1Msg' style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'datefield',
+                                    labelSeparator: '：',
+                                    fieldLabel: '发表日期',
+                                    name: 'publishtime',
+                                    anchor: '90%',
+                                    allowBlank: false,
+                                    format: 'Y-m-d'
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span id='pwdMsg' style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'uxtreecombobox',
+                                    hiddenName: 'classid',
+                                    store: new Ext.data.SimpleStore({
+                                        fields: [],
+                                        data: [[]]
+                                    }),
+                                    fieldLabel: '新闻类别',
+                                    editable: false,
+                                    shadow: false,
+                                    mode: 'local',
+                                    triggerAction: 'all',
+                                    anchor: '90%',
+                                    allowBlank: true,
+                                    treeUrl: 'newsclass_action.ashx?act=clist',
+                                    rootText: '新闻类别',
+                                    rootId: '0',
+                                    rootVisible: true
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            xtype: 'panel',
+                            html: '内容：',
+                            style: 'padding:5px 0px 5px 0px'
+                        }, {
+                            xtype: 'panel',
+                            layout: 'fit',
+                            height: 300,
+                            items: [{
+                                name: "content",
+                                xtype: "tinymce",
+                                hideLabel: true,
+                                anchor: "100% 100%",
+                                tinymceSettings: {
+                                    theme: "advanced",
+                                    skin: "o2k7",
+                                    language: "zh",
+                                    plugins: "safari,pagebreak,style,layer,table,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+                                    theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+                                    theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+                                    theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|",
+                                    theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+                                    theme_advanced_toolbar_location: "top",
+                                    theme_advanced_toolbar_align: "left",
+                                    theme_advanced_statusbar_location: "bottom",
+                                    theme_advanced_resizing: false,
+                                    extended_valid_elements: "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+                                    template_external_list_url: "example_template_list.js"
+                                },
+                                value: ""
+                            }]
+                        }],
+                        buttons: [{
+                            text: '确定',
+                            scope: this,
+                            handler: function(){
+                                var obj = app.editForm
+                                if (obj.form.isValid()) {
+                                    tinyMCE.triggerSave();
+                                    app.editForm.form.doAction('submit', {
+                                        waitTitle: '保存数据',
+                                        waitMsg: '正在保存……',
+                                        url: 'news_action.ashx',
+                                        method: 'post',
+                                        params: '',
+                                        success: function(form, action){
+                                            var result = action.result.data;
+                                            if (result == 'ok') {
+                                                app.hasChange = true;
+                                                var msg = "";
+                                                if (app.currentFormValue.act == "edit") {
+                                                    msg = "新闻已更新！";
+                                                    Ext.Msg.alert('保存新闻', msg, function(){
+                                                        app.editWin.hide();
+                                                    });
+                                                }
+                                                else {
+                                                    app.editForm.form.setValues(app.currentFormValue);
+                                                    app.editForm.form.clearInvalid();
+                                                    Ext.Msg.alert('信息', "新新闻保存成功！");
+                                                }
+                                            }
+                                            else {
+                                                Ext.Msg.alert('错误', action.result.data);
+                                            }
+                                        },
+                                        failure: function(){
+                                            Ext.Msg.alert('错误', '发生错误！');
+                                        }
+                                    });
+                                }
+                            }
+                        }, {
+                            text: '重置',
+                            scope: this,
+                            handler: function(){
+                                app.editForm.form.reset();
+                                app.editForm.form.setValues(app.currentFormValue)
+                            }
+                        }, {
+                            text: '关闭',
+                            scope: this,
+                            handler: function(){
+                                app.editWin.hide();
+                            }
+                        }]
+                    }) //form 
+            ]        , //window items
+                    listeners: {
+                        hide: function(){
+                            if (app.hasChange) 
+                                app.store.reload();
+                        },
+                        show: function(win){
+                            app.editForm.form.setValues(app.currentFormValue);
+                            if (app.currentFormValue.act == "add") {
+                                app.editWin.setTitle('增加新闻');
+                            }
+                            else {
+                                app.editWin.setTitle('编辑新闻：' + app.editForm.form.findField("title").getValue());
+                            }
+                            app.editForm.form.clearInvalid();
+                        },
+                        render: function(fp){
+                            app.editForm.form.waitMsgTarget = fp.getEl();
+                        }
+                    }
+                })//app.editWin
+                app.store.load();
+                
+                
+                setTimeout(function(){
+                    Ext.get('loading').remove();
+                    Ext.get('loading-mask').fadeOut({
+                        remove: true
+                    });
+                }, 250);
+            })//onReady
+        </script>
+    </body>
+</html>

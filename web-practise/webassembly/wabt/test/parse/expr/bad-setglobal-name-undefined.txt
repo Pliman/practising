@@ -1,0 +1,9 @@
+;;; ERROR: 1
+(module (func
+          i32.const 1 
+          set_global $f))
+(;; STDERR ;;;
+out/test/parse/expr/bad-setglobal-name-undefined.txt:4:22: undefined global variable "$f"
+          set_global $f))
+                     ^^
+;;; STDERR ;;)

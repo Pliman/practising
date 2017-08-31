@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>在拖动代理身上加入自定义的数据</title>
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+            Ext.onReady(function(){
+                var dd11 = Ext.get('dd1-item1');
+                dd11.dd = new Ext.dd.DDProxy('dd1-item1', 'group', {
+                    dragData: {
+                        name: 'Item 1.1',
+                        index: 1
+                    },
+                    scope: this,
+                    fn: function(dd, data){
+                        alert('name的值是：'+data.name+'\nindex的值是：'+data.index);
+                    }
+                });
+                
+                var dd12 = Ext.get('dd1-item2');
+                dd12.dd = new Ext.dd.DDProxy('dd1-item2', 'group', {
+                    dragData: {
+                        name: 'Item 1.2',
+                        index: 2
+                    },
+                    scope: this,
+                    fn: function(dd, data){
+                        alert('name的值是：'+data.name+'\nindex的值是：'+data.index);
+                    }
+                });
+            });
+            Ext.override(Ext.dd.DDProxy, {
+                endDrag: function(){
+                    var dragEl = Ext.get(this.getDragEl());
+                    var el = Ext.get(this.getEl());
+					//不考虑是否在DropZone，直接停留在此
+                    el.applyStyles({
+                        position: 'absolute'
+                    });
+                    el.setXY(dragEl.getXY());
+                    el.setWidth(dragEl.getWidth());
+                    //this.config.dragData得到自定义数据的值（类型为Object），传入到函数this.config.fn中，
+					//若有指定作用域的话（this.config.scope），即可改变this.config.fn运行时的this对象指针。
+                    if (typeof this.config.fn=='function') {
+                        this.config.fn.apply(this.config.scope || window, [this, this.config.dragData]);
+                    }
+                }
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+        <style type="text/css">
+            body {
+                font-size: 11px;
+            }
+            
+            .dd-ct {
+                position: absolute;
+                border: 1px solid silver;
+                width: 180px;
+                height: 180px;
+                top: 32px;
+                background-color: #ffffc0;
+            }
+            
+            #dd1-ct {
+                left: 64px;
+            }
+            
+            #dd2-ct {
+                left: 256px;
+            }
+            
+            .dd-item {
+                height: 18px;
+                border: 1px solid #a0a0a0;
+                background-color: #c4d0ff;
+                vertical-align: middle;
+                cursor: move;
+                padding: 2px;
+                z-index: 1000;
+            }
+            
+            .dd-ct .dd-item {
+                margin: 2px;
+            }
+            
+            .dd-proxy {
+                opacity: 0.4;
+                -moz-opacity: 0.4;
+            }
+            
+            .dd-over {
+                background-color: #ffff60;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dd-ct" id="dd1-ct">
+            <div class="dd-item" id="dd1-item1">
+                条目 1.1
+            </div>
+            <div class="dd-item" id="dd1-item2">
+                条目 1.2
+            </div>
+            <div class="dd-item" id="dd1-item3">
+                条目 1.3
+            </div>
+        </div>
+        <!--新添加的标签-->
+        <div class="dd-ct" id="dd2-ct">
+            <div class="dd-item" id="dd2-item1">
+                条目 2.1
+            </div>
+            <div class="dd-item" id="dd2-item2">
+                条目 2.2
+            </div>
+            <div class="dd-item" id="dd2-item3">
+                条目 2.3
+            </div>
+        </div>
+    </body>
+</html>

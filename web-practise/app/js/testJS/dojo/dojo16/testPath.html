@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Demo: Custom Widget</title>
+		<link rel="stylesheet" href="style.css" media="screen">
+		<link rel="stylesheet" href="css/demo.css"
+			media="screen">
+		<link rel="stylesheet" href="css/AuthorWidget.css"
+			media="screen">
+		<!-- Configure Dojo -->
+
+		<script>
+			// We're specifying our Dojo Configuration this way,
+			// as it's a bit more complex and easier to type out
+			// than a data-dojo-config string
+			var dojoConfig = {
+				//isDebug: true,
+				// The next two pieces define how we can load our custom modules
+				// baseUrl species where to work from as a baseline
+				// Here we're setting it to be the current directory
+				baseUrl: '',
+				// modulePaths takes an object with keys that are the namespace,
+				// and values that are the path - in this case, just a folder
+				// named 'custom' under the baseUrl
+				modulePaths: {
+				}
+			}
+		</script>
+		<!-- Load up Dojo -->
+		<script
+			src="dojo16src/dojo/dojo.js">
+		</script>
+	</head>
+	<body>
+
+		<script>
+			dojo.require("dijit._Widget");  
+			
+			alert(dijit._Widget);
+		</script>
+	</body>
+</html>

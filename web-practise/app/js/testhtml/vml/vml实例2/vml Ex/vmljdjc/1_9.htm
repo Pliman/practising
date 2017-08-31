@@ -1,0 +1,41 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>arc圆弧</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:arc圆弧 - 专用属性</span>
+
+<font color=red>startangle</font>  描述圆形的起点缺口(圆弧可以是圆形，或有缺口弧形)，取值范围-360-360，默认值-180
+<font color=red>endangle</font>    描述圆形的终点缺口，取值范围-360-360，默认值null(0)
+
+<span>2:arc圆弧 - 实例讲解</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:arc style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:arc style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100" startangle="-180" endangle="0"/>
+
+<v:arc style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100" startangle="-150" endangle="0"/>
+<v:arc style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100" startangle="-180" endangle="30"/>
+
+<v:arc style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100" startangle="0" endangle="30"/>
+<v:arc style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100" startangle="30" endangle="0"/>
+<v:arc style="Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100" startangle="0" endangle="-180"/>
+<v:arc style="Z-INDEX:1;LEFT:310;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100" startangle="360" endangle="0"/>
+<v:arc style="Z-INDEX:1;LEFT:420;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100" startangle="0" endangle="360"/>
+
+<v:arc style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:340;HEIGHT:100" startangle="20" endangle="-20"/>
+<v:arc style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:340;HEIGHT:100" startangle="90" endangle="90"/>
+<v:arc style="Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:340;HEIGHT:100" startangle="-90" endangle="90"/>
+</textarea>
+
+请仔细分析上边的代码，关键是了解startangle、endangle属性的工作原理（360%计算周遍），彼消=彼长、一个向左延伸、一个向右延伸、如果是负数又正好相反。如果理解不当，就会像到数第二个弧型，两个都是90就画不出弧型了
+
+不过就算弄糊涂了也没关系（别小看了这两个属性值的学习难度），FlashVml3.0画板有专门的弧型创建、弧度调整工具，通过该工具你可以画出任意的弧型。这里只需要你了解弧型有这2个属性、属性的最小值是-360、最大值是360，以便以后进行动态特技开发。

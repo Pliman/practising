@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<style>
+		div {
+			height: 100px;
+			width: 100px;
+			background-color: #00a5e0;
+			/*when a new value is assigned to it, will cause a smooth change between the old value and the new value over a period of two seconds*/
+			transition-property: opacity;
+			transition-duration: 2s;
+		}
+	</style>
+</head>
+<body>
+<div></div>
+
+<script>
+	setTimeout(function () {
+		document.body.children[0].style.opacity = 0.1;
+	});
+</script>
+</body>
+</html>

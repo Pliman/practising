@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <style type="text/css">
+    body {
+      font-family: lato;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    /*img:after {*/
+      /*content: attr(title);*/
+      /*color:#f00;*/
+    /*}*/
+    img {
+      /*content:attr(data-src, url);*/
+      /*url*/
+      /*content: url(a.jpg);*/
+      content: url(attr('data-src'));
+    }
+
+    li:before{
+      content:attr(title);
+      font-size:14px;
+      color:#f00;
+    }
+  </style>
+</head>
+<body>
+  <img data-src="a.jpg" title="图片图片图片图片图片">
+  <li title="第12章：">123123</li>
+  <div>zxvdadf235@163.com</div>
+</body>
+</html>

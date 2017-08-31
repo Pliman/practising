@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+  		function selectinnerHTML(){
+  			var str = "<option>---请选择---</option><option value=\"1\">2</option><option value=\"3\">4</option>" ;
+  			var str2 = "<option value=\"\"></option><option value=\"a216706684cd4ad3a17320fd1a64b1dd\">发起任务</option> " ;
+  			//document.getElementById('idselect').innerHTML = str;
+  			//document.getElementById('idselect').value = "3" ;
+  			document.getElementById('idselect').innerHTML = str2;
+  		}
+  		
+  		function addElement(){
+  			var select = document.getElementById('idselect') ;
+  			
+  			//var option = select.add(1) ;
+  			var option1 = document.createElement("OPTION");
+  			option1.value = 1 ;
+  			option1.text = 2 ;
+  			
+  			select.appendChild(option1);
+  		}
+  		
+  		function findOption(){
+  			var select = document.getElementById('idselect') ;
+  			alert(select.selectedIndex);
+  			alert(select.options[select.selectedIndex].innerHTML);
+  		}
+  		
+  		function countOption(){
+  			var select = document.getElementById('idselect') ;
+  			alert(select.options[0].value);
+  			alert(select.options.length);
+  			//alert(select.options[select.selectedIndex].innerHTML);
+  		}
+  		
+  		function shiftUp(){
+  			var select = document.getElementById('idselect') ;
+  			var curIndex = select.selectedIndex ;
+  			//alert(curIndex - 1) ;
+  			//var tempOption = document.createElement('OPTION') ;
+  			//var tempOption = select.options[curIndex - 1] ;
+  			select.options[curIndex - 1].swapNode(select.options[curIndex]) ;
+  			//alert(tempOption.value) ;
+  			//select.options[curIndex - 1] = select.options[curIndex] ;
+  			//select.options[curIndex] = tempOption ;
+  		}
+  	</script>
+		<title>selectOptions</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table border="1px" id="sourceContainer" name="sourceContainer"
+			style="text-align: left">
+			<tr>
+				<td id="1st" name="1st">
+					<select id="idselect" name="select">
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+						<option value='5'>5</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="addElement()" type="button" id="idaddElement"
+						name="addElement" value="添加"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="selectinnerHTML()" type="button" id="idselectinnerHTML"
+						name="selectinnerHTML" value="改变"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="findOption()" type="button" id="idfindOption"
+						name="findOption" value="查找"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="countOption()" type="button" id="idcountOption"
+						name="countOption" value="统计"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="shiftUp()" type="button" id="idshiftUp"
+						name="shiftUp" value="上移"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

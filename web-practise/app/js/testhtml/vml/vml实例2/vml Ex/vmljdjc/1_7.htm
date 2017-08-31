@@ -1,0 +1,47 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>oval圆与rect矩型</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:oval圆与rect矩型</span>
+
+VML的oval和rect分别可以绘制圆形与矩形，由于这两个标记的编写方法、原理、属性基本一致，所以我把他们放在一起讲
+
+oval、rect的3D输出实例
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="POSITION:absolute;Z-INDEX:1;LEFT:200px;TOP:150px;width:100;height:100;" fillcolor="yellow"/>
+<v:rect style="POSITION:absolute;Z-INDEX:1;LEFT:320px;TOP:150px;width:100;height:100;"/>
+<v:rect style="POSITION:absolute;Z-INDEX:2;LEFT:260px;TOP:230px;width:100;height:50;" strokeweight="2px"/>
+<v:oval style="POSITION:absolute;Z-INDEX:3;LEFT:290px;TOP:250px;width:50;height:100;" fillcolor="red" stroked="f"/>
+</textarea>
+
+从例子中可以看出，oval、rect除了VML图形的通用属性外，没有专有属性。CSS的POSITION:absolute;使其以Vector3D形式在网页输出，z-index:;定义3D高度，left:;top:;则分别定义距离网页左、上方的位置，width:100;height:50;则分别描述图形的宽度为100px和高度为50px。fillcolor、strokeweight、stroked则分别控制背景颜色、边框粗度、有无边框。其中stroked="f"的“f"值即代表boolean变量类型的false的简写形式，表示不使用边框，否则为stroked="t"或stroked="true"则代表图形有边框。true是图形的默认值，表示使用边框
+
+oval、rect的2D输出实例
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="width:100;height:100;" fillcolor="yellow"/>
+<v:rect style="width:100;height:100;"/><p>
+<v:rect style="width:100;height:50;" strokeweight="2px"/><br>
+<v:oval style="width:50;height:100;" fillcolor="red" stroked="f"/><br>
+
+<table border=1><tr><td colspan=2 align=center>HTML表格</td></tr>
+<tr>
+<td><v:oval style="width:100;height:100;" fillcolor="red" stroked="f"/></td>
+<td><v:oval style="width:100;height:100;" filled="false" strokecolor='blue'></v:oval></td>
+</tr>
+</table>
+</textarea>
+
+从例子不难看出，VML像传统HTML标记那样按照代码顺序一一排版、输出，碰到&lt;p>&lt;br>等HTML换行标记就会另起一行。而且，HTML标记创建的容器（本例容器是表格）内可以将VML图形嵌套。VML图形因为没有定义POSITION:absolute;，所以就会以默认的2D形式跟HTML一样输出
+
+这点不难看出VML与HTML之间的兼容性是多么的良好，不过VML Vector2D设计毕竟应用面比较狭窄、只能做HTML的配角。本章节只是提供一个VML Vector2D的演示，所以以后我们将主要讲VML Vector3D的图形设计。也许你现在看不出VML Vector3D图形设计的精彩、如何应用，但现在你只是在学习VML标记、深入。当你学会了VML标记这些基础知识，以后我会慢慢教你如何精彩的实际应用。

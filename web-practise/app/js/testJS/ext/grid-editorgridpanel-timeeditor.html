@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>New Document</title>
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<br>
+		<script> 
+		Ext.onReady(function () { 
+			//定义表格 
+			var grid = new Ext.grid.PropertyGrid({
+				title:"属性表格", renderTo:"grid", width:300, autoHeight:true, 
+				customEditors:{
+					"Start Time":new Ext.grid.GridEditor(
+						//new Ext.form.TimeField({selectOnFocus:true}))},
+						//new Ext.form.TimeField({format:'H:i',selectOnFocus:false,invalidText:'请输入一个符合格式的时间值',minValue:'07:30',minText:'时间过小'}))},
+						new Ext.form.TimeField({format:'H:i',selectOnFocus:false,invalidText:'请输入一个符合格式的时间值',minValue:'07:30',minText:'时间过小'}))},
+						//new Ext.form.TimeField({selectOnFocus:false}))}, 
+						//source:{"Start Time":"08:30"}}); 
+		
+			//可选的。用来控制VALUE是不是可修改的 
+			grid.on("beforeedit", function (e) {
+				e.cancel = false;
+				return true;
+			});
+		});
+    </script>
+		<table border="1" align="center">
+			<tr>
+				<td>
+					<font color="red">PropertyGrid表格样式如下：</font>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="grid">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" id="remove" value="提交内容" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

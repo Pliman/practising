@@ -1,0 +1,133 @@
+<HTML xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>《VML极道教程》原著:沐缘华</TITLE>
+<META name='Gemeratpr' content='FlashVml3.0'>
+<META name='KeyWords' content='VML极道教程; flashvml; flashvml3; 闪耀之星; vml; VML; vmlflash; vml动画; 矢量; Vector; Vector2D; Vector3D; 2D; 3D; 沐缘华; 风云舞; 杨华; 蓝丽网; 蓝丽技术论坛; MuYuanHua FYW; 画板; 在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+li{cursor:hand}
+a{text-Decoration:none;color:red}
+a:hover{text-Decoration:underline;color:blue}
+#tool{FONT-SIZE:20px;Z-INDEX:3010;CURSOR:hand;PADDING-TOP:26px;FONT-FAMILY:黑体;POSITION:absolute;TOP:12px;HEIGHT:80px;TEXT-ALIGN:center}
+</STYLE>
+<script id="myscript" language="javascript">
+var time1=null,jindu=15,jindu2=10,bodyleft=0,menuleft=0
+timuleft=0
+function toolchang(toolindex){
+if(time1!=null||tool[toolindex].style.color=='red')return false
+time1=setInterval("if(parseInt(menu.style.left)<bodyleft){menu.style.left=parseInt(menu.style.left)+jindu;timu.style.left=parseInt(timu.style.left)+jindu}else{clearInterval(time1);time1=null;timu.textPath.string=tool["+toolindex+"].value;for(i=0;i<ol1.length;i++){ol1[i].style.display='none';tool[i].style.color='black';}ol1["+toolindex+"].style.display='';tool["+toolindex+"].style.color='red';setTimeout('toolchang2()',200)}",20)
+}
+function toolchang2(){
+if(time1!=null)return false
+time1=setInterval("if(parseInt(menu.style.left)>menuleft){menu.style.left=parseInt(menu.style.left)-jindu2;timu.style.left=parseInt(timu.style.left)-jindu2}else{clearInterval(time1);time1=null;}",20)
+}
+function document.onmouseup(){
+ebj=event.srcElement
+if(ebj.tagName=="LI"&&ebj.s!=null){
+f.location.href="vmljdjc/"+ebj.s+".htm";
+}}
+</script>
+</HEAD>
+<BODY bgcolor=white style='scrollbar-base-color:#3275c0;scrollbar-shadow-color:white;scrollbar-highlight-color:white;scrollbar-arrow-color:white;'>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+bodyleft=body1.offsetLeft;menuleft=menu.offsetLeft;timuleft=timu.offsetLeft
+load1()
+}
+function load1(){
+var temp1=location.href
+if(temp1.indexOf('???')==-1){f.location="vmljdjc/1_1.htm";return false}
+try{
+temp1=temp1.substr(temp1.lastIndexOf('???')+3)
+var temp2=temp1.charAt(0)
+var temp3=temp1.substr(2)
+for(i=0;i<ol1.length;i++){ol1[i].style.display='none';tool[i].style.color=''}
+ol1[temp2-1].style.display='';tool[temp2-1].style.color='red'
+f.location="vmljdjc/"+ol1[temp2-1].children[temp3-1].s+".htm"
+timu.textPath.string=tool[temp2-1].value
+}catch(e){
+alert('异常错误,使用默认值');tool[0].style.color='red';ol1[0].style.display='';f.location="vmljdjc/1_1.htm"}
+}
+</script>
+<v:roundrect id=body1 style="Z-INDEX:3003;LEFT:203px;WIDTH:560px;PADDING-TOP:38px;POSITION:absolute;TOP:53px;HEIGHT:611px;TEXT-ALIGN:center" arcsize="5243f" fillcolor="#f1f0c7" stroked="t" strokecolor="#f5bf5a" strokeweight="1.5pt"> <v:extrusion on="t" backdepth="20pt" color="#3275c0" diffusity="72089f"/>
+<v:fill type="gradient" color2="#f1f0c7" angle="50"/>
+<v:shadow on="f" color="black" opacity="52428f" offset="3.75pt,3.75pt"/>
+<v:stroke dashstyle="dot"/><IFRAME id=f marginWidth=0 marginHeight=0 src="" frameBorder=0 width="94%" height=540></IFRAME></v:roundrect>
+<v:rect id=menu style="PADDING-LEFT:9px;FONT-WEIGHT:bold;FONT-SIZE:13px;Z-INDEX:2997;LEFT:37px;WIDTH:190px;COLOR:navy;LINE-HEIGHT:1.2;PADDING-TOP:95px;POSITION:absolute;TOP:88px;HEIGHT:552px" fillcolor="#dcc091" strokeweight=".75pt">
+<v:extrusion on="t" backdepth="20pt" color="#dcc091" diffusity="72089f"/>
+<v:fill type="gradient" color2="white" angle="65"/>
+<OL id=ol1 style="MARGIN-LEFT:30px">
+<LI type=1 s="1_1">关于VML极道教程 
+<LI s="1_2">VML的强大与用途 
+<LI s="1_3">VML精彩实例<BR>----<BR>
+<LI s="1_4">VML语言入门 
+<LI s="1_5">VML标记与通用属性 
+<LI s="1_6">标记实战与line线<BR>----<BR>
+<LI s="1_7">oval圆rect矩型 
+<LI s="1_8">RoundRect圆矩型 
+<LI s="1_9">arc圆弧 
+<LI s="1_10">image图片 
+<LI s="1_11">polyline多边型 
+<LI s="1_12">shape多边型 
+<LI s="1_13">shapetype模版 
+<LI s="1_14">shape与curve曲线 
+<LI s="1_15">background背景 
+<LI s="1_16">group集合容器 
+<LI s="1_17">vmlframe图形引用<BR>----<BR>
+<LI s="1_18">2级标记stroke边框 
+<LI s="1_19">shadow阴影 
+<LI s="1_20">fill填充 
+<LI s="1_21">extrusion立体3D 
+<LI s="1_22">textbox内容 
+<LI s="1_23">imagedata背景图片 
+<LI s="1_24">textpath文本路径<BR>----<BR>
+<LI s="1_25">其他标记与学习总结</LI></OL>
+<OL id=ol1 style="DISPLAY:none;MARGIN-LEFT:30px">
+<LI type=1 s="2_1">DVML编程概念介绍 
+<LI s="2_2">DVML事件编程入门 
+<LI s="2_3">DVML事件编程提高<BR>----<BR>
+<LI s="2_4">DVML侦式动画编程 
+<LI s="2_5">DVML流线动画编程 
+<LI s="2_6">DVML编程学习总结 </LI></OL>
+<OL id=ol1 style="DISPLAY:none;MARGIN-LEFT:30px">
+<LI type=1 s="3_1">FlashVml3.0简介 
+<LI s="3_2">后续版本开发计划书
+<LI s="3_3">历代版本回顾</LI></OL>
+<OL id=ol1 style="DISPLAY:none;MARGIN-LEFT:30px">
+<LI type=1 s="4_1">简历 
+<LI s="4_2">教程编著随想
+<LI s="4_3">几件IT代表作展馆
+<LI s="4_4">几件精彩脚本<BR>----<BR>
+<LI s="4_5">吾之学与诗与谚语 
+<LI s="4_6">中国人是怎样炼成的 
+<LI s="4_7">妓女赞美篇 
+<LI s="4_8">虚实之间的生存
+<LI s="4_9">他的现实
+</LI></OL></v:rect>
+<v:arc id=tool style="LEFT:236px;WIDTH:140px;color:red" value="精通VML语言" onmouseup="toolchang(0);" startangle="90" endangle="-90" fillcolor="#f1f0c7" strokeweight=".75pt">精通VML语言<v:extrusion on="t" backdepth="15pt" color="#f99299" diffusity="72089f"/> <v:fill type="gradient" color2="white" angle="65"/>
+</v:arc>
+<v:arc id=tool style="LEFT:376px;WIDTH:110px;" value="挑战DVML编程" onmouseup="toolchang(1);" startangle="90" endangle="-90" fillcolor="#f1f0c7" strokeweight=".75pt">DVML编程<v:extrusion on="t" backdepth="15pt" color="#fa7a42" diffusity="72089f"/> <v:fill type="gradient" color2="white" angle="65"/>
+</v:arc>
+<v:arc id=tool style="LEFT:487px;WIDTH:140px;" value="FlashVml3.0" onmouseup="toolchang(2);" startangle="90" endangle="-90" fillcolor="#f1f0c7" strokeweight=".75pt">FlashVml3.0<v:extrusion on="t" backdepth="15pt" color="#cf7af8" diffusity="72089f"/> <v:fill type="gradient" color2="white" angle="65"/>
+</v:arc>
+<v:arc id=tool style="LEFT:627px;WIDTH:100px;" value="原作者的文章" onmouseup="toolchang(3);" startangle="90" endangle="-90" fillcolor="#f1f0c7" strokeweight=".75pt">原作者<v:extrusion on="t" backdepth="15pt" color="lime" diffusity="72089f"/> <v:fill type="gradient" color2="white" angle="65"/>
+</v:arc>
+<v:arc style="Z-INDEX:3213;LEFT:220px;WIDTH:522px;POSITION:absolute;TOP:620px;HEIGHT:70px" startangle="89" endangle="-82" filled="f" strokecolor="red" strokeweight="1.5pt">
+<v:path arrowok="t"/>
+<v:stroke joinstyle="miter" startarrow="classic" startarrowwidth="wide" startarrowlength="long" endarrow="classic" endarrowwidth="wide" endarrowlength="long" dashstyle="dashDot"/>
+</v:arc>
+<v:Textbox style="FONT-SIZE:20px;Z-INDEX:3239;LEFT:330px;COLOR:red;WORD-BREAK:break-all;FONT-FAMILY:黑体;POSITION:absolute;TOP:638px" inset="5pt,5pt,5pt,5pt" print="t">《VML极道教程》 - 原著:沐缘华</v:Textbox> <v:curve id=timu style="Z-INDEX:2998;LEFT:-66px;POSITION:absolute;TOP:160px" from="0,0" control1="117pt,-41pt" control2="84pt,24pt" to="266.25pt,-54pt" fillcolor="black" stroked="t" strokecolor="red" strokeweight="3pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-FAMILY:宋体" on="t" fitpath="t" string="精通VML语言"/>
+<v:extrusion on="t" backdepth="4pt" color="#c1d9de" diffusity="1.5" rotationangle="28,-87"/>
+<v:fill type="gradient" color2="#5278fc" angle="65"/>
+</v:curve>
+<v:Textbox style="FONT-SIZE:12;Z-INDEX:3051;LEFT:500;COLOR:#e375bd;WORD-BREAK:break-all;POSITION:absolute;TOP:63" inset="5pt,5pt,5pt,5pt" print="false">搜索完全下载《VML极道教程》<A href="http://www.google.com/search?hl=zh-CN&newwindow=1&q=VML%E6%9E%81%E9%81%93%E6%95%99%E7%A8%8B&btnG=%E6%90%9C%E7%B4%A2&lr=" target=_blank>Google</A>、<A href="http://www.baidu.com/s?wd=VML%BC%AB%B5%C0%BD%CC%B3%CC&cl=3" target=_blank>Baidu</A></v:Textbox>
+<v:Textbox style="FONT-SIZE:12;Z-INDEX:3051;LEFT:228;COLOR:#e375bd;WORD-BREAK:break-all;POSITION:absolute;TOP:63" inset="5pt,5pt,5pt,5pt" print="false"><A href="vmljdjc/flashvml3.htm" target=_blank>使用FlashVml(闪耀之星)3.0</A>、<A href="vmljdjc/flashvml3e.htm" target=_blank>English edition</a></v:Textbox>

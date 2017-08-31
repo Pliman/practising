@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>TextBox.html</title>
+			content="A short description of this page." />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript"
+			src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css" />
+	</head>
+	<body class="claro">
+		<div>
+			<label for="text">
+				Name:
+			</label>
+			<input id="text" />
+		</div>
+		<div>
+			<label for="textarea">
+				Description:
+			</label>
+			<textarea id="textarea"></textarea>
+		</div>
+		<script>
+        require(["dijit/form/TextBox", "dijit/form/SimpleTextarea", "dojo/domReady!"], function(TextBox, SimpleTextarea) {
+            var textbox = new TextBox({
+                placeHolder: "Enter text here."
+            }, "text");
+            textbox.startup();
+ 
+            var textarea = new SimpleTextarea({
+                rows: 5,
+                cols: 50,
+                onFocus: function(){ console.log("textarea focus handler"); },
+                onBlur: function(){ console.log("textarea blur handler"); },
+                selectOnClick: true,
+                value: "This is a sample SimpleTextarea."
+            }, "textarea");
+            textarea.startup();
+        });
+    </script>
+	</body>
+</html>

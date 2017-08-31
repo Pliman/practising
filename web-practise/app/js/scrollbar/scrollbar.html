@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="../../lib/jquery/jquery-1.10.2.js"></script>
+	<style type="text/css">
+		#a1 {
+			height: 100px;
+			width:100px;
+			overflow: hidden;
+			border: 1px solid red;
+		}
+
+		#a2 {
+			height: 100px;
+			width:100px;
+			overflow: hidden;
+			border: 1px solid blue;
+		}
+
+	</style>
+</head>
+<body>
+<div id="a1" style="">aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+	aaaaaaaaaaaaaa<br/>
+</div>
+<div id="a2">bbbbbbbbbbbbbb</div>
+<script type="text/javascript">
+	console.log(document.getElementById('a1').scrollHeight);
+	console.log(document.getElementById('a1').clientHeight);
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+//		console.log($('#a1').scrollTop()); // 0
+//		console.log($('#a2').scrollTop()); // 0
+
+		$('#a1').scroll(function () {
+			console.log('a1 scrolled');
+			console.log($('#a1').scrollTop());
+		});
+
+		$('#a2').scroll(function () {
+			console.log('a2 scrolled');
+		});
+
+		console.log($('#a1').css('overflow'));
+		console.log(hasScrollBar(document.getElementById('a1')));
+		console.log(hasScrollBar(document.getElementById('a2')));
+	});
+
+	function hasScrollBar(el){
+		console.log(el.scrollHeight);
+		console.log(el.clientHeight);
+		return (el.scrollHeight > el.clientHeight && ($('#a1').css('overflow') != 'hidden'));
+	}
+</script>
+</body>
+</html>

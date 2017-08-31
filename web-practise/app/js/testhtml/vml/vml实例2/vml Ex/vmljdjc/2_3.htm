@@ -1,0 +1,130 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>DVML事件编程提高</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:DVML事件编程提高 - 引语</span>
+
+同学们，通过我上一节通俗、易懂、抽象的范例与讲解，你是否感觉自己以入门DVML事件编程和DVML程序语句？如果没有，那请你在继续温习上一节，直到入门了为止。我会在接下来的课程里继续讲DVML事件编程，并不会沿用在向上一章节那样傻瓜式语言。而是进阶的将全新的事件、用新的程序，所以我劝你务必要掌握上一节所讲的知识，否则在接下的课程里你会感觉一头雾水、或者收效甚微。
+
+<span>2:DVML事件编程提高 - 键盘事件</span>
+
+上一节，我们讲了有关鼠标（单击、鼠标按下、鼠标弹起、鼠标靠近、鼠标离开）等最简单、易懂的事件，接下来我们就讲键盘事件。其实VML图形在正常情况下本身不支持onkeydown（键盘按下）、onkeyup（键盘按下后、弹起时）、onkeypress（键盘使用输入字符的键）、oncut、oncopy、onpaste等事件。那是正常情况下它们无法像文本输入框、按钮那样可以获取操作焦点，而是“与网页本身融为一体、化为一物、只能看但不能用键盘去操作。”。而只有在其使用HTML的contentEditable（描述对象是否支持被用户编辑内容）通用属性时，才支持获取操作焦点、支持键盘事件，如下例图形即启用了contentEditable通用属性：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval contentEditable="true" style="Z-INDEX:1;LEFT:100;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow">你能输入、改变内容。</v:oval>
+
+<v:oval contentEditable style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90">我也是。</v:oval>
+
+<v:oval contentEditable="false" style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90">可我不能。</v:oval>
+</textarea>
+
+上例中，图形一（contentEditable="true"）、二（contentEditable，可以省略"true"）均支持获得操作焦点，而图形三（contentEditable="false"或没有contentEditable属性）则不能。也就是图形一、二支持键盘事件，而图形三不支持。请看下边例子，你分别用键盘在图一、二击键盘输入字符试试？并在第二个图形里使用剪切、复制、粘贴操作试试？
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval contentEditable="true" style="Z-INDEX:1;LEFT:100;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onkeydown="alert('你按下键盘了')">你能输入、改变内容。</v:oval>
+
+<v:oval contentEditable style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" onkeyup="alert('你按下键盘后、并弹起了，右边的图形现在颜色值是'+a.fillcolor);" oncut="alert('你使用剪切了，我要右边的图形变成绿色');a.fillcolor='green'"  oncopy="alert('你使用复制了，我要右边的图形变成蓝色');a.fillcolor='blue'"  onpaste="alert('你使用粘贴了，我要右边的图形变成白色');a.fillcolor='white'">我也是。</v:oval>
+
+<v:oval id=a contentEditable="false" style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90">可我不能。</v:oval>
+</textarea>
+
+这次有一点不同的是“alert('你按下键盘后、并弹起了，右边的图形现在颜色值是'+a.fillcolor)”。我们没有更新a.fillcolor值，而只是获取了a.fillcolor值，它后面没有='yellow'、='white'类的付值语句。
+
+<span>3:DVML事件编程提高 - 网页键盘事件编程</span>
+
+从上例中，我们学习了图形在contentEditable状态时支持键盘事件，当然事件想触发什么程序就触发什么程序，可用this更新自己也可以按照id名称更新图形。下面该说网页键盘事件编程了，网页可是什么事件都支持也不需要设置contentEditable状态。请运行下例，试着在网页任何位置击键盘。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE>
+<BODY onkeyup="alert('你按下键盘、并弹起了，键值是 '+event.keyCode+' ，对应字母是 '+String.fromCharCode(event.keyCode))">
+<v:oval style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+</textarea>
+
+这个程序，更有趣了。我们把onkeyup事件直接增加给了&lt;BODY>网页正文内容最高容器（你如果真不懂DHTML，就姑且理解为BODY就是你看到的网页）！而分析程序，event.keyCode其中的event是DHTML的一个固有对象，keyCode是它的固有属性，event.keyCode就是获取你按下的键盘键值（键盘上每个键都有一个系统键值）。而String.fromCharCode(event.keyCode)，则是将该键值转换成对应的字母。这些就是JavaScript+DHTML程序了，而我们只是给个演示，接下来我们主要利用网页对键盘事件的支持来进行DVML编程，请看下面二个例子。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE>
+<BODY onkeyup="var str1=event.keyCode;alert('变量str1现在值是'+str1);if(str1==65)a.fillcolor='red';if(str1==66)a.fillcolor='blue';if(str1==67)a.fillcolor='yellow'">
+请分别按下a、b、c键
+<v:oval id=a style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE>
+<BODY onkeyup="abcd1()">
+<script>
+function abcd1(){
+var str1=event.keyCode;
+alert('变量str1现在值是'+str1);
+if(str1==65)a.fillcolor='red';
+if(str1==66)a.fillcolor='blue';
+if(str1==67)a.fillcolor='yellow'
+}
+</script>
+请分别按下a、b、c键
+<v:oval id=a style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+</textarea>
+
+两个DVML程序的运行效果是一样的，只是写法有些区别而已。先说第一个，有一句“var str1=event.keyCode”，这就是变量声明与付值的语句，解释成中文的意思就是“新建变量 str1=event.keyCode”。你会问变量有什么用呢？变量用处可大着那~，只是写简单的程序时看不出、作用不大，但当要写大型的、上万、十万字的大型程序时，如果没有变量的概念啊，是累死都写不完。变量主要是为了节省代码字数、存储一些数据、加速作用等等很多用处。
+
+生动的比喻一下，如果不用变量“if(str1==65)a.fillcolor='red';if(str1==66)a.fillcolor='blue';if(str1==67)a.fillcolor='yellow'”就只有写成“if(event.keyCode==65)a.fillcolor='red';if(event.keyCode==66)a.fillcolor='blue';if(event.keyCode==67)a.fillcolor='yellow'”。不懂编程的人也该看出了，用变量剩字数。而对于理解编程的人来说，前者运行起来要比后者效果快约2倍，只是电脑太快了、该程序也太简单了我们感觉不出来而已。为什么慢2倍呢？你比较比较，前者只用了1次读取event.keyCode给变量、后者用了3次读event.keyCode，这每一次的DHTML对象访问都需要经过电脑检索、计算才能得到的……
+
+而后一个例子，我们定义了一个&lt;Script>脚本。而“function document.onkeyup(){ 所有程序语句 }”翻译成中文即是“创建函数 名为abcd1(){ 所有程序语句 }”，即创建了一个函数（你若不懂函数是什么，你就将函数理解成“把程序语句包装在一起的包装盒”）。然后在BODY的onkeyup事件内容内，直接写上abcd1()，即会执行abcd1函数内的所有语句。由于程序相同，所以运行效果跟前者一样，只不过后者在语法上更加易读，也更容易被其他对象使用（abcd1是函数，网页、圆形、方型等等都可以在XXX事件中用，算算，这样多剩代码？）
+
+<span>4:DVML事件编程提高 - 其他VML事件</span>
+
+在上一章节的表中还有一些诸如onscroll、onresize、onmove等事件。这些事件相对较特殊，而且也只能在特殊的情况下才能产生该事件，请看下例。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<input type=button value="按我吹气球" onclick="a.style.width=parseInt(a.style.width)+5;a.style.height=parseInt(a.style.height)+5;">
+<v:oval onresize="alert('又是谁在吹我？？？')" id=a style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+</textarea>
+
+以上例子，按钮负责吹气球，程序是：“a.style.width=parseInt(a.style.width)+5;a.style.height=parseInt(a.style.height)+5;”。很显然，是更新了圆形的CSS style样式表所包含的width（宽度）、height（高度）属性。其中“a.style.width=parseInt(a.style.width)+5”翻译为中文即是“a.style.宽度=数字转换函数(a.style.宽度)+5”。你可能不理解“parseInt(a.style.width)+5”，我会使你理解。比如说上个oval标记其width宽度被我们定义为90，虽然我们省略了px单位，但实际输出当中它依然表示90px的大小。而我们用a.style.width获取它的宽度时，程序会给我们自动追加上px，返回的也就是90px。所以如果我们直接写“a.style.width=a.style.width+5”电脑就会理解为“a.style.width=90px+5”，电脑就弄不懂这90px+5该怎么加法了就会报错。。所以必须用“a.style.width=parseInt(a.style.width)+5;”电脑就会理解为“a.style.width=90+5”就OK了。
+
+在说这点按钮吹气球时，这气球生气了。。因为有程序想更新它的大小把它吹大，所以就触发了它的“onresize（大小调整事件）”。而onresize内的程序是“alert('又是谁在吹我？？？')”，所以就会被执行了。
+
+继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<input type=button value="马儿快走" onclick="a.style.left=parseInt(a.style.left)+10;a.style.top=parseInt(a.style.top)+5;">
+<input type=button value="改变滤镜" onclick="a.style.filter='glow(color=orange,strength=10)'">
+<v:oval onmove="alert('又是谁在拍我？？？')" id=a style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" onfilterchange="alert('哇塞，我在发光！？')"/>
+</textarea>
+
+这次马儿快走跟吹气球一个道理，更新style.left跟style.top使之移动，然后触发了其onmove（位置调整事件）。而改变滤镜，我们在上一卷的image图片部分提及过CSS的滤镜效果。这次改变了它的filter滤镜为“glow(color=orange,strength=10)”，所以触发了它的滤镜改变事件。
+
+但上两例“马儿快走”、“吹气球”都有一个缺陷，就是页面显示完成时会自动触发图形的onresize、onmove事件。这是因为页面在输出时，根据图形标记style定义width/height/left/top等值进行了初期的定位，但结果却使图形误以为是“谁在弄我？”。有解决的办法么？当然有 - 用自定义属性判断。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<input type=button value="按我吹气球" onclick="a.style.width=parseInt(a.style.width)+5;a.style.height=parseInt(a.style.height)+5;">
+<v:oval onresize="if(this.haha==null){this.haha='页面加载过了'}else{alert('又是谁在吹我？？？')}" id=a style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+</textarea>
+
+瞧上边圆形onresize的程序“if(this.haha==null){this.haha='页面加载过了'}else{alert('又是谁在吹我？？？')}”中文意思是“如果(我的.haha属性==空){我的.haha属性='随意值'}else{弹出对话框('又是谁在吹我？？？')}”。很搞笑，oval哪里有haha属性？就是我们知道它没有这个属性，所以在页面加载时判断this.haha==null成立了。而成立我们却执行this.haha='页面加载过了'而不弹出对话框，所以启动时它没弹出。而到后来真有人吹它了，判断this.haha==null就不成立了，所以它就会执行alert('又是谁在吹我了？？？')
+
+
+继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval onscroll="alert('谁敢动我滚动条？？')" id=a style="Z-INDEX:1;LEFT:300;WIDTH:190;POSITION:absolute;TOP:100;HEIGHT:190;overflow-y:scroll">
+dd<p>dd<p>dd<p>dd<p>dd<p>dd<p>dd<p>dd<p>
+</v:oval>
+</textarea>
+
+不难看出，用CSS的overflow-y:scroll;给它增加了滚动条，当它内容很长了超过它本身大小时，就会显示了。而这时如果你拖动滚动条，就会触发它的onscroll事件。

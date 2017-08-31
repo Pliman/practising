@@ -1,0 +1,95 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>imagedata背景图片</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:imagedata背景图片 - 专用属性参考表</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;'><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td style="color:red">src</td><td>null</td><td>URLtext</td><td>描述图像URL地址来源</td></tr>
+<tr><td style="color:red">grayscale</td><td>false</td><td>boolean</td><td>描述图像是否为黑白效果</td></tr>
+<tr><td style="color:red">bilevel</td><td>false</td><td>boolean</td><td>描述图像是否为漫画卡通效果</td></tr>
+<tr><td style="color:red">blacklevel</td><td>null</td><td>number/-0.4-0.4</td><td>描述图像亮度</td></tr>
+<tr><td style="color:red">gain</td><td>null</td><td>number/0-100</td><td>描述图像对比度</td></tr>
+<tr><td style="color:red">gamma</td><td>null</td><td>number/0.9-0.1</td><td>描述图像颜色清晰度</td></tr>
+<tr><td style="color:red">chromakey</td><td>none</td><td>colortext</td><td>描述图像透明过滤的颜色</td></tr>
+<tr><td style="color:red">cropleft</td><td>null</td><td>number/0%-100%</td><td>描述图像左边的裁剪</td></tr>
+<tr><td style="color:red">cropright</td><td>null</td><td>number/0%-100%</td><td>描述图像右边的裁剪</td></tr>
+<tr><td style="color:red">croptop</td><td>null</td><td>number/0%-100%</td><td>描述图像上边的裁剪</td></tr>
+<tr><td style="color:red">cropbottom</td><td>null</td><td>number/0%-100%</td><td>描述图像下边的裁剪</td></tr>
+</table>
+
+<span>2:imagedata背景图片 - 介绍</span>
+
+也许你又会问，二级标记fill不是有很强背景图像填充的方法么，怎么还有个imagedata背景图片？我的回答是“不管是实用/常用与否，VML为我们想的很周到”。的确fill的背景图像填充是很强的、效果眼花缭乱，而又的确imagedata我认为使用的机会不会很多，但不可否认imagedata我曾经实际应用中也有一些特长。请先看下面几个imagedata的例子，它的属性作用跟一级标记image一摸一样，只不过是用它插入的图片必须依附于像oval、rect、roundrect、arc等图形当中，当作平铺于该图形底下的“背景/场景图像”
+
+<span>3:imagedata背景图片 - 实例讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:1;LEFT:50;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3"/>
+
+<v:oval style="Z-INDEX:1;LEFT:160;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:imagedata src="shili/fyw2.jpg"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:270;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:imagedata bilevel=t src="shili/fyw2.jpg"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:380;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:imagedata cropleft="25%" croptop="20%" cropright="20%" cropbottom="20%" src="shili/fyw2.jpg"/>
+</v:oval>
+</textarea>
+
+上例我们插入的图片是JPG格式的矩形图片，你只少应从例子中理解用imagedata插入的图像必须依附于图形、如果图像本事是JPG矩形的图片那么就会平铺于图形之下、图形本身的fillcolor填充也会无效、裁剪后被自动拉伸缩放剩下的图形部分
+
+在看下面用gif动画的例子
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:1;LEFT:50;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3"/>
+
+<v:oval style="Z-INDEX:1;LEFT:160;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1"/>
+<v:imagedata src="shili/haha.gif"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:270;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:imagedata bilevel=t src="shili/haha.gif"/>
+</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:380;WIDTH:100;POSITION:absolute;TOP:100;HEIGHT:100" fillcolor="#C4F6FA" strokecolor="yellow" strokeweight="3">
+<v:imagedata cropleft="25%" croptop="20%" cropright="20%" cropbottom="20%" src="shili/haha.gif"/>
+</v:oval>
+</textarea>
+
+上例我们插入的图片是gif格式的带透明部分不规则动画图片，就跟JPG矩形图片有些不同之出了，由于gif动画图形的不规则问题，显现出图形本身的fillcolor颜色
+
+<span>4:imagedata背景图片 - 应用价值探讨</span>
+
+如一开始所说，imagedata的实际应用价值远不如fill、stroke等二级标记，但若制作照片框、图像浏览、处理类的DVML程序到还不错，下面给个很简单的例子。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<center>
+<input type='button' value="放大" onclick="rect1.style.width=parseInt(rect1.style.width)+30;rect1.style.height=parseInt(rect1.style.height)+30;rect1.style.left=parseInt(rect1.style.left)-15;rect1.style.top=parseInt(rect1.style.top)-15;">
+<input type='button' value="缩小" onclick="rect1.style.width=parseInt(rect1.style.width)-30;rect1.style.height=parseInt(rect1.style.height)-30;rect1.style.left=parseInt(rect1.style.left)+15;rect1.style.top=parseInt(rect1.style.top)+15;">
+<input type='button' value="增加与取消漫画风格" onclick="img1.bilevel=!img1.bilevel">
+</center>
+
+<v:rect id="rect1" style="Z-INDEX:3334;LEFT:296px;WIDTH:350px;POSITION:absolute;TOP:200px;HEIGHT:250px" arcsize="6554f" fillcolor="white" stroked="t" strokecolor="#b0774c" strokeweight="15pt">
+<v:stroke filltype="pattern" src="shili/fyw2.jpg" opacity="1" startarrow="none" endarrow="none"/>
+<v:imagedata id=img1 src="shili/fyw2.jpg"/>
+</v:rect>
+</textarea>
+
+虽然用rect+image这两个一级标记也可以模拟实现上述效果，但DVML编程恐怕就需要花费很多关于坐标定位上的代码了（要更新rect也要更新image）。而imagedata是直接依附于rect内部的，坐标、大小更新时只需控制rect即可，简化了这方面编程的烦琐。

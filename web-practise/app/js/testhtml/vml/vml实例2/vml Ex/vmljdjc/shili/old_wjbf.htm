@@ -1,0 +1,46 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<Meta name='Gemeratpr' content='网络程序员伴侣(Lshdic)2004'>
+<TITLE>物及必反 - 5小球运动</TITLE>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+*{font-size:12px;color:;}
+a{text-decoration:none;}
+a:hover{color:red;}
+</STYLE>
+</HEAD>
+<BODY topmargin='2' leftmargin='2'>
+<BASE target='_top'>
+<div id=a style='table-Layout:fixed;width:100%;height:100%;border:1 solid black'></div>
+<script>
+var wid1,hei1,str1=""     //定义全局变量，为提高运行速度
+var xx=new Array(0,0,0,0,0)  //分别存储5个球的X坐标
+var yy=new Array(0,0,0,0,0)  //分别存储5个球的Y坐标
+var xjia=new Array(false,true,false,true,false)  //分别判断5个球是否“物极”到了X极限
+var yjia=new Array(true,false,true,false,true)   //分别判断5个球是否“物极”到了Y极限
+var ovalwid=new Array(0,0,0,0,0) //分别存储5个球随机的大小
+wid1=a.offsetWidth-70;hei1=a.offsetHeight-70    //得到容器的宽和高
+for(i=0;i<5;i++){  //首次向容器内塞进5个球，球属性是随机的
+tempx=Math.round(Math.random()*wid1);tempy=Math.round(Math.random()*hei1);
+tempcolor="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+ovalwid[i]=Math.round(Math.random()*70)+20;
+xx[i]=tempx;yy[i]=tempy
+str1+="<v:oval fillcolor='"+tempcolor+"' style='position:absolute;left:"+tempx+";top:"+tempy+";z-index:"+i+";width:"+ovalwid[i]+";height:"+ovalwid[i]+";' id='oval1'/>"
+}
+a.innerHTML=str1; //插入STR1，STR1是5个VML球的代码
+function play1(){  //播放函数
+wid1=a.offsetWidth;hei1=a.offsetHeight
+for(i=0;i<5;i++){   //循环5次
+if(wid1-xx[i]<ovalwid[i]+5)xjia[i]=false //到达X极限，值为FALSE
+if(xx[i]<5)xjia[i]=true    //到达X起点，值为TRUE
+if(hei1-yy[i]<ovalwid[i]+5)yjia[i]=false
+if(yy[i]<5)yjia[i]=true
+if (xjia[i]==true)xx[i]+=5;else xx[i]-=5  //TRUE的话就++，FALSE的话就--
+if (yjia[i]==true)yy[i]+=5;else yy[i]-=5
+oval1[i].style.left=xx[i];oval1[i].style.top=yy[i]  //更新球的位置
+}}
+setInterval("play1()",10)  //10毫秒播放一次，一般CPU保证能消化~~~
+</script>
+</BODY>
+</HTML> 

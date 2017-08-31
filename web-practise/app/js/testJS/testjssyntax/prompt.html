@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script>
+			function testPrompt(){
+				var name = prompt('请输入你的姓名');
+				applyPrompt(name) ;
+			}
+			function applyPrompt(name){
+				document.getElementById('name').value = name ;
+			}
+		</script>
+		<title>testPrompt</title>
+	</head>
+	<body>
+	<form action="" name="form1" id="form1">
+		<input id="name" type="text" value="" />
+		<select>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+	</form>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="testPrompt()" type="button" id="split" name="testPrompt"
+						value="testPrompt"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

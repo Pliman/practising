@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		function alertInfo(info){
+  			
+  			alert(info);
+  		}
+  		
+  		function evalFunction(comId, eventhandler){
+  			var args = arguments;
+  			//alert(comId);
+  			//alert(eval(wqewr));
+  			var com = document.getElementById(comId);
+  			//alert(com);
+  			//com.onclick = eval(wqewr);
+  			com.onclick = eventhandler;
+  			
+  			alert(com.onclick);
+  		}
+  		
+  		function getTarget(){
+  			//var com = document.getElementById('target');
+  			//com.onclick = alertInfo;
+  			//alert(com.onclick);
+  			//evalFunction('target', 'new function(){alert("1234");}');
+  			evalFunction('target', createFunction(null, "alertInfo", '1234'));
+  			
+  			
+  		}
+  		
+  		function createFunction(obj, strFunc){
+  			var args = [];
+  			if(!obj)obj = window;
+  			
+  			for(var i = 2; i < arguments.length; i++){
+  				args.push(arguments[i]);
+  			}
+  			
+  			return function(){
+  				obj[strFunc].apply(obj, args);
+  			}
+  		}
+  		
+  		
+  		//window.onload(evalFunction('target','new function(){alert("123");}'));
+  		//window.onload(alert('1234'));
+  	</script>
+    <title>evalFunction</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <table id="operatortable">
+			<tr>
+				<td>
+					<input onclick='getTarget()' type="button" id="evalFunction" name="evalFunction"
+						value="evalFunction"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable1">
+			<tr>
+				<td>
+					<input type="button" id="target" name="target"
+						value="target"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+  </body>
+</html>

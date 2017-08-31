@@ -1,0 +1,32 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ext.getCmp方法_演示</title>
+        <!-- 引入必要的Ext库文件-->
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+        <script>
+		//我们使用Ext.getCmp("panelCmp ")来得到id为panelCmp的组件
+		//并调用其setTitle方法来设置该面板的标题。
+        Ext.onReady(function(){
+			var foo = new Ext.Panel({
+			id:"panelCmp",
+			title:"测试",
+			renderTo:"divHolder",
+			width:300,
+			height:200
+			});
+			Ext.getCmp("panelCmp").setTitle("新的标题");
+		});
+        </script>
+        <div id="divHolder"></div>
+    </body>
+</html>
+

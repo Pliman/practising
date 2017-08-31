@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>通过拖拽改变行的顺序</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style type="text/css">
+            .up {
+                background-image: url(images/up.png) !important;
+            } .down {
+                background-image: url(images/down.png) !important;
+            } .save {
+                background-image: url(images/save.gif) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">通过拖拽改变行的顺序</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="panel1">
+                </div>
+                <br/>
+                <div>
+                    事件：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.Msg.minWidth = 300;
+                
+                var store = new Ext.data.Store({
+                    url: 'grid2_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id',
+                        type: 'int'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'filename'
+                    }, {
+                        name: 'classid'
+                    }, {
+                        name: 'filesize',
+                        type: 'int'
+                    }, {
+                        name: 'createtime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'width'
+                    }, {
+                        name: 'height'
+                    }, {
+                        name: 'sortorder',
+                        type: "int"
+                    }]),
+                    remoteSort: true,
+                    listeners: {
+                        scope: this,
+                        load: function(){
+                            if (grid) 
+                                grid.getSelectionModel().selectFirstRow();
+                        }
+                    }
+                }) //store
+                function qtips(val){
+                    return '<span style="display:table;width:100%;" qtip=\'<img src="images/' + val + '">\'>' + val + '</span>'
+                }
+                
+                var grid = new Ext.grid.GridPanel({
+                    height: 350,
+                    width: 800,
+                    enableDragDrop: true,
+                    store: store,
+                    title: '通过拖拽改变行的顺序',
+                    frame: true,
+                    enableDrag: true,
+                    columns: [{
+                        id: 'id',
+                        header: "编号",
+                        width: 80,
+                        dataIndex: 'id'
+                    }, {
+                        header: "标题",
+                        width: 75,
+                        dataIndex: 'title'
+                    }, {
+                        header: "文件名",
+                        width: 120,
+                        dataIndex: 'filename',
+                        renderer: qtips
+                    }, {
+                        header: "文件大小",
+                        width: 75,
+                        renderer: 'fileSize',
+                        dataIndex: 'filesize',
+                        align: 'right'
+                    }, {
+                        header: "宽",
+                        width: 75,
+                        dataIndex: 'width'
+                    }, {
+                        header: "高",
+                        width: 75,
+                        dataIndex: 'height'
+                    }, {
+                        header: "创建时间",
+                        width: 140,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+                        dataIndex: 'createtime'
+                    }],
+                    stripeRows: true,
+                    autoExpandColumn: 1,
+                    tbar: [{
+                        text: '上移',
+                        iconCls: 'up',
+                        scope: this,
+                        handler: function(){
+                            buttonMove(-1);
+                        }
+                    }, {
+                        text: '下移',
+                        iconCls: 'down',
+                        scope: this,
+                        handler: function(){
+                            buttonMove(1);
+                        }
+                    }, '-', {
+                        text: '保存',
+                        iconCls: 'save',
+                        scope: this,
+                        handler: function(){
+                            var ds = grid.getStore();
+                            var sortIndex = [];
+                            for (var i = 0; i < ds.getCount(); i++) {
+                                sortIndex.push(ds.data.items[i].id);
+                            }
+                            Ext.get('op').dom.value += '------------\n' + sortIndex + '\n';
+                            Ext.Ajax.request({
+                                url: 'grid2_action.ashx?act=save',
+                                params: {
+                                    sortIndex: sortIndex
+                                },
+                                success: function(response, op){
+                                    var msg = response.responseText;
+                                    var obj = Ext.decode(msg);
+                                    if (obj) {
+                                        if (obj.success) {
+                                            msg = "新的行顺序已保存！"
+                                        }
+                                        else {
+                                            msg = obj.data;
+                                        }
+                                    }
+                                    Ext.Msg.alert('信息', msg);
+                                },
+                                failure: function(response, op){
+                                    Ext.Msg.alert('信息', response.responseText);
+                                }
+                            });
+                        }
+                    }]
+                });
+                
+                grid.render('panel1');
+                
+                function buttonMove(toward){
+                    var sm = grid.getSelectionModel();
+                    var data = sm.getSelections();
+                    if (sm.hasSelection()) {
+                        //获取选择行第1行
+                        var rec = sm.getSelected();
+                        var ds = grid.getStore();
+                        //默认的插入行
+                        var rowIndex = ds.indexOfId(rec.id) + toward;
+                        //判断插入是否已选择，如果已选择，重新获取插入行
+                        var ri = []; //插入行的行号数组
+                        for (var i = 1; i < data.length; i++) {
+                            var index = ds.indexOfId(data[i].id)
+                            ri.push(index);
+                        }
+                        //对插入行数组进行排序，下移顺序排序，上移反序排序
+                        if (toward == 1) {
+                            ri.sort(function(x, y){
+                                if (parseInt(x) > parseInt(y)) 
+                                    return 1
+                                else 
+                                    return -1
+                            })
+                        }
+                        else {
+                            ri.sort(function(x, y){
+                                if (parseInt(x) > parseInt(y)) 
+                                    return -1
+                                else 
+                                    return 1
+                            })
+                        }
+                        //如果插入行是选择行，则插入行前移或后移
+                        for (var i = 0; i < ri.length; i++) {
+                            if (rowIndex == ri[i]) 
+                                rowIndex += toward;
+                        }
+                        //判断插入行是否已在顶部或底部，不是则执行移动操作
+                        if (rowIndex < 0) {
+                            Ext.Msg.alert('信息', '记录已在顶部');
+                        }
+                        else 
+                            if (rowIndex >= ds.getCount()) {
+                                Ext.Msg.alert('信息', '记录已在底部');
+                            }
+                            else {
+                                move(rowIndex, data);
+                            }
+                    }
+                    else {
+                        Ext.Msg.alert('信息', '请选择记录');
+                    }
+                }
+                
+                function move(rindex, data){
+                    var ds = grid.getStore();
+                    //获取插入行的记录
+                    var rdata = ds.getAt(rindex);
+                    //默认是上移操作
+                    var toward = 0;
+                    var index = ds.indexOfId(data[0].id);
+                    if (rindex > index) 
+                        toward = 1 //如果是下移，修改方向值
+                    //移除选择行
+                    for (i = 0; i < data.length; i++) {
+                        ds.remove(ds.getById(data[i].id));
+                    }
+                    //根据id获取插入行的新位置并根据移动操作计算出插入位置
+                    rindex = ds.indexOfId(rdata.id) + toward;
+                    //从插入位置依次插入选择行
+                    for (i = 0; i < data.length; i++) {
+                        ds.insert(rindex, data[i]);
+                        rindex++;
+                    }
+                    //重新选择选择行
+                    var sm = grid.getSelectionModel();
+                    if (sm) 
+                        sm.selectRecords(data);
+                }
+                
+                var target = new Ext.dd.DropTarget(grid.getEl(), {
+                    ddGroup: grid.ddGroup || 'GridDD',
+                    grid: grid,
+                    gridDropTarget: this,
+                    notifyDrop: function(dd, e, data){
+                        //获取选择行
+                        var t = e.getTarget();
+                        var rindex = this.grid.view.findRowIndex(t);
+                        if (rindex === false) 
+                            return false;
+                        var ds = this.grid.getStore();
+                        var rdata = ds.getAt(rindex);
+                        //判断插入行是否选择行，如果是不允许插入
+                        for (i = 0; i < data.selections.length; i++) {
+                            var rowIndex = ds.indexOfId(data.selections[i].id);
+                            if (rindex == rowIndex) 
+                                rindex = false;
+                        }
+                        move(rindex, data.selections)
+                        return true;
+                    },
+                    
+                    notifyOver: function(dd, e, data){
+                        var t = e.getTarget();
+                        var rindex = this.grid.view.findRowIndex(t);
+                        var ds = this.grid.getStore();
+                        for (i = 0; i < data.selections.length; i++) {
+                            var rowIndex = ds.indexOfId(data.selections[i].id);
+                            if (rindex == rowIndex) 
+                                rindex = false;
+                        }
+                        return (rindex === false) ? this.dropNotAllowed : this.dropAllowed;
+                    }
+                })
+                Ext.get('op').dom.value = "";
+                store.load();
+            })
+        </script>
+    </body>
+</html>

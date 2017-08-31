@@ -1,0 +1,19 @@
+v\:*{behavior:url(#default#VML);}   /*声明V为VML变量*/
+body{
+scrollbar-base-color:#3275c0;
+scrollbar-shadow-color:white;
+scrollbar-highlight-color:white;
+scrollbar-arrow-color:white;
+overflow-y:scroll;
+overflow-x:hidden;
+margin-top:5;
+}
+body,td{font-size:12px;}
+a{text-decoration:none;color:blue}
+a:hover{color:red;}
+.menu1{font-size:20px;font-family:楷体_GB2312;color:#3275c0;font-weight:bold}
+.b,span{font-size:16px;font-family:黑体;color:#FC23B4}
+pre{letter-Spacing:2;word-wrap:break-word;}
+img{border:0}
+input{border:1 solid #3275c0;background-color:f5f5f5;color:#3275c0;font-size:12px}
+textarea{border:1 solid #f48fcd;}

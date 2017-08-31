@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>operateinput</title>
+
+	<script type="text/javascript"
+	        src="../bower_components/jquery/jquery.js"></script>
+	<script type="text/javascript" src="selectrange.js"></script>
+</head>
+<body>
+<input type="text" id="test" value="Some text">
+<input type="text" id="test1" value="bbbbbbbbbbbbbbbbbbbbb">
+<textarea name="" id="dd" cols="30" rows="10"></textarea>
+<input type="button"
+       onmousedown="show()"
+       value="Selected?">
+// click是不行的，因为click会判断mousedown and mouseup是否对于同一个元素发生，从而将当前选择移到点击的元素上去了。
+<input type="button"
+       onclick="show()"
+       value="Selected1?">
+
+<button id="aaa">123</button>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		document.getElementById("test").focus();
+		$('#aaa').click(function(){
+			simulateKeyPress();
+		});
+	});
+
+	// 模拟按键
+	function simulateKeyPress() {
+		document.getElementById("test").focus();
+		var e = $.Event("keypress");
+		e.which = 97;
+		$("#test").trigger(e);
+
+//		$("#test").keypress(97); //好像不行
+	}
+
+	$("#test").on('keypress', function(e){
+		console.log(e.which);
+	});
+</script>
+</body>
+</html>

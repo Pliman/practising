@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+</head>
+<body>
+
+<div ng-app="app" ng-controller="foo">
+	<div class="button"
+	     ng-repeat="item in 'somewords'.split('')"
+	     ng-click="myFunc($event)">
+			<!--ng-click="$log.info($event)">-->
+		{{$index + 1}}, {{item}}
+		{{ev.pageX}}
+	</div>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

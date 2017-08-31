@@ -1,0 +1,29 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<Meta name='Gemeratpr' content='网络程序员伴侣(Lshdic)2004'>
+<TITLE>VML+阿基米德算法实现动画</TITLE>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+*{font-size:12px;color:;}
+a{text-decoration:none;}
+a:hover{color:red;}
+</STYLE>
+</HEAD>
+<BODY topmargin='2' leftmargin='2'>
+<BASE target='_top'>
+<div id=a style='width:100%;height:100%;border:1 solid black'></div>
+<script>
+ //原作:风云舞
+var pos1=0,cos1=0,sin1=0,buchang=1,line1,wid1,hei1,color1 //定义全局变量，为提高运行速度
+wid1=a.offsetWidth/2
+hei1=a.offsetHeight/2 //预装载宽与高，为提高运行速度
+function add1(){
+if(pos1==0){buchang=Math.round(Math.random()*5)+1;color1="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")"}  //初始化时，定义一个随机步长，为达到各种效果
+if(pos1<200)pos1+=buchang;else{pos1=0;a.innerHTML="";line1=null;wid1=a.offsetWidth/2;hei1=a.offsetHeight/2} //递加或者初始化
+a.appendChild(document.createElement('<v:line style="position:absolute;left:'+wid1+';top:'+hei1+';" strokecolor='+color1+' to="'+pos1*Math.cos(pos1)+','+pos1*Math.sin(pos1)+'"/>'));
+}
+setInterval('add1();',50)  //30毫秒增加一次，注意30毫秒如果超过30条线以上，低于30毫秒对于使用低CPU处理器用户吃不消
+</script>
+</BODY>
+</HTML> 

@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>对象相等</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script>
+			var obj = function(){
+				var a = 'A';
+			};
+			
+			var obj1 = new obj();
+			var obj2 = new obj();
+			alert(obj1 == obj2); //false
+			
+			var obj = new obj();
+			obj1 = obj;
+			obj2 = obj;
+			alert(obj1 == obj2); //true
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

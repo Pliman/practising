@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<computer xmlns="http://www.dfpark.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="computer.xsd">
+	<cpu>intel core2 Duo</cpu>
+	<motherboard>ShanZai</motherboard>
+	<harddisk>Seagate 5400.4 250G</harddisk>
+	<memory>
+		<slot1>2G DDR800</slot1>
+		<slot2>Kingston 2G DDR800</slot2>
+		<total>4096MB</total>
+	</memory>
+</computer>

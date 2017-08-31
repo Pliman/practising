@@ -1,0 +1,39 @@
+.tabsdemoDynamicTabs .remove-tab {
+	margin-bottom: 40px; }
+.tabsdemoDynamicTabs .md-button {
+	display: block; }
+.tabsdemoDynamicTabs .demo-tab {
+	height: 300px;
+	text-align: center; }
+.tabsdemoDynamicTabs .tab0, .tabsdemoDynamicTabs .tab1, .tabsdemoDynamicTabs .tab2, .tabsdemoDynamicTabs .tab3 {
+	background-color: #bbdefb; }
+.tabsdemoDynamicTabs .md-header {
+	background-color: #1976D2 !important; }
+.tabsdemoDynamicTabs md-tab {
+	color: #90caf9 !important; }
+.tabsdemoDynamicTabs md-tab.active, .tabsdemoDynamicTabs md-tab:focus {
+	color: white !important; }
+.tabsdemoDynamicTabs md-tab[disabled] {
+	opacity: 0.5; }
+.tabsdemoDynamicTabs .md-header .md-ripple {
+	border-color: #FFFF8D !important; }
+.tabsdemoDynamicTabs md-tabs-ink-bar {
+	background-color: #FFFF8D !important; }
+.tabsdemoDynamicTabs .title {
+	padding-top: 8px;
+	padding-right: 8px;
+	text-align: left;
+	text-transform: uppercase;
+	color: #888;
+	margin-top: 24px; }
+.tabsdemoDynamicTabs [layout-align] > * {
+	margin-left: 8px; }
+.tabsdemoDynamicTabs form > [layout] > * {
+	margin-left: 8px; }
+.tabsdemoDynamicTabs .long > input {
+	width: 264px; }
+.tabsdemoDynamicTabs .md-button {
+	max-height: 30px; }
+.tabsdemoDynamicTabs .md-button.add-tab {
+	margin-top: 20px;
+	max-height: 30px !important; }

@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>comboboxlinkage</title>
+
+        <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript">
+
+Ext.onReady(function(){
+	
+	var dataLevel1 = {
+		translator:[
+			{value:'doc',text:'文档编写'},
+			{value:'cc',text:'出差'},
+			{value:'rcgz',text:'日常工作'},
+			{value:'pxhy',text:'培训会议'},
+			{value:'qj',text:'请假'}
+		]
+	};
+	
+	var datadoc = {translator:[{value:'3',text:'需求分析'},{value:'5',text:'实施文档'},{value:'2',text:'项目管理'},{value:'4',text:'设计文档'},{value:'6',text:'其他'},{value:'1',text:'项目材料'}]} ;
+	var datacc = {translator:[{value:'3',text:'产品推广'},{value:'5',text:'其他'},{value:'2',text:'需求调研'},{value:'4',text:'合作开发'},{value:'1',text:'客户培训'}]} ;
+	var datarcgz = {translator:[{value:'3',text:'工作学习'},{value:'2',text:'工作协调'},{value:'1',text:'日常维护'}]} ;
+	var datapxhy = {translator:[{value:'3',text:'协作会议'},{value:'5',text:'客户交流'},{value:'7',text:'其他'},{value:'2',text:'工作汇报'},{value:'4',text:'项目沟通'},{value:'6',text:'培训'},{value:'1',text:'例会'}]} ;
+	var dataqj = {translator:[{value:'10',text:'哺乳假'},{value:'3',text:'产假'},{value:'5',text:'病假'},{value:'7',text:'丧假'},{value:'2',text:'婚假'},{value:'11',text:'计划生育假'},{value:'9',text:'流产假'},{value:'4',text:'看护假'},{value:'8',text:'探亲假'},{value:'12',text:'工伤假'},{value:'6',text:'事假'},{value:'1',text:'年假'}]} ;
+	
+	var storeLevel1 = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(dataLevel1),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storeLevel1.load();
+	var storedoc = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(datadoc),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storedoc.load();
+    var storecc = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(datacc),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storecc.load();
+    var storercgz = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(datarcgz),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storercgz.load();
+    var storepxhy = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(datapxhy),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storepxhy.load();
+    var storeqj = new Ext.data.Store({id:'value',
+		proxy: new Ext.data.MemoryProxy(dataqj),
+        reader: new Ext.data.JsonReader({root:"translator", id:"value"},Ext.data.Record.create([{name:"value"}, {name:"text"}]))});
+    storeqj.load();
+    
+   	var combobox2 = new Ext.form.ComboBox({id:'id_combo_two',applyTo:'combobox2',height:25,width:150,
+						lazyRender:false,typeAhead: true,triggerAction: 'all',
+						store:storedoc,emptyText : '请选择',valueField : 'value',
+						displayField : 'text',listClass: 'x-combo-list-small'}) ;
+    
+    var fn = function(combo,record,index){
+    	var dataName = 'data' + record.get('value') ;
+    	var storeName = 'store' + record.get('value') ;
+    	combobox2.clearValue();
+    	//combobox2.lastQuery = null ;
+    	//combobox2.store = eval(storeName) ; //不能用store赋值的方法，这样只会改变一次，之后再改变上级值，下级的选框就不动了。
+    	combobox2.store.loadData(eval(dataName)) ; //此法有效
+    } ;
+	
+	var combobox1 = new Ext.form.ComboBox({id:'id_combo_one',renderTo:'combobox1',
+						lazyRender:false,typeAhead: true,triggerAction: 'all',
+						store:storeLevel1,emptyText : '请选择',valueField : 'value',
+						displayField : 'text',listClass: 'x-combo-list-small',
+						listeners:{select:fn} //newValue,oldValue一般说来，和record一样
+						}) ;	
+						
+    var cm = new Ext.grid.ColumnModel([
+        {header:'编号',dataIndex:'value'},
+        {header:'描述',dataIndex:'text'}
+    ]);
+ 
+    var grid = new Ext.grid.GridPanel({
+        width:600,   
+    	height:100,
+    	autoExpandColumn : true,
+        renderTo: 'grid',
+        store: storeLevel1,
+        sm: new Ext.grid.RowSelectionModel({singleSelect:true}),//可要可无！如果不设置,按住Ctrl键可多选
+        cm: cm
+    });
+
+    var ExtButton = new Ext.Button({
+        text: '选择行信息',
+        renderTo: 'but1',
+        handler: function() { //行的选择//////////
+        var selections = grid.getSelectionModel().getSelections();
+        if (selections.length == 0) { Ext.Msg.alert('提示', "先选择行"); return; }
+	        for (var i = 0; i < selections.length; i++) {
+	            var record = selections[i];
+	            Ext.Msg.alert('提示', record.get("value") + "," + record.get("text"));
+	            //Ext.Msg.alert窗口不允许弹出多个,只会显示最后一个窗口
+	        }
+        }
+    });
+});
+
+        </script>
+    </head>
+    <body>
+        <div id="grid" style="height:100px;"></div>
+        <div id="but1"></div>
+        <div id="combobox1" style="height:30px"></div>
+        <div id="combobox23" style="height:30px"></div>
+        <input type="text" id="combobox2" size="20"/>
+    </body>
+</html>

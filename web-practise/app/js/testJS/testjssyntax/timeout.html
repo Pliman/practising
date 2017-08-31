@@ -1,0 +1,28 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>
+<script language="javascript">
+		var now = new Date();
+		function getDay(){
+			try{
+				var date = new Date();
+				var div = document.getElementById('idDiv') ;
+				var currentSecond = date.getSeconds() ;
+				var _year = date.getYear() ;
+				var _month = date.getMonth() ;
+				var _day = date.getDate() ;
+				alert(_year) ;
+				alert(_month) ;
+				alert(_day) ;
+				div.innerHTML = _year + _month + _day + currentSecond ;
+			}catch(e){}
+			window.setTimeout("getDay()", 1000) ;
+		}
+		window.onload = getDay;
+</script>
+<body>
+	<div id="picture">
+		<div id="idDiv" name="nameDiv"></div>
+	</div>
+</body>
+</html>

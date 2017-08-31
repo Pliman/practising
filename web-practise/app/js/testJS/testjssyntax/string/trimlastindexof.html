@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>trimlastindexof</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		
+		<script type="text/javascript">
+	  		function trimlastindexof(){
+	  			var str = '1,2;1,2;1,2;';
+	  			var lastIndex = str.lastIndexOf(';');
+	  			var str = str.substring(0,lastIndex);
+	  			alert(str);
+	  		}
+	  	</script>
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="trimlastindexof()" type="button" id="trimlastindexof" name="trimlastindexof"
+						value="trimlastindexof"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

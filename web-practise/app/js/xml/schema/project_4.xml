@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+<UWO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bbs.xml.org.cn project.xsd" xmlns="http://bbs.xml.org.cn">
+    <Departments>
+  <Department>
+   <Name>Economics</Name>
+   <Address>Social Science Centre, UWO, London, Ontario, Canada , N6A 5C2</Address>
+   <Location>SSC 4071</Location>
+   <Phone>519 661-3500 x83500</Phone>
+   <Facsimile>519 661-3666 x83666</Facsimile>
+   <Email>economics@uwo.ca</Email>
+   <WEB>http://economics.uwo.ca</WEB>
+  </Department>
+  <Department>
+   <Name>Political_science</Name>
+   <Address>Social Science Centre, UWO, London, Ontario, Canada , N6A 5C2</Address>
+   <Location>SSC 4154</Location>
+   <Phone>519 661-3266 x83266</Phone>
+   <Facsimile>519 661-3904 x83904</Facsimile>
+   <Email>polisci-web@uwo.ca</Email>
+   <WEB>http://politicalscience.uwo.ca</WEB>
+   <SERVICES>
+    <Service>
+     <Name>Local_Government_program</Name>
+     <Phone>519 661-2111 x80501</Phone>
+     <Location>SSC 4148</Location>
+     <WEB>http://localgovernment.uwo.ca</WEB>
+    </Service>
+    <Service>
+     <Name>Politics_020E_course_Coordinator</Name>
+     <Phone>519 661-2111 x85108</Phone>
+     <Location>ssc 4149</Location>
+    </Service>
+   </SERVICES>
+  </Department>
+   </Departments>
+</UWO>

@@ -1,0 +1,29 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>浏览器事件对象</title>
+    </head>
+    <body>
+        <div id="foo">
+            请单击我
+        </div>
+        <script>
+            
+            document.getElementById('foo').onclick = handleEvent;
+            function handleEvent(e){
+                var eventObj, eventTarget;
+                if (e) {
+                    //按照现代编码风格来讲，不提倡全局变量的编程手法，因此W3C的参数方案较Microsoft之方案略显优雅
+                    eventObj = e;
+                }
+                else {
+                    //若参数e不存在，保存window.event到变量eventObj对象
+                    eventObj = window.event;
+                }
+                //事件目标对象W3C称为target；Microsoft称为srcElement
+                evtTarget = eventObj.target || eventObj.srcElement;
+                alert(evtTarget.id); //弹出”foo”
+            }
+        </script>
+    </body>
+</html>

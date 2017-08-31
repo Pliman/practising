@@ -1,0 +1,43 @@
+<p>
+    <button id="mb5">
+        JsonData
+    </button>
+</p>
+<br/>
+<p>
+    <button id="mb6">
+        JsonReader
+    </button>
+</p>
+<script>
+    Ext.get('mb5').on('click', function(e){
+        Ext.Ajax.request({
+            url: 'litjson.ashx?act=JsonData',
+            method: 'post',
+            params: {
+                data: "{name:'Bill',age:32,awake:true,n:1994.0226,note:['life', 'is', 'but', 'a', 'dream']}"
+            
+            },
+            callback: function(oElement, bSuccess, oResponse){
+                if (bSuccess) {
+                    Ext.get('result').dom.innerHTML = oResponse.responseText;
+                }
+            }
+        });
+    });
+    
+    Ext.get('mb6').on('click', function(e){
+        Ext.Ajax.request({
+            url: 'litjson.ashx?act=JsonReader',
+            method: 'post',
+            params: {
+                data: "{name:'Bill',age:32,awake:true,n:1994.0226,note:['life', 'is', 'but', 'a', 'dream']}"
+            },
+            callback: function(oElement, bSuccess, oResponse){
+                if (bSuccess) {
+                    Ext.get('result').dom.innerHTML = oResponse.responseText;
+                }
+            }
+        });
+    });
+</script>

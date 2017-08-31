@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="react-with-addons-0.13.1.js"></script>
+	<script src="ReactRouter.js"></script>
+	<script src="JSXTransformer.js"></script>
+	<style>
+		nav {
+			background: #eee;
+			padding: 4px 10px;
+		}
+
+		nav a {
+			margin-right: 10px;
+		}
+
+		.active {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+<script type="text/jsx">
+	// 应用入口
+	var App = React.createClass({
+		render: function() {
+			var name = 123;
+
+			return (
+					<div className="app">
+						<input type="text" value="111" />
+						<input type="text" defaultValue="111" />
+					</div>
+			);
+		}
+	});
+
+	React.render(<App />, document.body);
+</script>
+</body>
+</html>

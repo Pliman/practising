@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			table td {
+				width:100px;
+				height:100px;
+				background-color:orange;
+				border:1px solid #blue;
+				border-collapse:collapse;
+				margin : 0;
+				padding : 0;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="container">
+			<tr >
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>8</td>
+				<td>9</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="merge()" type="button" value="合并单元格" />
+					<input onclick="split()" type="button" value="拆分单元格" />
+				</td>
+			</tr>
+		</table>
+	</body>
+	
+	<script type="text/javascript">
+		var table = document.getElementById('container');
+		var tdArr = [table.cells[1],table.cells[2],table.cells[4],table.cells[5]];
+		var td1 = table.cells[1];
+		td1.contains = [];
+		
+		//card中
+		function merge(){
+			for(var i=0,length=tdArr.length;i < length; i++){
+				var td = tdArr[i];
+				if(i == 0){
+					td.colSpan = 2;
+					td.rowSpan = 2;
+				}else{
+					hideTd(td);
+					td1.contains.push(td);
+				}
+			}
+		}
+		
+		function split(){
+			td1.colSpan = 1;
+			td1.rowSpan = 1;
+			for(var i=0,length=td1.contains.length;i < length; i++){
+				td = td1.contains[i];
+				showTd(td);
+			}
+			td1.contains=[];
+		}
+		
+		function hideTd(td){
+			//td.innerHTML = ''; //相当于cell.clear方法
+			td.style.display = 'none';
+		}
+		
+		function showTd(td){
+			alert(td.innerHTML);
+			td.style.display = 'block';
+			alert(td.style.display);
+		}
+ 	</script>
+</html>

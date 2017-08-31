@@ -1,0 +1,3 @@
+;;; FLAGS: --spec
+(assert_invalid (module binary "\00ASM") "bad magic")
+(module)

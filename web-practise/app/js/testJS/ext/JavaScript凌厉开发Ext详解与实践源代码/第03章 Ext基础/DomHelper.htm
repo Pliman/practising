@@ -1,0 +1,25 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>DomHelper单例_演示</title>
+        <!-- 引入必要的Ext库文件-->
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="../../extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="../../extjs/ext-all.js"></script>
+    </head>
+    <body>
+		<div id="testID"></div>
+		<script>
+			var list =  Ext.DomHelper.append('testID', {
+				tag: 'ul', cls: 'my-list', children: [
+					{tag: 'li', id: 'item0', html: 'List Item 0'}, 
+					{tag: 'li', id: 'item1', html: 'List Item 1'}, 
+					{tag: 'li', id: 'item2', html: 'List Item 2'}, 
+					{tag: 'li', id: 'item3', html: 'List Item 3'}, 
+					{tag: 'li', id: 'item4', html: 'List Item 4'}
+				]
+			});
+		</script>
+    </body>
+</html>
+

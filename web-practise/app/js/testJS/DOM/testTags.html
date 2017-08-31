@@ -1,0 +1,58 @@
+<html xmlns:rdl>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Rainer's Handbook</title>
+<style>
+body{margin:0px;padding:16px;background:#FFFFFF;overflow:auto;}
+body,table,input,select,textarea,a{font-family:verdana,tahoma,arial;font-size:11px;color:#000000;word-break:break-all;}
+table,img{border:0px;}
+a{text-decoration:none;color:#003399;}
+a:hover{color:#000000;text-decoration:underline;}
+#id_div3{padding-top:8px;border-top:1px solid #000000;line-height:15px;}
+#id_span3{font-size:10px;font-family:tahoma;}
+
+</style>
+<script>
+function rdl_getTags(){
+event.cancelBubble=true;
+var oWorkItem=event.srcElement;
+var aReturn=oWorkItem.parentElement.all.tags("li");
+var iChilds=oWorkItem.parentElement.children.tags("li").length;
+document.all("id_info").innerHTML="您选定的列表内有项目: <span style=\"color:#FF3300;\">"+aReturn.length.toString()+"<\/span> 个<br>"+"与选定项目同一级的有: <span style=\"color:#FF3300;\">"+iChilds.toString()+"<\/span> 个<br>"+"它的第一个列表项目是: <span style=\"color:#FF3300;\">"+aReturn[0].childNodes[0].nodeValue+"<\/span>";window.resizeTo(436,360);
+}
+function rdl_hoverLI(){
+event.cancelBubble=true;
+with (event.srcElement) {if (tagName.toLowerCase()=="li") style.color="#003399";}
+}
+function rdl_outsideLI(){
+event.cancelBubble=true;
+with (event.srcElement) {if (tagName.toLowerCase()=="li") style.color="#000000";}
+}
+</script>
+
+</head>
+<body>
+<ul onclick="rdl_getTags();" style="cursor:default;" onmouseover="rdl_hoverLI();" onmouseout="rdl_outsideLI();">
+<li>列表项目1
+<ul>
+<li>列表项目1-1
+<ul>
+<li>列表项目1-1-1
+<li>列表项目1-1-2
+</ul>
+<li>列表项目1-2
+<li>列表项目1-3
+</ul>
+<li>列表项目2
+<ul>
+<li>列表项目2-1
+<li>列表项目2-2
+</ul>
+<li>列表项目3
+</ul>
+<span id=id_info></span>
+
+<br>&nbsp;<br>&nbsp;<br>
+<div id=id_div3>苏昱作品·版权所有<br><span id=id_span3>&copy;2002 Rainer Su . All rights reserved .</span></div>
+</body>
+</html>

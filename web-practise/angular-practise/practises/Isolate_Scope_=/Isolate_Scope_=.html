@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+</head>
+<body>
+
+<div ng-app="drinkApp">
+	<div ng-controller="AppCtrl">
+		Ctrl
+		<input type="text" ng-model="ctrlFlavor">
+		Dir
+		<div drink flavor="ctrlFlavor"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

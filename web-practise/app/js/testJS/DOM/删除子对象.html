@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script>
+			function rdl_doRemove(){
+				var bRemoveChildren,sRemoveChildren;
+				with (document.all("oSelect")) sRemoveChildren=options[selectedIndex].value;
+				eval("bRemoveChildren="+sRemoveChildren);
+				document.all("oTextarea").removeNode(bRemoveChildren);
+			}
+		</script>
+	</head>
+	<body>
+		<textarea id=oTextarea>子对象</textarea>
+		<br>
+		<br>
+		<table>
+			<tr>
+				<td>
+					是否删除子对象:
+				</td>
+				<td>
+					<select style="width: 80px;" id=oSelect>
+						<option value="true">
+							true
+						</option>
+						<option value="false" selected>
+							false
+						</option>
+					</select>
+				</td>
+				<td>
+					<input type=button value=" 删除 " onclick="rdl_doRemove()">
+				</td>
+			</tr>
+		</table>
+		这个是removeNode 下面的是removeChild,你运行一下就知道区别了
+		<script>
+			var i_nowwidth=320;
+			var i_nowheight=240;
+			
+			function rdl_doRemove(){
+				with (document.all("oParent")) {
+					if (children.length<1) return;
+						removeChild(children[0]);
+				}
+				i_nowheight=i_nowheight-15;
+				window.resizeTo(i_nowwidth,i_nowheight);
+			}
+		</script>
+		<div id=oParent>
+			<div>
+				第1个子对象
+			</div>
+			<div>
+				第2个子对象
+			</div>
+			<div>
+				<a href="#" onclick="return false;">第3个子对象</a>
+			</div>
+			<div>
+				第4个子对象
+			</div>
+		</div>
+		<br>
+		<input type=button value=" 删除第一个子对象 " onclick="rdl_doRemove()">
+	</body>
+</html>

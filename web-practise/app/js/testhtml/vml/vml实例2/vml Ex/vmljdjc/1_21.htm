@@ -1,0 +1,140 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>extrusion立体3D</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:extrusion立体3D - 专用属性参考表</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=15%>属性名</td><td width=10%>默认值</td><td width=22%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">on</td><td>false</td><td>boolean</td><td>设置处理是否起效</td></tr>
+<tr><td style="color:red">type</td><td>parallel</td><td>parallel,Perspective</td><td>描述使用哪种立体模式</td></tr>
+<tr><td style="color:red">color</td><td>white</td><td>color</td><td>描述基本立体颜色</td></tr>
+<tr><td style="color:red">backdepth</td><td>35pt</td><td>number</td><td>描述后向立体厚度值</td></tr>
+<tr><td style="color:red">foredepth</td><td>0pt</td><td>number</td><td>描述前向立体厚度值</td></tr>
+<tr><td style="color:red">metal</td><td>false</td><td>boolean</td><td>描述是否给图形追加立体边框</td></tr>
+<tr><td style="color:red">diffusity</td><td>1.0</td><td>0.0-3.0</td><td>描述立体基本亮度</td></tr>
+<tr><td>brightness</td><td>0.3</td><td>0.0-1.0</td><td>描述立体过度渐层的亮度</td></tr>
+<tr><td style="color:red">rotationangle</td><td>0,0</td><td>Vector2D%360</td><td>描述立体的上下、左右360全景旋转度</td></tr>
+<tr><td>skewangle</td><td>0</td><td>-360-360</td><td>当type=parallel时，设置立体的倾斜度</td></tr>
+</table>
+
+<span>2:extrusion立体3D - 应用精彩实例</span>
+
+即使是极道教程，也没有什么好说的，一切靠你自己分析研究、修改代码达到精通为止。对着例子、属性表自己动手，是最佳的学习方法。另外该标记相当重要，务要靠自己的努力学会！
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:line id=vml0 style="z-index:1;LEFT:239;POSITION:absolute;TOP:110" from="0,0" to="37.5pt,56.25pt">
+<v:extrusion on="t" backdepth="5pt" color="white" diffusity="1"/>
+</v:line>
+<v:oval id=vml1 style="z-index:1;LEFT:307;WIDTH:43;POSITION:absolute;TOP:120;HEIGHT:39">
+<v:extrusion on="t" backdepth="5pt" color="white" diffusity="1"/>
+</v:oval>
+<v:rect id=vml2 style="z-index:1;LEFT:368;WIDTH:43;POSITION:absolute;TOP:120;HEIGHT:38">
+<v:extrusion on="t" backdepth="20pt" color="white" diffusity="1.2"/>
+</v:rect>
+<v:roundrect id=vml3 style="z-index:1;LEFT:434;WIDTH:53;POSITION:absolute;TOP:122;HEIGHT:42" arcsize="9830f" fillcolor="yellow"> <v:extrusion on="t" foredepth="20pt" backdepth="0" color="white" diffusity="1.2"/>
+</v:roundrect>
+<v:curve id=vml4 style="z-index:1;LEFT:368;POSITION:absolute;TOP:320" from="0,0" control1="104pt,-97pt" control2="248pt,-37pt" to="135pt,-16.5pt" filled="f" strokecolor="green" strokeweight="13.75pt"> <v:extrusion on="t" backdepth="20pt" color="#20c11b" diffusity="1.2"/>
+</v:curve>
+<v:arc id=vml5 style="z-index:1;LEFT:511;WIDTH:52;POSITION:absolute;TOP:118;HEIGHT:59" startangle="360" endangle="114">
+<v:extrusion on="t" backdepth="10pt" color="#5e15ff" diffusity="1.2"/>
+</v:arc>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="z-index:1;LEFT:335;WIDTH:297;POSITION:absolute;TOP:122;HEIGHT:364">
+<v:extrusion on="t" backdepth="15pt" color="#b12e26" diffusity="1.2" rotationangle="87,-13"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:339;WIDTH:31;POSITION:absolute;TOP:291;HEIGHT:34">
+<v:extrusion on="t" backdepth="10pt" color="#b12e26" diffusity="1.2" rotationangle="86,-11"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:403;WIDTH:31;POSITION:absolute;TOP:217;HEIGHT:34">
+<v:extrusion on="t" backdepth="10pt" color="#b12e26" diffusity="1.2" rotationangle="86,-11"/>
+</v:rect>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="z-index:1;LEFT:165;WIDTH:57;POSITION:absolute;TOP:124;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:236;WIDTH:57;POSITION:absolute;TOP:126;HEIGHT:52" strokecolor="red" strokeweight=".75pt"> <v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:308;WIDTH:57;POSITION:absolute;TOP:125;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="11,23"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:374;WIDTH:57;POSITION:absolute;TOP:125;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="8,59"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:427;WIDTH:57;POSITION:absolute;TOP:124;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="6,109"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:508;WIDTH:57;POSITION:absolute;TOP:125;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="-50,-7"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:580;WIDTH:57;POSITION:absolute;TOP:128;HEIGHT:52">
+<v:extrusion on="t" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="-35,-52"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:165;WIDTH:57;POSITION:absolute;TOP:204;HEIGHT:52">
+<v:extrusion on="t" type="perspective" backdepth="15pt" color="#20c11b" diffusity="1.2"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:233;WIDTH:57;POSITION:absolute;TOP:203;HEIGHT:52">
+<v:extrusion on="t" type="perspective" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:314;WIDTH:57;POSITION:absolute;TOP:206;HEIGHT:52">
+<v:extrusion on="t" type="perspective" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="59,1"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:390;WIDTH:57;POSITION:absolute;TOP:202;HEIGHT:52"> <v:extrusion on="t" type="perspective" backdepth="15pt" color="#20c11b" diffusity="1.2" metal="t" rotationangle="137,51"/>
+</v:oval>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="z-index:1;LEFT:149;WIDTH:297;POSITION:absolute;TOP:17;HEIGHT:364" filled="t" fillcolor="blue">
+<v:extrusion on="t" backdepth="15pt" color="#b12e26" diffusity="1.2" rotationangle="87,-13"/>
+<v:fill type="frame" opacity=".7"/>
+</v:rect>
+<v:rect style="z-index:2;LEFT:247;WIDTH:297;POSITION:absolute;TOP:66;HEIGHT:364" filled="t" fillcolor="yellow"> <v:extrusion on="t" backdepth="15pt" color="#b12e26" diffusity="1.2" rotationangle="87,-13"/>
+<v:fill src="shili\haha.gif" type="frame" opacity=".7"/>
+</v:rect>
+<v:rect style="z-index:3;LEFT:327;WIDTH:297;POSITION:absolute;TOP:116;HEIGHT:364" filled="t">
+<v:extrusion on="t" backdepth="15pt" color="#b12e26" diffusity="1.2" rotationangle="87,-13"/>
+<v:fill type="gradientRadial" opacity=".5" color2="yellow"/>
+</v:rect>
+<v:rect style="z-index:4;LEFT:416;WIDTH:297;POSITION:absolute;TOP:163;HEIGHT:364" filled="t"> <v:extrusion on="t" backdepth="15pt" color="navy" diffusity="1.2" rotationangle="87,-13"/>
+<v:fill src="shili\fyw2.jpg" type="frame" opacity=".7"/>
+</v:rect>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="z-index:1;LEFT:265;WIDTH:145;POSITION:absolute;TOP:116;HEIGHT:162" filled="f">
+<v:fill opacity=".7"/>
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:436;WIDTH:145;POSITION:absolute;TOP:124;HEIGHT:162" filled="f">
+<v:fill opacity=".7"/>
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1" rotationangle="11,-92"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:557;WIDTH:145;POSITION:absolute;TOP:121;HEIGHT:162" filled="f">
+<v:fill opacity=".7"/>
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1" rotationangle="76,17"/>
+</v:oval>
+<v:shape style="z-index:1;LEFT:265;WIDTH:100;POSITION:absolute;TOP:379;HEIGHT:100" coordsize="100,100" filled="f" strokecolor="black" strokeweight="15pt" path=" m0,0 l0,0,72,-73,140,1 xe"> <v:fill opacity=".7"/>
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1"/>
+</v:shape>
+<v:shape style="z-index:1;LEFT:421;WIDTH:100;POSITION:absolute;TOP:376;HEIGHT:100" coordsize="100,100" filled="f" strokecolor="black" strokeweight="15pt" path=" m0,0 l0,0,72,-73,140,1 xe">
+<v:fill opacity=".7"/>
+<v:extrusion on="t" backdepth="20pt" color="#6fab57" diffusity="1.1" rotationangle="-11,-83"/>
+</v:shape>
+</textarea>

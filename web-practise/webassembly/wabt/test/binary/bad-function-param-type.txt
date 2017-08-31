@@ -1,0 +1,13 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm
+magic
+version
+section(TYPE) {
+  count[1]
+  function params[1] void results[0]
+}
+(;; STDERR ;;;
+Error running "wasm2wast":
+error: @0x0000000e: expected valid param type (got -64)
+
+;;; STDERR ;;)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<input type="text" value="123123456789" autofocus="true">
+	<input type="text" id="aaa" value="aaa" autofocus="true">
+
+	<input type="text" id="bbb" value="bbb">
+	<input type="text" id="ccc" value="ccc">
+
+	<script type="text/javascript">
+		document.getElementById("aaa").focus();
+
+		document.getElementById("bbb").select();
+		document.getElementById("ccc").setSelectionRange(0, 9999);
+	</script>
+</body>
+</html>

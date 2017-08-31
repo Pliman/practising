@@ -1,0 +1,124 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>fill填充</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:fill填充 - 专用属性参考表</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=16%>属性名</td><td width=9%>默认值</td><td width=35%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">on</td><td>true</td><td>boolean</td><td>设置处理是否起效</td></tr>
+<tr><td style="color:red">type</td><td>solid</td><td>solid,gradient,gradientradial,tile,pattern,frame</td><td>描述使用哪种填充模式</td></tr>
+<tr><td style="color:red">color</td><td>white</td><td>color</td><td>描述基本填充颜色</td></tr>
+<tr><td style="color:red">opacity</td><td>1.0</td><td>0.0-1.0</td><td>描述填充透明度</td></tr>
+<tr><td colspan=4>以下属性只有当type=gradient,gradientradial渐变填充时有效</td></tr>
+<tr><td style="color:red">color2</td><td>white</td><td>color</td><td>描述基本二级过度颜色</td></tr>
+<tr><td style="color:red">colors</td><td>null</td><td>number% color*</td><td>沿着一个渐行度填充颜色，并以百分比分配空间。例如1:colors="30% red,50% blue"。例如2:colors="30% red,50% blue,90% purple"</td></tr>
+<tr><td style="color:red">angle</td><td>0</td><td>-360-360</td><td>描述渐行效果以圆周顺时旋转、倾斜</td></tr>
+<tr><td style="color:red">focus</td><td>0%</td><td>-100%-100%</td><td>描述渐层的位置</td></tr>
+<tr><td>focussize</td><td>0,0</td><td>Vector2D</td><td>描述渐层在所有者的位置分布</td></tr>
+<tr><td>focusposition</td><td>0,0</td><td>Vector2D</td><td>描述渐层在所有者的倾斜度分布</td></tr>
+<tr><td style="color:red">method</td><td>sigma</td><td>none,linear,sigma,any</td><td>描述均匀分布的对比</td></tr>
+<tr><td colspan=4>以下属性只有当type=tile,pattern,frame背景图像填充时有效</td></tr>
+<tr><td style="color:red">src</td><td>null</td><td>URL</td><td>描述填充使用的图像地址</td></tr>
+<tr><td style="color:red">size</td><td>auto</td><td>Vector2D</td><td>描述图像放大倍数</td></tr>
+<tr><td>origin</td><td>auto</td><td>Vector2D</td><td>描述图像的分布位置，适用于tile、pattern</td></tr>
+<tr><td>position</td><td>auto</td><td>Vector2D</td><td>描述图像放置的起源位置，适用于tile、pattern</td></tr>
+<tr><td>aspect</td><td>ignore</td><td>ignore,atleast,atmost</td><td>描述图像居中还是充满整个图型</td></tr>
+<tr><td style="color:red">alignshape</td><td>true</td><td>boolean</td><td>描述是否对比容器对齐图片</td></tr>
+</table>
+
+<span>2:fill填充 - 应用精彩实例</span>
+
+即使是极道教程，也没有什么好说的，一切靠你自己分析研究、修改代码达到精通为止。对着例子、属性表自己动手，是最佳的学习方法。另外该标记相当重要，务要靠自己的努力学会！
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3001;LEFT:271;WIDTH:88;POSITION:absolute;TOP:128;HEIGHT:74" filled="t" fillcolor="yellow">
+<v:fill type="frame" opacity=".5"/>
+</v:oval>
+<v:oval style="Z-INDEX:2999;LEFT:313;WIDTH:95;POSITION:absolute;TOP:152;HEIGHT:76" fillcolor="red"/>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3009;LEFT:193;WIDTH:92;POSITION:absolute;TOP:117;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradient" opacity=".5" color2="yellow"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:395;WIDTH:92;POSITION:absolute;TOP:120;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradient" opacity=".5" color2="yellow" angle="50" method="none"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:294;WIDTH:92;POSITION:absolute;TOP:118;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradient" opacity=".5" color2="yellow" method="none"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:497;WIDTH:92;POSITION:absolute;TOP:122;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradient" opacity=".5" color2="yellow" angle="50" focus="20%" method="none"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:602;WIDTH:92;POSITION:absolute;TOP:121;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradient" opacity=".5" color2="yellow" angle="50" focus="50%" method="none"/>
+</v:oval>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3009;LEFT:193;WIDTH:92;POSITION:absolute;TOP:117;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradientRadial" opacity=".5" color2="yellow"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:301;WIDTH:92;POSITION:absolute;TOP:117;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradientRadial" opacity=".5" color2="yellow" focus="20%" method="none"/>
+</v:oval>
+<v:oval style="Z-INDEX:3009;LEFT:404;WIDTH:92;POSITION:absolute;TOP:122;HEIGHT:87" filled="t" fillcolor="blue"> <v:fill type="gradientRadial" opacity=".5" color2="yellow" focus="50%" method="none"/>
+</v:oval>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="Z-INDEX:3078;LEFT:215;WIDTH:81;POSITION:absolute;TOP:134;HEIGHT:75" filled="t" fillcolor="blue">
+<v:fill type="gradientRadial" opacity=".5" color2="yellow"/>
+</v:rect>
+<v:roundrect style="Z-INDEX:3084;LEFT:276;WIDTH:83;POSITION:absolute;TOP:129;HEIGHT:85" arcsize="9830f" filled="t" fillcolor="blue">
+<v:fill type="gradient" opacity=".5" color2="yellow"/>
+</v:roundrect>
+<v:roundrect style="Z-INDEX:3084;LEFT:233;WIDTH:83;POSITION:absolute;TOP:236;HEIGHT:85" arcsize="9830f" filled="t" fillcolor="yellow"> <v:fill type="gradient" opacity=".5" color2="blue" colors="30% red,50% green"/>
+</v:roundrect>
+<v:roundrect style="Z-INDEX:3084;LEFT:334;WIDTH:83;POSITION:absolute;TOP:238;HEIGHT:85" arcsize="9830f" filled="t" fillcolor="yellow"> <v:fill type="gradientRadial" opacity=".5" color2="blue" colors="30% red,50% green"/>
+</v:roundrect>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3115;LEFT:312;WIDTH:110;POSITION:absolute;TOP:130;HEIGHT:102" filled="t" fillcolor="yellow">
+<v:fill src="shili\fyw2.jpg" type="frame" opacity=".5"/>
+</v:oval>
+<v:oval style="Z-INDEX:3115;LEFT:192;WIDTH:110;POSITION:absolute;TOP:130;HEIGHT:102" filled="t" fillcolor="white"> <v:fill src="shili\fyw2.jpg" type="frame" opacity="1"/>
+</v:oval>
+<v:oval style="Z-INDEX:3115;LEFT:430;WIDTH:110;POSITION:absolute;TOP:134;HEIGHT:102" filled="t" fillcolor="red">
+<v:fill src="shili\fyw2.jpg" type="frame" opacity=".5" aspect="atMost"/>
+</v:oval>
+<v:shape style="Z-INDEX:3127;LEFT:189;WIDTH:100;POSITION:absolute;TOP:316;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="yellow" path=" m0,0 l0,0,55,-48,58,87,142,21,0,0 e">
+<v:fill src="shili\fyw2.jpg" type="frame" opacity=".5"/>
+</v:shape>
+<v:shape style="Z-INDEX:3127;LEFT:326;WIDTH:100;POSITION:absolute;TOP:307;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path=" m0,0 l0,0,55,-48,58,87,142,21,0,0 e"> <v:fill src="shili\fyw2.jpg" type="frame" opacity=".5" size="0.5,0.4"/>
+</v:shape>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3150;LEFT:108;WIDTH:158;POSITION:absolute;TOP:3;HEIGHT:140" filled="t" fillcolor="yellow">
+<v:fill src="shili\haha.gif" type="tile" opacity=".5"/>
+</v:oval>
+<v:oval style="Z-INDEX:3150;LEFT:267;WIDTH:224;POSITION:absolute;TOP:30;HEIGHT:193" filled="t" fillcolor="yellow">
+<v:fill src="shili\haha.gif" type="tile" opacity=".5"/>
+</v:oval>
+<v:oval style="Z-INDEX:3150;LEFT:491;WIDTH:262;POSITION:absolute;TOP:46;HEIGHT:209" filled="t" fillcolor="yellow"> <v:fill src="shili\haha.gif" type="tile" opacity="1"/>
+</v:oval>
+<v:oval style="Z-INDEX:3150;LEFT:101;WIDTH:255;POSITION:absolute;TOP:149;HEIGHT:207" filled="t" fillcolor="red">
+<v:fill src="shili\haha.gif" type="pattern" opacity="1"/>
+</v:oval>
+<v:oval style="Z-INDEX:3150;LEFT:336;WIDTH:262;POSITION:absolute;TOP:233;HEIGHT:209" filled="t" fillcolor="red">
+<v:fill src="shili\haha.gif" type="pattern" opacity="1" color2="blue"/>
+</v:oval>
+<v:oval style="Z-INDEX:3150;LEFT:598;WIDTH:262;POSITION:absolute;TOP:242;HEIGHT:209" filled="t" fillcolor="red">
+<v:fill src="shili\haha.gif" type="pattern" opacity="1" color2="blue" position="50,50"/>
+</v:oval>
+</textarea>

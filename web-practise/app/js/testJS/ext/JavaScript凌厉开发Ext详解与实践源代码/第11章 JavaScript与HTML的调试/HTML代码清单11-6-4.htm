@@ -1,0 +1,67 @@
+<!--HTML代码清单11-6-4--> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>查看对象属性</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">查看对象属性例子</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form">
+                </div>
+                <br>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                var datas = [[1, '小学'], [2, '初中'], [3, '高中'], [4, '中专'], [5, '大专'], [6, '大学']];
+                
+                var store = new Ext.data.SimpleStore({
+                    fields: ["retrunValue", "displayText"],
+                    data: datas
+                })
+                
+                var panel = new Ext.Panel({
+                    title: "查看对象属性例子",
+                    applyTo: "form",
+                    autoHeight: true,
+                    width: 750,
+                    frame: true,
+                    items: [{
+                        xtype: 'button',
+                        text: '查看Panel对象的属性',
+                        scope: this,
+                        handler: function(){
+                            console.dir(panel);
+                        }
+                    }, {
+                        xtype: 'button',
+                        text: '查看Store对象的属性',
+                        scope: this,
+                        handler: function(){
+                            console.dir(store);
+                        }
+                    }]
+                });
+                
+                
+            })
+        </script>
+    </body>
+</html>

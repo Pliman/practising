@@ -1,0 +1,15 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm
+magic
+version
+section(MEMORY) {
+  count[1]
+  has_max[1]
+  initial[0]
+  max[leb_u32(65537)]
+}
+(;; STDERR ;;;
+Error running "wasm2wast":
+error: @0x00000010: invalid memory max size
+
+;;; STDERR ;;)

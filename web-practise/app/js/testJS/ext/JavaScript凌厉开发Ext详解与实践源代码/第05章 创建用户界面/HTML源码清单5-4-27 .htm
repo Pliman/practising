@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>服务器端验证</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/Ext.ux.plugins.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">第4章 服务器端验证</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 400,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: '服务器端验证',
+                    items: [{
+                        xtype: 'numberfield',
+                        name: 'postcode',
+                        fieldLabel: '邮政编码',
+                        anchor: '90%',
+                        plugins: [Ext.ux.plugins.RemoteValidator],
+                        rvOptions: {
+                            url: 'validate.ashx'
+                        },
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'age',
+                        fieldLabel: '年龄',
+                        anchor: '90%',
+                        plugins: [Ext.ux.plugins.RemoteValidator],
+                        rvOptions: {
+                            url: 'validate.ashx'
+                        },
+                        allowBlank: false
+                    }, {
+                        xtype: 'button',
+                        text: "form.getValues()",
+                        scope: this,
+                        handler: function(){
+                            Ext.get('op').dom.value += "执行：frm.form.getValues()\n" +
+                            '结果：' +
+                            Ext.encode(frm.form.getValues()) +
+                            '\n';
+                        }
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+                
+                
+                
+            })
+        </script>
+    </body>
+</html>

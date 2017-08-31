@@ -1,0 +1,78 @@
+1.data:可以有array形式，和json形式(必须是个对象，不能是字符串)
+	data的常用方法：无特殊方法，都是js对象通用的方法
+
+2.record：此类的实例封装了Record的定义和值信息，它被用在 Ext.data.Store 对象中
+	record的常用方法：
+		a.根据dataindex，获取值 record.data[dataindex]
+		b.get( String name ) : Object 
+		根据字段名称获取字段值。 --效果同上
+
+3.reader:定义reader需2个参数，第二个参数传入record
+	reader的常用方法：
+		a.第一个参数设置怎么读取数据如：
+		({
+		    totalProperty: "results",             // 包含数据集总大小的参数(可选)
+		    root: "rows",                         // 包含一个数据行对象数组的参数
+		    id: "id"                              // The property within each row object that provides an ID for the record (可选)
+		}
+
+4.store：可以加载array形式，和json形式等
+	一般需要定义proxy和reader
+	store的常用方法：
+		a.load() 加载store
+		b.find('catalog',v) 查找一行记录的行号，该记录的catalog列值为v
+		c.getAt(num) 获取第num行的record
+	
+5.Ext.grid.CheckboxSelectionModel 单选或多选列
+
+6.Ext.grid.ColumnModel 列定义
+	ColumnModel的常用方法：
+		a.getColumnId( Number index ) : String 
+		返回指定序号处列的id。(一般也是dataindex,可以传给record用)
+		b.setHidden( Number colIndex, Boolean hidden ) : void 
+		设置是否隐藏一列。
+		c.setRenderer( Number col, Function fn ) : void 
+		为一列设置渲染器/格式器（原文：rendering (formatting)）。 更多默认的格式化函数，参见Ext.util.Format ...
+		d.getIndexById( String id ) : Number 
+		根据指定列的id，返回列序号。 (和a的效果相反)
+		e.findColumnIndex() 和getIndexById()效果相同
+
+7.grid：将store以ColumnModel的格式加载，并显示
+	grid的常用方法：
+		grid.selModel：设置行选择模式 如new Ext.grid.RowSelectionModel({singleSelect:false}) (一般说来
+			有了此属性，才能进行列选择)
+		clicksToEdit:1 进入编辑状态，需要点击的次数
+		listeners：grid事件监听器
+		autoExpandColumn：自动扩展成多少列 如:autoExpandColumn:3
+	
+8(常用方法).grid，combobox编辑后，显示combobox显示值的方法：
+	a.根据combobox的store id 获取行record,根据record取得值(record.data.name)
+	b.在grid多生成一列，记录combobox选好的值，在把这列的值，设置到正在编辑的列
+	c.获取combobox的 record(保证值和行号对应)
+	myRenderer = function(v){
+	    var rec = this.editor.getStore().getAt(v);
+	    if (rec == null) {
+	        return v;
+	    }
+	    else {
+	        return rec.data[this.editor.displayField];
+	    }
+	};
+	d.!nice 通过combobox的store查找当前值的record( store.find('value',v) )，再取得record的显示值
+	myRenderer = function(v){
+		var num = store.find('value',v) ;
+	    var rec = this.editor.getStore().getAt(num);
+	    if (rec == null) {
+	        return v;
+	    }
+	    else {
+	        return rec.data[this.editor.displayField];
+	    }
+	};
+
+9(问题).render在编辑其他列的时候，也执行???能否不执行
+
+10(问题).combox的store变了，怎么内容没变
+	--不是这个原因：每次点击combox，都会重新加载当初设置的store名称，后来的数据集名称会被覆盖，所以，中间设置的数据集名称并不可靠。
+	//combobox2.store = eval(storeName) ; //不能用store赋值的方法，这样只会改变一次，之后再改变上级值，下级的选框就不动了。
+	用combobox2.store.loadData(eval(dataName)) ; //此法有效

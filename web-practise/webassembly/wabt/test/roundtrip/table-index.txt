@@ -1,0 +1,8 @@
+;;; TOOL: run-roundtrip
+;;; FLAGS: --stdout
+(module
+  (import "a" "b" (table 2 anyfunc)))
+(;; STDOUT ;;;
+(module
+  (import "a" "b" (table (;0;) 2 anyfunc)))
+;;; STDOUT ;;)

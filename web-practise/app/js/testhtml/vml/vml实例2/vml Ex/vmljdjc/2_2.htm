@@ -1,0 +1,134 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>DVML事件编程入门</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:DVML事件编程入门 - 简介</span>
+
+网页事件的概念：
+
+想你刚才肯定点击了左边的“东西”-DVML事件编程入门，你才打开、看到了本网页。而对于那个“东西”来说，你用鼠标点击了它，你就触发了它的“鼠标点击事件”。所以它就变色了、该页也就显示了，这就是DVML事件交互程序（交互就是你把“事件”给了“东西”，而“东西”给了你“所以它就变色了、该页也就显示了”）……，这个事件的简介，够生动吧？
+
+难到VML图形只能有“鼠标点击事件”么？当然不是，它的事件还有很多（几乎支持所有的DHTML事件），以下是一些常用事件的参考表格，这并不是全面的、或有部分事件只有在特定情况下才能用。不过我只要求你重视用“红色字”标识的事件，它们是最常用的事件，其他的要看你编程中用不用的到了。
+
+<span>2:DVML事件编程入门 - VML图形支持的所有事件</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=19%>事件名称</td><td width=50%>特殊要求</td><TD>描述</td></tr>
+<tr><td colspan=3>鼠标激发的事件</td></tr>
+<tr><td style="color:red">onclick</td><td></td><td>单击图形时</td></tr>
+<tr><td style="color:red">onmousedown</td><td></td><td>鼠标按下时</td></tr>
+<tr><td style="color:red">onmouseup</td><td></td><td>鼠标按下后、弹起时</td></tr>
+<tr><td style="color:red">oncontextmenu</td><td></td><td>右键单击时</td></tr>
+<tr><td style="color:red">ondblclick</td><td></td><td>双击时</td></tr>
+<tr><td style="color:red">onmouseover</td><td></td><td>鼠标靠近时</td></tr>
+<tr><td style="color:red">onmouseout</td><td></td><td>鼠标靠近后、离开时</td></tr>
+<tr><td style="color:red">onmousemove</td><td></td><td>鼠标移动时</td></tr>
+<tr><td style="color:red">onselectstart</td><td></td><td>按住鼠标准备选定它时</td></tr>
+<tr><td colspan=3>键盘激发的事件</td></tr>
+<tr><td>onkeydown</td><td>contentEditable属性为true允许编辑</td><td>键盘按下时</td></tr>
+<tr><td>onkeypress</td><td>contentEditable属性为true允许编辑</td><td>键盘输入时</td></tr>
+<tr><td>onkeyup</td><td>contentEditable属性为true允许编辑</td><td>键盘按下后、弹起时</td></tr>
+<tr><td>oncut</td><td>contentEditable属性为true允许编辑</td><td>编辑内容、使用剪切操作时</td></tr>
+<tr><td>oncopy</td><td>contentEditable属性为true允许编辑</td><td>编辑内容、使用复制操作时</td></tr>
+<tr><td>onpaste</td><td>contentEditable属性为true允许编辑</td><td>编辑内容、使用粘贴操作时</td></tr>
+<tr><td colspan=3>其他激发的事件</td></tr>
+<tr><td style="color:red">onfilterchange</td><td>程序更新style.filter</td><td>CSS filter滤镜改变时</td></tr>
+<tr><td style="color:red">onerror</td><td>资源未加载成功、更新使用错误值</td><td>加载、更新出错时</td></tr>
+<tr><td>onfocus</td><td>contentEditable属性为true允许编辑</td><td>聚集焦点时</td></tr>
+<tr><td>onblur</td><td>contentEditable属性为true允许编辑</td><td>失去焦点时</td></tr>
+<tr><td style="color:red">onscroll</td><td>style.overflow设定具有滚动条</td><td>滚动条滚动时</td></tr>
+<tr><td style="color:red">onresize</td><td>程序更新style.width/height</td><td>大小调整时</td></tr>
+<tr><td style="color:red">onmove</td><td>启动时输出,程序更新style.left/top</td><td>位置移动时</td></tr>
+</table>
+
+<span>3:DVML事件编程入门 - 实例讲解</span>
+
+你也许想发牢骚了，这么多事件，要怎么实际应用？DVML事件编程代码到底怎么写？好，现在我就告诉你。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:1;LEFT:100;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onclick="alert('你单击了我')">鼠标单击我，我能出现对话框！</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onmousedown="this.fillcolor='green'" onmouseup="this.fillcolor='yellow'">鼠标按下时我变绿色、弹起时我变黄色！</v:oval>
+
+<v:oval style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onmouseover="this.strokeweight=5" onmouseout="this.strokeweight='1px'">鼠标靠近我边框变粗、离开我还原！</v:oval>
+</v:oval>
+</textarea>
+
+瞧上边的例子，即演示了与鼠标相关的事件。分析代码不难发现，事件其实就跟通用属性一样（不光oval支持，像line、rect、roundrect、curve、shape、image、textbox、polyline等等所有可输出图形的一级VML标记均可使用上述表格列出的事件），只不过参数变成了像“alert('你单击了我')”、“this.fillcolor='green'”这样的DVML程序！
+
+成熟的老WEB程序员基本都或多或少的懂些DHTML程序，不知你学没学过DHTML？如果有则最好不过，没有虽然很遗憾但也没关系，我会在接下来教你几招DVML程序的套路，足够你一展拳脚了（如果你不懂DHTML编程并且想有更高的突破，待学完本卷《DVML编程》以后，你就应该去网上下载或到书店购买关于DHTML编程的书籍，彻底将自己变成高手！由于DHTML涉及的内容太多，我在VML极道教程中就不在详细去讲DHTML了）。
+
+<span>4:DVML编程 - 充分发挥你所学的VML属性！</span>
+
+在介绍更多的事件范例之前，我先讲讲如何编写DVML程序语句、以及如何充分用上你在上一卷所学的VML标记/属性的知识。
+
+先给个例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onmousedown="this.fillcolor='white';this.strokeweight='5px'" onmouseup="this.fillcolor='yellow';this.strokeweight='1px'"/>
+</textarea>
+
+上例中，程序的目的是：鼠标按下时图形的颜色变成白色、边框粗度变成5px，鼠标弹起时图形的颜色恢复原来的黄色、边框粗度恢复原来的1px。具体用代码实现起来其实很容易，我先说鼠标按下时的程序“this.fillcolor='white';this.strokeweight='5px'”。其中的this是DHTML的关键字，表示的是自己本身，你就理解为“this=我”。而“fillcolor='white'”你应该没有忘记fillcolor是VML通用属性之一用于描述图形背景颜色的吧？“.”意思你就理解为“的”，“this.fillcolor='white'”结合起来意思就是“我的背景颜色='white'”，所以你按下鼠标时“我就白了”。还有一句“this.strokeweight='5px'”就是“我的边框粗度='5px'”，不过在追加这句之前，也就是this.fillcolor='white'的后面必须增加一个“;”号，表示this.fillcolor='white'执行完毕。我用如此傻瓜的语言，鼠标弹起时执行的“this.fillcolor='yellow';this.strokeweight='1px'”不用我说你也能理解了吧？
+
+在看个例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onclick="if(this.fillcolor=='yellow'){this.fillcolor='red'}else{this.fillcolor='yellow'}"/>
+</textarea>
+
+运行时，你反复点击图形，看看图形的变化。程序目的是：鼠标点击图形时，如果图形背景颜色是黄色那么就变成红色，如果不在是黄色了那么就在变回黄色。程序语句是if(this.fillcolor=='yellow'){this.fillcolor='red'}else{this.fillcolor='yellow'}，这个稍微复杂了点，不过也是编程中最基本长用的判断语句。翻译成中文就成了“如果(我.fillcolor=='yellow'){我.fillcolor='red'}否则{我.fillcolor='yellow'}”
+
+继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onclick="abc.fillcolor='red';abc.stroked=false">
+按我更新id名为abc的图形
+</v:rect>
+
+<v:rect id=abc style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow"/>
+
+<v:rect style="Z-INDEX:1;LEFT:400;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow" onclick="abc.fillcolor='yellow';abc.stroked=true">
+按我更新id名为abc的图形
+</v:rect>
+</textarea>
+
+这次不同以往，this.fillcolor='red'被我换成了abc.fillcolor='red'，而第二个VML标记的通用属性id名称被定义为abc，所以“this=我”就换成了“abc=id名为abc的目标图形”，这回明白id名称对于DVML编程的重要意义了吧？在说abc.stroked=false，表示把它的边框去掉，而abc.stroked=true，则表示不去掉它的边框。这时你如果用abc.stroked='false'或abc.stroked='true'就会出错，不信你改改试试！这是因为false和true为boolean类型的数据，它是常数（你要听不懂，就证明你不会DHTML编程。），而常数跟变量两边不能增加''符号，程序就是这么规定！而相对的abc.fillcolor='red'你要写成abc.fillcolor=red也会出错，不信你试试！这是因为fillcolor属性的数据类型是字符型，必须使用''或""包含着字符型数据，或定义变量后在引用（你要听不懂，就证明你不会编程）。这就是程序的规定、不管你听懂没听懂、你照着做就没错儿。
+
+继续看例子：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:rect id=abc1 style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow"/>
+<v:rect id=abc2 style="Z-INDEX:1;LEFT:300;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow"/>
+<v:rect id=abc3 style="Z-INDEX:1;LEFT:400;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90" fillcolor="yellow"/>
+
+<center>
+<input type=button onclick='abc1.strokeweight=2;abc1.stroke.dashstyle="dot";abc1.stroke.on="t";abc2.fill.type="gradient";abc2.fill.color2="red";abc2.fill.on=true;abc3.extrusion.color="green";abc3.extrusion.backdepth="15pt";abc3.extrusion.on=true' value="增加二级标记边框、填充、立体的效果">
+
+<input type=button onclick='abc1.stroke.on=false;abc2.fill.on=false;abc3.extrusion.on="f"' value="取消二级标记边框、填充、立体的效果">
+</center>
+</textarea>
+
+这个例子目的是：用程序实现给图形增加VML二级标记处理效果！全是用了我们上一卷所学的stroke、fill、extrusion二级标记的知识。代码虽然复杂了点，但待我仔细分析于你，你就发现，这太简单了。
+
+我先解释第一个按钮的onclick事件所包含的程序。程序所包括的“abc1.strokeweight=2;abc1.stroke.dashstyle="dot";abc1.stroke.on="t";”，而“abc1.strokeweight=2”很显然就是更新abc1的VML通用属性strokeweight=2，让abc1的边框粗度变成2pt。由于我们用的是数字2所以两边不需要加''或""包括，反之如果换成2px或2pt就成了字符串，我们就应该写成"2px"或"2pt"，不加""程序就会报错！在看“abc1.stroke.dashstyle="dot";abc1.stroke.on="t";”，你应还记的我们上卷所学的二级边框处理标记stroke吧？而该标记的专用属性表中又有dashstyle和on属性，因此“abc1.stroke.dashstyle="dot";abc1.stroke.on="t";”翻译成中文的意思就是“abc1.二级标记stroke.dashstyle边框样式属性="dot虚线";abc1.二级标记stroke.on处理是否生效="t生效"”，所以就实现用程序给图形增加了二级标记边框处理。
+
+而相对而言，第一个按钮onclick事件所包含的程序剩下的“abc2.fill.type="gradient";abc2.fill.color2="red";abc2.fill.on=true;abc3.extrusion.color="green";abc3.extrusion.backdepth="15pt";abc3.extrusion.on=true”，就显而易见与增加二级标记stroke边框处理的原理相同，只不过我们给abc2、abc3增加的不是stroke而是fill和extrusion。
+
+在说第二个按钮的onclick事件所包含的程序。程序所包括的“abc1.stroke.on=false;abc2.fill.on=false;abc3.extrusion.on="f"”，就更容易理解了。on这个大多数二级标记都有的属性就是控制处理是否生效，值为true或"t"时处理就生效，反之值为false或"f"时处理就不起效。程序里把stroke、fill、extrusion的on属性都给设置成了false或"f"，所以按下这个按钮后图形的二级标记处理效果就没有了。
+
+<span>5:DVML编程 - 就是控制对象！</span>
+
+以上所有的校例，代码在有什么不同，但都有一个共同点，就是“处理目标对象”！目标可以是this（触发事件的图形本身）或id名称（对应id名称的VML图形）。而无论是this或id，他们共同的特点就是充当“对象”。而后在“XX对象.XX对象的XX属性=我们给定义的属性值;XXX对象.XXX对象的XXX属性=我们给定义的属性值”，DVML编程就是这么一回事，就是控制对象！

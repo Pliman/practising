@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>form-urlencoded</title>
+</head>
+<body>
+<button id="send">send</button>
+<script src="../../js/jquery/jquery.min.js"></script>
+<script>
+  $('#send').click(function () {
+    $.ajax({
+      type: "POST",
+      url: "a",
+      data: "name=John&location=孙彬",
+      success: function (msg) {
+        alert("Data Saved: " + msg);
+      }
+    });
+  });
+</script>
+</body>
+</html>

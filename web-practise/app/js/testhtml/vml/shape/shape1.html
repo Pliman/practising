@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<title>shape1</title>
+		<meta http-equiv="keywords" content="vml line" />
+		<meta http-equiv="description" content="vml_line" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<?import namespace="v" implementation="#default#VML" ?>
+		<style>
+			<!-- 为什么这里不用指定shape的样式呢 -->
+			v\:rect,v\:rect,v\:imagedata {
+				display: inline-block
+			}
+		</style>
+	</head>
+	<body>
+		<!-- top left 设置图像上边的距离和下边的距离 -->
+		<v:shape id="curve11" onclick="alert('123');"
+			style="top:400px;left:400px;POSITION: absolute; WIDTH: 130px; BACKGROUND: none transparent scroll repeat 0% 0%; HEIGHT: 10px; VISIBILITY: visible"
+			coordsize="130,10" title="a curve" filled="f" stroked="t"
+			strokecolor="#36393d" strokeweight=".75pt"
+			path=" m0,0 l50,0 c70,0,70,0,70,5,70,10,70,10,90,10 l125,10 e">
+			<v:stroke dashstyle="solid"></v:stroke>
+		</v:shape>
+		<v:shape style="top:400px;left:400px;POSITION: absolute; WIDTH: 130px; HEIGHT: 10px"
+			coordsize="130,10" fillcolor="#36393d" strokecolor="#36393d"
+			path=" m129,10 l123,13,125,10,123,7 xe">
+			<v:stroke opacity="1" joinstyle="miter"></v:stroke>
+			<v:fill opacity="1"></v:fill>
+		</v:shape>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var shape = document.getElementById('curve11');
+	alert(shape);
+</script>

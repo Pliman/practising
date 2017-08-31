@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+  		function evalTest(){
+  			var str = "({thumbListStr:'4E3D38BB19B93CB0D3FB928B3F25EA0924EDFB0C', a1:{a1:'a1',a2:'a2'}})" ;
+  			//var strObj = eval("(" + str + ")") ;
+  			var strObj = eval(str) ;
+  			
+  			//-alert(strObj.thumbListStr) ;
+  			//alert(str.thumbListStr) ;
+  			//-alert(strObj.a1.a2) ;
+  			
+  			var arrStr = "[{a1:'a1',a2:'a2'},{b1:'b1',b2:'b2'}]";
+  			var arrArr = eval(arrStr) ;
+  			//--alert(arrArr[1].b2) ;
+  			
+  			var str1 = "({thumbListStr:'4E3D38BB19B93CB0D3FB928B3F25EA0924EDFB0C', a1:{}})" ;
+  			var str1Obj = eval(str1) ;
+  			alert(strObj.a1) ;
+  			alert(strObj.length) ;
+  		}
+  	</script>
+		<title>evalTest</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="evalTest()" type="button" id="evalTest" name="evalTest"
+						value="evalTest"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

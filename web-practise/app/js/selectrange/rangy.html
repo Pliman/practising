@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div>
+	<span>
+		<textarea name="" id="test" cols="30" rows="10">dsaffffffffffffffffffffffffffsdfsafoisdjfoipsandfodshaofipdsnfpoiusabfposadinfpoasbnd</textarea>
+	</span>
+</div>
+
+<div>
+	<span><b>aaaaaaaaaaaaaaaaaa</b></span>
+</div>
+
+<div>
+	<span><input type="text" value="aaaaaaaaaaaaaaaaaa"/></span>
+</div>
+<script type="text/javascript" src="rangy-uncompressed/rangy-core.js"></script>
+<script type="text/javascript">
+	function getSelectText() {
+		var selection = rangy.getSelection();
+		var range = selection.getRangeAt(0);
+		console.log(range);
+		return range;
+	}
+
+	var obj = document.getElementById("test");
+	document.onmouseup = function () {
+		obj.value = getSelectText();
+	}
+</script>
+</body>
+</html>
+
+<!--WrappedRange {nativeRange: Range, commonAncestorContainer: span, collapsed: true, endOffset: 1, endContainer: span…}-->
+<!--WrappedRange {nativeRange: Range, commonAncestorContainer: text, collapsed: false, endOffset: 12, endContainer: text…}-->
+<!--说明这个框架还是不能直接获取textarea和input的focusNode-->

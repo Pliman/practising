@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>不对个体元素设置拖动，而采用群体式在特定范围内实现拖动</title>
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+            Ext.namespace('Tutorial', 'Tutorial.dd');
+            Tutorial.dd.MyDragZone = function(el, config){
+				var div = document.createElement('div')
+				div.innerHTML = '用户按着鼠标键';
+                Ext.apply(config, {
+                    ddel: div
+                });
+                Tutorial.dd.MyDragZone.superclass.constructor.call(this, el, config);
+            };
+            
+            Ext.extend(Tutorial.dd.MyDragZone, Ext.dd.DragZone, {
+				//重写getDragData方法
+                getDragData: function(e){
+                    var target = Ext.get(e.getTarget());//参数e是鼠标按下事件
+                    if (target.hasClass('dd-ct')) {
+                        return false;
+                    }
+                    return {
+                        ddel: this.ddel,
+                        item: target
+                    };
+                }
+            });
+            
+            Ext.onReady(function(){
+                dragZone1 = new Tutorial.dd.MyDragZone('dd1-ct', {
+                    ddGroup: 'group',
+                    scroll: false
+                });
+                dragZone2 = new Tutorial.dd.MyDragZone('dd2-ct', {
+                    ddGroup: 'group',
+                    scroll: false
+                });
+                
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+        <style type="text/css">
+            body {
+                font-size: 11px;
+            }
+            
+            .dd-ct {
+                position: absolute;
+                border: 1px solid silver;
+                width: 180px;
+                height: 180px;
+                top: 32px;
+                background-color: #ffffc0;
+            }
+            
+            #dd1-ct {
+                left: 64px;
+            }
+            
+            #dd2-ct {
+                left: 256px;
+            }
+            
+            .dd-item {
+                height: 18px;
+                border: 1px solid #a0a0a0;
+                background-color: #c4d0ff;
+                vertical-align: middle;
+                cursor: move;
+                padding: 2px;
+                z-index: 1000;
+            }
+            
+            .dd-ct .dd-item {
+                margin: 2px;
+            }
+            
+            .dd-proxy {
+                opacity: 0.4;
+                -moz-opacity: 0.4;
+            }
+            
+            .dd-over {
+                background-color: #ffff60;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dd-ct" id="dd1-ct">
+            <div class="dd-item" id="dd1-item1">
+                条目 1.1
+            </div>
+            <div class="dd-item" id="dd1-item2">
+                条目 1.2
+            </div>
+            <div class="dd-item" id="dd1-item3">
+                条目 1.3
+            </div>
+        </div>
+        <!--新添加的标签-->
+        <div class="dd-ct" id="dd2-ct">
+            <div class="dd-item" id="dd2-item1">
+                条目 2.1
+            </div>
+            <div class="dd-item" id="dd2-item2">
+                条目 2.2
+            </div>
+            <div class="dd-item" id="dd2-item3">
+                条目 2.3
+            </div>
+        </div>
+    </body>
+</html>

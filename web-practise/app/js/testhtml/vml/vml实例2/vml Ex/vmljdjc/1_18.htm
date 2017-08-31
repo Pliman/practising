@@ -1,0 +1,152 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>2级标记stroke边框</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:2级标记的通用属性</span>
+
+以前，我们常说的VML通用属性，是针对像oval、rect、roundrect这样的一级标记而言的（只是“极道”的学习规则，我不会在你还是一只“VML菜鸟”时，用太多的一级标记、二级标记这些难懂的词语）。而对于大多数的二级标记，是不支持的，只有一个例外，像Textbox内容，即能当作一级标记又能当作二级标记。不过<font color=red><b>id</b></font>这个通用属性，是所有的一、二级标记均支持的属性。
+
+<span>2:stroke边框 - 专用属性参考表</span>
+
+<div style='height:300;overflow-y:scroll'>
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=21%>属性名</td><td width=9%>默认值</td><td width=35%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">on</td><td>true</td><td>boolean</td><td>设置处理是否起效</td></tr>
+<tr><td style="color:red">weight</td><td>1pt</td><td>number</td><td>描述边框粗度</td></tr>
+<tr><td style="color:red">color</td><td>black</td><td>color</td><td>描述边框颜色</td></tr>
+<tr><td style="color:red">opacity</td><td>1.0</td><td>0.0-1.0</td><td>描述边框透明度</td></tr>
+<tr><td style="color:red">dashstyle</td><td>solid</td><td>solid,dot,dash,dashdot,longdash,longdashdot,longdashdotdot,shortdot,shortdash,shortdashdot,shortdashdotdot</td><td>描述边框的线条样式</td></tr>
+<tr><td style="color:red">filltype</td><td>solid</td><td>solid,tile,pattern,frame</td><td>描述如何填充边框</td></tr>
+<tr><td style="color:red">src</td><td>null</td><td>URLstring</td><td>当filltype!=solid时，指定填充边框的图像地址</td></tr>
+<tr><td>imagesize</td><td>auto</td><td>Vector2D</td><td>当filltype!=solid时，描述图像放大倍数</td></tr>
+<tr><td>imagealignshape</td><td>true</td><td>boolean</td><td>当filltype!=solid时，描述图像是否居中对齐</td></tr>
+<tr><td style="color:red">color2</td><td>null</td><td>color</td><td>当filltype=pattern时，描述图像的融合背景色</td></tr>
+<tr><td style="color:red">startarrow</td><td>none</td><td>none,block,classic,diamond,oval,open,chevron,doublechevron</td><td>描述线起点的箭头样式</td></tr>
+<tr><td style="color:red">endarrow</td><td>none</td><td>none,block,classic,diamond,oval,open,chevron,doublechevron</td><td>描述线终点的箭头样式</td></tr>
+<tr><td style="color:red">startarrowwidth</td><td>medium</td><td>narrow,medium,wide</td><td>当startarrow!=none时，描述起点箭头的宽度</td></tr>
+<tr><td style="color:red">startarrowlength</td><td>medium</td><td>short,medium,long</td><td>当startarrow!=none时，描述起点箭头的高度</td></tr>
+<tr><td style="color:red">endarrowwidth</td><td>medium</td><td>narrow,medium,wide</td><td>当endarrow!=none时，描述起点箭头的宽度</td></tr>
+<tr><td style="color:red">endarrowlength</td><td>medium</td><td>short,medium,long</td><td>当endarrow!=none时，描述起点箭头的高度</td></tr>
+<tr><td>miterlimit</td><td>8.0</td><td>number</td><td>描述边框关节位置的厚度</td></tr>
+<tr><td>joinstyle</td><td>round</td><td>round(rounded join),bevel(beveled join),miter(miter join)</td><td>描述边框参加的样式</td></tr>
+<tr><td>endcap</td><td>round</td><td>flat,square,round</td><td>描述边框结束部分</td></tr>
+</table>
+</div>
+
+<span>3:开始二级标记的课程！</span>
+
+通过以前所有章节的学习、在到从本章节开始，就表示你已对VML有了相当的认识、掌握了几乎所有的VML一级标记、如果之前的内容你认真学习了的话。
+
+VML二级标记，你可以这样理解：“它是专门为VML一级标记设计的、它们可以修饰几乎所有用VML一级标记绘制的圆形、矩形、弧形、曲线等几乎所有形状，从头到脚、从边框到背景、从立体到背景图片、从路径轨迹到超文本内容、等等。。二级标记可以将基础的图形包装成各式各样千奇百怪、二级标记可以说是一级标记的一件华丽的衣服”。
+
+不过，学习二级标记，我不会把二级标记的所有属性一一演示、讲解，更不会在去讲之前那些基础的知识（如果你不会，那现在就去看、去学、直到会了、能听懂本章节以后的课程我所说的话为止，我也不会在忌讳不加解释的使用一些诸如交接点/通用属性/专用属性/Vector3D/DVML/coorsize/group/line/curve等等词语）。并仅提供关于该二级属性的常识问题以及一些比较有用的、实用的、好用的、抽象的属性演示例子，你可以通过XXX二级标记专用属性参考表提供的数据，自行更改例题，从而自己了解、掌握XX属性是什么效果、什么用、我怎么挪用应用到XX一级标记图形中。
+
+<span>4:二级标记的兼容性问题</span>
+
+学习中你已知道，二级标记几乎可以“从头到脚”的处理图形几乎任何部分。但是如果图形本身“只有头没有脚”，那么你用专门处理“脚”的二级标记去处理它？不用说，肯定是无效的。那“脚”是什么哪？举个例子，line它只是线只有边框概念而没有填充概念，也就是说stroke二级标记可以处理它但fill(背景填充)二级标记就无法处理它。在说image，它只是图像，没有背景填充的概念，所以fill对它也无法处理。在拿oval、rect、roundrect这些图形跟line线相比，前者由于都有背景概念，所以就支持fill填充。但是，它们却无法使用“箭头”，不然，你说oval、rect哪里是起点？哪里是终点？箭头给它加到哪里合适？而line、arc、curve、polyline、shape却不同，他们都是线条类组成的、或根本就是一条line线，它门有线条起点、终点的概念，所以它们就支持在起点、终点增加箭头。请看下面给图形增加箭头的例子对比
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+
+<v:line style="Z-INDEX:1;LEFT:225;POSITION:absolute;TOP:110" from="0,0" to="43.5pt,8.25pt" stroked="t" strokecolor="black" strokeweight=".75pt">
+<v:stroke opacity="1" startarrow="none" endarrow="classic"/>
+</v:line>
+
+<v:arc style="Z-INDEX:1;LEFT:242;WIDTH:61;POSITION:absolute;TOP:169;HEIGHT:71" startangle="359" endangle="119" fillcolor="white" stroked="t" strokeweight="5">
+<v:stroke color="red" opacity=".5" startarrow="oval" endarrow="classic" endarrowwidth="wide" endarrowlength="long"/>
+</v:arc>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+
+<v:oval style="Z-INDEX:1;LEFT:330;WIDTH:58;POSITION:absolute;TOP:95;HEIGHT:58">
+<v:stroke opacity="1" startarrow="none" endarrow="classic"/>
+</v:oval>
+
+<v:rect style="Z-INDEX:1;LEFT:335;WIDTH:53;POSITION:absolute;TOP:177;HEIGHT:56" fillcolor="white" stroked="t" strokecolor="black" strokeweight=".75pt">
+<v:stroke color="red" opacity=".5" startarrow="oval" endarrow="classic" endarrowwidth="wide" endarrowlength="long"/>
+</v:rect>
+</textarea>
+
+显示情况证明oval、rect就不支持箭头，不过却支持边框颜色定义。
+
+<span>5:stroke边框 - 精彩实例</span>
+
+我制作了几个抽象的例子，源代码自行分析，并请对照专用属性表修改（其实学习二级标记就是学属性！），篇幅问题不一一作出解释。stroke所涉及的属性，关键是活学活用，不要求全部学会、死记住，但建议应学会专用属性表中我用红色给标记的常用属性，当然多了我不反对，只要你有脑子装~
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:line style="z-index:1;LEFT:256;POSITION:absolute;TOP:232" from="0,0" to="76.5,-17.25" stroked="t" strokecolor="black" strokeweight="3.75">
+<v:stroke opacity="1" startarrow="oval" startarrowwidth="wide" startarrowlength="long" endarrow="classic" endarrowwidth="wide" endarrowlength="long"/>
+</v:line>
+<v:line style="z-index:1;LEFT:249;POSITION:absolute;TOP:151" from="0,0" to="76.5,-17.25" stroked="t" strokecolor="black" strokeweight="3.75">
+<v:stroke opacity="1" startarrow="oval" startarrowwidth="narrow" startarrowlength="short" endarrow="classic" endarrowwidth="narrow" endarrowlength="short"/>
+</v:line>
+<v:line style="z-index:1;LEFT:252;POSITION:absolute;TOP:190" from="0,0" to="76.5,-17.25" stroked="t" strokecolor="black" strokeweight="3.75"> <v:stroke opacity="1" startarrow="oval" startarrowwidth="medium" startarrowlength="medium" endarrow="classic" endarrowwidth="wide" endarrowlength="long"/>
+</v:line>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:curve style="z-index:1;LEFT:249;POSITION:absolute;TOP:144" from="0,0" control1="32.25,-15" control2="24.75,24" to="70.5,0" filled="f" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight=".75">
+<v:stroke opacity="1" startarrow="none" startarrowwidth="narrow" startarrowlength="short" endarrow="classic" endarrowwidth="wide" endarrowlength="long"/>
+</v:curve>
+<v:curve style="z-index:1;LEFT:251;POSITION:absolute;TOP:187" from="0,0" control1="32.25,-15" control2="24.75,24" to="70.5,0" filled="f" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight=".75">
+<v:stroke opacity="1" startarrow="none" startarrowwidth="narrow" startarrowlength="short" endarrow="classic" endarrowwidth="wide" endarrowlength="long" dashstyle="dash"/>
+</v:curve>
+<v:rect style="z-index:1;LEFT:248;WIDTH:69;POSITION:absolute;TOP:222;HEIGHT:51" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight=".75">
+<v:stroke opacity="1" dashstyle="dot"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:325;WIDTH:69;POSITION:absolute;TOP:223;HEIGHT:51" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight=".75">
+<v:stroke opacity="1" dashstyle="dash"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:402;WIDTH:69;POSITION:absolute;TOP:223;HEIGHT:51" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight=".75">
+<v:stroke opacity="1" dashstyle="longDashDotDot"/>
+</v:rect>
+<v:oval style="z-index:1;LEFT:244;WIDTH:61;POSITION:absolute;TOP:292;HEIGHT:58" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight="2.25">
+<v:stroke opacity="1" dashstyle="shortDashDot"/>
+</v:oval>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:Image style="z-index:1;LEFT:258;WIDTH:100;POSITION:absolute;TOP:136;HEIGHT:100" src="shili\fyw1.jpg" bilevel="f" stroked="t" strokecolor="#e725d6" strokeweight="2.25">
+<v:stroke opacity="1" dashstyle="shortDashDot"/>
+</v:Image>
+<v:roundrect style="z-index:1;LEFT:329;WIDTH:94;POSITION:absolute;TOP:183;HEIGHT:102" arcsize="9830f" fillcolor="white" stroked="t" strokecolor="#e725d6" strokeweight="22.5">
+<v:stroke opacity="0.2"/>
+</v:roundrect>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:oval style="z-index:1;LEFT:136;WIDTH:193;POSITION:absolute;TOP:115;HEIGHT:185" fillcolor="yellow" stroked="t" strokecolor="#e725d6" strokeweight="3.75"> <v:stroke filltype="frame" opacity="1" src="shili/fyw2.jpg"/>
+</v:oval>
+<v:oval style="z-index:1;LEFT:356;WIDTH:193;POSITION:absolute;TOP:119;HEIGHT:185" fillcolor="yellow" stroked="t" strokecolor="#e725d6" strokeweight="18.75">
+<v:stroke filltype="frame" opacity="39321f" src="shili/haha.gif"/>
+</v:oval>
+<v:rect style="z-index:1;LEFT:593;WIDTH:131;POSITION:absolute;TOP:160;HEIGHT:127" fillcolor="white" stroked="t" strokecolor="black" strokeweight="30"> <v:stroke filltype="frame" opacity=".5" src="shili/fyw1.jpg"/>
+</v:rect>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:rect style="z-index:1;LEFT:262;WIDTH:100;POSITION:absolute;TOP:147;HEIGHT:103" fillcolor="white" stroked="t" strokecolor="green" strokeweight="15"> <v:stroke filltype="pattern" opacity="1" color2="red" src="shili/fyw1.jpg"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:400;WIDTH:100;POSITION:absolute;TOP:149;HEIGHT:103" fillcolor="white" stroked="t" strokecolor="white" strokeweight="15"> <v:stroke filltype="pattern" opacity="1" color2="yellow" src="shili/fyw1.jpg" imagesize="1,1"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:533;WIDTH:100;POSITION:absolute;TOP:151;HEIGHT:103" fillcolor="white" stroked="t" strokecolor="blue" strokeweight="15"> <v:stroke filltype="pattern" opacity="1" color2="lime" src="shili/fyw1.jpg" imagealignshape="f" imagesize="1,1"/>
+</v:rect>
+<v:rect style="z-index:1;LEFT:679;WIDTH:100;POSITION:absolute;TOP:150;HEIGHT:103" fillcolor="white" stroked="t" strokecolor="blue" strokeweight="15">
+<v:stroke filltype="tile" opacity="1" color2="lime" src="shili/fyw1.jpg" imagealignshape="f" imagesize="1,1"/>
+</v:rect>
+</textarea>

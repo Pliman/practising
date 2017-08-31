@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>xml.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript">
+			 var dojoConfig = (function(){
+				return {
+					async: true,
+					isDebug: true,
+					packages : [{
+						name : "pliman",
+						location : "../../xml"
+					}]
+				};
+			})();
+		</script>
+
+		<script type="text/javascript" src="xml2json.js"></script>
+		<script type="text/javascript" src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="async: true"></script>
+
+		<script type="text/javascript">
+			require(["pliman/amdxml2json"],function(amdxml2json){
+				//alert(amdxml2json);
+				//amdxml2json.kkk();
+			});
+		
+			require(["dojox/xml/parser","pliman/amdxml2json","dojox/xml/DomParser"],function(parser,amdxml2json,DomParser){
+				//dojo.every([1,2,3],function(a){
+				//	alert(a);
+				//	return true;
+				//});
+				
+				var doc = parser.parse("","text/xml");
+				doc.async = false;
+				
+				doc.load("book.xml");
+				//alert(doc);
+				
+				var obj = amdxml2json.parseDoc_(doc);
+				alert(obj.book.ISBN);
+				
+				var xml = "<tnode><node>Some Text</node><node>Some Other Text</node></tnode>";
+   				var jsdom = dojox.xml.DomParser.parse(xml); // 不是纯js对象，用处不大
+				
+				//var evaluator = new XPathEvaluator();
+				//alert(evaluator.evaluate("book/author/name",doc,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE, null));
+				
+				var aNodes = new Array();
+				
+				//alert(doc.selectSingleNode("book/author/name").xml);
+			});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

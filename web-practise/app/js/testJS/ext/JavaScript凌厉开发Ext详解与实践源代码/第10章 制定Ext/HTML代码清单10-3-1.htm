@@ -1,0 +1,173 @@
+<!--HTML代码清单10-3-1-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		 <title id="title">本地化例子</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css">
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext-all-debug.js">
+        </script>
+        <script type="text/javascript" src="../locale/PagingMemoryProxy.js">
+        </script>
+        <!-- Ext localization javascript -->
+        <script type="text/javascript" id="extlocale">
+        </script>
+        <script type="text/javascript">
+            // decode language passed in url
+            var locale = window.location.search ? Ext.urlDecode(window.location.search.substring(1)).locale : '';
+            
+            var head = Ext.fly(document.getElementsByTagName('head')[0]);
+            if (locale) {
+                Ext.fly('extlocale').set({
+                    src: '../../source/locale/ext-lang-' + locale + '.js'
+                });
+            }
+        </script>
+        <script type="text/javascript" id="applocale">
+        </script>
+        <script type="text/javascript" src="importScript.js">
+        </script>
+        <!-- Main application -->
+        <script type="text/javascript">
+            var grid;
+            Ext.onReady(function(){
+                Ext.BLANK_IMAGE_URL = '../../resources/images/default/s.gif';
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                /******************************************************************/
+                var fm = Ext.form, Ed = Ext.grid.GridEditor;
+                var monthArray = Date.monthNames.map(function(e){
+                    return [e];
+                });
+                
+                var ds = new Ext.data.Store({
+                    proxy: new Ext.data.PagingMemoryProxy(monthArray),
+                    reader: new Ext.data.ArrayReader({}, [{
+                        name: 'month'
+                    }])
+                });
+                var cm = new Ext.grid.ColumnModel([{
+                    header: "Months of the year",
+                    id: 'monthID',
+                    dataIndex: 'month',
+                    editor: new Ed(new fm.TextField({
+                        allowBlank: false
+                    })),
+                    width: 240
+                }]);
+                cm.defaultSortable = true;
+                grid = new Ext.grid.GridPanel({
+                    //frame:true,
+                    width: 475,
+                    height: 215,
+                    title: 'Month Browser',
+                    store: ds,
+                    cm: cm,
+                    sm: new Ext.grid.RowSelectionModel({
+                        selectRow: Ext.emptyFn
+                    }),
+                    
+                    bbar: new Ext.PagingToolbar({
+                        pageSize: 6,
+                        store: ds,
+                        displayInfo: true
+                    })
+                });
+                // trigger the data store load
+                ds.load({
+                    params: {
+                        start: 0,
+                        limit: 6
+                    }
+                });
+                /******************************************************************/
+                // create pre-configured example window extension class
+                Ext.ns('Tutorial');
+                
+                Tutorial.LocalizationWin = Ext.extend(Ext.Window, {
+                    titleText: 'Localization Example',
+                    selectLangText: 'Select Language',
+                    textFieldText: 'Text Field',
+                    dateFieldText: 'Date Field',
+                    monthText: 'Month Localizing..',
+                    initComponent: function(){
+                        Ext.apply(this, {
+                            width: 500,
+                            id: 'winid',
+                            height: 350,
+                            layout: 'fit',
+                            border: false,
+                            closable: false,
+                            title: this.titleText,
+                            items: [{
+                                xtype: 'form',
+                                frame: true,
+                                defaultType: 'textfield',
+                                items: [{
+                                    xtype: 'combo',
+                                    fieldLabel: this.selectLangText,
+                                    name: 'locale',
+                                    store: new Ext.data.SimpleStore({
+                                        id: 0,
+                                        fields: ['file', 'locale'],
+                                        data: [['', 'English'], ['zh_CN', 'Chinese'], ['ja', 'Japanese']]
+                                    }),
+                                    listeners: {
+                                        select: {
+                                            fn: function(combo){
+                                                window.location.search = '?' +
+                                                Ext.urlEncode({
+                                                    locale: combo.getValue()
+                                                });
+                                            }
+                                        }
+                                    },
+                                    mode: 'local',
+                                    editable: false,
+                                    forceSelection: true,
+                                    valueField: 'file',
+                                    displayField: 'locale',
+                                    triggerAction: 'all',
+                                    value: locale
+                                }, {
+                                    fieldLabel: this.textFieldText,
+                                    allowBlank: false
+                                }, {
+                                    xtype: 'datefield',
+                                    fieldLabel: this.dateFieldText,
+                                    allowBlank: false
+                                }, {
+                                    xtype: 'label',
+                                    text: this.monthText,
+                                    style: 'top:200px'
+                                }, grid]
+                            }]
+                        });
+                        Tutorial.LocalizationWin.superclass.initComponent.apply(this, arguments);
+                    }
+                });
+                
+                function callback(){
+                    appMain();
+                }
+                
+                if (locale) {
+                    importScript('app-lang-' + locale + '.js', callback);
+                }
+                else {
+                    appMain();
+                }
+                
+                function appMain(){
+                    var win = new Tutorial.LocalizationWin();
+                    win.show();
+                }
+                
+            });
+        </script>
+       
+    </head>
+    <body>
+    </body>
+</html>

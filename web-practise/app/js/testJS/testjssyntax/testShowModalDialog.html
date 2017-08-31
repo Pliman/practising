@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		function testShowModalDialog(){
+  			var url = '../dom/testOuterHTML.html';
+  			var returnValue = window.showModalDialog(url, window, "dialogHeight:"+500+"px;dialogWidth:"+450+"px;dialogTop:"+250+"; dialogLeft:"+450+"; status=off;resizable:no;scroll:yes");
+  		}
+  	</script>
+    <title>testShowModalDialog</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="testShowModalDialog()" type="button" id="testShowModalDialog"
+						name="testShowModalDialog" value="testShowModalDialog"
+						style="background: #999999 url(../../img/submit.gif) no-repeat center;" />
+				</td>
+				<td id="3rd" name="3rd">
+					<input type="text" value="333" />
+				</td>
+			</tr>
+		</table>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<title>stantard_rect.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<?import namespace="v" implementation="#default#VML" ?>
+		<script type="text/javascript">
+			function changeDisplay(){
+				var rect = document.getElementById('rect');
+				//var stroke = document.getElementById('stroke');
+				/*if(stroke.style.display=='block'){
+					stroke.style.display = 'none';
+				}else{
+					stroke.style.display = 'block';
+				}*/
+				//rect.removeChild(stroke);
+				
+				rect.strokeweight = '';
+				rect.strokecolor = '';
+			}
+		</script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<v:rect id="rect" onclick="changeDisplay()" style="position:absolute;top:0px;left:0px;width:800px;height:600px;z-index:500"
+		 filled="t" fillcolor="yellow" strokeweight="2pt" strokecolor="red">
+		 	<!-- <v:stroke id="stroke" style="position:absolute" color="red" weight="2pt"></stroke>  -->
+		</v:rect>
+	</body>
+</html>

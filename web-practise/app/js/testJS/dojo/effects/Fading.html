@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Fading.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript"
+			src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+		<script>
+				require(["dojo/_base/fx", "dojo/on", "dojo/dom", "dojo/domReady!"], function(fx, on, dom) {
+					var fadeOutButton = dom.byId("fadeOutButton"),
+						fadeInButton = dom.byId("fadeInButton"),
+						fadeTarget = dom.byId("fadeTarget");
+			
+					on(fadeOutButton, "click", function(evt){
+						fx.fadeOut({ node: fadeTarget }).play();
+					});
+					on(fadeInButton, "click", function(evt){
+						fx.fadeIn({ node: fadeTarget }).play();
+					});
+				});
+			</script>
+	</head>
+	<body>
+		<button id="fadeOutButton">
+			Fade block out
+		</button>
+		<button id="fadeInButton">
+			Fade block in
+		</button>
+
+		<div id="fadeTarget" class="red-block">
+			A red block
+		</div>
+	</body>
+</html>

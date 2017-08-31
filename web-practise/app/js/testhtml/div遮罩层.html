@@ -1,0 +1,50 @@
+<style type="text/css">
+#divPageMask{background-color:#000000; filter:alpha(opacity=50);left:0px;position:absolute;top:0px;}
+#divOpenWin{background-color:#EEEEEE;position: absolute;left:0px;top:-300px;z-index:50; width:300px;height:150px}
+</style>
+<div id="divPageMask"></div>
+<div id="divOpenWin"><center><a href="javascript:Close();">关闭</a>
+<div id="DivInfo">请认真阅读本发帖说明 (15 秒后自动关闭)</div></center></div>
+<script language="javascript">
+function $(id){return document.getElementById(id);}
+function Open()
+{     sDisp(0);  
+     $("divPageMask").style.display="block";
+     resizeMask();
+     window.onResize = resizeMask;
+     $("divOpenWin").style.display="block";
+}
+function Close()
+{     sDisp(1);
+     divPageMask.style.width = "0px";
+     divPageMask.style.height = "0px";
+     divOpenWin.style.top = "-300px";
+     window.onResize = null;
+}
+function resizeMask()
+{
+divPageMask.style.width = document.body.scrollWidth;
+divPageMask.style.height = document.body.scrollHeight>document.body.clientHeight?document.body.scrollHeight:document.body.clientHeight;
+divOpenWin.style.left = (document.body.offsetWidth - divOpenWin.offsetWidth) / 2;
+divOpenWin.style.top = (document.body.offsetHeight - divOpenWin.offsetHeight) / 2;
+}
+function sDisp(val)
+{var dispalyType;
+     var dType=["hidden","visible"];
+     var obj=document.getElementsByTagName("select");
+     for (i=0;i<obj.length;i++)
+     {
+       obj[i].style.visibility=dType[val];
+     }
+}
+Open();
+var secs = 15;
+for(i=1;i<=secs;i++) {window.setTimeout("update(" + i + ")",    i*1000);}
+function update(num) {
+if(num == secs) {Close();}
+else {
+printnr = secs-num;
+$("DivInfo").innerHTML = "请认真阅读本发帖说明 (" + printnr +" 秒后自动关闭)";
+}
+}
+</script>

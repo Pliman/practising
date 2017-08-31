@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>判断页面是关闭还是刷新</title>
+
+  <script src="../../bower_components/jquery/jquery-1.10.2.js"></script>
+</head>
+
+<body onunload="fclose();" onbeforeunload="bfunload();">
+
+<script language="javascript">
+  $.ajaxSetup({
+    async: false
+  });
+
+  var s = "";
+  function fclose() {
+    if (s === "no") {
+      $.ajax({
+        type: "get",
+        url: "http://www.baidu.com?k=refresh",
+        async: false
+      });
+
+//      $.get("http://www.baidu.com?k=refresh");
+      console.log("刷新");
+    } else {
+      $.ajax({
+        type: "get",
+        url: "http://www.baidu.com?k=refresh",
+        async: false
+      });
+
+//      $.get("http://www.baidu.com?k=close");
+      console.log("关闭");
+    }
+  }
+
+  function bfunload() {
+    $.ajax({
+      type: "get",
+      url: "http://www.baidu.com?k=onbeforeunload",
+      async: false
+    });
+    s = "no";
+  }
+</script>
+</body>
+</html>

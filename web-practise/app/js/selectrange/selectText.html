@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div>
+	<span>
+		<textarea name="" id="test" cols="30" rows="10">dsaffffffffffffffffffffffffffsdfsafoisdjfoipsandfodshaofipdsnfpoiusabfposadinfpoasbnd</textarea>
+	</span>
+</div>
+
+<div>
+	<span><b>aaaaaaaaaaaaaaaaaa</b></span>
+</div>
+
+<div>
+	<span><input type="text" value="aaaaaaaaaaaaaaaaaa"/></span>
+</div>
+<script type="text/javascript">
+	function getSelectText(){
+		var txt = null;
+		if (window.getSelection){  // mozilla FF
+			txt = window.getSelection();
+		}
+		else if (document.getSelection){
+			txt = document.getSelection();
+		}
+		else if (document.selection){  //IE
+			txt = document.selection.createRange().text;
+		}
+		console.log(txt);
+//		console.log(txt.focusNode.parentNode.tagName);
+		console.log(txt.getRangeAt(0));
+		return txt;
+	}
+
+	function ShowDirection() {
+		var tbl = [];
+		// focusNode就是当前选择的节点的文字(textarea, input不同，他们的focusNode值是父节点)
+		console.log(window.getSelection().endContainer);
+		var direct = (document.selection && document.selection.createRange)
+				? document.selection.createRange().parentElement() // IE
+				: window.getSelection().focusNode.parentNode; //FF
+		do {
+			tbl.push(direct.tagName);
+		}
+		while ((direct = direct.parentNode) && (direct !== document.documentElement));
+		alert(tbl.reverse().join('---->'));
+	}
+
+	var obj=document.getElementById("test");
+	document.onmouseup=function(){
+		obj.value=getSelectText();
+//		ShowDirection();
+	}
+</script>
+</body>
+</html>

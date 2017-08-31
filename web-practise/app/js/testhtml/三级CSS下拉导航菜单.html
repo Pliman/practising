@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>三级菜单</title>
+<style type="text/css">
+*,body,ul,li {margin:0;padding:0;list-style: none;}
+body {font:12px Arial; background:#000;}
+a { border:none; color:#FFF; text-decoration:none;}
+.menu {width:980px; margin:auto; background:url("http://www.codefans.net/jscss/demoimg/201003/menu.gif") repeat-x 0 0;}
+#menu { padding-left:210px; background:url("/jscss/demoimg/201003/menu.gif") no-repeat 0 -36px; height:36px; }
+	#menu li { float:left;;}
+	#menu li a {display:block;clear:both;font-size:14px;padding-right:14px;}
+	#menu li a strong {display:inline-block; height:16px;padding:15px 0 5px 15px;overflow:hidden;}
+	#menu li a:hover,
+	#menu li a.ok {background:url("/jscss/demoimg/201003/menu.gif") no-repeat right -72px; }
+	#menu li a:hover strong,
+	#menu li a.ok strong{
+		padding:8px 0 12px 15px; 
+		background:url("/jscss/demoimg/201003/menu.gif") no-repeat 0 -72px;
+	}
+	#menu li ul {display:none; width:125px;position:absolute;background-color:#D9D9D9;}
+	#menu li ul li { float:none;vertical-align:top; overflow:hidden;}
+	#menu li ul li a {
+		float:left;
+		width:115px;
+		_float:none;
+		_display:inline-block;
+		padding:7px 0 4px 10px;
+		text-align:left;
+		font-size:12px;
+		border-bottom:#000 1px solid;
+		overflow:hidden;
+	}
+	#menu li ul li a:hover{ background-image:none; background-color:#F00;}
+	#menu li ul li ul {left:125px;}	
+</style>
+<script language="javascript">
+var Menu = ["menu"];
+window.onload = function(){
+	var li = document.getElementById(Menu).getElementsByTagName("li");
+	for(var i=0;i<li.length;i++){
+		var li_ul = li[i].getElementsByTagName("ul");
+		if(li_ul.length){
+			li[i].onmouseout = function(){
+				this.getElementsByTagName("a")[0].style.backgroundColor = "";
+				this.getElementsByTagName("ul")[0].style.display ="none";
+			}
+			if(li[i].parentNode.id!=Menu){
+				li[i].onmouseover= function(){
+					this.getElementsByTagName("a")[0].style.backgroundColor = "#F00"; 
+					this.getElementsByTagName("ul")[0].style.display ="block";
+				}
+			}
+		}
+	}
+}
+function ShowMenu(obj){
+	var li = document.getElementById(Menu).getElementsByTagName("li");
+	for(var c=0;c<li.length;c++){
+		if(li[c].parentNode.id==Menu){
+			li[c].getElementsByTagName("a")[0].className = "";
+		}
+	}
+	obj.getElementsByTagName("a")[0].className = "ok";
+	obj.getElementsByTagName("a")[0].style.backgroundColor = "#F00"; 
+	obj.getElementsByTagName("ul")[0].style.display ="block";
+}
+</script>
+</head>
+<body>
+<div class="menu">
+<ul id="menu">
+    <li onmouseover="javascript:ShowMenu(this)"><a href="javascript:void(0)"><strong>二级菜单B</strong></a>
+		<ul>
+			<li><a href="javascript:void(0)">二级菜单B_1</a>
+				<ul>
+					<li><a href="javascript:void(0)">二级菜单B_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">二级菜单B_1_1_1</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_1_2</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_1_6</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0)">二级菜单B_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">二级菜单B_1_2_1</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_2_2</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_2_3</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_2_4</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_2_5</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0)">二级菜单B_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">二级菜单B_1_3_1</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_3_2</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_3_5</a></li>
+							<li><a href="javascript:void(0)">二级菜单B_1_3_6</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="javascript:void(0)">二级菜单B_2</a>
+				<ul>
+					<li><a href="javascript:void(0)">二级菜单B_2_1</a></li>
+					<li><a href="javascript:void(0)">二级菜单B_2_2</a></li>
+					<li><a href="javascript:void(0)">二级菜单B_2_3</a></li>
+					<li><a href="javascript:void(0)">二级菜单B_2_6</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+ 
+    <li onmouseover="javascript:ShowMenu(this)"><a href="javascript:void(0)"><strong>三级菜单C</strong></a>
+		<ul>
+			<li><a href="javascript:void(0)">三级菜单C_1</a>
+				<ul>
+					<li><a href="javascript:void(0)">三级菜单C_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">三级菜单C_1_1_1</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_1_2</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_1_5</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0)">三级菜单C_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">三级菜单C_1_2_1</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_2_2</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_2_6</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0)">三级菜单C_1_1</a>
+						<ul>
+							<li><a href="javascript:void(0)">三级菜单C_1_3_1</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_3_2</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_3_3</a></li>
+							<li><a href="javascript:void(0)">三级菜单C_1_3_4</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="javascript:void(0)">三级菜单C_2</a>
+				<ul>
+					<li><a href="javascript:void(0)">三级菜单C_2_1</a></li>
+					<li><a href="javascript:void(0)">三级菜单C_2_2</a></li>
+					<li><a href="javascript:void(0)">三级菜单C_2_3</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+</body>
+</html>

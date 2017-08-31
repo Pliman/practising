@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>fireEvent</title>
+
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+	<script type="text/javascript">
+		function testmouseover(){
+			//alert('testover');
+		}
+		
+		function amousedown(){
+			alert('amousedown');
+		}
+	</script>
+	<style>
+		div {
+			width : 400px;
+			height : 400px;
+			background-color : #EEE;
+		}
+		
+		a {
+			width : 400px;
+			height : 400px;
+			background-color : #EEE;
+			display : block;
+		}
+	</style>
+	</style>
+	<body>
+		<div id="test" onmouseover="testmouseover()"></div>
+		<a id="adown" onmousedown="amousedown()">aaaa</a>
+	</body>
+</html>
+<script type="text/javascript">
+	//var div = document.getElementById('test');
+	//div.fireEvent('onmouseover');
+	
+	var a = document.getElementById('adown');
+	a.fireEvent('onmousedown');
+</script>

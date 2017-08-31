@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>Form加载编辑数据</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/radiogroup.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">Form加载编辑数据</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br/>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'under';
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    width: 400,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 80,
+                    labelSeparator: "：",
+                    title: 'Form加载编辑数据',
+                    items: [{
+                        xtype: 'combo',
+                        fieldLabel: '加载数据',
+                        listWidth: 400,
+                        hiddenName: 'returnValue',
+                        store: [[1, "测试数据一"], [2, "测试数据二"]],
+                        anchor: '-30',
+                        editable: true,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        value: 1
+                    }, {
+                        xtype: 'ux-radiogroup',
+                        fieldLabel: '性别',
+                        name: 'sex',
+                        horizontal: true,
+                        anchor: '-30',
+                        radios: [{
+                            value: '男',
+                            checked: true,
+                            boxLabel: '男'
+                        }, {
+                            value: '女',
+                            boxLabel: '女'
+                        }]
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'postcode',
+                        fieldLabel: '邮政编码',
+                        anchor: '-30',
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'age',
+                        fieldLabel: '年龄',
+                        anchor: '-30',
+                        allowBlank: false
+                    }, {
+                        layout: 'column',
+                        border: false,
+                        items: [{
+                            columnWidth: .5,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'checkbox',
+                                fieldLabel: '角色',
+                                boxLabel: '系统管理员',
+                                name: 'role1',
+                                anchor: '100%'
+                            }]
+                        }, {
+                            columnWidth: .25,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'checkbox',
+                                hideLabel: true,
+                                boxLabel: '经理',
+                                name: 'role2',
+                                anchor: '100%'
+                            }]
+                        }, {
+                            columnWidth: .25,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'checkbox',
+                                hideLabel: true,
+                                boxLabel: '普通用户',
+                                name: 'role3',
+                                anchor: '100%'
+                            }]
+                        }]
+                    }, {
+                        layout: 'column',
+                        border: false,
+                        items: [{
+                            columnWidth: .25,
+                            layout: 'form',
+                            labelSeparator: "：",
+                            border: false,
+                            items: [{
+                                xtype: 'checkbox',
+                                fieldLabel: '控制输入',
+                                name: 'control',
+                                anchor: '100%',
+                                listeners: {
+                                    scope: this,
+                                    check: function(cb, checked){
+                                        if (checked) {
+                                            frm.form.findField("text1").enable();
+                                        }
+                                        else {
+                                            frm.form.findField("text1").disable();
+                                        }
+                                    }
+                                }
+                            }]
+                        }, {
+                            columnWidth: .05,
+                            layout: 'form',
+                            labelSeparator: "：",
+                            border: false,
+                            items: [{
+                                xtype: 'panel',
+                                height: 26,
+                                html: '&nbsp;'
+                            }]
+                        }, {
+                            columnWidth: .7,
+                            layout: 'form',
+                            labelSeparator: "：",
+                            border: false,
+                            items: [{
+                                xtype: 'textfield',
+                                name: 'text1',
+                                hideLabel: true,
+                                anchor: '-30',
+                                disabled: true
+                            }]
+                        }]
+                    }],
+                    buttons: [{
+                        text: '加载',
+                        scope: this,
+                        handler: function(){
+                            var url = "submit1.ashx?returnValue=" + frm.form.findField("returnValue").getValue();
+                            Ext.get('op').dom.value += "----------------------------\n" +
+                            "提交：" +
+                            url +
+                            '\n';
+                            frm.form.doAction('load', {
+                                waitTitle: '加载编辑数据',
+                                waitMsg: '正在加载编辑数据……',
+                                url: url,
+                                method: 'post',
+                                params: '',
+                                success: function(form, action){
+                                    Ext.get('op').dom.value += "----------------------------\n" +
+                                    "执行回调函数：success\n" +
+                                    "返回值：" +
+                                    Ext.encode(action.result) +
+                                    '\n';
+                                },
+                                failure: function(form, action){
+                                    Ext.get('op').dom.value += "----------------------------\n" +
+                                    "执行回调函数：failure\n" +
+                                    "返回值：" +
+                                    Ext.encode(action.result) +
+                                    '\n';
+                                }
+                            });
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }],
+                    listeners: {
+                        render: function(fp){
+                            fp.form.waitMsgTarget = fp.getEl();
+                        }
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

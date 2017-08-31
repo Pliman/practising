@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>More Fun with Drop!</title>
+        <link rel="stylesheet" type="text/css"
+          href="drop.css" />
+
+        <script
+            type="text/javascript"
+            djConfig="parseOnLoad:true"
+            src="http://o.aolcdn.com/dojo/1.1/dojo/dojo.xd.js">
+        </script>
+
+        <script type="text/javascript">
+            dojo.require("dojo.dnd.Source");
+            dojo.require("dojo.parser");
+
+            dojo.addOnLoad(function(  ) {
+                dojo.subscribe("/dnd/source/over", function(source) {
+                    console.log("/dnd/source/over", source);
+                });
+                dojo.subscribe("/dnd/start", function(source, nodes, copy) {
+                    console.log("/dnd/start", source, nodes, copy);
+                });
+                dojo.subscribe("/dnd/drop", function(source, nodes, copy) {
+                    console.log("/dnd/drop", source, nodes, copy);
+                });
+                dojo.subscribe("/dnd/cancel", function(  ) {
+                    console.log("/dnd/cancel");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="source1" dojoType="dojo.dnd.Source" class="container">
+            <div class="dojoDndItem">foo</div>
+            <div class="dojoDndItem">bar</div>
+            <div class="dojoDndItem">baz</div>
+            <div class="dojoDndItem">quux</div>
+        </div>
+        <div id="source2" dojoType="dojo.dnd.Source" class="container">
+            <div class="dojoDndItem">FOO</div>
+            <div class="dojoDndItem">BAR</div>
+            <div class="dojoDndItem">BAZ</div>
+            <div class="dojoDndItem">QUUX</div>
+        </div>
+    </body>
+</html>

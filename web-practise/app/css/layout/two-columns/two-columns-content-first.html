@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .main, .sitebar {
+      height: 300px;
+      font: bolder 20px/300px '微软雅黑';
+      color: #fff;
+      text-align: center;
+    }
+
+    .main {
+      width: 100%;
+      float: left;
+    }
+
+    .main .content {
+      margin-left: 200px;
+      background-color: #00AA88;
+    }
+    /*main设置了margin的话，就要占宽度，有间隙*/
+
+    .sitebar {
+      width: 200px;
+      float: left;
+      margin-left: -100%;
+      background-color: #0c63ee;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <div class="content">content</div>
+</div>
+<div class="sitebar">menu</div>
+</body>
+</html>

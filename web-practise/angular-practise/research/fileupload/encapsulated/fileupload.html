@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>fileupload</title>
+
+	<script src="./lib/angular.js"></script>
+	<script src="./lib/ng-file-upload-shim.js"></script>
+	<script src="./lib/ng-file-upload.js"></script>
+	<script src="fileupload.js"></script>
+</head>
+<body ng-app="fileUploader">
+<script type="text/ng-template" id="uploader/uploader.html">
+	<div>
+		<input type="file" ngf-select="onFileSelect($files)" multiple=""
+		       style="display: none"/>
+		<a style="border: 1px solid blue;">点击上传</a>
+
+		<div ngf-drop="onFileSelect($files)" multiple=""
+		     style="margin: 20px;width:100px;height:100px;border: 1px solid blue;">
+			拖放到此处
+		</div>
+
+		<div ng-if="!percentageCb">
+			{{percentage}}
+		</div>
+	</div>
+</script>
+
+<!--<div uploader ng-transclude>-->
+<div uploader>
+	文件上传
+</div>
+</body>
+</html>

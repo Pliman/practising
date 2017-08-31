@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+		
+  		function split(){
+  			var str = '1?2?3,4,5,6';
+  			var str2 = '1,2,3,' ;
+  			var str3 = '1-_-2-_-3,' ;
+  			var str4 = '' ;
+  			var str5 = 'dfdf' ;
+  			
+  			var strs = str.split("?");
+  			var strs2 = str2.split(",");
+  			var strs3 = str3.split("-_-!");
+  			var strs4 = str4.split(";");
+  			/*for(var i = 0; i < strs.length; i++){
+  				alert(strs[i]);
+  			}
+  			for(var j = 0; j < strs2.length; j++){
+  				alert(strs2[j]);
+  			}
+  			for(var k = 0; k < strs3.length; k++){
+  				alert(strs3[k]);
+  			}*/
+  			//alert(strs4.length) ;
+  			//alert(strs4[0]) ;
+  			//var arr1 = str4.split(',') ;
+  			//alert(arr1.length) ;
+  			var arr2 = str5.split(',') ;
+  			alert(arr2.length) ;
+  			alert(arr2[0]) ;
+  		}
+  		
+  		function splitLongChar(){
+  			var str1 = 'd8b2f07042fb41b3a3e80bc941a22bca;2c9288500ebbaa38010ebfbf120d03fb;2c9288500c3e34bb010c5b7340030105;2c9288a12317a16f01232b33677a1709' ;
+  			var str2 = '2c9288500ebbaa38010ebfbf120d03fb;d8b2f07042fb41b3a3e80bc941a22bca;2c9288500c3e34bb010c5b7340030105;2c9288a12317a16f01232b33677a1709' ;
+  			var str3 = '2c9288500ebbaa38010ebfbf120d03fb;2c9288500c3e34bb010c5b7340030105;2c9288a12317a16f01232b33677a1709;d8b2f07042fb41b3a3e80bc941a22bca' ;
+  			//var strSpliter = 'd8b2f07042fb41b3a3e80bc941a22bca;' ;
+  			var strSpliter = ';d8b2f07042fb41b3a3e80bc941a22bca' ;
+  			
+  			var arr1 = str1.split(strSpliter) ;
+  			var arr2 = str2.split(strSpliter) ;
+  			var arr3 = str3.split(strSpliter) ;
+  			
+  			/*for(var i = 0; i < arr1.length; i++){
+  				alert('arr1: ' + arr1[i]) ;
+  			}
+  			for(var i = 0; i < arr2.length; i++){
+  				alert('arr2: ' + arr2[i]) ;
+  			}
+  			for(var i = 0; i < arr3.length; i++){
+  				alert('arr3: ' + arr3[i]) ;
+  			}*/
+  			alert('arr1.length: ' + arr1.length) ;
+  			alert('arr2.length: ' + arr2.length) ;
+  			alert('arr3.length: ' + arr3.length) ;
+  		}
+  	</script>
+		<title>split</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="split()" type="button" id="split" name="split"
+						value="split"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+					<input onclick="splitLongChar()" type="button" id="splitLongChar" name="splitLongChar"
+						value="splitLongChar"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

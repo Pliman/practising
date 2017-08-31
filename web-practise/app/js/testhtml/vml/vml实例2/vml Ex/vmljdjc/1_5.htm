@@ -1,0 +1,112 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML标记与通用属性</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:VML标记</span>
+
+VML是通过XML标记来描述矢量图形的，所以必须遵循一定规则，请看下面的几种标记写法
+
+1:图形不包含内容，可以直接使用/>号结束
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval fillcolor='red' style='width:100;height:150'/>
+</textarea>
+2:或者使用&lt;/名域名:标记名>的形式表示VML图形描述标记的结束
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval fillcolor='red' style='width:100;height:150'></v:oval>
+</textarea>
+
+<span>2:VML标记通用属性说明</span>
+
+和HTML标记的通用属性（如:id、name、class、title、style）等一样，VML标记也有自己的通用属性、支持HTML的通用属性、支持CSS的样式定义。通过这些属性，我们可以修饰VML图形（如线、圆形）的形状、大小、颜色、内容、边框，以及定义鼠标样式、编程用的ID索引、提示标题等等
+
+<span>3:VML标记特有的通用属性（非HTML、CSS所有） - 参考表</span>
+
+VML特有通用属性使用范例：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval strokeweight='5' strokecolor='red' fillcolor=yellow style='width:100;height:150'></v:oval>
+<v:oval stroked=false fillcolor=yellow style='width:100;height:150'/>
+</textarea>
+
+<table width=100% style="color:red"><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td>strokeweight</td><td>0.75pt=1px</td><td>number</td><td>描述图形的边框粗度</td></tr>
+<tr><td>strokecolor</td><td>black</td><td>color</td><td>描述图形的边框颜色</td></tr>
+<tr><td>stroked</td><td>true</td><td>boolean</td><td>描述图形是否使用边框</td></tr>
+<tr><td>fillcolor</td><td>white</td><td>color</td><td>描述图形的背景颜色</td></tr>
+<tr><td>filled</td><td>true</td><td>boolean</td><td>描述图形是否使用背景</td></tr>
+<tr><td>print</td><td>true</td><td>boolean</td><td>描述图形是否允许被打印机打印</td></tr>
+<tr><td>coordsize</td><td>1000,1000</td><td>Vector2D</td><td>暗示图形与容器空间的大小比例</td></tr>
+<tr><td>coordorigin</td><td>0 0</td><td>Vector2D</td><td>coordinate at top-left corner of element</td></tr>
+<tr><td>wrapcoords</td><td>null</td><td>string</td><td>outline to use for tight text wrapping</td></tr>
+</table>
+
+<span>4:VML标记支持的HTML通用属性 - 参考表</span>
+
+HTML通用属性使用范例：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval href='http://www.microsoft.com' title='提示标题' target='_blank' fillcolor=red style='width:100;height:150'/>
+</textarea>
+
+<table width=100% style="color:red"><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td>id</td><td>null</td><td>string</td><td>定义元素的标识索引(多用于DHTML编程)</td></tr>
+<tr><td>class</td><td>null</td><td>classname</td><td>定义元素使用的CSS样式类</td></tr>
+<tr><td>style</td><td>null</td><td>CSS string</td><td>描述图形的CSS样式表</td></tr>
+<tr><td>title</td><td>null</td><td>string</td><td>定义图形的提示标题(鼠标靠近后的帮助提示)</td></tr>
+<tr><td>href</td><td>null</td><td>string</td><td>定义图形链接的URL地址</td></tr>
+<tr><td>target</td><td>_self</td><td>_self/_blank/_top</td><td>定义图形以何种形式打开链接</td></tr>
+<tr><td>contentEditable</td><td>false</td><td>boolean</td><td>描述图形内容是否允许用户编辑</td></tr>
+<tr><td>dir</td><td>ltr</td><td>ltr/rtl</td><td>描述图形内容以哪种方向输出</td></tr>
+<tr><td>disabled</td><td>false</td><td>boolean</td><td>描述图形能够响应用户事件触发</td></tr>
+</table>
+
+<span>5:VML标记支持的CSS通用属性 - 参考表</span>
+
+其实，VML元素几乎支持所有CSS样式定义，有些HTML元素不支持的像（rotation，旋转样式），VML却支持。由于CSS2样式属性太多，这里不一一写出了，只提及一些常用、好用的样式标记。如需要了解更多有关CSS的资料，请打开LD5、或下载一本由苏小雨编著的CSS手册，内容较专业、全面。
+
+CSS通用属性使用范例：
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval fillcolor="rgb(255,0,0)" style='position:absolute;left:50;top:150;width:200;height:100;cursor:crosshair;z-index:5000'/>
+<v:oval fillcolor="#0000ff" style='position:absolute;left:150;top:250;width:200;height:100;cursor:move;rotation:60;z-index:2000'/>
+<v:rect fillcolor="green" style='position:absolute;left:400;top:150;width:200;height:100;cursor:help;rotation:120;zoom:2.5;color:red'>已经被缩放2.5倍</v:rect>
+</textarea>
+
+<table width=100% style="color:red"><tr><td>属性名</td><td>可用值/可用值范围</td><TD>用途</td></tr>
+<tr><td>width</td><td>0-9999</td><td>描述宽度</td></tr>
+<tr><td>height</td><td>0-9999</td><td>描述高度</td></tr>
+<tr><td>position</td><td>static absolute fixed relative</td><td>描述如何定位输出</td></tr>
+<tr><td>left</td><td>0-9999</td><td>描述距离页面位置左</td></tr>
+<tr><td>top</td><td>0-9999</td><td>描述距离页面位置上</td></tr>
+<tr><td>z-index</td><td>0-9999</td><td>描述3D位置</td></tr>
+<tr><td>cursor</td><td>auto crosshair hand move help wait text……</td><td>描述鼠标形状</td></tr>
+<tr><td>zoom</td><td>0-99</td><td>描述缩放比例</td></tr>
+<tr><td>clip</td><td>rect(上 右 下 左)</td><td>描述裁剪对象</td></tr>
+<tr><td>border</td><td>0-99 style color</td><td>描述边框</td></tr>
+<tr><td>display</td><td>block none inline list-item</td><td>描述显示或隐藏</td></tr>
+<tr><td>overflow</td><td>visible auto hidden scroll</td><td>描述滚动条</td></tr>
+<tr><td>color</td><td>colorstring</td><td>描述文本内容颜色</td></tr>
+<tr><td>font-size</td><td>0-999</td><td>描述文本内容字号</td></tr>
+<tr><td>filter</td><td>xray flipv fliph invert alpha(opacity=num)</td><td>描述滤镜效果</td></tr>
+<tr><td>rotation</td><td>(0-9999)%360</td><td>描述旋转度</td></tr>
+<tr><td>flip</td><td>x y</td><td>描述反转或颠倒图形</td></tr>
+<tr><td>……</td><td>……</td><td>……</td></tr>
+</table>
+
+<span>6:要重视通用属性</span>
+
+以上提及的VML通用属性以及范例，不难发现通用属性的重要性，通用属性也是VML元素属性中最重要的属性、最容易使用的属性。不过这里的“通用”你不要理解为“所有的VML元素都支持”，那是不正确的。像今后我们要学的VML标记line(线)，就不支持fillcolor、filled，因为它是“线短”只有边框、没有背景，所以不支持背景描述。“通用”你可以理解为常用的、绝大多数VML图形均可用的“通用属性”。

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>CTDBox.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript"
+			src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css" />
+	</head>
+	<body class="claro">
+		<div>
+			<label for="number">
+				Age:
+			</label>
+			<input id="number" />
+		</div>
+		<div>
+			<label for="currency">
+				Annual Salary:
+			</label>
+			<input id="currency" />
+		</div>
+		<div>
+			<label for="time">
+				Start Time:
+			</label>
+			<input id="time" />
+		</div>
+		<div>
+			<label for="date">
+				Start Date:
+			</label>
+			<input id="date" />
+		</div>
+		<script>
+        require(["dijit/form/NumberTextBox", "dijit/form/CurrencyTextBox", "dijit/form/TimeTextBox", "dijit/form/DateTextBox", "dojo/domReady!"], function(NumberTextBox, CurrencyTextBox, TimeTextBox, DateTextBox) {
+            var number = new NumberTextBox({
+                value: 54,
+                required: true
+            }, "number");
+            number.startup();
+ 
+            var currency = new CurrencyTextBox({
+                value:54775.53,
+                required:true,
+                constraints:{fractional:true},
+                currency:"USD",
+                invalidMessage:"Invalid amount. Cents are mandatory."
+            }, "currency");
+            currency.startup();
+ 
+            var time = new TimeTextBox({
+                constraints: {
+                    timePattern: "HH:mm:ss",
+                    clickableIncrement: "T00:15:00",
+                    visibleIncrement: "T00:15:00",
+                    visibleRange: "T01:00:00"
+                },
+                invalidMessage:"Invalid time."
+            },"time");
+            time.startup();
+ 
+            var date = new DateTextBox({
+                value: new Date(2011, 8, 15)
+            }, "date");
+            date.startup();
+        });
+    </script>
+	</body>
+</html>

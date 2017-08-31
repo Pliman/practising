@@ -1,0 +1,72 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>标记实战与line线</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:标记实战与line线 - 前言</span>
+
+从本章节开始，我将从最简单的VML标签说起，循序渐进……。你每学会用一个VML标记，你的VML技术就会有一个大的跨越。学标记有学标记的手段，我不会在促足长谈的去讲标记的语法概念、怎么绘制这绘制那。我只给你一些该标记抽象的范例、全面的给出该标记的固有属性、固有属性所有值、讲解属性和属性值有什么作用。也就算是给了你一把剑，具体你怎么去用剑那要看你的本事了。
+
+<span>2:实战line线标记、XYZ坐标与单位概念</span>
+
+line标记可以在网页中从1个XY交接点 到 另1个XY交接点之间，创建一条直线，我们就把line线作为VML标记入门的第一关，并详细讲述相关的坐标、单位基础知识（要求是要你了解坐标系、单位概念，并不要求你死记，而是头脑有清醒的认识，不至于对简单的3D坐标系、单位概念一头雾水）
+
+例如：在距离网页左边(left1)=233px处、距离网页上边(top1)=150px处（这就是第1个XY交接点），创建一条偏移left1 100pt、偏移top1 94.5pt的线
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:line style="Z-INDEX:5;LEFT:233px;POSITION:absolute;TOP:150px" from="0,0" to="100pt,94.5pt"/>
+</textarea>
+
+从源码里不难分析出，这条线被CSS（style="这里就是写CSS样式的地方"）定义为是Vector3D(X left,Y top,Z z-index)结构，其中left:233px决定了该线的绝对位置左、top:150px决定了该线的绝对位置上、z-index:5决定了该线的第三维高度，而to="100pt,94.5pt"则决定了偏移left1 100pt、偏移top1 94.5pt
+
+该说VML单位了，你也许会问233px其中的px、94.5pt其中的pt，是什么意思、代表了多长？其实233px就是233个屏幕像素，这个单位是最小、最精确的单位，我推荐你使用该单位。而94.5pt则相当与（94.5*1.25=118.125px），不难算出pt比px大了4分之1，也就是75pt=100px。CSS默认的单位是px（LEFT:233px;写成LEFT:233;不加px效果相同），而VML默认的单位也是px（to="100pt,94.5pt"写成to="100,94.5"就不同了，后者会使用px计算，自然比前者要短），在今后的开发当中推荐用后者，剩时剩力、单位精确
+
+CSS的z-index，定义图形3D高度的，则没有px、pt的概念，而只是纯数字的概念。z-index的默认值是0，即像HTML的平面网页。图形的z-index值越大，就会覆盖、遮掉z-index值比它小的图形，这就是3D高度。
+
+而CSS的POSITION:;，则是决定图形以怎样形式输出，我们使用了absolute（绝对定位），也就是说以Vector3D(XYZ)的形式输出该图形。如果POSITION的值为空或为static，那么图形将以传统的2D平面形式，顺序的按先后输出图形，当然left:233px;top:150px;z-index:5;这些设置就一点作用不起了。VML如果只能这样用，那就没有什么价值了。
+
+在例如：在网页left1=200px、top1=150px处，创建一条偏移left1 -100px、偏移top1 50的线
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:line style="Z-INDEX:5;LEFT:200;POSITION:absolute;TOP:150" to="-100,50"/>
+</textarea>
+
+你就发现，该线向左偏移了-100px（支持负数），向上偏移了50px。好了，自己动手修改left:200;、top:150;、to="-100,50"，实战加深对VML画线的理解
+
+不知你发现了没有，例1中line线有个from="0,0"属性，而例2中没有。其实from是line线的专有属性，作用是控制第一个交接点（例1中的left:233px;top:150px;）的X,Y偏移度，我们定义了是0,0，就是第一个交接点的XY均不偏移（这个标记在3D结构开发中其实没太大用处，只需少有认识即可，因为CSS的left:;top:;可以更准确的替代它），否则你可以自己动手试着改改例1中的from="0,0"为其他数值
+
+<span>3:给line线增加通用属性</span>
+
+你也许又会问，这条线能不能是绿色的、而且在粗一些？回答是当然可以，这就要用到我们之前提及的VML通用属性了，在这里重提是为了加深你对通用属性的理解，例子如下
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:line style="Z-INDEX:5;LEFT:200;POSITION:absolute;TOP:200" to="250,0" strokecolor="green" strokeweight="3px"/>
+</textarea>
+
+<span>4:初步认识VML图型效果处理类二级标记“子标记”</span>
+
+你又会问，边框可不可以是虚线？可不可以做成箭头？等等等等的图形效果处理问题，回答是确定的 - 用二级标记“子标记”可以。只是现在还不到讲解的时候，因为画圆、画弧、曲线、矩形、圆矩形等等你还没有掌握，而“子标记”就相当于一组较复杂的“通用属性”，可以处理任何VML图形（线、圆、矩形等）的边框、填充、立体等等。这将在你学会VML绘图标记以后，以后的章节在一一提及
+
+先给个“子标记”的演示，不要求你现在掌握，只要求你掌握本章节如何用line画线，然后一章接一章的学下去。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+
+<v:line style="Z-INDEX:6;LEFT:125;POSITION:absolute;TOP:275" to="150,0" strokecolor="green" strokeweight="10px"/>
+
+<!--下面的就是使用子标记stroke(边框处理标记)修饰后的线了-->
+<v:line style="Z-INDEX:5;LEFT:200;POSITION:absolute;TOP:200" to="0,150" strokecolor="red" strokeweight="10px">
+<v:Stroke dashstyle="shortdot" endarrow='classic'/>
+</v:line>
+</textarea>

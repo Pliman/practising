@@ -1,0 +1,51 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>DomQuery入门_CSS值元素选择符</title>
+        <!-- 引入必要的Ext库文件-->
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+		<div id="bar" class="foo"  style="color:red;">
+			I'm a div ==> my id: bar, my class: foo
+			这是div标签，它的id为bar，class是foo
+			<span class="bar"  style="color:pink;">这是span标签，它有样式bar</span>
+			<a href="http://www.extjs.com" target="_blank">An ExtJs link</a>
+		</div>
+		<div id="foo" class="bar"  style="color:fushia;">
+			这是div标签，它的id为foo，class是bar
+			<p>
+				这是段落p标签，外层div的id是foo
+			</p>
+			<span class="bar" style="color:brown;">这是span标签，它有样式bar </span>
+			<a href="#"  style="color:green;">内置链接</a>
+		</div>
+		<script>
+			// 获取所以红色的元素
+			console.log(Ext.query("*{color=red}")); // [div#bar.foo]
+
+			// 获取所有粉红颜色的并且是有红色子元素的元素
+			console.log(Ext.query("*{color=red} *{color=pink}")); // [span.bar]
+			// 获取所有不是红色文字的元素
+			console.log(Ext.query("*{color!=red}")); 
+
+			// [html, head, script firebug.js, link, body#ext-gen2.ext-gecko, script ext-base.js,
+			//  script ext-core.js, span.bar, a www.extjs.com, div#foo.bar, p, span.bar, a test.html#]
+
+			// 获取所有颜色属性是从“yel”开始的元素
+			console.log(Ext.query("*{color^=yel}")); // [a www.extjs.com]
+
+			// 获取所有颜色属性是以“ow”结束的元素
+			console.log(Ext.query("*{color$=ow}")); // [a www.extjs.com]
+
+			// 获取所有颜色属性包含“ow”字符的元素
+			console.log(Ext.query("*{color*=ow}")); // [a www.extjs.com, span.bar]	
+		</script>
+    </body>
+</html>

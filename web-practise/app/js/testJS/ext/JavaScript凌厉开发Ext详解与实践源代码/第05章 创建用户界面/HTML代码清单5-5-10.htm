@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>通过TreeLoader异步加载子节点</title>
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+            Ext.BLANK_IMAGE_URL = '/images/s.gif';
+            Ext.onReady(function(){
+                var loader = new Ext.tree.TreeLoader({
+                    url: 'returnJSON_withAttributes.asp'
+                });
+                
+                /**
+                 * beforeload事件，在为子节点获取JSON文本进行网路请求之前触发。
+                 * 根据当前节点id，动态拼出请求服务器的路径，然后根据服务端返回的JSON数据，加载下级的菜单。
+                 * @param {Object} treeLoader 本TreeLoader对象
+                 * @param {Object} node 已加载好的Ext.tree.TreeNode的对象
+                 */
+                loader.on("beforeload", function(treeLoader, node){
+                    //节点不是一个叶子节点才可以加载
+                    if (!node.isLeaf()) {
+                        treeLoader.baseParams['parentID'] = parseInt(node.id.match(/[1-9]\d+/ig), 10);
+                        treeLoader.baseParams['myProperty'] = node.attributes['myProperty'] ? node.attributes['myProperty'] : null;
+                    }
+                });
+                
+                /**
+                 * load事件，当节点加载成功时触发。这里可以加入一些固定节点。
+                 * 注：如果要在第一的位置加入节点，应该在onBeforeLoad事件中加入
+                 * @param {Object} 本TreeLoader对象
+                 * @param {Object} node 已加载好的{@link Ext.tree.TreeNode}的对象
+                 * @param {Object} response 服务器响应的数据对象
+                 */
+                loader.on("load", function(loader, node, response){
+                    //加入固定的节点，可以有下一级的节点，由getMenuNode方法返回所得
+                    if (!node.attributes.menuNodeID && node.hasMenuNode === true) {
+                        node.appendChild(node.getMenuNode());
+                    }
+                    function openEntity(node){
+                        //在这里根据节点的id打开记录...
+                    }
+                    
+                    //node的类型是一个MixedCollection对象
+                    node.eachChild(function(childNode){
+                        childNode.getMenuNode = node.getMenuNode;
+                        //双击打开节点，触发执行openEntity函数
+                        entityNode.on('dblclick', openEntity);
+                    }, node);
+                });
+                
+                var tree = new Ext.tree.TreePanel({
+                    el: 'tree-div',
+                    useArrows: true,
+                    autoScroll: true,
+                    animate: true,
+                    enableDD: true,
+                    containerScroll: true,
+                    loader: loader,
+                    root: new Ext.tree.AsyncTreeNode({
+                        text: '点击该节点进行数据异步加载'
+                    })
+                });
+                
+                tree.render();
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+        <div id="tree-div" style="overflow:auto; height:300px;width:250px;border:1px solid #c3daf9;">
+        </div>
+    </body>
+</html>

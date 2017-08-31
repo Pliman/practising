@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		function checkBoxChecked(){
+  			var checkBox1 = document.getElementById('checkBox1');
+  			checkBox1.checked = 'checked';
+  			
+  			var radioBox = document.getElementsByName('radiochecked');
+  			var radioLen = radioBox.length ;
+  			//alert(checkBoxLen) ;
+  			for(var i = 0; i < radioLen; i++){
+  				//alert(radioBox[i].checked) ;
+  			}
+  			
+  			var checkBox = document.all('checkBoxchecked') ;
+  			var checkLen = checkBox.length ;
+  			for(var i = 0; i < checkLen; i++){
+  				//alert(checkBox[i].checked) ;
+  			}
+  			if(checkBox.value){
+  				//alert(checkBox.value) ;
+  			}else{
+  				//alert('checkBox.value') ;
+  			}
+  			
+  			var checkBoxXx = document.all('checkBoxXx') ;
+  			if(checkBoxXx){
+  				alert('null true') ;
+  			}else{
+  				alert('null false') ;
+  			}
+  		}
+  	</script>
+    <title>checkBoxChecked</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+  		<table id="checkboxtable">
+			<tr>
+				<td>
+					<input type="checkbox" id="checkBox1" name="checkBoxchecked" value="1">
+					<input type="checkbox" id="checkBox2" name="checkBoxchecked" value="2">
+					<input type="checkbox" id="checkBox3" name="checkBoxchecked" value="3">
+				</td>
+				<td>
+					<input type="radio" id="radio1" name="radiochecked" value="1">
+					<input type="radio" id="radio2" name="radiochecked" value="2">
+					<input type="radio" id="radio3" name="radiochecked" value="3">
+				</td>
+			</tr>
+		</table>
+    	<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick='checkBoxChecked()' type="button" id="checkBoxChecked" name="checkBoxChecked"
+						value="checkBoxChecked"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+  </body>
+</html>

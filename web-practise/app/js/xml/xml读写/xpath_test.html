@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>xpath简单的测试页面</title>
+		<script type="text/javascript">
+			xmlParser = function(){
+				this.xmlName = null ;
+				this.xmlDoc = null ;
+				this.browser = null ;
+				this.init = function(xmlName){
+					this.xmlName = xmlName ;
+					try{ //Internet Explorer
+						this.xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+						this.browser = "IE" ;
+					}catch(e){
+						try{ //Firefox, Mozilla, Opera, etc.
+						  	this.xmlDoc=document.implementation.createDocument("","",null);
+						  	this.browser = "FF" ;
+						}catch(e){
+						    alert(e.message);
+						    return;
+						}
+					}
+					this.xmlDoc.async=false;
+					this.xmlDoc.load("books.xml");
+					//测试是否加载成功
+					//var book = this.xmlDoc.selectNodes("/bookstore/book") ;
+					//alert(book[0].childNodes[0].xml) ;
+					//alert(this.xmlDoc) ;
+				} ;
+				
+				this.pathExpression = function(xmlName){
+					this.init(xmlName) ;
+					//var book = this.xmlDoc.selectNodes("/bookstore/book") ;
+					//alert('book[0] xml: \n' + book[1].xml) ;
+					//var bookParent = book[0].selectNodes("//@category") ;
+					//alert('bookParent xml: \n' +  bookParent) ;
+					
+					var book1 = this.xmlDoc.selectNodes("/bookstore/book") ;
+					alert('book1 xml: \n' + book1[0].ancestor) ;
+				} ;
+				this.axis = function(xmlName){
+					this.init(xmlName) ;
+					//按节点名称获取节点
+					//alert(this.xmlDoc.getElementsByTagName("book")[0].xml) ;
+					
+					//查找第一个"book"节点 
+					//var book = this.xmlDoc.selectSingleNode("bookstore/book") ;
+					//alert(book.xml) ;
+					
+					//当前节点名称
+					//alert(this.xmlDoc.getElementsByTagName("book")[0].nodeName) ;
+					//var xmlChildNode = this.xmlDoc.documentElement.childNodes
+					//alert(xmlChildNode[0].nodeName) ; //当前节点名称
+					
+					//节点文字
+					//var xmlChildNode = this.xmlDoc.documentElement.childNodes
+					//alert(xmlChildNode[0].text) ; //当前节点名称
+					
+					//节点属性名为category的属性值
+					//var xmlChildNode = this.xmlDoc.documentElement.childNodes
+					//alert(xmlChildNode[0].getAttributeNode("category").nodeValue) ;
+					
+					//获取xmlChildNode节点的子节点数量
+					//alert(this.xmlDoc.documentElement.childNodes.length) ;
+					
+					//取出一个节点的属性集合
+					try{
+						var objnodes = this.xmlDoc.documentElement.SelectNodes("book") ; //.getAttributeNode("category").attributes ;
+						alert(objnodes) ;
+						/*for (Element element in objnodes){
+							alert(element.nodename) ; //属性名 
+							alert(element.nodevalue) ; //属性值
+						}*/
+					}catch(e){
+						try{
+							var xpe = new XPathEvaluator();
+							var nsResolver = xpe.createNSResolver( this.xmlDoc.ownerDocument == null ? this.xmlDoc.documentElement : this.xmlDoc.ownerDocument.documentElement);
+							var results = xpe.evaluate("book",this.xmlDoc,nsResolver,XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+							alert(results.singleNodeValue);
+							//alert(results.nodeName);
+						}catch(e){
+							alert(e.message);
+						    return;
+						}
+					}
+				} ;
+			} ;
+			
+			function parseXML(){
+				var xmlDoc='' ;
+				try{ //Internet Explorer
+					xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				}catch(e){
+				  try{ //Firefox, Mozilla, Opera, etc.
+				  	xmlDoc=document.implementation.createDocument("","",null);
+				  }catch(e){
+				    alert(e.message);
+				    return;
+				  }
+				}
+				xmlDoc.async=false;
+				xmlDoc.load("books.xml");
+				var root = xmlDoc.documentElement;
+				//alert(root.ownerDocument.xml) ; 
+				//alert((xmlDoc.selectNodes("/bookstore/book")[0]).ownerDocument.xml) ;
+				var book = xmlDoc.selectNodes("/bookstore/book") ;
+				alert(book[0].childNodes[0].xml) ;
+			}
+			
+			/*
+			 * 使用路径表达式
+			 */
+			function parserInit(){
+				//var xmlParser1 = new xmlParser() ;
+				//xmlParser1.init('books.xml') ;
+				new xmlParser().init('books.xml') ; //效果相同
+			}
+			
+		</script>
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="parseXML()" type="button" id="parseXML" name="parseXML"
+						value="parseXML"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+			<tr>
+				<td height="100px">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input onclick="new xmlParser().init('books.xml')" type="button" id="parserInit" name="parserInit"
+						value="parserInit"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input onclick="new xmlParser().pathExpression('books.xml')" type="button" id="pathExpression" name="pathExpression"
+						value="pathExpression"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input onclick="new xmlParser().axis('books.xml')" type="button" id="axis" name="axis"
+						value="axis"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

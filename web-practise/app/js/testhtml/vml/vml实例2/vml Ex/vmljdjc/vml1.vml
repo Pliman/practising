@@ -1,0 +1,7 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml">
+<v:rect id="vml01" style="width:20;height:20" fillcolor="red" strokeweight="1px"/>
+<v:oval id="vml02" style="width:20;height:20" fillcolor="blue"/>
+<v:curve id="vml03" from="0,0" control1="-2,-35" control2="50,-10" to="38,-50" filled="t" fillcolor="yellow"/>
+<v:line id="vml04" style="position:absolute;left:150;top:120;" from="0,0" to="50px,0" strokecolor="green"/>
+<v:image id="vml05" style="width:50;height:50" src="shili/fyw1.jpg"/>
+</xml>

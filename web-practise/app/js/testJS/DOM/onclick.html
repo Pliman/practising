@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+			function onclicktest(){
+				var _table = document.getElementById('sourceContainer');
+				var _row1st = _table.rows[0];
+				var _tds = _row1st.cells;
+				
+				//alert(_row1st.cells['2nd'].innerHTML);
+				//alert(_row1st.cells['2nd'].dom);
+				var alert123 = alertHello('123') ;
+				_row1st.cells['2nd'].onclick = alert123 ;
+			}
+			function alertHello(str){
+				return function(){
+					var xtx = 'ert' ;
+					alert(xtx + str);
+				}
+			}
+		</script>
+		<title>onclicktest</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table border="1px" id="sourceContainer" name="sourceContainer"
+			style="text-align: left">
+			<tr>
+				<td id="1st" name="1st">
+					1st
+				</td>
+				<td id="2nd" name="2nd">
+					2nd
+				</td>
+				<td id="3rd" name="3rd">
+					3rd
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="onclicktest()" type="button" id="onclicktest" name="onclicktest"
+						value="onclicktest"
+						style="background: #999999 url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

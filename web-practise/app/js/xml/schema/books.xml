@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<book isbn="0-764-58007-8">
+	<title>三国演义</title>
+	<author>罗贯中</author>
+	<price>80.00</price>
+	<resume>程序员到达最高境界的时候，想的就是“我就是程序，程序就是我”。</resume>
+	<recommendation>经典好书</recommendation>
+	<publish>
+		<publisher>文艺出版社</publisher>
+		<pubdate>1998.10</pubdate>
+	</publish>
+</book>

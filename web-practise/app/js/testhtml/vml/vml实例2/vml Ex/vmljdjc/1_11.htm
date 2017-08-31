@@ -1,0 +1,50 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>polyline多边型</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:polyline多边型 - 专用属性</span>
+
+<table width=100%><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><td>Dhtml访问</td><TD>用途</td></tr>
+<tr><td style="color:red">points</td><td>0,0</td><td>Vector2D</td><td>points.value</td><td>描述多边形的形状</td></tr>
+</table>
+
+<span>2:polyline多边型 - 实例讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:polyline style="Z-INDEX:1;LEFT:71;POSITION:absolute;TOP:225" points="0,0,30,-40" filled="t" fillcolor="white"/>
+<v:polyline style="Z-INDEX:1;LEFT:171;POSITION:absolute;TOP:225" points="0,0,30,-40,60,0" filled="t" fillcolor="white"/>
+<v:polyline style="Z-INDEX:1;LEFT:271;POSITION:absolute;TOP:225" points="0,0,30,-40,60,0,0,0" filled="t" fillcolor="white"/>
+<v:polyline style="Z-INDEX:1;LEFT:371;POSITION:absolute;TOP:225" points="0,0,30,40,60,0,0,0"  filled="f" strokecolor="red"/>
+</textarea>
+很明显，polyline多边型不像oval、rect那样以CSS的width、height定义多边型的大小，而是通过points的参数绘制一条条线段实现任何形状、为一个整体的多边型。也许你说line线标记也可以组成一个多边型，但它不是一个整体，而polyline则是。本例只是个最简单的三角型，学习polyline主要就是理解points参数的写法，下面由我来解释其作用
+
+LEFT:271;TOP:225 points="0,0,30,-40,60,0,0,0"，是如何描绘三角型的？
+
+第1步：首先用CSS的LEFT、TOP定义了该多边型位于XY网页交接点的绝对位置
+第2步：0,0,30,-40,60,0,0,0，其中0,0的第一个0表示偏移X交接点多少值、第二个表示偏移Y交接点多少值。由于我们既然用CSS定义了准确的该形状的绝对位置，所以我们就用0,0表示不偏移（也就是说该值无必要，但必须写0,0）
+第3步：0,0,30,-40,60,0,0,0，其中的30,-40的30表示第一条线向右伸展30px、-40表示第一条线向下伸展-40px，由于是负数，那么就等同于向上伸展40，所以我们看到的第一个多边型的值为0,0,30,-40，只描述了一条线。
+第4步：0,0,30,-40,60,0,0,0，其中的60,0的60表示新增了第二条线它向右伸展了60px、0表示第二条线向下伸展0px，由于是0，那么就等同于原交接点的Y高度，所以我们看到的第二个多边型的值为0,0,30,-40,60,0，只描述了二条线。
+第5步：0,0,30,-40,60,0,0,0，最后的0,0的第一个0表示新增了第三条线它向右伸展了0px、第二个0表示第三条线向下伸展0px，由于都是0，那么就等同于原交接点的XY，所以我们看到的第三个多边型的值为0,0,30,-40,60,0,0,0，描述了三条线、最后的0,0值使它回归原路径，就构成了三角型
+
+而最后的那个到三角型，很简单的原因是把-40（向上延伸）写成了40，变成了向下延伸
+
+可以想象，0,0,30,-40,60,0,0,0的模式其实就是x1,y1,x1+n,y1+n,x2+n,y2+n,x3+n,y3+n，在多了就创建更多条线，绘制更复杂的多边型。。。另外第三条线的filled="f"采用了通用属性，表示该多边形不使用颜色填充
+
+例如:
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:polyline style="Z-INDEX:3081;LEFT:181px;POSITION:absolute;TOP:151px" points="0,0,51.75pt,0,9.75pt,38.25pt,28.5pt,-27pt,45pt,41.25pt,0,0" filled="t" strokecolor="blue"/>
+<v:polyline style="Z-INDEX:3087;LEFT:257px;POSITION:absolute;TOP:155px" points="0,0,18pt,-12.75pt,36.75pt,-12.75pt,48.75pt,0,48.75pt,13.5pt,27pt,30.75pt,6pt,25.5pt,0,0" strokeweight=".75pt" filled="false"/>
+<v:polyline style="Z-INDEX:3095;LEFT:350px;POSITION:absolute;TOP:169px" points="0,0,23.25pt,-4.5pt,58.5pt,11.25pt,20.25pt,30.75pt,78pt,44.25pt,87pt,22.5pt,87.75pt,-6pt,69pt,-18.75pt,23.25pt,-28.5pt,105pt,-32.25pt,115.5pt,-12pt,96.75pt,35.25pt,94.5pt,48pt,93pt,55.5pt,56.25pt,69.75pt,26.25pt,61.5pt,16.5pt,49.5pt,9.75pt,43.5pt,0,0" filled="t" strokeweight="2px"/>
+<v:polyline style="Z-INDEX:3118;LEFT:524px;POSITION:absolute;TOP:185px" points="0,0,43.5pt,-24.75pt,42.75pt,1.5pt,0,0" filled="t" fillcolor="red"/>
+</textarea>

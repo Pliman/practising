@@ -1,0 +1,13 @@
+<!--HTML代码清单10-2-2-->
+<script type="text/javascript">
+    var changeSkin = function(value){
+        Ext.util.CSS.swapStyleSheet('theme', '/Ext2.1_Work/ext-2.1_0622/resources/css/' + (value != 'default' ? 'xtheme-' : '') + value + '.css');
+    };
+</script>
+<body>
+    <span>Theme:</span>
+    <select id="exttheme" onchange="changeSkin(this.value)">
+        <option value="default" SELECTED>Ext Blue</option>
+        <option value="gray">Gray Theme</option>
+    </select>
+</body>

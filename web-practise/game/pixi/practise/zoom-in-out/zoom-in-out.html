@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>path-mode</title>
+</head>
+<body>
+<script src="../lib/pixi.js"></script>
+<script>
+    var baseWidth = 1920;
+    var baseHeight = 1080;
+
+    var renderer = PIXI.autoDetectRenderer(baseWidth, baseHeight, {backgroundColor : 0x1099bb});
+    document.body.appendChild(renderer.view);
+    adjustScreen();
+
+    // create the root of the scene graph
+    var stage = new PIXI.Container();
+
+    // create a texture from an image path
+    var texture = PIXI.Texture.fromImage('bunny.png');
+
+    // create a new Sprite using the texture
+    var bunny = new PIXI.Sprite(texture);
+
+    // center the sprite's anchor point
+    bunny.anchor.x = 0.5;
+    bunny.anchor.y = 0.5;
+
+    // move the sprite to the center of the screen
+    bunny.position.x = 200;
+    bunny.position.y = 150;
+
+
+    stage.addChild(bunny);
+    // start animating
+    animate();
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // just for fun, let's rotate mr rabbit a little
+        bunny.rotation += 0.1;
+
+        // render the container
+        renderer.render(stage);
+    }
+
+    function getViewPortSize() {
+        var o = {"w": NaN, "h": NaN};
+        o.w = document.documentElement.clientWidth || document.body.clientWidth;
+        o.h = document.documentElement.clientHeight || document.body.clientHeight;
+        return o;
+    }
+
+    function adjustScreen() {
+        var size = getViewPortSize();
+        var scale = Math.min(size.w / baseWidth, size.h / baseHeight);
+
+        renderer.view.style.width = baseWidth * scale + 'px';
+        renderer.view.style.height = baseHeight * scale + 'px';
+    }
+
+    window.onresize = adjustScreen;
+</script>
+</body>
+</html>

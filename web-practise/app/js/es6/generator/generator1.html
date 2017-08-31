@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+  function *idMaker() {
+    var x = 1 + (yield "foo");
+    console.log(x);
+  }
+
+  var gen = idMaker();
+
+  console.log(gen.next().value);
+  console.log(gen.next().value);
+  console.log(gen.next().value);
+</script>
+</body>
+</html>

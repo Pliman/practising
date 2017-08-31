@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>选择项目</title>
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script> 
+			/*确定*/ 
+			function ev_sure(){
+			    var obj=window.dialogArguments;
+			    var pname = obj.document.getElementById('pname') ;
+			    var pcode = obj.document.getElementById('pcode') ;
+			    pname.value = '123' ;
+			    pcode.value = '456' ;
+			    window.close() 
+			}
+	    </script>
+	</head>
+
+	<body>
+		<table border="1" align="center">
+			<tr>
+				<td>
+					<div id="grid">项目：123 项目编码：456</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" id="sure" value="确定" onclick="ev_sure()" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

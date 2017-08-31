@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>deepCopy</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript">
+			var o1 = {
+				'a1' : {
+					'a11' : 'a11'
+				},
+				'a2' : 'a1',
+				'a3' : [{'a33':{'a333':'a333'},'a331':'a331'},{'a34':{'a341':'a341'},'a341':'a341'}],
+				'a4' : new String('a4')
+			}
+			
+			//正确的函数
+			//方法对于String对象会产生错误的结果。看下面代码：
+			//var a=new String('xletian');
+			//var b={};
+			//alert(a instanceof Object);//rst:true
+			//for(var i in a)
+			//b=a;
+			//alert(a);//rst:xletian
+			//alert(b);//rst:[object Object]
+			//此函数处理了这种情况
+			    function clone(jsonObj) {  
+			        var buf;
+			        if(jsonObj.constructor === String) {  //加上，a4就是正确的字符串，去掉，a4就是个空对象
+			        	return jsonObj;
+			        }else if (jsonObj instanceof Array) {  
+			            buf = [];  
+			            var i = jsonObj.length;  
+			            while (i--) {  
+			                buf[i] = clone(jsonObj[i]);  
+			            }  
+			            return buf;  
+			        }else if (jsonObj instanceof Object){  
+			            buf = {};  
+			            for (var k in jsonObj) {  
+			                buf[k] = clone(jsonObj[k]);  
+			            }  
+			            return buf;  
+			        }else{  
+			            return jsonObj;  
+			        }  
+			    }  
+			
+			var o2 = clone(o1);
+			alert(o2);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

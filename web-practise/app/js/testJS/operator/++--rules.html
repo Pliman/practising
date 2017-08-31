@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>++--rules.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script type="text/javascript">
+	    	function testRules(){
+	    		var s1 = '2';
+	    		var s2 = 'z';
+	    		var b = false;
+	    		var f = 1.1;
+	    		var o = {
+	    			valueOf: function(){
+	    				return -1;
+	    			}
+	    		};
+	    		
+	    		alert(s1++);
+	    		alert(s2++);//由于先使用值，所以不能这么测试
+	    		alert(b++);//由于先使用值，所以不能这么测试
+	    		alert(f--);//由于先使用值，所以不能这么测试
+	    		alert(o--);//由于先使用值，所以不能这么测试
+	    	}
+	    </script>
+	</head>
+	<body>
+		<input type="button" value="测试操作符规则" onclick="testRules()"
+			style="width: 300px; height: 100px" />
+	</body>
+</html>

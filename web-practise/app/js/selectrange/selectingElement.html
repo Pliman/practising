@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> new document </title>
+	<script type="text/javascript">
+		function ShowDirection() {
+			var tbl = [];
+			var direct = (document.selection && document.selection.createRange)
+					? document.selection.createRange().parentElement() // IE
+					: window.getSelection().focusNode.parentNode; //FF
+			do {
+//				tbl.push(direct.tagName);
+				tbl.push(direct.id);
+			}
+			while ((direct = direct.parentNode) && (direct !== document.documentElement));
+			alert(tbl.reverse().join('---->'));
+		}
+	</script>
+</head>
+
+<body id="body">
+<div id="123">123
+	<p id="456">456
+        <span id="789">789
+                <b id="bbb">bbbbb </b>
+        </span>
+	</p>
+	<input type="button" value="ShowDirection" onclick="ShowDirection()"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipo:网上书城 xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+	xmlns:ipo="http://www.example.com/IPO"
+	xsi:schemaLocation="http://www.example.com/HZH bookstore.xsd">
+	　　
+	<图书集合>
+		　　
+		<图书类别 uid="TECH">
+			　　
+			<名称>科技类</名称>
+			　　
+			<描述>关于科学技术方面的书籍</描述>
+			　　
+			<书>
+				　　
+				<ISBN>7-115-090029-7/TP.2000</ISBN>
+				　　
+				<名称>"Visual Basic 6 XML专业书籍</名称>
+				　　
+				<作者>James Britt</作者>
+				　　
+				<作者>Teun Duynstee</作者>
+				　　
+				<页数>565</页数>
+				　　
+			</书>
+			　　
+			<书>
+				　　
+				<ISBN>7-111-07889-6</ISBN>
+				　　
+				<名称>Building the Data Warehouse</名称>
+				　　
+				<作者>W.H.Inmon</作者>
+				　　
+				<页数>227</页数>
+				　　
+			</书>
+			　　
+		</图书类别>
+		　　
+		<图书类别 uid="ESSAY">
+			　　
+			<名称>散文类</名称>
+			　　
+			<描述>关于人文精神思想类方面的书籍</描述>
+			　　
+			<书>
+				　　
+				<ISBN>7-80127-424-5/G.192</ISBN>
+				　　
+				<名称>火与冰</名称>
+				　　
+				<作者>余杰</作者>
+				　　
+				<页数>382</页数>
+				　　
+			</书>
+			　　
+		</图书类别>
+		　　
+	</图书集合>
+	　　
+</ipo:网上书城>

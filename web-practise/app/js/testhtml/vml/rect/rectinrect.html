@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<title>rectinrect</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<?import namespace="v" implementation="#default#VML" ?>
+		<style>
+			a {
+				position:absolute;
+				top:0px;
+				left:0px;
+				width:80px;
+				height:60px;
+				z-index:1000;
+				background-color : red;
+				display : block;
+			}
+		</style>
+	</head>
+	<body>
+		<v:rect style="position:absolute;top:0px;left:0px;width:800px;height:600px;z-index:500"
+		 filled="t" fillcolor="yellow">
+		 	<v:rect style="position:absolute;top:0px;left:0px;width:400px;height:300px;z-index:1000"
+			 filled="t" fillcolor="blue">
+			</v:rect><!-- 嵌套不能显示子图形 -->
+			<a>aaaas</a><!-- 但可以嵌套显示html标签 -->
+		</v:rect>
+	</body>
+</html>

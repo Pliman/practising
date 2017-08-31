@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+			function disableformEle(){
+				var text1 = document.getElementById('idtext1');
+				text1.disabled = true ;
+				var select1 = document.getElementById('idselect1');
+				select1.disabled = true ;
+			}
+		</script>
+		<title>disableformEle</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<form id="idform1" name="form1" action="">
+			<input type="text" name="text1" id="idtext1" value="text1" />
+			<select id="idselect1" name="select1">
+				<option value="1" >1</option>
+				<option value="2" >2</option>
+				<option value="3" >3</option>
+				<option value="4" >4</option>
+			</select>
+		</form>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="disableformEle()" type="button" id="disableformEle"
+						name="disableformEle" value="disableformEle" style="background:white url(../../img/submit.gif) no-repeat center;"/>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<title>无标题文档</title>
+		<script language="JavaScript">
+			function checkboxselect(itemname) {
+			  for(var i=0;i<itemname.length;i++) {
+			   if(itemname[i].checked==true){
+			    alert(itemname[i].checked+" "+itemname[i].value);
+			   }
+			  }
+			}
+		</script>
+	</head>
+
+	<body>
+		<form name="form1" method="post"
+			onsubmit="checkboxselect(document.form1.checkbox)">
+			<p>
+				<input type="checkbox" name="checkbox2" value="checkbox">
+				全选
+			</p>
+			<p>
+				<input type="checkbox" name="checkbox" value="1">
+				1
+				<br>
+				<input name="checkbox" type="checkbox" id="checkbox" value="2">
+				2
+				<br>
+				<input name="checkbox" type="checkbox" id="checkbox" value="3">
+				3
+				<br>
+				<input name="checkbox" type="checkbox" id="checkbox" value="4">
+				4
+				<br>
+				<input name="checkbox" type="checkbox" id="checkbox" value="5">
+				5
+				<br>
+				<input name="checkbox" type="checkbox" id="checkbox" value="6">
+				6
+			</p>
+			<p>
+				<input type="submit" name="Submit" value="提交">
+			</p>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,8 @@
+;;; ERROR: 1
+;;; FLAGS: --spec
+(invoke "foo")
+(;; STDERR ;;;
+out/test/parse/assert/bad-invoke-no-module.txt:3:2: unknown module
+(invoke "foo")
+ ^^^^^^
+;;; STDERR ;;)

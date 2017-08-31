@@ -1,0 +1,10 @@
+;;; ERROR: 1
+(module (func 
+          i32.const 0
+          i32.const 0
+          i32.store8 offset=-1))
+(;; STDERR ;;;
+out/test/parse/expr/bad-store-offset-negative.txt:5:22: unexpected token "offset=-1"
+          i32.store8 offset=-1))
+                     ^^^^^^^^^
+;;; STDERR ;;)

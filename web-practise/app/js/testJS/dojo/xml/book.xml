@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book ISBN="12343534" name="silence">
+	<author>
+		<name>adam</name>
+		<desc>adam is a musician</desc>
+	</author>
+	<price>
+		$20
+	</price>
+</book>

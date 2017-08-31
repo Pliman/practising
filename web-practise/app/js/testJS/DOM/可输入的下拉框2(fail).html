@@ -1,0 +1,48 @@
+<html>
+<head>
+<style>
+<!--
+.cls1 { position:absolute; left:250px; top:89px; width:216px; height:72px; z-index:1; }
+.cls2 { position:absolute; left:250px; top:89px; width:95px; height:18px; z-index:2 }
+input { font-size: 12px; padding-top: 2px; padding-left: 2px;width:127;}
+//-->
+</style>
+</head>
+<script>
+<!--
+function addOption(pos){
+ if(event.keyCode==13){
+  var select_obj = document.getElementById("myselect");
+  var text_value   = document.getElementById("test").value;
+
+  if (select_obj.length){
+   for (var i=0;i<select_obj.length;i++){
+    // 如果已经存在，不添加，直接退出
+    if (select_obj.options[i].text==text_value)
+     alert("选项已存在，请重新输入");
+   }
+  }
+  var the_option= new Option(text_value,text_value);
+  select_obj.add(the_option);
+  select_obj.selectedIndex = select_obj.options.length-1 ;
+ }  
+}
+//-->
+</script>
+<div class="cls1" style="clip: rect(3 280 21 110)"> 
+  <select name="myselect" style="width:127" onchange="document.getElementById('test').value=this.value">
+<option>a</option>  
+<option>b</option>  
+<option>c</option>  
+<option>d</option>  
+<option>e</option>  
+<option>f</option>  
+
+</select>
+</div>
+<div class="cls2">
+<input type="text" name="test" onkeydown="addOption()" size="20" style="width: 127; height: 23">
+</div>
+
+</body>
+</html>

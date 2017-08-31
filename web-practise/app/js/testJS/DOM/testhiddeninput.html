@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script>
+  	<!--
+  		function get1(){
+  			var len = document.getElementById("hiddeninputContainer").elements.length;
+  			var len2 = document.all("hiddeninputContainer").elements.length;
+  			var tagName = document.all("hiddeninputContainer").tagName;
+  			var hidden1value = document.getElementById("hiddeninputContainer").hidden1.value;
+  			var hidden1value2 = document.getElementById("hidden1").value;
+  			
+  			document.getElementById("hiddeninputContainer").submit();
+  			var TOVIEWLAST = "";
+  		}
+  	-->
+  	</script>
+    <title>testhiddeninput.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form id="hiddeninputContainer">
+    	<input type="hidden" id="hidden1" name="hidden1" value="hidden1value"/>
+    	<input type="hidden" id="hidden2" name="hidden2" value="hidden2value"/>
+    	<input type="hidden" id="hidden3" name="hidden3" value="hidden3value"/>
+    	<input type="button" value="获得1" onclick="get1()">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>multiinherit.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript" src="../dojo/dojo.js"></script>
+		<script type="text/javascript">
+			dojo.declare("Customer",null,{
+			    say:function(){
+			        alert("Hello Customer");
+			    },
+			    getDiscount:function(){
+			        alert("Discount in Customer");
+			    }
+			});
+			
+			dojo.declare("MixinClass",null,{
+			    say:function(){
+			        alert("Hello mixin");
+			    },
+			    foo:function(){
+			        alert("foo in MixinClass");
+			    }
+			});
+			dojo.declare("VIP",[Customer,MixinClass],{
+			});
+			var vip = new VIP();
+			vip.getDiscount();
+			vip.foo();
+			vip.say();//输出"Hello MixinClass"
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

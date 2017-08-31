@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>EditableListBox</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<input type="text" name="pagetype"
+						style="position:absolute;width:130px;height:21px" />
+					<select name="select"
+						style="position: absolute; width: 130px; clip: rect(0, auto, 22, 112)"
+						id="select"
+						onchange="pagetype.value=select.value;pagetype.select()">
+						<option value="">
+							&nbsp;
+						</option>
+						<option value="form">
+							form
+						</option>
+						<option value="list">
+							list
+						</option>
+						<option value="view">
+							view
+						</option>
+						<option value="REF_LINK">
+							REF_LINK
+						</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE note[
+	<!ELEMENT note (to,from,heading,body)>
+	<!ELEMENT to (#PCDATA)>
+		<!ATTLIST to name CDATA #IMPLIED>
+		<!ATTLIST to age CDATA #FIXED "18">
+		<!ENTITY writer "a test writer">
+		<!ENTITY copyright "Copyright W3School.com.cn">
+		<!ENTITY signature "      by legend ge">
+	<!ELEMENT from (#PCDATA)>
+		<!ATTLIST from lastname CDATA #REQUIRED>
+	<!ELEMENT heading (#PCDATA)>
+		<!ATTLIST heading kick CDATA #FIXED "value">
+	<!ELEMENT body (#PCDATA)>
+		<!ATTLIST body type (check|cash) "cash">
+]>
+<note>
+	<to name="">George</to>
+	<author>&writer;&copyright;</author>
+	<sign>&signature;</sign>
+	<from lastname11="">John</from>
+	<heading kick11="fixed??">Reminder</heading>
+	<body type="check">Don't forget the meeting!</body>
+</note>

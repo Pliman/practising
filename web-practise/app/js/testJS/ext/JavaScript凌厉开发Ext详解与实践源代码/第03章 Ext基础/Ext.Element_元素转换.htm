@@ -1,0 +1,30 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ext.Element:元素转换</title>
+        <!-- 引入必要的Ext库文件-->
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+		<script>
+			//新建好的div传入Ext.Element的构造函数，返回标准EXT元素
+			var ml = new Ext.Element(document.createElement('div'));
+			document.body.appendChild(ml.dom); //标准的DOM方法添加元素到页面
+			ml.position('absolute');
+			ml.setLeftTop(-1000, -1000);
+			ml.hide();
+			
+			var ml2 = new Ext.Element(document.createElement('div'));
+			
+			Ext.getBody().appendChild(ml2.dom); 
+			ml2.update('Ext.Element:元素转换 成功！');
+		</script>
+    </body>
+</html>
+

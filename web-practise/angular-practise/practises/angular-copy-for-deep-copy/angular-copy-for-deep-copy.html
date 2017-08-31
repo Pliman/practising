@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+</head>
+<body ng-app="app" ng-controller="AppCtrl as app">
+
+<form>
+	<input type="text" ng-model="app.contactCopy.firstName" />
+	<button ng-click="app.saveContact()">Save</button>
+</form>
+
+<div class="div" style="margin-top: 40px;" ></div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>First</td>
+			<td>Last</td>
+			<td>Phone</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="contact in app.contacts" ng-click="app.selectContact(contact)">
+			<td>{{contact.firstName}}</td>
+			<td>{{contact.lastName}}</td>
+			<td>{{contact.phone}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript" src="../../lib/tween-max/TweenMax.js"></script>
+<script type="text/javascript" src="../../lib/angular/angular1.2.0.js"></script>
+<script type="text/javascript"
+        src="../../lib/angular/angular-animate.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

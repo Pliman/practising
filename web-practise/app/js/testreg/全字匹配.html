@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>全字匹配.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script>
+	//var reg = /[^+\-*/()]+/gi ;
+	
+	var str = 'das,/*F1dsf;/,dfsad,Fdsf,';
+	var subStr = 'fdsf';
+	subStr = '\\b' + subStr + '\\b';
+	var reg = new RegExp(subStr,'gi');
+	
+	var result = str.match(reg);
+	
+	//alert(result.length);
+	//alert(reg.test(str));
+	
+	
+	str = 'das,/*fdsf123;/,dfsad,Fdsf,';
+	subStr = 'fdsf';
+	var ignoreCase = true;
+	
+	var regStr = '\\b' + subStr + '\\b';
+		
+	var reg = null;
+	
+	if(ignoreCase){
+		reg = new RegExp(regStr,'gi');
+	}else{
+		reg = new RegExp(regStr);
+	}
+	
+	//result = str.match(reg);
+	//alert(result.length);
+	alert(reg.test(str));
+</script>

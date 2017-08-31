@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<script type="text/javascript">
+<!--
+	function get1(){
+		//alert(1) ;
+		document.select.action="1.html"; 
+        document.select.submit();
+        return true;
+	}
+	
+	function submitdevice() { 
+        document.select.action="1.html"; 
+        document.select.submit();
+        return true;
+    }
+       
+       function savedevice() { 
+           document.select.action="saveform.jsp"; 
+           document.select.submit();
+           return true;
+       } 
+//-->
+</script>
+	</head>
+
+	<div align="center">
+		<form name="select" id="select" method="post" action="">
+			<table border="1" width="60%" id="table1" cellspacing="0"
+				cellpadding="0">
+				<tr>
+					<td>
+						<input type="checkbox" name="selectall" onclick="selectit()" />
+						全选
+						<input type="checkbox" name="Inverse" onclick="selectit()" />
+						反选
+						<input type="submit" name="submitdevice1" value="提交"
+							onclick="javascript:submitdevice()" />
+						<input type="submit" name="savedevice" value="保存设备组"
+							onclick="savedevice()" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</html>

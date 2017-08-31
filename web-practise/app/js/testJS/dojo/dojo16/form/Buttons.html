@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello Dijit!</title>
+		<!-- load Dojo -->
+		<link rel="stylesheet"
+			href="../dijit/themes/claro/claro.css">
+		<script
+			src="../dojo/dojo.js"></script>
+	</head>
+	<!-- set the claro class on our body element -->
+	<body class="claro">
+		<button id="btn"></button>
+		<script>
+        dojo.require("dijit.form.Button");
+        dojo.ready(function(){
+            var button = new dijit.form.Button({
+                label: "Click Me!",
+                onClick: function(){ console.log("First button was clicked!"); }
+            }, "btn");
+            button.startup();
+        });
+    </script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+  		function arrayindex(){
+  			var array2 = new Array("1","2","3");
+  			//var j = array2.indexOf('3') ; ;
+  			var i = indexOfArr(array2, '2') ;
+  			alert(i);
+  		}
+  		
+  		/*
+ 		* 组装grid2的sql语句
+ 		*/
+		function indexOfArr(arr, str){
+			var index = 0 ;
+			var arrLen = arr.length ;
+			for(var i = 0; i < arrLen; i++){
+				if(arr[i] == str){
+					index = i ;
+					return index ;
+				}
+			}
+			return false ;
+		}
+  	</script>
+		<title>arrayindex</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<input onclick="arrayindex()" type="button" id="idarrayindex"
+			name="arrayindex" value="arrayindex"
+			style="background: white url(../../img/submit.gif) no-repeat center;" />
+	</body>
+</html>

@@ -1,0 +1,26 @@
+ <script>   
+  function   pp(){   
+  ye.options[2]=new   Option(ok=(ye.options[2])?ye.options[2].innerText+String.fromCharCode(event.keyCode):String.fromCharCode(event.keyCode),"client")   
+  ye.selectedIndex=2;   
+  }   
+    
+  function   edit(){   
+  if(ye.options[2]){   
+  if(event.keyCode==8){   
+  var   str=ye.options[2].innerText;   
+  var   len=str.length;   
+  ye.options[2].innerText=str.substring(0,len-1);   
+  if(ye.options[2].innerText=="")ye.remove(2);   
+  }   
+  if(event.keyCode==13)return   false;   
+  if(event.keyCode==32){   
+  ye.options[2].innerText+="   ";   
+    
+  }   
+  }   
+  }   
+  </script>   
+  <select   id=ye   onkeypress=pp()   onkeyup="edit()">   
+  <option>测试程序   
+  <option>javascript   
+  </select>

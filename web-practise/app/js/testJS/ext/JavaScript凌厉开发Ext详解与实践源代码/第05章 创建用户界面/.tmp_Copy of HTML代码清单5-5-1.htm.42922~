@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>静态树最简单的树</title>
+        <script src="../extjs/ext-base.js">
+        </script>
+        <script src="../extjs/ext-all.js">
+        </script>
+        <script>
+            Ext.BLANK_IMAGE_URL = '/images/s.gif';
+            Ext.onReady(function(){
+                // shorthand									
+                var rootNode = new Ext.tree.TreeNode({
+                    text: '根节点',
+                });
+                rootNode.appendChild(new Ext.tree.TreeNode({
+                    iconCls: 'oa-tree-common-World',
+                    listeners: {
+                        'click': function(){
+                            alert('此处理函数有' + arguments.length + '参数');
+                        }
+                    },
+                    text: '打开外网博客'
+                }));
+                
+                rootNode.appendChild(new Ext.tree.TreeNode({
+                    iconCls: 'oa-tree-common-World',
+                    listeners: {
+                        'click': function(){
+                            alert('打开留言板管理');
+                        }
+                    },
+                    text: '打开留言板管理'
+                }));
+                var tree = new Ext.tree.TreePanel({
+                    el: 'tree-div',
+                    useArrows: true,
+                    autoScroll: true,
+                    animate: true,
+                    enableDD: true,
+                    containerScroll: true,
+                    loader: new Ext.tree.TreeLoader(),
+                    root: rootNode
+                });
+                
+                // render the tree
+                tree.render();
+                tree.getRootNode().expand();
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+        <div id="tree-div" style="overflow:auto; height:300px;width:250px;border:1px solid #c3daf9;">
+        </div>
+    </body>
+</html>

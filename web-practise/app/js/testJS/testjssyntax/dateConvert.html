@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">	
+  		function testDateConvert(){
+  			var time = Date.parse('Mon Sep 14 00:00:00 UTC+0800 2009') ;
+  			//var time2 = Date.parseDate('Mon Sep 14 00:00:00 UTC+0800 2009', 'Y-m-d') ; --错误，无此方法parseDate()
+  			var date = new Date(time) ;
+  			alert(date.getDate()) ;
+  		}
+  		function DateConvert(){
+  			//获取第一个日期
+  			var str1 = '2010-03-08 08:30:00' ;
+  			//获取第二个日期
+  			var str2 = '2010-03-08 17:30:00' ;
+  			
+  			/*str = '2007-2-28 10:18:30' ;
+  			var strArray=str.split("");   
+			var strDate=strArray[0].split("-");   
+			var strTime=strArray[1].split(":");   
+			var a=new Date(strDate[0],(strDate[1]-parseInt(1)),strDate[2],strTime[0],strTime[1],strTime[2])*/
+  			
+  			var date1 = new Date(Date.parse(str1.replace(/-/g,"/"))) ;
+  			var date2 = new Date(Date.parse(str2.replace(/-/g,"/"))) ;
+  			
+  			var days = (date2-date1)/1000/60/60/24 ;
+  			alert(pointAndOne(days)) ;
+  			return pointAndOne(days) ;
+  		}
+  		
+  		/**
+		 * 四舍五入，保留一位小数
+		 */
+		function pointAndOne(num) {
+			var returnNum = 10 * num;
+			returnNum = Math.round(returnNum);
+			returnNum = returnNum / 10;
+			return returnNum;
+		}
+  	</script>
+		<title>dateConvert</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="testDateConvert()" type="button" id="testDateConvert" name="testDateConvert"
+						value="testDateConvert"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="DateConvert()" type="button" id="DateConvert" name="DateConvert"
+						value="DateConvert"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,4 @@
+(module (func
+  block $foo
+    br $foo
+  end))

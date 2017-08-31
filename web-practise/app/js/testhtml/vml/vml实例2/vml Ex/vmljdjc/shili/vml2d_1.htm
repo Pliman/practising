@@ -1,0 +1,129 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML2D动画特技1</TITLE>
+<META name='Gemeratpr' content='flashvml3.0'>
+<META name='KeyWords' content='VML2D动画特技1,flashvml,vml,vml画板,vml动画,vml图像画板,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script>
+function window.onerror(){return true;}  //防止您的程序出现错误时弹出提示
+</script>
+<script>
+var exptime=0;endtime="/40";zhenlens=0;zhenlens2=0;
+function statusreplace(){window.status="有本事坚持看屏幕40秒，The FlashVml Play Time\'s "+exptime+endtime+" Seconds,An animation:"+zhenlens+",Milli-an animation:"+zhenlens2}
+function statuschange(){
+if(top.location==self.location)setInterval('exptime++;statusreplace()',1000)
+}
+</script>
+<script id="myscript" language="javascript">
+var pex=0,pexbu=20,oldx=0,oldy="-450pt"
+var time1=null,time1ts=50
+function fun1(){
+if(pex<700)pex+=pexbu;else {clearInterval(time1);time1=setInterval("fun2()",time1ts)}
+vml1.to=oldx+pex+"pt,"+oldy;vml2.to=oldx-pex+"pt,"+oldy
+}
+function fun2(){
+if(pex>0)pex-=pexbu;else {clearInterval(time1);time1=setInterval("fun1()",time1ts)}
+vml1.to=oldx+pex+"pt,"+oldy;vml2.to=oldx-pex+"pt,"+oldy
+}
+function shan(){
+for(i=0;i<6;i++){
+vml3[i].to=Math.round(Math.random()*300)-150+"pt,"+Math.round(Math.random()*500)+"pt";
+vml3[i].style.display=''
+}
+document.bgColor="#68ec4d"
+setTimeout("document.bgColor='black';for(i=0;i<6;i++)vml3[i].style.display='none';",30)
+}
+
+</script>
+</HEAD>
+<BODY bgcolor=black scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+var dzobj2=null,tuoldx=0,tuoldy=0,dzbuzhou=1
+function dizhen(dzobj,zhenfu){  //流线动画使用地震效果必要函数
+if(dzobj2!=dzobj){
+if(dzobj2!=null){if(dzobj2==window)dzobj2.moveTo(tuoldx,tuoldy);else {dzobj2.style.left=tuoldx;dzobj2.style.top=tuoldy;}}
+dzobj2=dzobj
+if(dzobj==window){tuoldx=window.screenLeft;tuoldy=window.screenTop;}else{tuoldx=parseInt(dzobj.style.left);tuoldy=parseInt(dzobj.style.top);}
+}
+zhenfu2=Math.round(Math.random()*zhenfu)
+if(dzobj!=window){
+Math.random()>0.5?zhengui2="+":zhengui2="-";
+if(dzbuzhou==1){eval("dzobj.style.left=tuoldx"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==2){eval("dzobj.style.top=tuoldy"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==3){dzobj.style.left=tuoldx}
+else if(dzbuzhou==4){dzobj.style.top=tuoldy}
+}else{
+Math.random()>0.5?windowBy=zhenfu2:windowBy=-zhenfu2;
+if(dzbuzhou==1){eval("window.moveBy("+windowBy+",0)")}
+else if(dzbuzhou==2){eval("window.moveBy(0,"+windowBy+")")}
+else if(dzbuzhou==3){window.moveTo(tuoldx+","+window.screenTop)}
+else if(dzbuzhou==4){window.moveTo(tuoldx+","+tuoldy)}
+}
+dzbuzhou++;if(dzbuzhou==5)dzbuzhou=1
+}
+ //使用动态裁剪效果必要函数
+var objwid=0,objhei=0,cliptop=0,clipright=0,clipdown=0,clipleft=0,clipoldobj=null
+function clipcool(clipobj,clipsudu,cliptopyes,cliprightyes,clipdownyes,clipleftyes,clipwidth,clipheight){
+if(clipoldobj!=clipobj){
+objwid=clipobj.offsetWidth;objhei=clipobj.offsetHeight;
+clipobj.style.clip="rect(0 "+objwid+" "+objhei+" 0)"
+cliptop=0;clipright=objwid;clipdown=objhei;clipleft=0
+clipoldobj=clipobj
+}
+if(cliprightyes==true)objwid-=clipsudu
+if(clipdownyes==true)objhei-=clipsudu
+if(cliptopyes==true)cliptop+=clipsudu
+if(clipleftyes==true)clipleft+=clipsudu
+clipobj.style.clip="rect("+cliptop+"px "+objwid+"px "+objhei+"px "+clipleft+"px)"
+}
+
+function flashvml2(){  //以下是流线动画程序
+FlashVmlIntervalVar0="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime0=setInterval(FlashVmlIntervalVar0,500)",5000);
+setTimeout("clearInterval(FlashVmlIntervalTime0)",10000);
+FlashVmlIntervalVar1="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime1=setInterval(FlashVmlIntervalVar1,400)",10000);
+setTimeout("clearInterval(FlashVmlIntervalTime1)",15000);
+FlashVmlIntervalVar2="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime2=setInterval(FlashVmlIntervalVar2,300)",15000);
+setTimeout("clearInterval(FlashVmlIntervalTime2)",20000);
+FlashVmlIntervalVar3="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime3=setInterval(FlashVmlIntervalVar3,200)",20000);
+setTimeout("clearInterval(FlashVmlIntervalTime3)",25000);
+FlashVmlIntervalVar4="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime4=setInterval(FlashVmlIntervalVar4,100)",25000);
+setTimeout("clearInterval(FlashVmlIntervalTime4)",30000);
+FlashVmlIntervalVar5="zhenlens2++;statusreplace();shan()";
+setTimeout("FlashVmlIntervalTime5=setInterval(FlashVmlIntervalVar5,50)",30000);
+setTimeout("clearInterval(FlashVmlIntervalTime5)",40000);
+}
+</script>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于大于1024*768显示器分辨率的环境工作，检测您的分辨率低于这个数值，请在[控制面板--显示]中调整为1024*768或大于这个分辨率，而后刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+flashvml2();
+statuschange();
+
+time1=setInterval("fun1()",50)
+}
+</script>
+<v:line id=vml1 style="Z-INDEX:3003;LEFT:18px;POSITION:absolute;TOP:581px" from="0,0" to="0,-500pt" strokecolor="#68ec4d" strokeweight=".75pt"/> <v:line id=vml2 style="Z-INDEX:3007;LEFT:987px;POSITION:absolute;TOP:580px" from="0,0" to="0,-500pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3023;LEFT:480px;POSITION:absolute;TOP:1px" yincang="true" from="0,0" to="-27.75pt,96.75pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3024;LEFT:482px;POSITION:absolute;TOP:-1px" yincang="true" from="0,0" to="-3pt,93pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3025;LEFT:481px;POSITION:absolute;TOP:0px" yincang="true" from="0,0" to="42.75pt,134.25pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3026;LEFT:479px;POSITION:absolute;TOP:-3px" yincang="true" from="0,0" to="96pt,158.25pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3027;LEFT:482px;POSITION:absolute;TOP:-1px" yincang="true" from="0,0" to="-52.5pt,155.25pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+<v:line id=vml3 style="Z-INDEX:3028;LEFT:482px;POSITION:absolute;TOP:-1px" yincang="true" from="0,0" to="-7.5pt,197.25pt" strokecolor="#68ec4d" strokeweight=".75pt"/>
+
+<script>  //以下程序快速执行使预隐藏图型及时隐藏
+try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}
+</script></BODY></HTML>

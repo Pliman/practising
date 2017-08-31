@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript" src="../bower_components/json3/lib/json3.js"></script>
+<script type="text/javascript">
+	var str = JSON.stringify({
+		name: [1,2,3],
+		birth: new Date()
+	})
+	console.log(str);
+
+	var obj = JSON.parse(str);
+	console.log(obj);
+
+//	console.log(JSON.parse('{"a":"a","b":"2014-02-13T07:32:58.193Z"}'));
+</script>
+</body>
+</html>

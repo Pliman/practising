@@ -1,0 +1,87 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>shape多边型</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:shape多边型 - 专用属性</span>
+
+<table width=100%><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><td>Dhtml访问</td><TD>用途</td></tr>
+<tr><td style="color:red">path</td><td>m0,0 l e</td><td>command</td><td>path.value</td><td>描述多边形的形状</td></tr>
+<tr><td style="color:red">type</td><td>null</td><td>#ShapeTypeName</td><td></td><td>暗示引用的shapetype模版名称</td></tr>
+</table>
+
+<span>2:shape多边型 - 与polyline多边型的优劣比较</span>
+
+polyline多边型特点1：增加CSS的rotation平面旋转、以及VML3D角度旋转处理时，旋转角度视图形中心为准
+polyline多边型特点2：不支持CSS的width宽度、height高度定义，也不需要在CSS中定义width、height
+
+shape多边型特点1   ：增加CSS的rotation平面旋转、以及VML3D角度旋转处理时，旋转角度视图形起点为准
+shape多边型特点2   ：支持CSS的width宽度、height高度定义，不过需要配合coordsize属性。同时必须在CSS中定义width、height才能显示
+
+虽然两者功能很类似，但我仍建议你至少应精通shape多边形的绘制原理，polyline也要理解的差不多。因为多边型是绘制复杂图形的重要工具，虽然FlashVml3.0有提供shape、polyline简单易用可视化绘图工具，但没有可视化的多边形修改工具。因此，了解他们的绘图原理，在今后你想修改他们的形状、开发DVML动画时是有一定帮助的。
+
+<span>2:shape多边型 - 通用属性coordsize使用讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:shape style="Z-INDEX:1;LEFT:71;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30 e"/>
+<v:shape style="Z-INDEX:1;LEFT:171;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30,60,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:271;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30,60,0,0,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:371;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="f" strokecolor="blue" path="m0,0 l30,30,60,0,0,0 e"/>
+
+<v:shape style="Z-INDEX:1;LEFT:471;WIDTH:50;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="f" strokecolor="blue" path="m0,0 l30,30,60,0,0,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:571;WIDTH:2000;POSITION:absolute;TOP:225;HEIGHT:2000" coordsize="1000,1000" filled="t" strokecolor="blue" path="m0,0 l30,30,60,0,0,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:571;WIDTH:5000;POSITION:absolute;TOP:300;HEIGHT:5000" coordsize="1000,1000" filled="t" strokecolor="blue" path="m0,0 l30,30,60,0,0,0 e"/>
+</textarea>
+
+显然，我们用了跟polyline多边形同理的校例，都是绘制三角型，不同的是shape多边形支持CSS的width、height，在结合VML的coordsize属性自动调整shape大小的对比度，而这对polyline线是无法实现的。我在解释它的path路径参数规则之前，先详细的说明coordsize的作用
+
+我们先说倒数第三个图形，它width:50;height:100;、coordsize="100,100"，运行效果看出它的图形正好比其他属性是width:100;height:100;、coordsize="100,100"的图形宽度小了一半。
+
+在说倒数第二个图形，它width:2000;height:2000;、coordsize="1000,1000"，运行效果看出它的图形正好比其他属性是width:100;height:100;、coordsize="100,100"的图形宽度、高度均大了1倍。
+
+最后说最后一个图形，它width:5000;height:5000;、coordsize="1000,1000"，运行效果看出它的图形正好比其他属性是width:100;height:100;、coordsize="100,100"的图形宽度、高度均大了5倍。
+
+也许你已小有醒悟，图形如果使用了虚拟空间大小描述coordsize="widthnumber,heightnumber"，那么其CSS的width、height就会根据coordsize来做比例计算，而不是按照以前我们所说的屏幕像素计算了，所以width:100;height:100;、coordsize="100,100"跟width:1000;height:1000;、coordsize="1000,1000"或者跟width:5432;height:5432;、coordsize="5432,5432"效果相同。
+
+也就是为什么倒数第三个图形的width:50;height:100;、coordsize="100,100"它的宽度就正好小一半（2分之1）、倒数第二个width:2000;height:2000;、coordsize="1000,1000"正好大一倍、最后一个width:5000;height:5000;、coordsize="1000,1000"就大了五倍
+
+<span>3:shape多边型 - path参数讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor="#eeeeee">
+<v:shape style="Z-INDEX:1;LEFT:71;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30 e"/>
+<v:shape style="Z-INDEX:1;LEFT:171;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30,60,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:271;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="t" fillcolor="white" path="m0,0 l30,-30,60,0,0,0 e"/>
+<v:shape style="Z-INDEX:1;LEFT:371;WIDTH:100;POSITION:absolute;TOP:225;HEIGHT:100" coordsize="100,100" filled="f" strokecolor="blue" path="m0,0 l30,30,60,0,0,0 e"/>
+</textarea>
+
+其实shape多边形的path路径参数原理跟polyline的points路径参数大同小异，下面就详细解释path的参数
+
+第1步：首先用CSS的LEFT、TOP定义了该多边型位于XY网页交接点的绝对位置
+第2步：m0,0 l30,-30,60,0,0,0 e，其中m l e是必需写的，m0,0的第一个0表示偏移X交接点多少值、第二个表示偏移Y交接点多少值。由于我们既然用CSS定义了准确的该形状的绝对位置，所以我们就用0,0表示不偏移（也就是说该值无必要，但必须写m0,0）
+第3步：m0,0 l30,-30,60,0,0,0 e，其中的l30,-30的30表示第一条线向右伸展30px、-30表示第一条线向下伸展-30px，由于是负数，那么就等同于向上伸展30，所以我们看到的第一个多边型的值为m0,0 l30,-30 e，只描述了一条线。
+第4步：m0,0 l30,-30,60,0,0,0 e，其中的60,0的60表示新增了第二条线它向右伸展了60px、0表示第二条线向下伸展0px，由于是0，那么就等同于原交接点的Y高度，所以我们看到的第二个多边型的值为m0,0 l30,-30,60,0 e，只描述了二条线。
+第5步：m0,0 l30,-30,60,0,0,0 e，最后的0,0的第一个0表示新增了第三条线它向右伸展了0px、第二个0表示第三条线向下伸展0px，由于都是0，那么就等同于原交接点的XY，所以我们看到的第三个多边型的值为m0,0 l30,-30,60,0,0,0 e，描述了三条线、最后的0,0值使它回归原路径，就构成了三角型
+
+最后一个倒三角由于值为m0,0 l30,30,60,0,0,0 e，正好将l30,-30写成了l30,30，所以就向下伸展成了倒三角
+
+<span>4:shape多边型 - 应用实例</span>
+
+shape多边型跟polyline多边型大同小异，都能够绘制任意形状的多边型，如果各线直间的距离很短，就会形成连续且流畅的铅笔书写、划画工具。但这往往是手写代码难于实现的，但可以借助FlashVml的强大绘图功能得以实现
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:shape style="Z-INDEX:3180;LEFT:300px;WIDTH:100px;POSITION:absolute;TOP:179px;HEIGHT:100px" coordsize="100,100" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt" path=" m0,0 l0,0,-5,16,-6,18,-7,20,-7,21,-8,21,-9,23,-10,24,-11,25,-12,26,-13,27,-15,28,-18,29,-21,31,-23,32,-25,33,-26,34,-25,31,-22,28,-19,24 -16,20,-12,15,-9,11,-6,7,-3,4,0,2,3,0,4,-2,6,-3,14,-9,15,-11,16,-12,17,-13,18,-11,18,-9,18,-5,18,-1,18,4,18,9,20,15 21,19,24,26,26,28,27,29,28,30,30,31,31,31,33,31,35,32,35,33,36,31,34,29,30,24,22,19,15,14,2,8,-2,6,-3,5,-4,5,-5,4 -5,3,-5,4,-3,6,3,10,9,14,13,18,18,23,22,27,27,31,28,33,30,34,31,33,31,31,31,27,29,23,27,19,24,16,22,14,20,11,18,9 17,9,15,10,13,12,10,15,7,18,5,21,2,24,-1,25,-2,27,-3,29 e"/>
+<v:shape style="Z-INDEX:3185;LEFT:360px;WIDTH:100px;POSITION:absolute;TOP:173px;HEIGHT:100px" coordsize="100,100" filled="f" fillcolor="white" strokecolor="blue" strokeweight=".75pt" path=" m0,0 l0,0,34,-8,33,-7,31,-4,29,-2,27,1,25,3,23,4,21,6,19,7,19,8,18,8,17,9,16,9,14,10,12,10,9,11,6,12,4,12,8,12 13,12,19,9,23,8,27,7,29,7,31,7,29,9,25,13,20,16,16,20,11,24,7,26,6,27,8,27,12,27,17,26,23,25,27,23,30,21,31,20 32,20,33,19,33,18,34,18,36,20,38,23,39,25,41,28,42,30,43,32 e"/>
+<v:shape style="Z-INDEX:3186;LEFT:452px;WIDTH:100px;POSITION:absolute;TOP:160px;HEIGHT:100px" coordsize="100,100" filled="f" fillcolor="white" strokecolor="red" strokeweight=".75pt" path=" m0,0 l0,0,-12,17,-13,18,-11,16,-7,14,-2,12,3,9,9,6,15,5,20,4,22,3,24,2,22,5,20,7,15,10,14,11,11,14,7,17,4,19,1,20 1,21,0,21,-2,22,-2,23,-4,24,-1,23,3,21,11,19,18,17,23,15,29,14,30,14,31,14,28,14,24,14,21,14,17,14,14,13,13,13,11,12 10,15,10,17,10,21,10,24,10,25,10,26,11,24,13,22,15,18,15,15,15,12,16,11,16,10,17,10,18,11,18,13,18,15,18,16,18,18,18,19 18,20,19,18,20,17,22,15,23,12,24,11,24,13,24,14,24,17,24,20,22,22,19,24,15,27,9,30,2,31,-3,33,-7,34,-11,36,-13,37,-10,34 -3,31,5,26,12,23,20,19,25,17,29,15,26,16,21,19,15,23,9,28,3,33,-2,36,-7,40,-8,41,-4,38,0,36,6,34,10,32,11,30,13,29 14,31,14,34,11,38,4,43,-5,49,-16,55,-28,60,-37,64,-43,65,-42,65,-39,63,-33,58,-27,56,-20,51,-12,49,-7,45,1,43,6,39,9,38,10,37 11,36,11,35,12,35,14,34,15,33,16,33,13,34,10,35,5,38,3,40,2,41,2,42,3,43,4,43,6,43,8,43,12,43,16,42,22,40,27,37 33,34,36,33,39,31,39,29,39,28,39,26,38,25,36,24,35,24,34,24,33,25,33,26,32,27,32,29,32,32,32,35,32,39,32,42,32,44,32,47 33,50,35,54,37,58,39,62,41,66,42,69 e"/>
+<v:shape style="Z-INDEX:3187;LEFT:327px;WIDTH:100px;POSITION:absolute;TOP:277px;HEIGHT:100px" coordsize="100,100" filled="t" fillcolor="yellow" strokecolor="black" strokeweight=".75pt" path=" m0,0 l0,0,9,0,20,-9,19,20,10,10,0,10,0,0 e"/>
+</textarea>

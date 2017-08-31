@@ -1,0 +1,50 @@
+language: c
+before_install:
+  - scripts/travis-before-install.sh
+script:
+  - scripts/travis-build.sh
+  - scripts/travis-test.sh
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: gcc
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: gcc-i686
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: clang
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: clang
+      env: SANITIZER=asan
+# Disabled because MSAN seems to have stopped working on Travis.
+#    - os: linux
+#      dist: trusty
+#      sudo: required
+#      compiler: clang
+#      env: SANITIZER=msan
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: clang
+      env: SANITIZER=lsan
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: clang
+      env: SANITIZER=ubsan
+    - os: osx
+      compiler: clang
+
+  # Allow failures on the Mac bots. We'd rather not, but they are quite slow.
+  allow_failures:
+    - os: osx
+      compiler: clang
+
+  fast_finish: true

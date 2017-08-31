@@ -1,0 +1,5 @@
+;;; ERROR: 1
+;; empty file
+(;; STDERR ;;;
+no module found
+;;; STDERR ;;)

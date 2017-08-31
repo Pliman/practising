@@ -1,0 +1,61 @@
+;;; TOOL: run-objdump
+;;; FLAGS: -v --dump-verbose
+(module
+  (import "ignored" "test" (func (param i32 i64 f32 f64)))
+  (import "ignored" "test2" (func (param i32) (result i32))))
+(;; STDOUT ;;;
+0000000: 0061 736d                                 ; WASM_BINARY_MAGIC
+0000004: 0100 0000                                 ; WASM_BINARY_VERSION
+; section "Type" (1)
+0000008: 01                                        ; section code
+0000009: 00                                        ; section size (guess)
+000000a: 02                                        ; num types
+; type 0
+000000b: 60                                        ; func
+000000c: 04                                        ; num params
+000000d: 7f                                        ; i32
+000000e: 7e                                        ; i64
+000000f: 7d                                        ; f32
+0000010: 7c                                        ; f64
+0000011: 00                                        ; num results
+; type 1
+0000012: 60                                        ; func
+0000013: 01                                        ; num params
+0000014: 7f                                        ; i32
+0000015: 01                                        ; num results
+0000016: 7f                                        ; i32
+0000009: 0d                                        ; FIXUP section size
+; section "Import" (2)
+0000017: 02                                        ; section code
+0000018: 00                                        ; section size (guess)
+0000019: 02                                        ; num imports
+; import header 0
+000001a: 07                                        ; string length
+000001b: 6967 6e6f 7265 64                        ignored  ; import module name
+0000022: 04                                        ; string length
+0000023: 7465 7374                                test  ; import field name
+0000027: 00                                        ; import kind
+0000028: 00                                        ; import signature index
+; import header 1
+0000029: 07                                        ; string length
+000002a: 6967 6e6f 7265 64                        ignored  ; import module name
+0000031: 05                                        ; string length
+0000032: 7465 7374 32                             test2  ; import field name
+0000037: 00                                        ; import kind
+0000038: 01                                        ; import signature index
+0000018: 20                                        ; FIXUP section size
+
+import.wasm:	file format wasm 0x1
+
+Section Details:
+
+Type:
+ - type[0] (i32, i64, f32, f64) -> nil
+ - type[1] (i32) -> i32
+Import:
+ - func[0] sig=0 <- ignored.test
+ - func[1] sig=1 <- ignored.test2
+
+Code Disassembly:
+
+;;; STDOUT ;;)

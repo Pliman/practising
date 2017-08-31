@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>EditableListBox</title>
+		<script type="text/javascript">
+			function changeInput(){
+				var pagetypeObj = document.getElementById('idpagetype') ;
+				var selectObj = document.getElementById('idselect') ;
+				pagetypeObj.value=selectObj.value ;
+				pagetypeObj.select() ;
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td height="250" width="200"></td><td height="250" width="200"></td>
+			</tr>
+			<tr>
+				<td colspan="2" height=25 valign="top">
+					<input type="text" name="pagetype" id='idpagetype'
+						style="position: absolute; width: 130px; height: 21px" />
+					<select name="select" id='idselect'
+						style="position: absolute; width: 130px; clip: rect(0, auto, 22, 112)"
+						id="select" onchange="changeInput()">
+						<option value="">
+							&nbsp;
+						</option>
+						<option value="form">
+							form
+						</option>
+						<option value="list">
+							list
+						</option>
+						<option value="view">
+							view
+						</option>
+						<option value="REF_LINK">
+							REF_LINK
+						</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

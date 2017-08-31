@@ -1,0 +1,2 @@
+lib.js L 2372 bind event function
+webuploader.js L 2068 get clipboardData items

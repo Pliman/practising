@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>Form的提交</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/Ext.ux.plugins.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">Form的提交</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'under';
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    width: 400,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: 'Form的提交',
+                    items: [{
+                        xtype: 'combo',
+                        fieldLabel: '返回值',
+                        listWidth: 400,
+                        resizable: true,
+                        hiddenName: 'returnValue',
+                        store: [[1, "返回值：空"], [2, "返回值：'string'"], [3, "返回值：{}"], [4, "返回值：{success:false}"], [5, "返回值：{success:false,errors:{}}"], [6, "返回值：{success:false,errors:{postcode:'错误的邮政编码',age:'年龄必须在20到40岁之间'}}"], [7, "返回值：{errors:{postcode:'错误的邮政编码',age:'年龄必须在20到40岁之间'}}"], [8, "返回值：{success:true}"], [9, "返回值：{success:true,msg:'自定义信息'}"]],
+                        anchor: '-30',
+                        editable: true,
+                        triggerAction: 'all',
+                        allowBlank: false,
+                        value: 1
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'postcode',
+                        fieldLabel: '邮政编码',
+                        anchor: '-30',
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'age',
+                        fieldLabel: '年龄',
+                        anchor: '-30',
+                        allowBlank: false
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    waitTitle: '保存数据',
+                                    waitMsg: '正在保存……',
+                                    url: 'submit.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.get('op').dom.value += "----------------------------\n" +
+                                        "执行回调函数：success\n" +
+                                        "返回值：" +
+                                        Ext.encode(action.result) +
+                                        '\n';
+                                        if (typeof action.result === "object") 
+                                            Ext.get('op').dom.value += '自定义信息：' + action.result.msg + "\n";
+                                    },
+                                    failure: function(form, action){
+                                        Ext.get('op').dom.value += "----------------------------\n" +
+                                        "执行回调函数：failure\n" +
+                                        "返回值：" +
+                                        Ext.encode(action.result) +
+                                        '\n' +
+                                        "failureType：" +
+                                        action.failureType +
+                                        '\n';
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }, {
+                        text: '测试窗口为waitMsgTarget',
+                        scope: this,
+                        handler: function(){
+                            win.show();
+                        }
+                    }],
+                    listeners: {
+                        render: function(fp){
+                            fp.form.waitMsgTarget = fp.getEl();
+                        }
+                    }
+                });
+                
+                var frm2 = new Ext.form.FormPanel({
+                    baseCls: 'x-plain',
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    items: [{
+                        xtype: 'numberfield',
+                        name: 'postcode',
+                        fieldLabel: '邮政编码',
+                        anchor: '-30',
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'age',
+                        fieldLabel: '年龄',
+                        anchor: '-30',
+                        allowBlank: false
+                    }]
+                });
+                
+                var win = new Ext.Window({
+                    width: 400,
+                    height: 400,
+                    title: '设置窗口为waitMsgTarget',
+                    plain: true,
+                    closable: true,
+                    resizable: true,
+                    layout: 'fit',
+                    closeAction: 'hide',
+                    modal: true,
+                    buttonAlign: 'center',
+                    hideMode: "offsets",
+                    constrainHeader: true,
+                    bodyStyle: 'padding:5px;',
+                    items: frm2,
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm2.form.isValid()) {
+                                frm2.form.doAction('submit', {
+                                    waitTitle: '保存数据',
+                                    waitMsg: '正在保存……',
+                                    url: 'submit.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result);
+                                    },
+                                    failure: function(form, action){
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }],
+                    listeners: {
+                        render: function(win){
+                            frm2.form.waitMsgTarget = win.getEl();
+                        }
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>

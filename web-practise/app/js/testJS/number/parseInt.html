@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>parseInt.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script type="text/javascript">
+	    	function testParseInt(){
+	    		var num1 = parseInt("1234blue");
+	    		var num2 = parseInt("");
+	    		var num3 = parseInt("0xA");
+	    		var num4 = parseInt("22.5");
+	    		var num5 = parseInt("070");
+	    		var num6 = parseInt("70");
+	    		var num7 = parseInt("0xf");
+	    		alert(num1);
+	    		alert(num2);
+	    		alert(num3);
+	    		alert(num4);
+	    		alert(num5);
+	    		alert(num6);
+	    		alert(num7);
+	    		//指定转换基数，前面可以不带进制
+	    		var num = parseInt("0xAF",16); //正确
+	    		var num = parseInt("AF",16); //正确
+	    	}
+	    </script>
+	</head>
+	<body>
+		<input type="button" value="测试parseInt函数" onclick="testParseInt()"
+			style="width: 300px; height: 100px" />
+	</body>
+</html>

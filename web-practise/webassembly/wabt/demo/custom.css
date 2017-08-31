@@ -1,0 +1,19 @@
+.CodeMirror {
+  height: 600px;
+}
+
+.two-fifths {
+  width:40%;
+}
+
+.three-fifths {
+  width:60%;
+}
+
+.container {
+  width: 1200px;
+}
+
+.hidden {
+  visibility: hidden;
+}

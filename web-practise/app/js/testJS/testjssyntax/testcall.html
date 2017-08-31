@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+		function showArr(a,b,c){
+  			alert(b);
+  			alert(c);
+  		}
+		
+  		function testarray(){
+  			var arr1 = [1,2,3,4,5];
+  			var arr2 = [6,7,8];
+  			showArr.apply(null,arr2);
+  		}
+  	</script>
+		<title>array</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<input onclick="testarray()" type="button" id="testarray"
+			name="testarray" value="testarray" />
+	</body>
+</html>

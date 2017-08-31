@@ -1,0 +1,159 @@
+TD {
+	FONT-SIZE: 12px
+}
+TD.content {
+	FONT-SIZE: 14px; COLOR: #000000; LINE-HEIGHT: 140%
+}
+TD.list {
+	LINE-HEIGHT: 148%
+}
+BODY {
+	FONT-SIZE: 12px; MARGIN: 0px; BACKGROUND-COLOR: #616378; TEXT-ALIGN: center
+}
+HR {
+	COLOR: #000000; HEIGHT: 1px
+}
+TEXTAREA {
+	FONT-SIZE: 12px; FONT-FAMILY: "Tahoma", "MS Shell Dlg"
+}
+.codetextarea {
+	FONT-SIZE: 12px; WIDTH: 515px; WORD-BREAK: keep-all; FONT-FAMILY: "§ºÊ^"; HEIGHT: 310px; WORD-WRAP: normal
+}
+A:link {
+	COLOR: #333366; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #333366; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #333366; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+A.navLink:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.navLink:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.navLink:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+.navLight {
+	COLOR: #ffffff; BACKGROUND-COLOR: #666688
+}
+.navMedium {
+	BACKGROUND-COLOR: #f2f3f7
+}
+.navDark {
+	BACKGROUND-COLOR: #8c8ea3
+}
+.logoBackground {
+	BACKGROUND-COLOR: #ffffff
+}
+.pageSeparator {
+	BACKGROUND-COLOR: #ccccd4
+}
+.pageselect {
+	FONT-SIZE: 9px; FONT-FAMILY: Arial
+}
+.border {
+	MARGIN: auto; BACKGROUND-COLOR: #ffffff
+}
+.pageLighter {
+	BACKGROUND-COLOR: #fafafa
+}
+.pageLight {
+	BACKGROUND-COLOR: #f2f3f7
+}
+.pageMedium {
+	BACKGROUND-COLOR: #8c8ea3
+}
+.pageMediumer {
+	BACKGROUND-COLOR: #ccccd4
+}
+.pageDark {
+	BACKGROUND-COLOR: #666688
+}
+.pageSubject {
+	BACKGROUND-COLOR: #d9dce8
+}
+.pageIcon {
+	FONT-SIZE: 12px; FONT-FAMILY: "§ºÊ^"; BACKGROUND-COLOR: #ffffff
+}
+.columnTitle {
+	BACKGROUND-COLOR: #cfcdaf
+}
+.columnContent {
+	BACKGROUND-COLOR: #ebeadd
+}
+.hotTitle {
+	BACKGROUND-COLOR: #abd3a5
+}
+.hotContent {
+	BACKGROUND-COLOR: #e0efde
+}
+.listTitle {
+	BACKGROUND-COLOR: #ccccd4
+}
+.listContent {
+	BACKGROUND-COLOR: #f2f3f7
+}
+.pagesimages {
+	BORDER-RIGHT: #bbbbbb 1px solid; BORDER-TOP: #bbbbbb 1px solid; BORDER-LEFT: #bbbbbb 1px solid; BORDER-BOTTOM: #bbbbbb 1px solid
+}
+.titleTable {
+	BACKGROUND-COLOR: #ccccd4
+}
+.listTable {
+	BACKGROUND-COLOR: #f2f3f7
+}
+.code {
+	BORDER-RIGHT: #0099cc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #0099cc 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 12px; PADDING-BOTTOM: 5px; MARGIN: 5px; BORDER-LEFT: #0099cc 1px solid; WIDTH: 480px; COLOR: #000000; LINE-HEIGHT: 18px; PADDING-TOP: 5px; BORDER-BOTTOM: #0099cc 1px solid; FONT-FAMILY: "Verdana" , "Courier New", "Courier", "mono"; BACKGROUND-COLOR: #ddedfb
+}
+.CodeSamp_bak {
+	BORDER-RIGHT: #0099cc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #0099cc 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 12px; PADDING-BOTTOM: 5px; MARGIN: 5px; OVERFLOW: hidden; BORDER-LEFT: #0099cc 1px solid; WIDTH: 480px; COLOR: #000000; LINE-HEIGHT: 18px; PADDING-TOP: 5px; BORDER-BOTTOM: #0099cc 1px solid; FONT-FAMILY: "Courier New", "Courier", "mono"; BACKGROUND-COLOR: #ddedfb
+}
+.CodeSamp {
+	BORDER-RIGHT: #888888 1px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: #888888 1px solid; MARGIN-TOP: 1em; PADDING-LEFT: 0.5em; MARGIN-BOTTOM: 1em; PADDING-BOTTOM: 0.5em; MARGIN-LEFT: 0pt; OVERFLOW: hidden; BORDER-LEFT: #888888 1px solid; WIDTH: 480px; PADDING-TOP: 0.5em; BORDER-BOTTOM: #888888 1px solid; FONT-FAMILY: "Courier New"; BACKGROUND-COLOR: #eeeeee
+}
+.docparameter {
+	BACKGROUND-COLOR: #efefef
+}
+.docparameter TD {
+	COLOR: #999999
+}
+.listContentMedium {
+	BACKGROUND-COLOR: #e4e3e8
+}
+.location {
+	COLOR: #333366
+}
+SELECT {
+	FONT-SIZE: 12px; FONT-FAMILY: "MS Shell Dlg"
+}
+FORM {
+	MARGIN-TOP: 3px; FONT-SIZE: 12px; MARGIN-BOTTOM: 0px; FONT-FAMILY: "Tahoma", "MS Shell Dlg"
+}
+INPUT {
+	FONT-SIZE: 12px; FONT-FAMILY: "Tahoma", "MS Shell Dlg"
+}
+.dotLine {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url(/img/common/bg_dot.gif); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; HEIGHT: 1px
+}
+.voteBar {
+	FONT-SIZE: 9px; FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif"
+}
+.bordercolor {
+	COLOR: #000000; BACKGROUND-COLOR: #000000
+}
+.activePage {
+	BORDER-RIGHT: #616378 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #616378 1px solid; PADDING-LEFT: 3px; FONT-WEIGHT: bold; PADDING-BOTTOM: 1px; BORDER-LEFT: #616378 1px solid; COLOR: #fff; MARGIN-RIGHT: 3px; PADDING-TOP: 1px; BORDER-BOTTOM: #616378 1px solid; FONT-FAMILY: Verdana, Arial, sans-serif; BACKGROUND-COLOR: #616378
+}
+.inactivePage {
+	BORDER-RIGHT: #616378 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #616378 1px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 1px; BORDER-LEFT: #616378 1px solid; COLOR: #616378; MARGIN-RIGHT: 3px; PADDING-TOP: 1px; BORDER-BOTTOM: #616378 1px solid; BACKGROUND-COLOR: #fff
+}
+.inactivePage A {
+	COLOR: #616378; FONT-FAMILY: Verdana, Arial, sans-serif; TEXT-DECORATION: none
+}

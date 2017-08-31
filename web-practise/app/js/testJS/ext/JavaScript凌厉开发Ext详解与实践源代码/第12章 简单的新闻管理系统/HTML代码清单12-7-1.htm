@@ -1,0 +1,226 @@
+<!--HTML代码清单12-7-1--> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd" />
+<html>
+    <head>
+        <title>主页面</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/application.css" />
+    </head>
+    <body scroll="no">
+        <script type="text/javascript" src="lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <div id="loading-mask">
+        </div>
+        <div id="loading">
+            <div class="loading-indicator">
+                <img alt="" src="lib/ext/resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle"/>正在加载...
+            </div>
+        </div>
+        <script type="text/javascript">
+var app = {};
+
+Ext.onReady(function(){
+    Ext.BLANK_IMAGE_URL = 'lib/ext/resources/images/default/s.gif';
+    Ext.QuickTips.init();
+    Ext.form.Field.prototype.msgTarget = 'side';
+    
+    //标签页
+    app.tabs = new Ext.TabPanel({
+        region: 'center',
+        margins: '0 0 5 0',
+        resizeTabs: true,
+        minTabWidth: 135,
+        tabWidth: 135,
+        enableTabScroll: true,
+        hideParent: true,
+        hideMode: 'offsets',
+        activeTab: 0,
+        items: [{
+            id: 'welcomePage',
+            title: '欢迎',
+            html: '欢迎使用新闻管理系统'
+        }]
+    });
+    
+    
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [{
+            xtype: 'panel',
+            region: 'north',
+            height: 0,
+            bbar: [{
+                text: '新闻管理',
+                scope: this,
+                handler: onItemClick,
+                url: 'news'
+            }, {
+                text: '用户管理',
+                scope: this,
+                handler: onItemClick,
+                url: 'users'
+            }, {
+                text: '修改密码',
+                scope: this,
+                handler: onItemClick
+            }, {
+                text: '退出',
+                scope: this,
+                handler: onItemClick,
+                url: 'quit'
+            }, '->', '<b>新闻管理系统&nbsp;&nbsp;&nbsp;&nbsp;</b>']
+        }, app.tabs]
+    });
+    
+    //菜单单击事件	
+    function onItemClick(item){
+        switch (item.text) {
+            case '退出':
+                window.location = item.url + '.ashx';
+                break;
+            case '修改密码':
+                app.passwordWin.show();
+                break;
+            default:
+                var obj = Ext.getCmp(item.url);
+                if (obj) {
+                    app.tabs.setActiveTab(obj);
+                    app.tabs.activate(item.url);
+                }
+                else {
+                    var tab = new Ext.Panel({
+                        id: item.url,
+                        title: item.text,
+                        html: '<iframe src="' + item.url + '.aspx" width="100%" height="100%" frameBorder="0"></iframe>',
+                        closable: true
+                    });
+                    app.tabs.add(tab);
+                    app.tabs.setActiveTab(tab);
+                }
+        }
+    }
+    
+    //设置对话框宽度
+    Ext.Msg.minWidth = 300;
+    
+    app.passwordWin = new Ext.Window({
+        width: 300,
+        height: 200,
+        title: '修改密码',
+        plain: true,
+        closable: true,
+        resizable: false,
+        frame: true,
+        layout: 'fit',
+        closeAction: 'hide',
+        border: false,
+        modal: true,
+        items: [app.passwordForm = new Ext.form.FormPanel({
+            labelAlign: 'left',
+            buttonAlign: 'center',
+            bodyStyle: 'padding:5px',
+            frame: true,
+            labelWidth: 80,
+            items: [{
+                xtype: 'textfield',
+                inputType: 'password',
+                name: 'txt1',
+                fieldLabel: '旧密码',
+                allowBlank: false,
+                anchor: '90%'
+            }, {
+                xtype: 'textfield',
+                inputType: 'password',
+                name: 'txt2',
+                fieldLabel: '新密码',
+                allowBlank: false,
+                anchor: '90%'
+            }, {
+                xtype: 'textfield',
+                inputType: 'password',
+                name: 'txt3',
+                fieldLabel: '确认密码',
+                allowBlank: false,
+                anchor: '90%'
+            }],
+            buttons: [{
+                text: '确定',
+                scope: this,
+                handler: function(){
+                    if (app.passwordForm.form.isValid()) {
+                        //获取表单字段的两个对象
+                        var pwd1 = app.passwordForm.form.findField('txt2');
+                        var pwd2 = app.passwordForm.form.findField('txt3');
+                        if (pwd1.getValue() == pwd2.getValue()) {
+                            app.passwordForm.form.doAction('submit', {
+                                url: 'changepassword.ashx',
+                                method: 'post',
+                                params: '',
+                                //用户通过验证，进入系统的回调函数
+                                success: function(form, action){
+                                    var result = action.result.data;
+                                    if (result == 'ok') {
+                                        Ext.Msg.alert('信息', "密码已修改！", function(){
+                                            app.passwordWin.hide();
+                                        });
+                                    }
+                                    else 
+                                        if (result == 'login') {
+                                            app.login();
+                                        }
+                                        else 
+                                            if (typeof result == 'object') {
+                                            }
+                                            else {
+                                                Ext.Msg.alert('错误', action.result.data);
+                                            }
+                                },
+                                //不能进入系统时执行的函数
+                                failure: function(){
+                                    Ext.Msg.alert('错误', '发生错误！');
+                                }
+                            });
+                        }
+                        else {
+                            pwd2.markInvalid('两次输入的密码不同！');
+                        }
+                    }
+                }
+            }, {
+                text: '重置',
+                scope: this,
+                handler: function(){
+                    app.passwordForm.form.reset()
+                }
+            }]
+        })]
+    });
+    
+    
+    //增加一个tab页
+    app.addTab = function(title, html){
+        var tab = new Ext.Panel({
+            title: title,
+            html: html,
+            closable: true
+        });
+        app.tabs.add(tab);
+        app.tabs.setActiveTab(tab);
+    }
+    
+    setTimeout(function(){
+        Ext.get('loading').remove();
+        Ext.get('loading-mask').fadeOut({
+            remove: true
+        });
+    }, 250);
+    
+})//onReady
+        </script>
+    </body>
+</html>

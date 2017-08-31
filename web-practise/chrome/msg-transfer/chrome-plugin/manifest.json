@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+
+    "name": "Js implants",
+    "description": "微信同步插件",
+    "version": "1.0",
+
+    "permissions": [
+        "tabs", "downloads", "contextMenus", "<all_urls>"
+    ],
+    "content_scripts": [
+      {
+        "js": ["jquery-3.1.1.slim.js", "socket.io.js", "insert.js"],
+        "matches": ["https://wx2.qq.com/*","https://web.wechat.com/*","https://wx.qq.com/*"]
+      }
+    ],
+    "background": {
+      "scripts": ["downloader.js"],
+      "persistent": true
+    },
+    "web_accessible_resources":  ["angular_inject.js", "clipboard-utils.js"]
+}

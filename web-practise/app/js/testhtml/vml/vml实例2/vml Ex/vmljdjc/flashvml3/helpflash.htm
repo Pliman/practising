@@ -1,0 +1,295 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>FlashVml入门动画教程</TITLE>
+<META name='Gemeratpr' content='flashvml2.0'>
+<META name='KeyWords' content='FlashVml入门动画教程,flashvml,vml,vml动画,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script>
+function window.onerror(){return true;}  //防止您的程序出现错误时弹出提示
+</script>
+<script>
+var exptime=0;endtime="/137";zhenlens=0;zhenlens2=0;
+function statusreplace(){window.status="The FlashVml Play Time\'s "+exptime+endtime+" Seconds,An animation:"+zhenlens+",Milli-an animation:"+zhenlens2}
+function statuschange(){
+if(top.location==self.location)setInterval('exptime++;statusreplace()',1000)
+}
+</script>
+<script id="myscript" language="javascript">
+var huituyoubiao=0
+var vml1text="FlashVml入门动画教程",vml1textyoubiao=1
+var arrayyoubiao=0,posyoubiao=2,leftstr="",thetime1=null
+var pathstr=new Array(8)  //记录原始path.value
+var somestr1=new Array(8)  //记录path.value数组
+function vml2zhunbei(){
+vml2.style.top=-200;vml2.Rotation=0;vml2.style.display='';
+}
+function fvmlchang(){
+for(i=0;i<9;i++){
+pathstr[i]=fvml[i].path.value;
+somestr1[i]=pathstr[i].replace(' m','').replace(' l',',').replace(' e','').split(',');
+fvml[i].path.value="m"+somestr1[i][0]+","+somestr1[i][1]  //创建基本视图
+fvml[i].style.display=""
+}thetime1=setInterval("fun2()",20)}
+function fun2(){
+if(posyoubiao<somestr1[arrayyoubiao].length){
+leftstr="";
+for(i=2;i<posyoubiao;i++){if(i==2){leftstr=somestr1[arrayyoubiao][i]}else leftstr+=(","+somestr1[arrayyoubiao][i])}
+fvml[arrayyoubiao].path.value="m "+somestr1[arrayyoubiao][0]+","+somestr1[arrayyoubiao][1]+" l"+leftstr+" e"
+}else{ //*********
+if(arrayyoubiao==8){fvml[arrayyoubiao].path.value=pathstr[arrayyoubiao];clearTimeout(thetime1);}
+else{fvml[arrayyoubiao].path.value=pathstr[arrayyoubiao];arrayyoubiao++;posyoubiao=2;}
+}  //*************
+posyoubiao+=2
+}</script>
+</HEAD>
+<BODY bgcolor=#EEEEEE scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+function flashvml(){  //以下是侦式动画程序
+setTimeout("zhenlens++;statusreplace();vml1.style.display='';vml1.textPath.string=\"F\"","26000");
+setTimeout("zhenlens++;statusreplace();vml2zhunbei()","28000");
+setTimeout("zhenlens++;statusreplace();for(i=0;i<huitu.length;i++){huitu[i].style.left=parseInt(huitu[i].style.left)-1000;}","33000");
+setTimeout("zhenlens++;statusreplace();vml2zhunbei();vml2.textPath.string=\"2:图型处理\";","42000");
+setTimeout("zhenlens++;statusreplace();huitu[0].strokeweight='3px';","47000");
+setTimeout("zhenlens++;statusreplace();huitu[0].strokecolor='red'","48000");
+setTimeout("zhenlens++;statusreplace();huitu[0].shadow.color='black';huitu.shadow.offset='3pt,3pt';huitu.shadow.on='t';","49000");
+setTimeout("zhenlens++;statusreplace();huitu[1].style.left=huitu[1].offsetLeft+70","50000");
+setTimeout("zhenlens++;statusreplace();huitu[1].style.zIndex=1000","51000");
+setTimeout("zhenlens++;statusreplace();huitu[1].strokecolor=\"blue\";huitu[1].strokeweight=3","52000");
+setTimeout("zhenlens++;statusreplace();huitu[1].stroke.startarrow=\"classic\";huitu[1].stroke.endarrow=\"block\"","53000");
+setTimeout("zhenlens++;statusreplace();huitu[2].strokecolor=\"red\"","54000");
+setTimeout("zhenlens++;statusreplace();huitu[2].fillcolor=\"yellow\"","55000");
+setTimeout("zhenlens++;statusreplace();huitu[2].fill.type=\"gradient\";huitu[2].fill.color2=\"green\";","56000");
+setTimeout("zhenlens++;statusreplace();huitu[2].filled=false","57000");
+setTimeout("zhenlens++;statusreplace();huitu[3].stroke.dashstyle=\"dashDot\";huitu[3].strokeweight=\"2px\";huitu[3].strokecolor=\"purple\";","58000");
+setTimeout("zhenlens++;statusreplace();huitu[3].style.clip=\"rect(0 \"+huitu[3].offsetWidth/2+\" \"+huitu[3].offsetHeight/2+\" 0)\"","59000");
+setTimeout("zhenlens++;statusreplace();huitu[4].filled=true;huitu[4].fill.type=\"frame\";huitu[4].fill.src=huitu[11].src;huitu[4].fill.on=true;","61000");
+setTimeout("zhenlens++;statusreplace();huitu[4].fill.opacity=\"0.5\";huitu[4].fillcolor=\"red\";","62000");
+setTimeout("zhenlens++;statusreplace();huitu[5].extrusion.on='t';huitu[5].extrusion.foredepth='0';huitu[5].extrusion.backdepth='20pt';huitu[5].extrusion.color='red';huitu[5].extrusion.rotationangle='0,0';","63000");
+setTimeout("zhenlens++;statusreplace();huitu[5].extrusion.diffusity=\"1.2\"","64000");
+setTimeout("zhenlens++;statusreplace();huitu[6].shadow.color='black';huitu[6].shadow.offset='3pt,3pt';huitu[6].shadow.on='t';","65000");
+setTimeout("zhenlens++;statusreplace();huitu[6].shadow.color='red';huitu[6].shadow.offset='-3pt,3pt';huitu[6].shadow.on='t';","66000");
+setTimeout("zhenlens++;statusreplace();huitu[7].startangle=\"250\";huitu[7].endangle=\"80\"","67000");
+setTimeout("zhenlens++;statusreplace();huitu[8].filled=true;huitu[8].fillcolor=\"white\";huitu[8].strokecolor=\"blue\";huitu[8].innerHTML=\"<v:path textpathok='True'/><v:textpath on='True' style='font-size:30px;' string='FlashVml'/>\"","68000");
+setTimeout("zhenlens++;statusreplace();huitu[9].filled=true;huitu[9].fillcolor=\"yellow\";huitu[9].strokecolor=\"red\";huitu[9].innerHTML=\"<v:path textpathok='True'/><v:textpath on='True' style='font-size:20px;' string='FlashVml文字化功能'/>\"","69000");
+setTimeout("zhenlens++;statusreplace();huitu[10].style.border=\"\";huitu[10].innerHTML=\"<b>FlashVml</b> <Font color=blue>Good!</font><input type=button value='HTML支持' onclick=alert('HTML/DHTML支持')\"","70000");
+setTimeout("zhenlens++;statusreplace();huitu[11].style.filter=\"gray\"","71000");
+setTimeout("zhenlens++;statusreplace();huitu[11].Rotation=150","72000");
+setTimeout("zhenlens++;statusreplace();vml2zhunbei();vml2.textPath.string=\"3:动画创作\";","74000");
+setTimeout("zhenlens++;statusreplace();vml2zhunbei();vml2.textPath.string=\"4:动画结束\"","132000");
+setTimeout("location.reload();",140000);
+}
+</script>
+<script>
+var dzobj2=null,tuoldx=0,tuoldy=0,dzbuzhou=1
+function dizhen(dzobj,zhenfu){  //流线动画使用地震效果必要函数
+if(dzobj2!=dzobj){
+if(dzobj2!=null){if(dzobj2==window)dzobj2.moveTo(tuoldx,tuoldy);else {dzobj2.style.left=tuoldx;dzobj2.style.top=tuoldy;}}
+dzobj2=dzobj
+if(dzobj==window){tuoldx=window.screenLeft;tuoldy=window.screenTop;}else{tuoldx=parseInt(dzobj.style.left);tuoldy=parseInt(dzobj.style.top);}
+}
+zhenfu2=Math.round(Math.random()*zhenfu)
+if(dzobj!=window){
+Math.random()>0.5?zhengui2="+":zhengui2="-";
+if(dzbuzhou==1){eval("dzobj.style.left=tuoldx"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==2){eval("dzobj.style.top=tuoldy"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==3){dzobj.style.left=tuoldx}
+else if(dzbuzhou==4){dzobj.style.top=tuoldy}
+}else{
+Math.random()>0.5?windowBy=zhenfu2:windowBy=-zhenfu2;
+if(dzbuzhou==1){eval("window.moveBy("+windowBy+",0)")}
+else if(dzbuzhou==2){eval("window.moveBy(0,"+windowBy+")")}
+else if(dzbuzhou==3){window.moveTo(tuoldx+","+window.screenTop)}
+else if(dzbuzhou==4){window.moveTo(tuoldx+","+tuoldy)}
+}
+dzbuzhou++;if(dzbuzhou==5)dzbuzhou=1
+}
+ //使用动态裁减效果必要函数
+var objwid=0,objhei=0,cliptop=0,clipright=0,clipdown=0,clipleft=0,clipoldobj=null
+function clipcool(clipobj,clipsudu,cliptopyes,cliprightyes,clipdownyes,clipleftyes,clipwidth,clipheight){
+if(clipoldobj!=clipobj){
+objwid=clipobj.offsetWidth;objhei=clipobj.offsetHeight;
+clipobj.style.clip="rect(0 "+objwid+" "+objhei+" 0)"
+cliptop=0;clipright=objwid;clipdown=objhei;clipleft=0
+clipoldobj=clipobj
+}
+if(cliprightyes==true)objwid-=clipsudu
+if(clipdownyes==true)objhei-=clipsudu
+if(cliptopyes==true)cliptop+=clipsudu
+if(clipleftyes==true)clipleft+=clipsudu
+clipobj.style.clip="rect("+cliptop+"px "+objwid+"px "+objhei+"px "+clipleft+"px)"
+}
+
+function flashvml2(){  //以下是流线动画程序
+FlashVmlIntervalVar0="zhenlens2++;statusreplace();for(i=0;i<6;i++){fvml[i].style.left=parseInt(fvml[i].style.left)+3;}for(i=6;i<9;i++){fvml[i].style.left=parseInt(fvml[i].style.left)-3;}";
+setTimeout("FlashVmlIntervalTime0=setInterval(FlashVmlIntervalVar0,25)",9000);
+setTimeout("clearInterval(FlashVmlIntervalTime0)",12000);
+FlashVmlIntervalVar1="zhenlens2++;statusreplace();for(i=0;i<6;i++){fvml[i].style.left=parseInt(fvml[i].style.left)-2;}for(i=6;i<9;i++){fvml[i].style.left=parseInt(fvml[i].style.left)+2;}";
+setTimeout("FlashVmlIntervalTime1=setInterval(FlashVmlIntervalVar1,23)",13000);
+setTimeout("clearInterval(FlashVmlIntervalTime1)",15000);
+FlashVmlIntervalVar2="zhenlens2++;statusreplace();for(i=0;i<9;i++){fvml[i].strokecolor='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';}";
+setTimeout("FlashVmlIntervalTime2=setInterval(FlashVmlIntervalVar2,100)",18000);
+setTimeout("clearInterval(FlashVmlIntervalTime2)",23000);
+FlashVmlIntervalVar3="zhenlens2++;statusreplace();fvml[0].style.left=parseInt(fvml[0].style.left)-15;fvml[1].style.left=parseInt(fvml[1].style.left)-15;fvml[2].style.left=parseInt(fvml[2].style.left)-15;fvml[2].style.top=parseInt(fvml[2].style.top)-15;fvml[3].style.top=parseInt(fvml[3].style.top)-15;fvml[4].style.left=parseInt(fvml[4].style.left)+15;fvml[4].style.top=parseInt(fvml[4].style.top)-15;fvml[5].style.left=parseInt(fvml[5].style.left)+15;fvml[6].style.left=parseInt(fvml[6].style.left)-15;fvml[6].style.top=parseInt(fvml[6].style.top)+15;fvml[7].style.top=parseInt(fvml[7].style.top)+15;fvml[8].style.left=parseInt(fvml[8].style.left)+15;fvml[8].style.top=parseInt(fvml[8].style.top)+15;";
+setTimeout("FlashVmlIntervalTime3=setInterval(FlashVmlIntervalVar3,10)",23000);
+setTimeout("clearInterval(FlashVmlIntervalTime3)",25000);
+FlashVmlIntervalVar4="zhenlens2++;statusreplace();if(vml1textyoubiao<vml1text.length+1){vml1textyoubiao++;vml1.textPath.string=vml1text.substr(0,vml1textyoubiao);}";
+setTimeout("FlashVmlIntervalTime4=setInterval(FlashVmlIntervalVar4,140)",26000);
+setTimeout("clearInterval(FlashVmlIntervalTime4)",28000);
+FlashVmlIntervalVar5="zhenlens2++;statusreplace();vml2.style.top=parseInt(vml2.style.top)+8;vml2.Rotation+=5;";
+setTimeout("FlashVmlIntervalTime5=setInterval(FlashVmlIntervalVar5,10)",28000);
+setTimeout("clearInterval(FlashVmlIntervalTime5)",33000);
+FlashVmlIntervalVar6="zhenlens2++;statusreplace();if(huituyoubiao<huitu.length){huitu[huituyoubiao].style.display='';huituyoubiao++}";
+setTimeout("FlashVmlIntervalTime6=setInterval(FlashVmlIntervalVar6,500)",33000);
+setTimeout("clearInterval(FlashVmlIntervalTime6)",40000);
+FlashVmlIntervalVar7="zhenlens2++;statusreplace();vml2.style.top=parseInt(vml2.style.top)+8;vml2.Rotation-=8;";
+setTimeout("FlashVmlIntervalTime7=setInterval(FlashVmlIntervalVar7,10)",42000);
+setTimeout("clearInterval(FlashVmlIntervalTime7)",47000);
+FlashVmlIntervalVar8="zhenlens2++;statusreplace();vml2.style.top=parseInt(vml2.style.top)+10;vml2.Rotation+=10;";
+setTimeout("FlashVmlIntervalTime8=setInterval(FlashVmlIntervalVar8,10)",74000);
+setTimeout("clearInterval(FlashVmlIntervalTime8)",78000);
+FlashVmlIntervalVar9="zhenlens2++;statusreplace();huitu[0].style.left=parseInt(huitu[0].style.left)+2;huitu[0].style.top=parseInt(huitu[0].style.top)+2;";
+setTimeout("FlashVmlIntervalTime9=setInterval(FlashVmlIntervalVar9,20)",78000);
+setTimeout("clearInterval(FlashVmlIntervalTime9)",82000);
+FlashVmlIntervalVar10="zhenlens2++;statusreplace();huitu[1].style.left=parseInt(huitu[1].style.left)-2;huitu[1].Rotation-=5;";
+setTimeout("FlashVmlIntervalTime10=setInterval(FlashVmlIntervalVar10,20)",82000);
+setTimeout("clearInterval(FlashVmlIntervalTime10)",85000);
+FlashVmlIntervalVar11="zhenlens2++;statusreplace();dizhen(huitu[2],10);";
+setTimeout("FlashVmlIntervalTime11=setInterval(FlashVmlIntervalVar11,20)",85000);
+setTimeout("clearInterval(FlashVmlIntervalTime11)",88000);
+FlashVmlIntervalVar12="zhenlens2++;statusreplace();huitu[3].caijian1=true;clipcool(huitu[3],1,false,false,false,true);";
+setTimeout("FlashVmlIntervalTime12=setInterval(FlashVmlIntervalVar12,20)",88000);
+setTimeout("clearInterval(FlashVmlIntervalTime12)",92000);
+FlashVmlIntervalVar13="zhenlens2++;statusreplace();huitu[4].caijian1=true;clipcool(huitu[4],1,true,true,true,true);";
+setTimeout("FlashVmlIntervalTime13=setInterval(FlashVmlIntervalVar13,30)",92000);
+setTimeout("clearInterval(FlashVmlIntervalTime13)",96000);
+FlashVmlIntervalVar14="zhenlens2++;statusreplace();huitu[5].style.filter='wave(add=0,freq=4,lightstrength=5,phase=5,strength=0)';huitu[5].filters[0].strength+=1;";
+setTimeout("FlashVmlIntervalTime14=setInterval(FlashVmlIntervalVar14,20)",96000);
+setTimeout("clearInterval(FlashVmlIntervalTime14)",100000);
+FlashVmlIntervalVar15="zhenlens2++;statusreplace();huitu[6].fill.color='blue';huitu[6].fill.type='gradient';huitu[6].fill.angle-=2;";
+setTimeout("FlashVmlIntervalTime15=setInterval(FlashVmlIntervalVar15,20)",100000);
+setTimeout("clearInterval(FlashVmlIntervalTime15)",108000);
+FlashVmlIntervalVar16="zhenlens2++;statusreplace();huitu[7].fill.color='blue';huitu[7].fill.type='gradient';huitu[7].fill.angle+=2;";
+setTimeout("FlashVmlIntervalTime16=setInterval(FlashVmlIntervalVar16,20)",104000);
+setTimeout("clearInterval(FlashVmlIntervalTime16)",108000);
+FlashVmlIntervalVar17="zhenlens2++;statusreplace();huitu[8].style.filter='blur(add=0,direction=100,strength=0)';huitu[8].filters[0].strength+=1;";
+setTimeout("FlashVmlIntervalTime17=setInterval(FlashVmlIntervalVar17,20)",108000);
+setTimeout("clearInterval(FlashVmlIntervalTime17)",112000);
+FlashVmlIntervalVar18="zhenlens2++;statusreplace();huitu[9].style.filter='alpha(opacity=100,style=0)';huitu[9].filters[0].opacity-=2;";
+setTimeout("FlashVmlIntervalTime18=setInterval(FlashVmlIntervalVar18,20)",112000);
+setTimeout("clearInterval(FlashVmlIntervalTime18)",116000);
+FlashVmlIntervalVar19="zhenlens2++;statusreplace();huitu[11].Rotation=Math.round(Math.random()*360);huitu[11].style.left=Math.round(Math.random()*document.body.offsetWidth-100);huitu[11].style.top=Math.round(Math.random()*document.body.offsetHeight-100);";
+setTimeout("FlashVmlIntervalTime19=setInterval(FlashVmlIntervalVar19,20)",116000);
+setTimeout("clearInterval(FlashVmlIntervalTime19)",120000);
+FlashVmlIntervalVar20="zhenlens2++;statusreplace();temp1=document.body.offsetWidth;temp2=document.body.offsetHeight;for(i=0;i<huitu.length;i++){huitu[i].style.left=Math.round(Math.random()*temp1-100);huitu[i].style.top=Math.round(Math.random()*temp2-100);}";
+setTimeout("FlashVmlIntervalTime20=setInterval(FlashVmlIntervalVar20,30)",120000);
+setTimeout("clearInterval(FlashVmlIntervalTime20)",126000);
+FlashVmlIntervalVar21="zhenlens2++;statusreplace();dizhen(window,20);";
+setTimeout("FlashVmlIntervalTime21=setInterval(FlashVmlIntervalVar21,30)",126000);
+setTimeout("clearInterval(FlashVmlIntervalTime21)",132000);
+FlashVmlIntervalVar22="zhenlens2++;statusreplace();vml2.style.top=parseInt(vml2.style.top)+8;vml2.Rotation+=5;";
+setTimeout("FlashVmlIntervalTime22=setInterval(FlashVmlIntervalVar22,20)",132000);
+setTimeout("clearInterval(FlashVmlIntervalTime22)",137000);
+}
+</script>
+<script>
+ //启动更新函数,更新所有使用旋转/隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于支持大于1024*768显示器分辨率的环境下工作，检测您的显示器分辨率低于这个数值，请在[控制面板--显示]中调整分辨率为1024*768或大于这个分辨率，而后在刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序音乐正在加载，请等待，Loading'
+loadtime=setInterval(loadtext,200)
+function window.onload(){try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].xuanzhuan!=null)bodyobjs[i].Rotation=bodyobjs[i].xuanzhuan;
+if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}
+flashvml();
+flashvml2();
+statuschange();
+
+fvmlchang()
+}
+</script>
+<v:shape id=fvml title="" style="Z-INDEX:3007;LEFT:10px;WIDTH:100px;POSITION:absolute;TOP:0px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#f71433" strokeweight="3.75pt" path=" m257,274 l257,274,295,267,298,267,307,265,309,264,310,263,312,262,313,262 e"> <v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3008;LEFT:10px;WIDTH:100px;POSITION:absolute;TOP:0px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#f71433" strokeweight="3.75pt" path=" m317,233 l317,233,304,233,303,234,300,236,298,237,297,239,296,240,294,240,293,241,293,243,292,244,291,246,290,248,289,250,289,251,288,253,288,254,287,256,287,258,287,259 287,262,287,265,287,267,287,270,287,273,287,275,287,277,287,279,287,280,287,282,287,283,287,285,287,287,287,288,287,290,287,291,287,293,287,295,287,296,286,298 286,299,285,301,284,303,283,304,282,306,282,308,281,309,280,311,279,313,277,315,276,316,274,318,273,320,272,321,271,321,270,322 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3009;LEFT:7px;WIDTH:100px;POSITION:absolute;TOP:4px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#3cdc3a" strokeweight="3.75pt" path=" m344,225 l344,225,336,273,336,276,336,279,336,281,336,289,335,290,335,292,335,294,335,295,335,296,335,297,336,298,336,299,337,300,337,302,338,303,339,304,339,305,339,306 340,306,342,306,343,305,344,304,346,303,347,301,348,299,350,298,351,297 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3010;LEFT:8px;WIDTH:100px;POSITION:absolute;TOP:2px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#f789f7" strokeweight="3.75pt" path=" m403,277 l403,277,389,277,386,278,383,279,377,283,376,285,376,287,376,290,376,292,376,295,376,297,376,298,376,300,376,301,376,302,376,303,377,304,379,304,381,303,385,302 388,299,391,296,394,294,396,292,398,290,400,289,402,288,403,287,404,286,405,285,405,284,406,283,407,284,407,287,407,290,407,293,408,297,409,301,410,303,411,306 411,308,412,309,413,309 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3015;LEFT:10px;WIDTH:100px;POSITION:absolute;TOP:0px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#2cb1f5" strokeweight="3.75pt" path=" m448,271 l448,271,433,275,432,275,431,276,431,277,431,278,431,280,432,282,433,283,434,285,436,288,439,291,443,294,449,296,453,300,457,301,459,302,461,303,461,304,462,305 462,306,460,307,459,308,457,309,454,310,452,310,449,311,447,311,446,311,445,311,443,311,442,311,441,310,440,310,438,309,437,309,436,309,435,309,434,309,433,308 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3016;LEFT:12px;WIDTH:100px;POSITION:absolute;TOP:-5px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#f7c252" strokeweight="3.75pt" path=" m501,223 l501,223,483,313,483,311,483,308,484,304,485,301,487,298,489,294,489,293,491,290,493,288,496,285,498,284,499,282,501,281,504,279,506,278,507,277,508,277,509,278 509,281,509,285,509,288,509,292,509,296,509,298,509,301,509,303,509,304,510,306,510,308,510,309,511,310,513,312,514,313,515,313,516,314,517,314,519,316,521,316 522,315,522,314,523,314 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3025;LEFT:6px;WIDTH:100px;POSITION:absolute;TOP:-12px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#8b12ac" strokeweight="3.75pt" path=" m544,247 l544,247,562,322,563,324,563,326,566,321,569,314,572,307,578,296,583,287,587,280,590,272,592,267,593,263,594,260,594,257,595,256,595,255 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3026;LEFT:7px;WIDTH:100px;POSITION:absolute;TOP:-3px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#8b12ac" strokeweight="3.75pt" path=" m600,284 l600,284,607,278,608,278,609,279,609,280,609,282,610,284,610,285,610,287,610,288,610,290,610,293,610,295,610,298,610,301,610,303,610,305,610,306,610,305,610,302 611,298,612,296,614,292,617,290,619,287,621,285,623,282,624,281,625,280,625,279,626,278,627,277,627,276,628,276,629,279,629,282,629,287,629,293,629,298,629,301 629,304,629,306,629,307,630,308,630,309,630,310,630,311,629,308,629,305,629,300,632,294,635,288,637,284,639,280,641,277,642,274,643,273,643,272,644,271,645,271 646,270,647,271,647,273,647,278,647,283,647,288,647,292,647,297,647,302,647,307,647,311,648,314,649,315,649,316,650,317,650,319,652,321,653,322,654,324,655,325 655,324 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:shape id=fvml title="" style="Z-INDEX:3029;LEFT:0px;WIDTH:100px;POSITION:absolute;TOP:3px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" stroked="t" strokecolor="#8b12ac" strokeweight="3.75pt" path=" m685,239 l685,239,683,305,683,307,683,309,687,314,688,315,689,316,690,316,691,316,692,316,693,316,695,315,698,313,701,311,703,308,705,307,706,306,707,305 e">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:shape>
+<v:curve id=vml1 style="Z-INDEX:3006;LEFT:297px;POSITION:absolute;TOP:92px" yincang="true" from="0,0" control1="155.25pt,42pt" control2="153.75pt,-29.25pt" to="303pt,0" filled="t" fillcolor="white" strokecolor="red" strokeweight=".75pt">
+<v:path textpathok="t">
+</v:path>
+<v:textpath style="FONT-SIZE:50px;FONT-FAMILY:宋体" on="t" string="FlashVml入门动画教程">
+</v:textpath>
+</v:curve>
+<v:line id=vml2 title="" style="Z-INDEX:3039;LEFT:381px;POSITION:absolute;TOP:174px" yincang="true" from="0,0" to="183.75pt,-1.5pt" filled="t" fillcolor="blue" stroked="t" strokecolor="white" strokeweight="1.5pt">
+<v:path textpathok="t">
+</v:path>
+<v:textpath style="FONT-SIZE:60px;FONT-FAMILY:宋体" on="t" string="1:绘图功能">
+</v:textpath>
+<v:stroke startarrow="none" endarrow="none" dashstyle="dashDot">
+</v:stroke>
+</v:line>
+<v:shape id=huitu title="" style="Z-INDEX:3120;LEFT:-9px;WIDTH:100px;POSITION:absolute;TOP:122px;HEIGHT:100px" yincang="true" coordsize="100,100" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt" path=" m1156,81 l1156,81,1161,73,1163,72,1164,72,1166,73,1167,76,1169,80,1170,84,1171,88,1172,90,1172,93,1172,94,1172,96,1172,97,1173,95,1174,92,1176,90,1177,86,1179,83,1179,80 1181,77,1182,76,1183,74,1183,72,1184,71,1185,69,1185,68,1186,68,1187,67,1187,68,1187,72,1187,77,1187,84,1187,91,1186,99,1183,110,1179,122,1176,134,1172,144,1170,151 1169,157,1168,159,1167,160,1166,159,1165,155,1164,148,1164,142,1164,135,1164,130,1164,126,1165,122,1166,120,1166,116,1169,112,1170,109,1173,105,1176,101,1178,98,1180,95,1183,92 1187,89,1191,88,1195,86,1198,85,1201,84,1203,83,1206,82,1209,82,1213,81,1216,81,1220,80,1223,80,1224,79,1225,79,1226,78,1227,77,1228,76,1226,75,1225,74,1222,73 1219,72,1218,72,1217,72,1216,72,1215,73,1212,74,1208,75,1206,76,1205,77,1204,78,1204,80,1204,83,1205,87,1207,91,1211,96,1214,100,1215,101,1218,102,1220,102,1223,102 1227,102,1230,101,1231,100,1232,99,1235,97,1236,95,1239,92,1243,90,1247,87,1250,84,1253,82,1255,80,1256,79,1256,78,1256,77,1257,76,1257,75,1258,75,1254,76,1252,76 1247,79,1242,81,1241,82,1241,83,1244,83,1249,87,1255,89,1262,93,1266,95,1272,97,1276,99,1276,100,1272,102,1266,106,1265,106,1259,108,1257,108,1255,108,1254,107,1252,105 1251,103,1250,102 e">
+</v:shape>
+<v:line id=huitu title="" style="Z-INDEX:3213;LEFT:1308px;POSITION:absolute;TOP:193px" yincang="true" from="0,0" to="54pt,63.75pt" stroked="t" strokecolor="black" strokeweight=".75pt">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:line>
+<v:oval id=huitu title="" style="Z-INDEX:3122;LEFT:1404px;WIDTH:97px;POSITION:absolute;TOP:184px;HEIGHT:92px" yincang="true" coordsize="21600,21600" filled="t" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:fill type="frame" opacity="1" color2="white">
+</v:fill>
+</v:oval>
+<v:rect id=huitu title="" style="Z-INDEX:3127;LEFT:1529px;WIDTH:82px;POSITION:absolute;TOP:189px;HEIGHT:83px" yincang="true" coordsize="21600,21600" fillcolor="white" stroked="t" strokecolor="black" strokeweight=".75pt">
+<v:stroke startarrow="none" endarrow="none">
+</v:stroke>
+</v:rect>
+<v:polyline id=huitu title="" style="Z-INDEX:3128;LEFT:1661px;POSITION:absolute;TOP:195px" yincang="true" points="0,0,57pt,-3pt,90.75pt,14.25pt,37.5pt,59.25pt,-9.75pt,34.5pt,0,0" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:fill src="../shili/fyw1.jpg" type="frame" opacity="1">
+</v:fill>
+</v:polyline>
+<v:polyline id=huitu title="" style="Z-INDEX:3135;LEFT:1182px;POSITION:absolute;TOP:300px" yincang="true" points="0,0,42.75pt,0,63pt,15.75pt,62.25pt,26.25pt,18.75pt,64.5pt,-25.5pt,26.25pt,-26.25pt,14.25pt,0,0" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+</v:polyline>
+<v:roundrect id=huitu title="" style="Z-INDEX:3144;LEFT:1307px;WIDTH:90px;POSITION:absolute;TOP:302px;HEIGHT:81px" yincang="true" arcsize="4321f" coordsize="21600,21600" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+</v:roundrect>
+<v:arc id=huitu title="" style="Z-INDEX:3145;LEFT:1428px;WIDTH:74px;POSITION:absolute;TOP:298px;HEIGHT:87px" yincang="true" startangle="359" endangle="181" coordsize="21600,21600" fillcolor="white" strokecolor="black" strokeweight=".75pt" adj=",,5400">
+<v:path arrowok="t">
+</v:path>
+</v:arc>
+<v:curve id=huitu title="" style="Z-INDEX:3152;LEFT:1512px;POSITION:absolute;TOP:378px" yincang="true" from="0,0" control1="9.75pt,-60.75pt" control2="27.75pt,-57pt" to="44.25pt,-54.75pt" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+</v:curve>
+<v:curve id=huitu title="" style="Z-INDEX:3156;LEFT:1543px;POSITION:absolute;TOP:384px" yincang="true" from="0,0" control1="-1.5pt,-63.75pt" control2="52.5pt,-25.5pt" to="48.75pt,-79.5pt" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+</v:curve>
+<v:Textbox id=huitu title="" style="BORDER-RIGHT:black 1px solid;BORDER-TOP:black 1px solid;FONT-SIZE:20px;Z-INDEX:3160;LEFT:1646px;BORDER-LEFT:black 1px solid;WIDTH:132px;COLOR:red;WORD-BREAK:break-all;BORDER-BOTTOM:black 1px solid;FONT-FAMILY:宋体;POSITION:absolute;TOP:290px;HEIGHT:96px" yincang="true" inset="5pt,5pt,5pt,5pt">
+<B>HTML</B>超文本 <BR>文字插入支持！</v:Textbox>
+<v:Image id=huitu title="" style="Z-INDEX:3162;LEFT:1165px;WIDTH:76px;POSITION:absolute;TOP:413px;HEIGHT:90px" yincang="true" src="../shili/fyw1.jpg" coordsize="21600,21600"> </v:Image></BODY></HTML>

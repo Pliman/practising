@@ -1,0 +1,13 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm
+magic
+version
+section(TYPE) {
+  count[1]
+  0x20
+}
+(;; STDERR ;;;
+Error running "wasm2wast":
+error: @0x0000000c: unexpected type form: 32
+
+;;; STDERR ;;)

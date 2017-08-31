@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>unload</title>
+  <script src="../../../bower_components/jquery/jquery-1.10.2.js"></script>
+</head>
+<body>
+<button onclick="getBaidu()">get</button>
+
+<script type="text/javascript">
+  // 只有在ie中有用
+  //  $(window).unload(function () {
+  //    getBaidu();
+  //  });
+
+  $.ajaxSetup({
+    async : false
+  });
+
+  function getBaidu() {
+//    console.log(123213);
+//    return "确定离开么?";
+      $.get("http://www.baidu.com");
+  }
+
+  //  好像也不起作用
+  //  $(window).beforeunload(function (event) {
+  //    getBaidu()
+  //
+  //    var message = "wakaka";
+  //    event.returnValue = message;
+  //    return message;
+  //  });
+
+  //    window.onbeforeunload = getBaidu;
+  //  document.body.onbeforeunload = getBaidu;
+  $(window).bind('beforeunload', getBaidu);
+</script>
+</body>
+</html>

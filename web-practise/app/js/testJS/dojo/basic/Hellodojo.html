@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Hellodojo</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="async: true"></script>
+			
+		<!-- Configure Dojo -->
+		<script>
+			// We're specifying our Dojo Configuration this way,
+			// as it's a bit more complex and easier to type out
+			// than a data-dojo-config string
+			 var dojoConfig = (function(){
+				var base = location.href.split("/");
+				base.pop();
+				base = base.join("/");
+				return {
+					async: true,
+					isDebug: true,
+					packages: [{
+						name: "widget",
+						location: base + "/"
+					}]
+				};
+			})();
+		</script>
+		<!-- Load up Dojo -->
+			
+		<!-- 如果async: true 就不能加载dojo，因为dojo是在 -->
+		<script type="text/javascript">
+			require(['dojo/_base/kernel'],function(kernel){
+				var a1 = dojo;
+			});
+			// Require the module we just created
+			require(["demo/myModule"], function(myModule){
+			    // Use our module to change the text in the greeting
+			    myModule.setText("greeting", "Hello Dojo!");
+			 
+			    // After a few seconds, restore the text to its original state
+			    setTimeout(function(){
+			        myModule.restoreText("greeting");
+			    }, 3000);
+			});
+		</script>
+	</head>
+	<body>
+		<h1 id="greeting">
+			Hello
+		</h1>
+	</body>
+</html>

@@ -1,0 +1,120 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML3D动画特技1</TITLE>
+<META name='Gemeratpr' content='flashvml3.0'>
+<META name='KeyWords' content='VML3D动画特技1,flashvml,vml,vml画板,vml动画,vml图像画板,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script>
+var exptime=0;endtime="/27";zhenlens=0;zhenlens2=0;
+function statusreplace(){window.status="The FlashVml Play Time\'s "+exptime+endtime+" Seconds,An animation:"+zhenlens+",Milli-an animation:"+zhenlens2}
+function statuschange(){
+if(top.location==self.location)setInterval('exptime++;statusreplace()',1000)
+}
+</script>
+<script id="myscript" language="javascript">
+var archtml="";arcpos=0,arcbu=0.02,time1=null
+function zhuan1(){
+vml1.extrusion.backdepth="5pt";vml1.extrusion.color="white";vml1.extrusion.diffusity="1.1";vml1.extrusion.rotationangle="0,0";vml1.extrusion.on=true;time1=setInterval("zhuan2()",50)
+}
+var rotmxpos=1
+function zhuan2(){
+rotmxpos+=1;vml1.extrusion.rotationangle=rotmxpos+","+rotmxpos;vml1.Rotation+=rotmxpos
+vml1.extrusion.color="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")"
+if(rotmxpos>2000){clearInterval(time1);location.reload()}
+}</script>
+</HEAD>
+<BODY bgcolor=black scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+function flashvml(){  //以下是侦式动画程序
+setTimeout("zhenlens++;statusreplace();vml1.style.width=250;vml1.style.height=250;vml1.style.left=document.body.offsetWidth/2-125;vml1.style.top=document.body.offsetHeight/2-125;archtml=vml1.outerHTML;","12000");
+setTimeout("zhenlens++;statusreplace();vml1.outerHTML=archtml.replace(/ arcsize \= \".*?\"/g,' arcsize=\"0.5\"');zhuan1()","16000");
+setTimeout("zhenlens++;statusreplace();zhuan1()","27000");
+}
+</script>
+<script>
+var dzobj2=null,tuoldx=0,tuoldy=0,dzbuzhou=1
+function dizhen(dzobj,zhenfu){  //流线动画使用地震效果必要函数
+if(dzobj2!=dzobj){
+if(dzobj2!=null){if(dzobj2==window)dzobj2.moveTo(tuoldx,tuoldy);else {dzobj2.style.left=tuoldx;dzobj2.style.top=tuoldy;}}
+dzobj2=dzobj
+if(dzobj==window){tuoldx=window.screenLeft;tuoldy=window.screenTop;}else{tuoldx=parseInt(dzobj.style.left);tuoldy=parseInt(dzobj.style.top);}
+}
+zhenfu2=Math.round(Math.random()*zhenfu)
+if(dzobj!=window){
+Math.random()>0.5?zhengui2="+":zhengui2="-";
+if(dzbuzhou==1){eval("dzobj.style.left=tuoldx"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==2){eval("dzobj.style.top=tuoldy"+zhengui2+"zhenfu2")}
+else if(dzbuzhou==3){dzobj.style.left=tuoldx}
+else if(dzbuzhou==4){dzobj.style.top=tuoldy}
+}else{
+Math.random()>0.5?windowBy=zhenfu2:windowBy=-zhenfu2;
+if(dzbuzhou==1){eval("window.moveBy("+windowBy+",0)")}
+else if(dzbuzhou==2){eval("window.moveBy(0,"+windowBy+")")}
+else if(dzbuzhou==3){window.moveTo(tuoldx+","+window.screenTop)}
+else if(dzbuzhou==4){window.moveTo(tuoldx+","+tuoldy)}
+}
+dzbuzhou++;if(dzbuzhou==5)dzbuzhou=1
+}
+ //使用动态裁剪效果必要函数
+var objwid=0,objhei=0,cliptop=0,clipright=0,clipdown=0,clipleft=0,clipoldobj=null
+function clipcool(clipobj,clipsudu,cliptopyes,cliprightyes,clipdownyes,clipleftyes,clipwidth,clipheight){
+if(clipoldobj!=clipobj){
+objwid=clipobj.offsetWidth;objhei=clipobj.offsetHeight;
+clipobj.style.clip="rect(0 "+objwid+" "+objhei+" 0)"
+cliptop=0;clipright=objwid;clipdown=objhei;clipleft=0
+clipoldobj=clipobj
+}
+if(cliprightyes==true)objwid-=clipsudu
+if(clipdownyes==true)objhei-=clipsudu
+if(cliptopyes==true)cliptop+=clipsudu
+if(clipleftyes==true)clipleft+=clipsudu
+clipobj.style.clip="rect("+cliptop+"px "+objwid+"px "+objhei+"px "+clipleft+"px)"
+}
+
+function flashvml2(){  //以下是流线动画程序
+FlashVmlIntervalVar0="zhenlens2++;statusreplace();vml1.style.top=parseInt(vml1.style.top)+1;vml1.style.height=parseInt(vml1.style.height)+1;";
+setTimeout("FlashVmlIntervalTime0=setInterval(FlashVmlIntervalVar0,20)",500);
+setTimeout("clearInterval(FlashVmlIntervalTime0)",3000);
+FlashVmlIntervalVar1="zhenlens2++;statusreplace();vml1.style.top=parseInt(vml1.style.top)+1;if(parseInt(vml1.style.height)>2){vml1.style.height=parseInt(vml1.style.height)-1;}";
+setTimeout("FlashVmlIntervalTime1=setInterval(FlashVmlIntervalVar1,20)",3000);
+setTimeout("clearInterval(FlashVmlIntervalTime1)",6000);
+FlashVmlIntervalVar2="zhenlens2++;statusreplace();vml1.style.left=parseInt(vml1.style.left)-1;vml1.style.width=parseInt(vml1.style.width)+2;";
+setTimeout("FlashVmlIntervalTime2=setInterval(FlashVmlIntervalVar2,20)",6000);
+setTimeout("clearInterval(FlashVmlIntervalTime2)",9000);
+FlashVmlIntervalVar3="zhenlens2++;statusreplace();vml1.style.top=parseInt(vml1.style.top)-1.5;vml1.style.height=parseInt(vml1.style.height)+3;";
+setTimeout("FlashVmlIntervalTime3=setInterval(FlashVmlIntervalVar3,20)",9000);
+setTimeout("clearInterval(FlashVmlIntervalTime3)",11900);
+FlashVmlIntervalVar4="zhenlens2++;statusreplace();arcpos+=arcbu;vml1.outerHTML=archtml.replace(/ arcsize \= \".*?\"/g,' arcsize=\"'+arcpos+'\"')";
+setTimeout("FlashVmlIntervalTime4=setInterval(FlashVmlIntervalVar4,20)",13000);
+setTimeout("clearInterval(FlashVmlIntervalTime4)",15900);
+FlashVmlIntervalVar5="zhenlens2++;statusreplace();vml1.fillcolor=='red'?vml1.fillcolor='white':vml1.fillcolor='red';";
+setTimeout("FlashVmlIntervalTime5=setInterval(FlashVmlIntervalVar5,50)",17000);
+setTimeout("clearInterval(FlashVmlIntervalTime5)",20000);
+FlashVmlIntervalVar6="zhenlens2++;statusreplace();vml1.fillcolor='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';";
+setTimeout("FlashVmlIntervalTime6=setInterval(FlashVmlIntervalVar6,50)",20000);
+setTimeout("clearInterval(FlashVmlIntervalTime6)",23000);
+FlashVmlIntervalVar7="zhenlens2++;statusreplace();vml1.dizhen=true;dizhen(vml1,15);";
+setTimeout("FlashVmlIntervalTime7=setInterval(FlashVmlIntervalVar7,20)",23000);
+setTimeout("clearInterval(FlashVmlIntervalTime7)",26000);
+}
+</script>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于大于1024*768显示器分辨率的环境工作，检测您的分辨率低于这个数值，请在[控制面板--显示]中调整为1024*768或大于这个分辨率，而后刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+flashvml();
+flashvml2();
+statuschange();
+}
+</script>
+<v:roundrect id=vml1 style="Z-INDEX:3005;LEFT:492px;WIDTH:2px;POSITION:absolute;TOP:61px;HEIGHT:12px" arcsize="0" filled="t" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:fill src="fyw1.jpg" type="frame" opacity=".5"/>
+</v:roundrect><script>  //以下程序快速执行使预隐藏图型及时隐藏try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}</script></BODY></HTML>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">	
+  		function testDate(){
+  			var now = new Date() ;
+  			var year = now.getYear() ;
+  			var fullyear = now.getFullYear() ;
+  			var month = now.getMonth() ;
+  			if(month+1 < 10)
+  				month = '0' + (month+1) ;
+  			var date = now.getDate() ;
+  			if(date < 10)
+  				date = '0' + date ;
+  			/*var day = now.getDay() ;
+  			if(day < 10)
+  				day = '0' + day ;*/
+  			
+  			var hour = now.getHours() ;
+  			if(hour < 10)
+  				hour = '0' + hour ;
+  			var minute = now.getMinutes() ;
+  			if(minute < 10)
+  				minute = '0' + minute ;
+  			var second = now.getSeconds() ;
+  			if(second < 10)
+  				second = '0' + second ;
+  				
+  			var dateStr = year+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;
+  			var fullYearStr = fullyear+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;   			
+  			//alert(dateStr) ;
+  			//alert(fullYearStr) ;
+  			//alert(now.getDay()) ;
+  			var newDate=new Date('2010', 3-1, 1);
+  			iDaysInMonth = newDate.getDate() ;
+  			//alert(newDate.getMonth()) ;
+  			alert(iDaysInMonth) ;
+  			alert(newDate.getDay()) ;
+  			//alert(newDate.getFullYear()) ;
+  		}
+  		
+  		/*
+		 * 组装搜索条当前日期
+		 */
+		function assembleCurrDate() {
+		    var now = new Date();
+		    var fullyear = now.getFullYear();
+		    var month = (now.getMonth() + 1);
+		    var date = now.getDate();
+		    var day = now.getDay();
+		    var dayStr = '' ;
+		    switch(day){
+		        case 1:
+		            dayStr = '星期一' ;
+		            break ;
+		        case 2:
+		            dayStr = '星期二' ;
+		            break ;
+		        case 3:
+		            dayStr = '星期三' ;
+		            break ;
+		        case 4:
+		            dayStr = '星期四' ;
+		            break ;
+		        case 5:
+		            dayStr = '星期五' ;
+		            break ;
+		        case 6:
+		            dayStr = '星期六' ;
+		            break ;
+		        case 0:
+		            dayStr = '星期日' ;
+		            break ;
+		        default :
+		            dayStr = '获取星期错误' ;
+		            break ;
+		    }
+		    var dateStr = '今天是'+ fullyear + '年' + month + '月' + date + '日　' + dayStr;
+		    document.getElementById('displayer').value = dateStr ;
+		    //return dateStr ;
+		}
+  	</script>
+		<title>testDate</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table id="operatortable1">
+			<tr>
+				<td>
+					<input id="displayer" type="text" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable2">
+			<tr>
+				<td>
+					<input onclick="assembleCurrDate()" type="button" id="assembleCurrDate" name="assembleCurrDate"
+						value="assembleCurrDate"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable3">
+			<tr>
+				<td>
+					<input onclick="testDate()" type="button" id="testDate" name="testDate"
+						value="testDate"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

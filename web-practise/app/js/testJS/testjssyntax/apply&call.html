@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">	
+		
+		/*JavaScript为函数对象定义了两个方法：apply和call，它们的作用都是将函数绑定到另外一个对象上去运行，两者仅在定义参数的方式有所区别： 
+		Function.prototype.apply(thisArg,argArray); 
+		Function.prototype.call(thisArg[,arg1[,arg2…]]);*/
+		
+		/*--在另一个对象下面运行这个方法，能够使用另一个对象的内部变量，方法一般都会调用对象的内部变量如this.xxx
+		当运行于不同对象下时，this.xxx不同*/
+		
+  		//定义一个函数func1，具有属性p和方法A 
+		function func1() {
+			this.p = "func1-";
+			this.A = function (arg) {
+				//this.p = this.superClass.p ;
+				alert(this.p + arg+'1');
+			};
+		} 
+		//定义一个函数func2，具有属性p和方法B 
+		function func2() {
+			this.p = "func2-";
+			this.B = function (arg) {
+				alert(this.p + arg+'2');
+			};
+		}
+		var obj1 = new func1();
+		obj1.A() ;
+		/*var obj2 = new func2();
+		obj1.A("byA");     //显示func1-byA //func1-byA1
+		obj2.B("byB");     //显示func2-byB //func2-byB2
+		//在obj2下运行obj1.A方法 this.p = "func2-"
+		obj1.A.apply(obj2, ["byA"]); //显示func2-byA，其中[“byA”]是仅有一个元素的数组，下同 //显示func2-byA1
+		//在obj1下运行obj2.B方法 this.p = "func1-"
+		obj2.B.apply(obj1, ["byB"]); //显示func1-byB //显示func1-byB2
+		
+		//在obj2下运行obj1.A方法 this.p = "func2-" 
+		obj1.A.call(obj2, "byA");   //显示func2-byA //显示func2-byA1
+		//在obj1下运行obj2.B方法 this.p = "func1-"
+		obj2.B.call(obj1, "byB");   //显示func1-byB //显示func1-byB2*/
+		
+  	</script>
+		<title>apply&call</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+	</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Example - example-ngMessages-directive-production</title>
+
+	<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css"/>
+	<style type="text/css">
+		.has-error, .ng-invalid {
+			border: 1px solid green;
+		}
+	</style>
+</head>
+<body ng-app="ngMessagesExample">
+
+<script type="text/ng-template" id="validate/validate-msg-tpl.html">
+	<div class="error-hints" ng-show="" ng-messages="">
+		<div ng-message="required">需要填写</div>
+		<div ng-message="mobileValid">号码格式有误</div>
+		<div ng-message="minlength">字数过少</div>
+		<div ng-message="maxlength">字数过多</div>
+		<div ng-message="minValue">值过小</div>
+		<div ng-message="maxValue">值过大</div>
+		<div ng-message="date">无效的日期格式</div>
+		<div ng-message="rePasswordValid">密码输入不一致</div>
+	</div>
+</script>
+
+<!--<form name="myForm" action="http://www.baidu.com" novalidate>-->
+<div ng-controller="ngMessagesCtrl">
+	<form name="myForm" novalidate>
+		<div has-error="myForm.myName">
+			<!--<div ng-class="{ 'has-error': (myForm.myName.$invalid && (myForm.myName.$touched || myForm.$submitted)) }">-->
+			<label>
+				Enter your name:
+			</label>
+			<input type="text"
+			       validate-field="myForm.myName"
+			       mobile-valid
+			       name="myName"
+			       ng-model="name"
+			       ng-minlength="5"
+			       ng-maxlength="20"
+			       required
+			       class="form-control"/>
+		</div>
+
+		<div ng-class="{ 'has-error': (myForm.myNickName.$error.minlength) }">
+			<label>
+				Enter your nick name:
+				<input type="text"
+				       validate-field="myForm.myNickName"
+				       name="myNickName"
+				       ng-model="myNickName"
+				       ng-minlength="5"
+				       ng-maxlength="20"
+				       class="form-control"/>
+			</label>
+		</div>
+		<pre>myForm.$submitted = {{ myForm.$submitted}}</pre>
+
+		<pre>myForm.myName.$error = {{ myForm.myName.$error | json }}</pre>
+		<pre>myForm.myName.$valid = {{ myForm.myName.$valid}}</pre>
+		<pre>myForm.myName.$invalid = {{ myForm.myName.$invalid}}</pre>
+		<pre>myForm.myName.$pristine = {{ myForm.myName.$pristine}}</pre>
+		<pre>myForm.myName.$dirty = {{ myForm.myName.$dirty}}</pre>
+		<pre>myForm.myName.$touched = {{ myForm.myName.$touched}}</pre>
+		<pre>myForm.myNickName.$error = {{ myForm.myNickName.$error | json }}</pre>
+		<pre>myForm.myNickName.$invalid = {{ myForm.myName.$invalid}}</pre>
+
+		<a class="btn btn-primary" ng-click="save()">AAAdd User</a>
+		<button class="btn btn-primary" ng-click="save()">Add User</button>
+	</form>
+</div>
+
+<form name="myForm1">
+	<div ng-class="{ 'has-error': myForm1.myName1.$error.mobileValid }">
+		<label>
+			Enter your name:
+			<input type="text"
+			       mobile-valid
+			       name="myName1"
+			       ng-model="name1"
+			       ng-minlength="5"
+			       ng-maxlength="20"
+			       required/>
+		</label>
+	</div>
+	<pre>myForm1.myName1.$error = {{ myForm1.myName1.$error | json }}</pre>
+
+	<div ng-messages="myForm1.myName1.$error" style="color:maroon" role="alert">
+		<div ng-message="required">You did not enter a field</div>
+		<div ng-message="minlength">Your field is too short</div>
+		<div ng-message="maxlength">Your field is too long</div>
+		<div ng-message="mobileValid">not valid mobile phone number</div>
+	</div>
+</form>
+
+<script type="text/javascript"
+        src="../../lib/angular-1.5.7/angular.js"></script>
+<script type="text/javascript"
+        src="../../lib/angular-1.5.7/angular-messages.js"></script>
+<script src="ng-message-validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow Id="WF_LEAVE" Caption="请假流程" Name="员工请假流程">
+	<Description>员工请假流程</Description>
+	<DataFields></DataFields>
+	<StartNode Id="SN1" Caption="S" Name="开始节点">
+		<Description>开始节点</Description>
+		<Shape>
+			<x>33.5</x>
+			<y>48.5</y>
+		</Shape>
+	</StartNode>
+	<Activities>
+		<Activity Id="A0" Caption="请假人申请" Name="请假人提出申请">
+			<Tasks>
+				<Task Id="task0" Caption="测试模型" Type="CLASS"
+					Model="class_task">
+					<Description>测试模型</Description>
+					<Class>com.sot.test</Class>
+				</Task>
+				<Task Id="task1" Caption="生产模型" Type="CLASS"
+					Model="class_task">
+					<Description>生产模型</Description>
+					<Class>com.sot.product</Class>
+				</Task>
+			</Tasks>
+			<Description>请假人提出申请</Description>
+			<Strategy>ALL</Strategy>
+			<Shape>
+				<x>157.5</x>
+				<y>48.5</y>
+			</Shape>
+		</Activity>
+		<Activity Id="A1" Caption="业务主管审批" Name="业务主管审批">
+			<Tasks></Tasks>
+			<Description>业务主管审批</Description>
+			<Strategy>ALL</Strategy>
+			<Shape>
+				<x>325.5</x>
+				<y>109.5</y>
+			</Shape>
+		</Activity>
+		<Activity Id="A2" Caption="技术主管审批" Name="技术主管审批">
+			<Tasks></Tasks>
+			<Description>技术主管审批</Description>
+			<Strategy>ALL</Strategy>
+			<Shape>
+				<x>323.5</x>
+				<y>225.5</y>
+			</Shape>
+		</Activity>
+		<Activity Id="A3" Caption="上级领导审批" Name="上级领导审批">
+			<Tasks></Tasks>
+			<Description>上级领导审批</Description>
+			<Strategy>ALL</Strategy>
+			<Shape>
+				<x>627.5</x>
+				<y>167.5</y>
+			</Shape>
+		</Activity>
+	</Activities>
+	<Synchronizers>
+		<Synchronizer Id="S0" Caption="S" Name="S">
+			<Description>S</Description>
+			<JointType>AND</JointType>
+			<Shape>
+				<x>156.5</x>
+				<y>173.5</y>
+			</Shape>
+		</Synchronizer>
+		<Synchronizer Id="S1" Caption="S" Name="S">
+			<Description>S</Description>
+			<JointType>AND</JointType>
+			<Shape>
+				<x>475.5</x>
+				<y>168.5</y>
+			</Shape>
+		</Synchronizer>
+	</Synchronizers>
+	<EndNodes>
+		<EndNode Id="E0" Caption="E" Name="E">
+			<Description>E</Description>
+			<Shape>
+				<x>627.5</x>
+				<y>291.5</y>
+			</Shape>
+		</EndNode>
+	</EndNodes>
+	<Transitions>
+		<Transition From="SN1" To="A0" Id="T0" Caption="流程开始"
+			Name="流程开始">
+			<Description>流程开始</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="A0" To="S0" Id="T1" Caption="申请人分支"
+			Name="申请人分支">
+			<Description>申请人分支</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="S0" To="A1" Id="T2" Caption="业务人员申请"
+			Name="业务人员申请">
+			<Description>业务人员申请</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="S0" To="A2" Id="T3" Caption="技术人员申请"
+			Name="技术人员申请">
+			<Description>技术人员申请</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="A1" To="S1" Id="T4" Caption="提交上级领导"
+			Name="提交上级领导">
+			<Description>提交上级领导</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="A2" To="S1" Id="T5" Caption="提交上级领导"
+			Name="提交上级领导">
+			<Description>提交上级领导</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="S1" To="A3" Id="T6" Caption="提交上级领导"
+			Name="提交上级领导">
+			<Description>提交上级领导</Description>
+			<Condition></Condition>
+		</Transition>
+		<Transition From="A3" To="E0" Id="T7" Caption="流程结束"
+			Name="流程结束">
+			<Description>流程结束</Description>
+			<Condition></Condition>
+		</Transition>
+	</Transitions>
+</Workflow>

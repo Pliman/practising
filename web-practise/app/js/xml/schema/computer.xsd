@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:Element>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="cpu" type="xsd:string" />
+				<xsd:element name="motherboard" type="xsd:string" />
+				<xsd:element name="harddisk" type="xsd:string" />
+				<xsd:element name="memory">
+					<xsd:element name="slot1" type="xsd:string" />
+					<xsd:element name="slot2" type="xsd:string" />
+					<xsd:element name="total" type="xsd:int" />
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:Element>
+</xsd:schema>

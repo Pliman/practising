@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+　　
+<xsd:schema targetNamespace="http://www.example.com/IPO"
+	xmlns:ipo="http://www.example.com/IPO"
+	xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+	　　
+	<xsd:element name="ISBN" type="xsd:string" />
+	　　
+	<xsd:element name="网上书城">
+		　　
+		<xsd:complexType>
+			　　
+			<xsd:sequence>
+				　　
+				<xsd:element name="图书集合" type="图书集合类型" />
+				　　
+			</xsd:sequence>
+			　　
+		</xsd:complexType>
+		　　
+	</xsd:element>
+	　　
+	<xsd:complexType name="书类型">
+		　　
+		<xsd:sequence>
+			　　
+			<xsd:element ref="ISBN" />
+			　　
+			<xsd:element name="名称" type="xsd:string" />
+			　　
+			<xsd:element name="作者" type="xsd:string"
+				maxOccurs="unbounded" />
+			　　
+			<xsd:element name="页数" type="short" />
+			　　
+		</xsd:sequence>
+		　　
+	</xsd:complexType>
+	　　
+	<xsd:complexType name="图书类别类型">
+		　　
+		<xsd:sequence>
+			　　
+			<xsd:element name="名称" type="xsd:string" />
+			　　
+			<xsd:element name="描述" type="xsd:string" />
+			　　
+			<xsd:element name="书" type="书类型" maxOccurs="unbounded" />
+			　　
+		</xsd:sequence>
+		　　
+		<xsd:attribute name="uid" use="required">
+			　　
+			<xsd:simpleType>
+				　　
+				<xsd:restriction base="xsd:string">
+					　　
+					<xsd:enumeration value="ESSAY" />
+					　　
+					<xsd:enumeration value="TECH" />
+					　　
+					<xsd:enumeration value="OTHER" />
+					　　
+				</xsd:restriction>
+				　　
+			</xsd:simpleType>
+			　　
+		</xsd:attribute>
+		　　
+	</xsd:complexType>
+	　　
+	<xsd:complexType name="图书集合类型">
+		　　
+		<xsd:sequence>
+			　　
+			<xsd:element name="图书类别" type="图书类别类型"
+				maxOccurs="unbounded" />
+			　　
+		</xsd:sequence>
+		　　
+	</xsd:complexType>
+	　　
+</xsd:schema>

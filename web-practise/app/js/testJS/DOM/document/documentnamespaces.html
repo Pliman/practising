@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>documentnamespaces</title>
+</head>
+
+<body>
+</body>
+<script >
+	//document.namespaces.add("v", "urn:schemas-microsoft-com:vml");--和直接写作用一样
+	
+	var namespacesObj = document.namespaces;
+	for(n in namespacesObj){
+		alert(n + ' ' + namespacesObj[n]);
+	}
+</script>
+</html>

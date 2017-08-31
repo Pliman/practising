@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>New Document</title>
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+
+	<body>
+
+		<br>
+		<script> 
+
+Ext.onReady(function(){ 
+
+	var sm = new Ext.grid.CheckboxSelectionModel(); 
+	
+	    var cm = new Ext.grid.ColumnModel([ 
+			new Ext.grid.RowNumberer(), 
+			sm, 
+			{header:'编号',dataIndex:'id',width:40,sortable:true}, 
+			{header:'名称',dataIndex:'name',width:80}, 
+			{id:'descn',header:'描述',dataIndex:'descn',width:200,renderer:renderDescn}, 
+			{header:'性别',dataIndex:'sex',width:80,renderer: function (value){ 
+			if ( value == 'male') 
+			{ 
+			return "<span style='color:red;font-weight:bold;'>男</span><img src='drop-no.gif' />"; 
+			} else { 
+			return "<span style='color:green;font-weight:bold;'>女</span><img src='drop-add.gif' />"; 
+			} 
+			
+			}},{ 
+			header:'日期列', 
+			dataIndex:'date', 
+			editor: new Ext.grid.GridEditor(new Ext.form.DateField( { 
+			format:'Y-m-d', 
+			minValue:'2007-12-14', 
+			disabledDays:[0,6], 
+			disabledDaysText:'只能选择工作日' 
+			} )), 
+			renderer: function(value) { 
+			return value.format("Y-m-d"); 
+			} 
+			} 
+			
+			//{header:'日期',dateIndex:'date',type:'date',renderer:Ext.util.Format.dateRenderer('Y年m月d日')} 
+		]); 
+	
+	var data = [ 
+		['1','啊','descn1','male',new Date()], 
+		['2','波','descn2','female',new Date()], 
+		['3','车','descn3','male',new Date()], 
+		['4','衣','descn4','female',new Date()], 
+		['5','服','descn5','male',new Date()], 
+		['6','波','descn2','female',new Date()], 
+		['7','车','descn3','male',new Date()], 
+		['8','衣','descn4','female',new Date()] 
+	]; 
+	
+	var store = new Ext.data.Store({ 
+		proxy: new Ext.data.MemoryProxy(data), 
+		reader: new Ext.data.ArrayReader({}, [ 
+		{name:'id'}, 
+		{name:'name'}, 
+		{name:'descn'}, 
+		{name:'sex'}, 
+		{name:'date'} 
+		//{name:'date',type:'date',dateFormat:'Y-m-dTH:i:s'} 
+		]), 
+		sortInfo: {field:"name", direction:"ASC"} 
+	}); 
+	//store.load(); 
+	
+	
+	function renderDescn(value, cellmeta, record, rowIndex, columnIndex, store) { 
+		var str = "<input type='button' value='查看详细信息' onclick='alert(\"" + 
+		"这个单元格的值是：" + value + "\\n" + 
+		"这个单元格的配置是：{cellId:" + cellmeta.cellId + ",id:" + cellmeta.id + ",css:" + cellmeta.css + "}\\n" + 
+		"这个单元格对应行的record是：" + record + ",一行的数据都在里面\\n" + 
+		"这是第" + rowIndex + "行\\n" + 
+		"这是第" + columnIndex + "列\\n" + 
+		"这个表格对应的Ext.data.Store在这里：" + store + ",随便用吧." + 
+		"\")'>"; 
+		return str; 
+	} 
+	
+	var grid = new Ext.grid.GridPanel({ 
+		renderTo: 'grid', 
+		width:650, 
+		height: 250, 
+		//loadMask: true, 
+		stripeRows:true, 
+		store: store, 
+		cm: cm, 
+		sm:sm, 
+		//viewConfig:{ 
+		//	forceFit: true 
+		//} 
+		//autoExpandColumn:'descn', 
+		bbar:new Ext.PagingToolbar({ 
+		pageSize:2, 
+		store:store, 
+		displayInfo:true, 
+		displayMsg:'显示第{0}条到{1}条记录，一共{2}条', 
+		emptyMsg:"没有记录" 
+		}) 
+	}); 
+	store.load(); 
+	
+	Ext.get('remove').on('click',function() { 
+		store.remove(store.getAt(1)); 
+		grid.view.refresh(); 
+	}); 
+}); 
+
+    </script>
+
+
+		<table border="1" align="center">
+			<tr>
+				<td>
+					<font color="red">grid表格样式如下：</font>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="grid">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" id="remove" value="删除第二行" />
+				</td>
+			</tr>
+
+		</table>
+	</body>
+</html>

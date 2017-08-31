@@ -1,0 +1,63 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML3D动画特技2</TITLE>
+<META name='Gemeratpr' content='flashvml3.0'>
+<META name='KeyWords' content='VML3D动画特技2,flashvml,vml,vml画板,vml动画,vml图像画板,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script id="myscript" language="javascript">
+var rotmxpos=1,vmllen=0
+var rox=new Array()
+var roy=new Array()
+function dong(){
+rotmxpos+=1;
+for(i=0;i<vmllen;i++){
+vml[i].extrusion.rotationangle=(rox[i]+rotmxpos)+","+(roy[i]+rotmxpos);
+}
+}</script>
+</HEAD>
+<BODY bgcolor=black scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于大于1024*768显示器分辨率的环境工作，检测您的分辨率低于这个数值，请在[控制面板--显示]中调整为1024*768或大于这个分辨率，而后刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+
+vmllen=vml.length
+for(i=0;i<vmllen;i++){
+str1=vml[i].extrusion.rotationangle
+if(str1==""){rox[i]=0;roy[i]=0}else{
+str1=new String(str1).split(",")
+rox[i]=parseInt(str1[0]);roy[i]=parseInt(str1[1])
+}
+}
+setTimeout('setInterval("dong()",50)',3000)
+}
+</script>
+<v:roundrect id=vml style="Z-INDEX:2998;LEFT:202px;WIDTH:564px;POSITION:absolute;TOP:204px;HEIGHT:332px" arcsize="9830f" fillcolor="#3ad66d" strokecolor="#3ad66d" strokeweight=".75pt">
+<v:extrusion on="t" foredepth="20pt" backdepth="30pt" color="#3ad66d" diffusity="72089f" rotationangle="-96,-172"/>
+</v:roundrect>
+<v:rect id=vml style="Z-INDEX:3052;LEFT:290px;WIDTH:52px;POSITION:absolute;TOP:262px;HEIGHT:35px" filled="t" fillcolor="#cf3414" strokecolor="#3ad66d" strokeweight=".75pt"> <v:extrusion on="t" foredepth="0" backdepth="10pt" color="#3a56da" diffusity="85196f" rotationangle="89,-15"/>
+<v:fill type="frame" opacity="1"/>
+</v:rect>
+<v:roundrect id=vml style="Z-INDEX:3060;LEFT:314px;WIDTH:44px;POSITION:absolute;TOP:282px;HEIGHT:7px" arcsize=".5" filled="t" fillcolor="#cf3414" strokecolor="#3ad66d" strokeweight=".75pt"> <v:extrusion on="t" foredepth="0" backdepth="5pt" color="#cf3414" diffusity="85196f" rotationangle="-3,29"/>
+<v:fill type="frame" opacity="1"/>
+</v:roundrect>
+<v:rect id=vml style="Z-INDEX:3052;LEFT:597px;WIDTH:52px;POSITION:absolute;TOP:366px;HEIGHT:35px" filled="t" fillcolor="#cf3414" strokecolor="#3ad66d" strokeweight=".75pt"> <v:extrusion on="t" foredepth="0" backdepth="10pt" color="#3a56da" diffusity="85196f" rotationangle="99,-13"/>
+<v:fill type="frame" opacity="1" color2="yellow"/>
+</v:rect>
+<v:roundrect id=vml style="Z-INDEX:3060;LEFT:577px;WIDTH:44px;POSITION:absolute;TOP:372px;HEIGHT:7px" arcsize=".5" filled="t" fillcolor="#3a56da" strokecolor="#3ad66d" strokeweight=".75pt"> <v:extrusion on="t" foredepth="0" backdepth="5pt" color="#cf3414" diffusity="85196f" rotationangle="-13,23"/>
+<v:fill type="frame" opacity="1"/>
+</v:roundrect>
+<v:shape id=vml style="Z-INDEX:3092;LEFT:342px;WIDTH:100px;POSITION:absolute;TOP:317px;HEIGHT:100px" coordsize="100,100" filled="t" fillcolor="yellow" strokecolor="#3ad66d" strokeweight=".75pt" path=" m0,0 l0,0,34,-41,162,-48,15,74,0,0 e"> <v:extrusion on="t" foredepth="0" backdepth="0" color="yellow" diffusity="85196f"/>
+<v:fill type="gradient" opacity=".5" color2="yellow"/>
+</v:shape>
+<v:shape id=vml style="Z-INDEX:2999;LEFT:555px;WIDTH:100px;POSITION:absolute;TOP:418px;HEIGHT:100px" coordsize="100,100" filled="t" fillcolor="yellow" strokecolor="#3ad66d" strokeweight=".75pt" path=" m0,0 l0,0,58,-71,32,-130,-95,-1,0,0 e"> <v:extrusion on="t" foredepth="0" backdepth="0" color="yellow" diffusity="85196f"/>
+<v:fill type="gradient" opacity=".5" color2="yellow"/>
+</v:shape><script>  //以下程序快速执行使预隐藏图型及时隐藏try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}</script></BODY></HTML>

@@ -1,0 +1,72 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>textbox内容</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:textbox内容 - 专用属性参考表</span>
+
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;'><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td style="color:red">inset</td><td>7pt,3pt,7pt,3pt</td><td>0-999pt*(1-4)</td><td>描述距离容器内边界左/上/右/下长度</td></tr>
+<tr><td style="color:red">print</td><td>false</td><td>boolean</td><td>暗示是否被打印机打印</td></tr>
+</table>
+
+<span>2:textbox内容 - 介绍</span>
+
+该标记不同于其他二级标记，特点是它即可以当做二级标记应用于VML一级标记中、也可以当作一级标记直接在网页输出超文本内容（但这个一级标记不像oval、rect、line那样支持二级标记stroke、fill、extrusion的修饰）。它基本跟HTML的span标记类似，本身没有什么独特的专用属性（就inset、print[该通用属性其他一级标记都默认为true，而它默认为false]）、也不支持VML其他二级标记的修改，而是充分利用CSS对的font/text用于文本的样式表修饰超文本内容的样式（如控制文字大小、颜色、字体、缩进、字间隔度、行间隔度、周遍的留白、排版换行等）
+
+<span>3:textbox内容 - 当作一级标记应用实例</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+
+<v:Textbox style="FONT-SIZE:20;Z-INDEX:1;LEFT:209;COLOR:#f81ad2;WORD-BREAK:break-all;FONT-FAMILY:黑体;POSITION:absolute;TOP:99" inset="5pt,5pt,5pt,5pt" print="t">
+这里是textbox文本 <BR><BR>它几乎支持CSS所有用于文本的修饰
+</v:Textbox>
+
+<v:Textbox style="OVERFLOW-Y:scroll;FONT-SIZE:20;Z-INDEX:1;LEFT:216;WIDTH:292;COLOR:#f81ad2;WORD-BREAK:break-all;FONT-FAMILY:黑体;POSITION:absolute;TOP:208;HEIGHT:79;border:1 solid black" inset="5pt,5pt,5pt,5pt" print="t">这里是 <BR>textbox文本 <BR><BR>它几乎支持
+<BR>CSS所有用于文本的修饰
+</v:Textbox>
+
+<v:Textbox style="FONT-SIZE:20;Z-INDEX:1;LEFT:215;WIDTH:303;COLOR:#4c1b82;WORD-BREAK:break-all;FONT-FAMILY:黑体;POSITION:absolute;TOP:328;HEIGHT:184;border:10 ridge red;" inset="5pt,5pt,5pt,5pt" print="t">
+内容同样也支持<FONT color=blue>HTML</FONT>超文本 <BR><BR>
+比如<A href="http://www.microsoft.com/" target=_blank>超级连接</A> <BR><BR>
+在比如用HTML插入图像<IMG src="shili/fyw1.jpg">、插入HTML表格、frame网页框等等
+</v:Textbox>
+</textarea>
+
+仔细分析以上代码，不难看出它就是用于输出超文本，而本身专用属性很有限（只有inset描述与容器内边界的文本间隔度，但这个属性意义并不大了，因为完全可以用CSS的padding代替）。而描述内容文本各种样式则直接使用CSS提供的丰富样式，该标记基本跟HTML的span相同。
+
+<span>4:textbox内容 - 当作二级标记应用实例</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+
+<v:roundrect style="Z-INDEX:1;LEFT:219;WIDTH:350;POSITION:absolute;TOP:93;HEIGHT:100" arcsize="0.15">
+<v:Textbox style="FONT-SIZE:20;COLOR:#f81ad2;WORD-BREAK:break-all;FONT-FAMILY:黑体;" inset="5pt,5pt,5pt,5pt" print="t">
+这里是textbox文本 <BR><BR>它几乎支持CSS所有用于文本的修饰
+</v:Textbox>
+</v:roundrect>
+
+<v:roundrect style="Z-INDEX:1;LEFT:219;WIDTH:350;POSITION:absolute;TOP:200;HEIGHT:100" arcsize="0.15" fillcolor="yellow" strokecolor="black" strokeweight=".75pt">
+<v:Textbox style="FONT-SIZE:20;COLOR:#f81ad2;WORD-BREAK:break-all;FONT-FAMILY:黑体;" inset="8pt,8pt,8pt,8pt" print="t">
+这里是textbox文本 <BR><BR>它几乎支持CSS所有用于文本的修饰
+</v:Textbox>
+</v:roundrect>
+
+<v:roundrect style="Z-INDEX:1;LEFT:219;WIDTH:350;POSITION:absolute;TOP:310;HEIGHT:100" arcsize="0.15" filled="t" fillcolor="#ef69ce" stroked="t" strokecolor="black" strokeweight="5px">
+<v:fill type="gradientRadial" opacity="0.6" color2="white"/>
+<v:Textbox style="FONT-SIZE:20;COLOR:#f81ad2;WORD-BREAK:break-all;FONT-FAMILY:黑体;" print="t" inset="1pt,1pt,1pt,1pt">
+这里是textbox文本 <BR><BR>它几乎支持CSS所有用于文本的修饰
+</v:Textbox>
+</v:roundrect>
+</textarea>
+
+可以看出，它也可以充当二级标记作为oval、rect、roundrect等图形的内容。你也许会问，我完全可以直接在图形内插入HTML超文本内容，还有必要用textbox？回答是看你用VML进行什么样的开发，如果只是简单的绘图那么可以说没必要，但如果进行的是WEB 3D网页开发、DVML编程，那么用textbox在某种情况可以剩时、剩力、剩代码、更好的组织性。

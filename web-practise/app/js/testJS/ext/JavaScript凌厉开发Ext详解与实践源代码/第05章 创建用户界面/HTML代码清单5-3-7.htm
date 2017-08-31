@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>Grid的分页、查询、远程排序与通过拖拽改变分类</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/searchfield.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">Grid的分页、查询、远程排序与通过拖拽改变分类</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="panel1">
+                </div>
+                <br>
+                <div>
+                    事件：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.Msg.minWidth = 300;
+                
+                var store = new Ext.data.Store({
+                    url: 'grid3_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id',
+                        type: 'int'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'filename'
+                    }, {
+                        name: 'classid'
+                    }, {
+                        name: 'filesize',
+                        type: 'int'
+                    }, {
+                        name: 'createtime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'width'
+                    }, {
+                        name: 'height'
+                    }, {
+                        name: 'sortorder',
+                        type: "int"
+                    }]),
+                    remoteSort: true,
+                    listeners: {
+                        scope: this,
+                        load: function(){
+                            if (grid) 
+                                grid.getSelectionModel().selectFirstRow();
+                        }
+                    }
+                }) //store
+                function qtips(val){
+                    return '<span style="display:table;width:100%;" qtip=\'<img src="images/' + val + '">\'>' + val + '</span>'
+                }
+                
+                var grid = new Ext.grid.GridPanel({
+                    enableDragDrop: true,
+                    store: store,
+                    ddGroup: 'treeDD',
+                    border: false,
+                    enableDrag: true,
+                    columns: [{
+                        id: 'id',
+                        header: "编号",
+                        width: 80,
+                        dataIndex: 'id',
+                        sortable: true
+                    }, {
+                        header: "标题",
+                        width: 75,
+                        dataIndex: 'title',
+                        sortable: true
+                    }, {
+                        header: "文件名",
+                        width: 75,
+                        dataIndex: 'filename',
+                        renderer: qtips,
+                        sortable: true
+                    }, {
+                        header: "文件大小",
+                        width: 75,
+                        renderer: 'fileSize',
+                        dataIndex: 'filesize',
+                        align: 'right',
+                        sortable: true
+                    }, {
+                        header: "宽",
+                        width: 75,
+                        dataIndex: 'width'
+                    }, {
+                        header: "高",
+                        width: 75,
+                        dataIndex: 'height'
+                    }, {
+                        header: "创建时间",
+                        width: 75,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+                        dataIndex: 'createtime',
+                        sortable: true
+                    }],
+                    stripeRows: true,
+                    autoExpandColumn: 1
+                });
+                
+                var pageToolbar = new Ext.PagingToolbar({
+                    pageSize: 10,
+                    displayInfo: true,
+                    store: store,
+                    items: ['-', new Ext.app.SearchField({
+                        store: store
+                    })]
+                });
+                
+                
+                var tree = new Ext.tree.TreePanel({
+                    title: '类别',
+                    store: store,
+                    animate: false,
+                    region: 'west',
+                    split: true,
+                    width: 200,
+                    minSize: 175,
+                    maxSize: 400,
+                    collapsible: true,
+                    hideCollapseTool: true,
+                    collapseMode: 'mini',
+                    margins: '0 0 5 0',
+                    rootVisible: true,
+                    autoScroll: true,
+                    enableDD: true,
+                    border: false,
+                    enableDrop: true,
+                    rootVisible: false,
+                    root: new Ext.tree.AsyncTreeNode({
+                        text: "类别",
+                        id: '0',
+                        expanded: true,
+                        allowDrag: false,
+                        allowDrop: false,
+                        loader: new Ext.tree.TreeLoader({
+                            dataUrl: 'dvtree_action.ashx?act=list',
+                            clearOnLoad: true,
+                            listeners: {
+                                scope: this,
+                                load: function(loader, node, response){
+                                    var n = tree.getNodeById("-99");
+                                    if (n) 
+                                        n.select();
+                                }
+                            }
+                        })
+                    }),
+                    dropConfig: {
+                        ddGroup: 'treeDD',
+                        onNodeDrop: function(node, source, e, data){
+                            var id = node.node.id;
+                            if ((id > 0 | id == -1) & data.selections.length > 0) {
+                                var ids = [];
+                                for (var i = 0; i < data.selections.length; i++) {
+                                    ids.push(data.selections[i].id);
+                                }
+                                Ext.Ajax.request({
+                                    url: 'grid3_action.ashx?act=move',
+                                    params: {
+                                        classid: id,
+                                        value: ids
+                                    },
+                                    success: function(response, op){
+                                        var msg = response.responseText;
+                                        var obj = Ext.decode(msg);
+                                        if (obj) {
+                                            if (obj.success) {
+                                                store.reload();
+                                                return;
+                                            }
+                                            else {
+                                                msg = obj.data;
+                                            }
+                                        }
+                                        Ext.Msg.alert('信息', msg);
+                                    },
+                                    failure: function(response, op){
+                                        Ext.Msg.alert('信息', response.responseText);
+                                    }
+                                });
+                            }
+                        }
+                    },
+                    listeners: {
+                        scope: this,
+                        click: function(node, e){
+                            store.baseParams.classid = node.id
+                            store.baseParams.query = "";
+                            store.load();
+                        }
+                    }
+                });
+                
+                var dataPanel = new Ext.Panel({
+                    style: 'padding:0px 0px 5px 0px',
+                    region: 'center',
+                    title: 'Grid',
+                    layout: 'fit',
+                    autoScroll: true,
+                    closable: true,
+                    tbar: pageToolbar,
+                    items: grid
+                });
+                
+                var panel = new Ext.Panel({
+                    layout: 'border',
+                    width: 800,
+                    height: 400,
+                    applyTo: 'panel1',
+                    items: [tree, dataPanel]
+                });
+                
+                
+                Ext.get('op').dom.value = "";
+                store.load();
+            })
+        </script>
+    </body>
+</html>

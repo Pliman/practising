@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Buttons.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript" src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css" />
+
+		<script type="text/javascript">
+			require(["dijit/form/Button", "dojo/domReady!"], function(Button) {
+	            var button = new Button({
+	                label: "Click Me!",
+	                onClick: function(){ console.log("First button was clicked!"); }
+	            }, "btn");
+	            button.startup();
+	        });
+		</script>
+	</head>
+	<body class="claro">
+		<button id="btn"></button>
+	</body>
+</html>

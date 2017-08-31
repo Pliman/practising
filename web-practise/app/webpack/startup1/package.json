@@ -1,0 +1,9 @@
+{
+  "name": "startup1",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.0"
+  }
+}

@@ -1,0 +1,25 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>
+<script language="javascript">
+		function stringCompare(){
+			var string1 = '2009-03-22' ;
+			var string2 = '2009-03-25' ;
+			
+			if(string1.localeCompare(string2)){
+				alert('string1 排在在 string2之前') ;
+			}
+		}
+</script>
+<body>
+	<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="stringCompare()" type="button" id="stringCompare" name="stringCompare"
+						value="stringCompare"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+</body>
+</html>

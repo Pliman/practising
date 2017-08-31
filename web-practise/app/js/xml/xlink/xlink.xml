@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<homepages xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <homepage xlink:type="simple"
+  xlink:href="http://www.w3school.com.cn">Visit W3School</homepage>
+  
+  <homepage xlink:type="simple"
+  xlink:href="http://www.w3.org">Visit W3C</homepage>
+  
+</homepages>

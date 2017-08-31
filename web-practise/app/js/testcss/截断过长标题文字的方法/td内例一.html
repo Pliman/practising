@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<title>使用CSS截断过长标题文字的方法-HTMer</title>
+		<style>
+			td {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				word-break: keep-all;
+				//这个是必须的
+			}
+		</style>
+	</head>
+	<body>
+		<table width="550" border="0" cellpadding="5" cellspacing="1"
+			bgcolor="#007373" style="table-layout: fixed">
+			<tr>
+				<td bgcolor="#E8FFFF" title="用CSS实现超长字段被省略的简单方法阿隆索打开解放拉山口">
+					用CSS实现超长字段被省略的简单方法阿隆索打开解放拉山口
+				</td>
+				<td bgcolor="#E8FFFF">
+					用CSS实现超长字段被省略的简单方法阿斯蒂芬
+				</td>
+				<td bgcolor="#E8FFFF">
+					aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

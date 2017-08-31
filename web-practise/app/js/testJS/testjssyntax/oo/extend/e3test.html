@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>e2test.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src="extend.js"></script>
+		<script type="text/javascript">
+			function Vehicle(){
+				this.type = 'vehicle';
+			}
+			
+			Vehicle.prototype.showType = function(){
+				alert(this.type);
+			}
+			
+			function Car(){
+				this.classify = '小型';
+			}
+			
+			extend3(Car,Vehicle); //不用在构造函数中些apply，也是可以的，但是不知道传什么参数了，所以还是不怎么好
+			
+			var newCar = new Car();
+			
+			alert(newCar.showType);
+			newCar.showType();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,9 @@
+;;; ERROR: 1
+(module
+  (func(call $i32 ))
+  (func $UemoOy_size ))
+(;; STDERR ;;;
+out/test/regress/regress-1.txt:3:14: undefined function variable "$i32"
+  (func(call $i32 ))
+             ^^^^
+;;; STDERR ;;)

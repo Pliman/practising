@@ -1,0 +1,23 @@
+<html>
+	<body>
+		<div id="te1"
+			style="border: 1px solid red; width: 500px; height: 500px">
+			鼠标点中此区域后
+		</div>
+	</body>
+</html>
+<script language="javascript">
+  var etarget = document.body;
+  document.onclick = function (event){ 
+  	event = event || window.event;
+  	etarget = event.target || event.srcElement;
+  }
+  document.onkeyup = function ( event ){
+	  event = event || window.event;
+	  var srElement = event.target || event.srcElement;
+	  alert( etarget.tagName );
+	  
+	  var keyCode = event.keyCode || event.which
+	  alert( keyCode );
+  };
+</script>

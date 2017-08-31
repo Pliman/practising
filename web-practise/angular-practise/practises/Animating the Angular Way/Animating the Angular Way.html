@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="app" ng-controller="AppCtrl as app">
+
+<button class="btn" ng-click="app.fadeIt()">Click to fade</button>
+
+<div class="badge" hide-me="app.isHidden">Fade me</div>
+<div class="badge" >Fade me</div>
+<div class="badge" hide-me="app.isHidden">Fade me</div>
+<div class="badge" hide-me="app.isHidden">Fade me</div>
+<div class="badge" hide-me="app.isHidden">Fade me</div>
+<div class="badge" hide-me="app.isHidden">Fade me</div>
+
+<script type="text/javascript" src="../../lib/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../../lib/tween-max/TweenMax.js"></script>
+<script type="text/javascript" src="../../lib/angular/angular1.2.0.js"></script>
+<script type="text/javascript"
+        src="../../lib/angular/angular-animate.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

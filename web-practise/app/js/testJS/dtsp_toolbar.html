@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script language='javascript'>
+	var _isFF = false;//if firefox
+	var _isIE = false;//if IE
+	var _isOpera = false;
+	var _isKHTML = false;
+	var _isMacOS = false;
+	if (navigator.userAgent.indexOf("Macintosh") != -1) {
+		_isMacOS = true;
+	}
+	if ((navigator.userAgent.indexOf("Safari") != -1) || (navigator.userAgent.indexOf("Konqueror") != -1)) {
+		_isKHTML = true;
+	} else {
+		if (navigator.userAgent.indexOf("Opera") != -1) {
+			_isOpera = true;
+			_OperaRv = parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf("Opera") + 6, 3));
+		} else {
+			if (navigator.appName.indexOf("Microsoft") != -1) {
+				_isIE = true;
+			} else {
+				_isFF = true;
+				var _FFrv = parseFloat(navigator.userAgent.split("rv:")[1]);
+			}
+		}
+	}
+	
+ function btn_error(){alert('�ð�ť�����ã�');}
+ function onload_wfButton(){
+ var _tb = document.getElementById('toolBar');
+ if(_tb&&_tb.tagName=='TABLE'){
+ var _row = _tb.rows[0];
+ var _cells = _row.cells;
+ var _td1st = _cells[0];
+ var _anchors = _cells[0].getElementsByTagName("A");
+ var _index = -1;
+ var _bis = false;
+ _bis = true;
+ if(_anchors.length==0)_bis=false;
+ var leng = _anchors.length;
+ for(var i=0;i<_anchors.length;i++){
+ 		var _anchor = _anchors[i];
+ 		//var name = _anchor.nodeName;
+ 		if(_anchor.name=='return'){
+ 			_index=i;break;
+ 		}
+ }
+ if(_index==-1)_bis=false;
+ var _newAnchor = document.createElement('A');
+ _newAnchor.class = 'orange11';
+ _newAnchor.id = 'id_BV_FLOWMAP';
+ _newAnchor.name='BV_FLOWMAP';
+ _newAnchor.title='点击此按钮您可以查看当前审批流程的流程图，查看在您处理之前和之后的相关环节名称。';
+ _newAnchor.innerHTML = '查看流程图';
+ if(_bis){
+ 		_td1st.appendChild(_newAnchor);
+ 		//if (cells.length > 5)  
+		_td1st.appendChild(_td1st.removeChild(_anchors[_anchors.length-2]));
+		
+		var TOVIEWLAST = "";
+ }else{
+ 		_td1st.appendChild(_newAnchor);
+ }
+ try{
+ _newAnchor.onclick=function(){mapFrame._ev_flowMap();};
+ }catch(Exception){_newAnchor.onclick=btn_error;}
+ //createButton(_anchors);
+ }
+ if(typeof wf_buttonControl == 'function') wf_buttonControl('opinion;cause;backToSap;blankOut;BV_READING;BV_ASSIGN;BV_ASSIT1;BV_TOREAD;BV_SENDBACK;BV_TOCREATOR;BV_ABORTPROCESS;BV_WITHDRAW;BV_FLOWMAP','');
+ }
+ if(_isIE) window.attachEvent('onload',onload_wfButton);
+ else window.addEventListener('onload',onload_wfButton,false);
+ 
+ </script>
+ <title>testAnchor</title>
+ </head>
+ <body onload="onload_wfButton()">
+<table id='toolBar' cellpadding=0 cellspacing=0 width="100%" border="0"  class="list-top">
+<tbody>
+<tr>
+        <td class='list-caozuo'>
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_save','','parent')"  id="id_save"  name="save">���� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_opinion','','parent')"  id="id_opinion"  name="opinion">����д��� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_cause','','parent')"  id="id_cause"  name="cause">����дԭ�� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_submit','','parent')"  id="id_submit"  name="submit">�ύ </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_reload','','parent')"  id="id_reload"  name="reload">���� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_print','','parent')"  id="id_print"  name="print">����ӡ </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_jump','','this')"  id="id_jump"  name="jump">���⴦�� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_turn','','parent')"  id="id_turn"  name="turn">ת���������˴��� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_backToSap','','this')"  id="id_backToSap"  name="backToSap">�˻�SAP </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_blankOut','','this')"  id="id_blankOut"  name="blankOut">��� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_trialPower','','this')"  id="id_trialPower"  name="trialPower">����Ȩ�� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_trace','','this')"  id="id_trace"  name="trace">��̸��� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_explain','','this')"  id="id_explain"  name="explain">���˵�� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_help','','this')"  id="id_help"  name="help">���� </a> |
+<a href='#' class="orange11"  onaction="javascript:_execute_object_action('ev_return','','this')"  id="id_return"  name="return">�ر� </a> |
+      </td>
+   </tr>
+  </tbody>
+</table>
+</body>
+</html>

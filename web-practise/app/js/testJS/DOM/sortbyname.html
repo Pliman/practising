@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<style type="text/css">
+			.hidden {display:none;}
+		</style>
+		 
+		<script type="text/javascript">
+  		function sort(){
+  			var sourceContainer = document.getElementById('sourceContainer');
+  			var destContainer = document.getElementById('destContainer');
+  			var _destrow1st = destContainer.rows[0];
+  			
+  			var _sourcerows = sourceContainer.rows[0];
+  			var _cellsR0 = _sourcerows.cells;
+  			
+  			var totalruntimes = _cellsR0.length;
+  			var totalinserted = 0;
+  			for(var i = 0; i < totalruntimes; i++){
+  			  //alert('run ' + ( i + 1 ) + ' times.');
+  			  var currentElem = i - totalinserted;
+
+  				if(_cellsR0[currentElem].id == '2nd' || _cellsR0[currentElem].id == '4th' || _cellsR0[currentElem].id == '6th' || _cellsR0[currentElem].id == '8th'){
+  				  //alert('当前操作第 ' + currentElem + ' 号元素');
+  				  totalinserted = totalinserted + 1;
+  				  //alert(_cellsR0[currentElem]);
+  				  //alert('i = ' + i);
+  				  //alert('totalinserted = ' + totalinserted);
+  				  
+  				  var _newCell;
+  				  try{
+  				  	_newCell = _destrow1st.insertCell(totalinserted - 1);
+  				  	/*if(_cellsR0[currentElem].id == '4th'){
+  				  		_newCell = _destrow1st.insertCell(0);
+  				  	}if(_cellsR0[currentElem].id == '2nd'){
+  				  		_newCell = _destrow1st.insertCell(3);
+  				  	}if(_cellsR0[currentElem].id == '6th'){
+  				  		_newCell = _destrow1st.insertCell(1);
+  				  	}if(_cellsR0[currentElem].id == '8th'){
+  				  		_newCell = _destrow1st.insertCell(2);
+  				  	}*/
+  				  }catch(Exception){
+  						alert("insert cell error.");
+ 				  }
+  					_newCell.id = _cellsR0[currentElem].id;
+  					//_newCell.name = _cellsR0[currentElem].name;
+  				  if(totalinserted == 1){
+  					  _newCell.innerHTML = _cellsR0[currentElem].innerHTML;
+  				  }else{
+  				    _newCell.innerHTML = '|&nbsp;' +  _cellsR0[currentElem].innerHTML ;
+  				  }
+  				  _sourcerows.deleteCell(currentElem);
+  				}else{
+  				  var _forText = _cellsR0[currentElem].innerHTML;
+  				  if(_forText != null && i != 0){
+  				     _cellsR0[currentElem].innerHTML = '|&nbsp' + _forText;
+  				  }
+  			  }
+  			}
+  		}
+  		
+  		
+  		function sort1(matchTimes,matchFlag){
+  			
+  			//var namesToMatch = new Array("trace", "BV_FLOWMAP", "trialPower", "help", "return");
+  			var namesToMatch = new Array("6th", "8th", "4th", "2nd", "5th");
+  			var actionsToAdd = new Array("javascript:_execute_object_action('ev_trace','','this')", 
+  								"javascript:_execute_object_action('ev_trialPower','','this')", 
+  								"javascript:_execute_object_action('ev_help','','this')", 
+  								"javascript:_execute_object_action('ev_return','','this')");
+  		
+  			var sourceContainer = document.getElementById('sourceContainer');
+  			var _sourcerows = sourceContainer.rows[0];
+  			var _cellsR0 = _sourcerows.cells;
+  			
+  			var destContainer = document.getElementById('destContainer');
+  			var _destrow1st = destContainer.rows[0];
+  			
+  			//var matchTimes = 0;
+  			//var matchFlag = 0;
+  			
+  			for(var i = 0; i < namesToMatch.length; i++){
+  					matchTimes = matchTimes + 1;
+  					var index = getTdIndex(_cellsR0, namesToMatch[matchTimes - 1]);
+  					if(index != null){
+  						try{
+  							//addDestTd(_cellsR0[index], _destrow1st, matchFlag);
+  							var _newCell = destRow.insertCell(destTdIndex);
+				  			_newCell.id = _td.id;
+				  			_newCell.name = _td.name;
+				  			_newCell.onaction = "action";
+				  			if(matchFlag != 0){
+				  				_newCell.innerHTML = '|&nbsp;' + _td.innerHTML;
+				  			}else{
+				  				_newCell.innerHTML = _td.innerHTML;
+				  			}
+  							removeSourceTd(_sourcerows, index);
+  							matchFlag = matchFlag + 1;
+  						}catch(Exception){
+  							
+  						}					
+  					}else{
+  						
+  					}
+  			}
+  			
+  			sort1(matchTimes, matchFlag);
+  		}
+  		
+  		var operateTd = function(){
+  			
+  		}
+  		
+  		function addDecoration(){
+  			
+  		}
+
+  		function removeSourceTd(sourceRow, sourceTdIndex){
+  			sourceRow.removeChild(sourceRow.cells[sourceTdIndex]);
+  		}
+  		
+  		function addDestTd(_td, destRow, destTdIndex){
+  			var _newCell = destRow.insertCell(destTdIndex);
+  			_newCell.id = _td.id;
+  			_newCell.name = _td.name;
+  			_newCell.onaction = "action";
+  			_newCell.innerHTML = _td.innerHTML;
+  		}
+  		
+  		function getTdIndex(_tds, dest){	
+  			for(var i = 0; i < _tds.length; i++){
+  				if(_tds[i].id == dest && _tds[i].style.display != 'none'){
+  					alert(dest);
+  					//alert(i);
+  					//alert(_tds[i].style.display);
+  					return i;
+  				}
+  			}
+  				
+  			return null;	
+  		}
+  		
+  		function removeDisabled(sourceRows){
+  			
+  			var _tds = sourceRows.cells;
+  			
+  			var totalToRun = _tds.length;
+  			
+  			var removeFlag = 0;
+  		
+  			for(var i = 0; i < totalToRun; i++){
+	  			if(_tds[i - removeFlag].style.display == 'none'){
+	  				
+	  				sourceRows.removeChild(_tds[i - removeFlag]);
+	  				
+	  				removeFlag = removeFlag + 1;
+	  			}
+	  		}
+	  		
+	  		alert(_tds.length);
+  		}
+  		
+  		
+  		function sort2(){
+  			var namesToMatch = new Array("6th", "8th", "4th", "2nd", "5th");
+  			var actionsToAdd = new Array("javascript:_execute_object_action('ev_trace','','this')", 
+  								"javascript:_execute_object_action('ev_trialPower','','this')", 
+  								"javascript:_execute_object_action('ev_help','','this')", 
+  								"javascript:_execute_object_action('ev_return','','this')");
+  		
+  			var sourceContainer = document.getElementById('sourceContainer');
+  			var _sourcerows = sourceContainer.rows[0];
+  			var _cellsR0 = _sourcerows.cells;
+  			
+  			var destContainer = document.getElementById('destContainer');
+  			var _destrow1st = destContainer.rows[0];
+  			
+  			removeDisabled(_sourcerows);
+  			
+  			var matchFlag = 0;
+  			
+  			for(var i = 0; i < namesToMatch.length; i++){
+  				//alert('now will match ' + namesToMatch[i]);
+  				var index = getTdIndex(_cellsR0, namesToMatch[i]);
+  				//alert(index);
+  				/*if(index != null){
+  					_sourcerows.removeChild(_cellsR0[index]);
+  				}*/
+  				if(index != null){
+  				
+	  					matchFlag = matchFlag + 1;
+	  					try{
+	  						//addDestTd(_cellsR0[index], _destrow1st, matchFlag);
+	  						
+	  						var imgTd = _destrow1st.insertCell(2*(matchFlag - 1));
+	  						imgTd.width = "15px";
+	  						imgTd.align = "left";
+	  						var img = document.createElement("IMG");
+	  						img.align="right";
+					  		img.src = "../../img/submit.gif";
+					  		img.width = "12";
+					  		img.height = "10";
+					  		imgTd.appendChild(img);
+	  						
+	  						var _newCell = _destrow1st.insertCell(2*(matchFlag - 1) + 1);
+					  		_newCell.id = _cellsR0[index].id;
+					  		_newCell.name = _cellsR0[index].name;
+					  		_newCell.align = 'left';
+					  		_newCell.className='coolButtonEiac';
+					  		if(i == 0){
+					  			_newCell.onaction = actionsToAdd[0];
+					  		}else if(i == 1){
+					  			//_newCell.onclick = function(){mapFrame.ev_opinion();};
+					  			_newCell.onclick = function(){alert('Event added');};
+					  		}else if(i == 2){
+					  			_newCell.onaction = actionsToAdd[1];
+					  		}else if(i == 3){
+					  			_newCell.onaction = actionsToAdd[2];
+					  		}else if(i == 4){
+					  			_newCell.onaction = actionsToAdd[3];
+					  		}
+					  		if(matchFlag != 1){
+					  			_newCell.innerHTML = _cellsR0[index].innerHTML;
+					  		}else{
+					  			_newCell.innerHTML = _cellsR0[index].innerHTML;
+					  		}
+					  		
+	  						removeSourceTd(_sourcerows, index);
+	  					}catch(Exception){	
+	  					}
+			
+  				}
+  				
+  				if(i == (namesToMatch.length - 1)){
+  					
+  					/*var timesToRun = _sourcerows.cells.length;
+  					alert('timesToRun ' + timesToRun);
+  					//var displayArray = new Array(timesToRun);
+  					for(var k = 0; k < timesToRun; k++){
+  						alert('k = ' + k);
+  						alert(_sourcerows.cells[k]);
+  						if(_cellsR0[k] != null && _cellsR0[k].style.display == 'none'){
+  							removeSourceTd(_sourcerows, k);
+  						}
+  						//alert(k);
+  						//alert(displayArray[k]);
+  					}
+  					//alert(timesToRun);
+  					var insertFlag = 0;*/
+  					
+  					var finalTimesToRun = _cellsR0.length;
+  					alert('finalTimesToRun ' + finalTimesToRun);
+  					for(var j = 0; j < finalTimesToRun; j++){
+  						
+  							var imgTd = _sourcerows.insertCell(2*j);
+	  						imgTd.width = "15px";
+	  						imgTd.align = "left";
+	  						//alert(_cellsR0[(2*j + 1)].style.display);
+	  						
+	  						var img = document.createElement("IMG");
+	  						img.align="right";
+					  		img.src = "../../img/nopic.gif";
+					  		img.width = "12";
+					  		img.height = "10";
+					  		
+					  		imgTd.appendChild(img);
+  						
+  					}
+  					
+  				}
+  				
+  			}
+  		}
+  	</script>
+		<title>sortbyname</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table>
+			<tr>
+				<td>
+					<table border="1px" id="sourceContainer" name="sourceContainer" style="text-align: left">
+						<tr>
+							<td id="1st" name="1st">
+								1st
+							</td>
+							<td id="2nd" name="2nd" style="display:none">
+								2nd
+							</td>
+							<td id="3rd" name="3rd" style="display:none">
+								3rd
+							</td>
+							<td id="4th" name="4th" style="display:none">
+								4th
+							</td>
+							<td id="5th" name="5th" style="display:none">
+								5th
+							</td>
+							<td id="6th" name="6th">
+								6th
+							</td>
+							<td id="7th" name="7th">
+								7th
+							</td>
+							<td id="8th" name="8th">
+								8th
+							</td>
+							<td id="9th" name="9th">
+								9th
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table id="destContainer" style="text-align: right;">
+						<tr></tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
+
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="sort2()" type="button" id="sortbutton"
+						name="sortbutton" value="sort" style="background:white url(../../img/submit.gif) no-repeat center;"/>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>i18n</title>
+
+	<script src="../../lib/angular-1.5.7/angular.js"></script>
+	<script src="../../lib/angular-1.5.7/i18n/angular-locale_zh-cn.js"></script>
+	<script src="../../lib/angular-translate/angular-translate.js"></script>
+	<script src="i18n.js"></script>
+</head>
+<body ng-app="currencyExample">
+<div ng-controller="ExampleController">
+	<input type="number" ng-model="amount" aria-label="amount"> <br>
+	default currency symbol ($): <span id="currency-default">{{amount | currency}}</span><br>
+	custom currency identifier (USD$): <span id="currency-custom">{{amount | currency:"USD$"}}</span>
+	no fractions (0): <span id="currency-no-fractions">{{amount | currency:"USD$":0}}</span>
+
+	<div translate="TITLE"></div>
+
+	<pre>{{ 'TITLE' | translate }}</pre>
+	<button ng-click="changeLanguage('en')">ENGLISH</button>
+	<button ng-click="changeLanguage('de')">DEUTSCH</button>
+</div>
+</body>
+</html>

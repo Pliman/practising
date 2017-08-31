@@ -1,0 +1,42 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>TdAnchor</title>
+		<script type="text/javascript">
+			function ev_add(){
+				var td = document.getElementById("container").tBodies[0].rows[0].cells[0];
+				var a = document.createElement("A");
+				a.href= "#";
+				//a.style.margin = "15px";
+				a.id = "new";
+				a.innerHTML = "new";
+				td.appendChild(a);
+				var cells = td.getElementsByTagName("A");
+				var len = cells.length;
+				if (cells.length > 5)  
+					td.appendChild(td.removeChild(cells[cells.length-2]));				
+			}
+
+			function ev_delete(){
+				var test = document.getElementById("toobar");
+				var typeEle = typeof test;
+				var TOVIEWLAST = "";
+			}
+		</script>
+	</head>
+	<body>
+		<table id="container" cellspacing="0" cellpadding="0" border="0">
+			<tr>
+				<td>
+				 	<a href="#" id="1">1</a><a href="#" id="2">2</a><a href="#" id="3">3</a><a href="#" id="4">4</a><a href="#" id="5">5</a><a href="#" id="6">7</a><a href="#" id="8">8</a>
+			 	</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="添加" onclick="ev_add()" />
+					<input type="button" value="删除" onclick="ev_delete()" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

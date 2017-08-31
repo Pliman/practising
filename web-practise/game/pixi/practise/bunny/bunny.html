@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bunny</title>
+</head>
+<body>
+<script src="../lib/pixi.js"></script>
+<script>
+    var stage = new PIXI.Stage();
+    var renderer = PIXI.autoDetectRenderer(400, 300);
+
+    document.body.appendChild(renderer.view);
+    var sprite = new PIXI.Sprite.fromImage('bunny.png');
+
+    sprite.texture.baseTexture.on('loaded',function(){
+        renderer.render(stage);
+    });
+
+    stage.addChild(sprite);
+</script>
+</body>
+</html>

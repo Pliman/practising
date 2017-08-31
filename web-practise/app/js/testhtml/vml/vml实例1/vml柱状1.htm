@@ -1,0 +1,222 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml">   
+<head>   
+<title>图表</title>   
+<meta http-equiv="Content-Type" content="text/html; Charset=UTF-8" /></head>   
+<STYLE>   
+v\:* { BEHAVIOR: url(#default#VML) }   
+.memo{   
+     border-top: solid black;   
+    border-right:solid black;   
+     border-bottom:solid black;   
+   border-left:solid black;   
+     padding-top:10px;   
+     padding-left:10px;   
+     padding-bottom:10px;   
+     padding-right:10px;   
+border-width:1px;   
+     background-color:#EFEFEF;   
+     font-size:9pt;   
+    font-family:宋体;   
+}   
+.memo1{   
+     padding-top:3px;   
+     padding-left:3px;   
+     padding-bottom:3px;   
+     padding-right:3px;   
+border-width:1px;   
+     background-color:#EFEFEF;   
+     font-size:9pt;   
+     font-family:宋体;   
+}    
+   .ddd{   
+   border-top: solid silver;   
+   border-right:solid silver;   
+   border-bottom:solid silver;   
+   border-left:solid silver;   
+     border-width:1px;   
+}   
+.title{   
+     padding-top:5px;   
+     padding-left:10px;   
+     padding-bottom:5px;   
+     padding-right:10px;   
+     font-size:10pt;   
+     font-family:宋体;   
+}    
+A{   
+font-size:9pt;   
+color: blue;   
+text-decoration:none;   
+}   
+A:hover{color:red;text-decoration:underline;}   
+</STYLE>   
+<script>   
+  
+// 该段变量用 ASP 获取表单值 来设置   
+var aoNum = [2,2,2,2,2];    // 分数集合   
+var aoMember = [1,2,3,4,5,6]; // 分数对应集合   
+// 该段变量用 ASP 获取表单值 来设置   
+  
+var aoPercent = null; // 保存对 aoNum 成员对应应百分比   
+var count = 0;   
+// 设置 aoPercent   
+function InintaoPercent(){   
+   //aoMember = window.location.search.match(/counts=([^&]+)/)[1].split(",");   
+    //aoNum = window.location.search.match(/members=([^&]+)/)[1].split(",");   
+       
+      
+   count = eval(aoMember.join("+"));   
+   if(aoNum.length == 0) return false;   
+    aoPercent = new Array();   
+  
+   for(var i=0; i<aoNum.length; i++){   
+        aoPercent[i] = Math.round(100*aoMember[i]/count);   
+    }   
+  
+    for(var i = 0 ; i < aoNum.length; i ++)   
+    {   
+    temarray0[i] =  aoNum[i];   
+   temarray1[i] = Math.round(10* aoPercent[i]) // 1000 * aoPercent[i] / 100   
+    }   
+    dataarray[0] = temarray0   
+    dataarray[1] = temarray1   
+}   
+ 
+///////////////////////////////////////////////////////   
+var dSumData = 0  
+var dCs = 0  
+var MaxData = 0  
+var dataarray = new Array()     
+var temarray0 = new Array()   
+var temarray1 = new Array()   
+  
+function drawLinesX(m)   
+{      
+   var num = aoMember;   
+    for(var i=0;i<num.length;i++){   
+        for(var j=0;j<i;j++){   
+           if(parseInt(num[j])<parseInt(num[i])){   
+               var filter = num[j];   
+                num[j]=num[i];   
+                num[i]=filter;   
+            }   
+        }   
+    }   
+       
+    var temp = num[0]/5;   
+    count=0; //画横坐标   
+    var str = 1;   
+    var textPoint=Math.round(temp);   
+    for(var i=1;i<=10;i++){   
+        var py=2750-i*245;   
+        var strTo=m+" "+py;        
+        var newLine = document.createElement("<v:line from='200 "+py+"' to='"+strTo+"' style='position:absolute;z-index:8'></v:line>");   
+        group2.insertBefore(newLine);   
+        if(count%2!=0){            
+           var newStroke = document.createElement("<v:stroke color='#c0c0c0'>");   
+            newLine.insertBefore(newStroke);   
+           var newShape= document.createElement("<v:shape style='position:absolute;left:0;top:"+(py-50)+";WIDTH:1000px;HEIGHT:200px;z-index:8' coordsize='21600,21600' fillcolor='white'></v:shape>")    
+            group2.insertBefore(newShape);    
+            var newText = document.createElement("<v:textbox id='tx"+textPoint+"' inset='3pt,0pt,3pt,0pt' style='font-size:10pt;v-text-anchor:bottom-right-baseline'></v:textbox>");   
+            newShape.insertBefore(newText);   
+            newText.innerText=textPoint;   
+           str += 1;    
+            textPoint = Math.round(temp*str);   
+        }   
+        else{              
+            var newStroke = document.createElement("<v:stroke dashstyle='dot' color='black'/>");   
+           newLine.insertBefore(newStroke);   
+        }   
+        count++;   
+    }   
+  
+}   
+function drawLinesY()   
+{   
+   //画X轴上的刻度   
+   var textPoint= "";   
+    var fColWidth = 4200 / (dataarray[0].length + 1)   
+    var iCols = dataarray[0].length + 1  
+    for(var i=1;i<=iCols;i++){   
+    if(i != iCols) textPoint = dataarray[0][i-1]   
+    else textPoint = ""  
+    var py=170+ i * fColWidth ;   
+    var newLine = document.createElement("<v:line from='"+py+" 2700' to='"+py+" 2750' style='position:absolute;z-index:8'></v:line>");   
+    group2.insertBefore(newLine);   
+    var newStroke = document.createElement("<v:stroke color='black'>");   
+    newLine.insertBefore(newStroke);    
+    var newShape= document.createElement("<v:shape style='position:absolute;left:"+(py-50)+";top:2750;WIDTH:200px;HEIGHT:150px;z-index:8' coordsize='21600,21600' fillcolor='white'></v:shape>")     
+    group2.insertBefore(newShape);       
+    var newText = document.createElement("<v:textbox id='ty"+textPoint+"' inset='0pt,0pt,0pt,0pt' style='font-size:9pt;v-text-anchor:top-right-baseline'></v:textbox>");   
+    //生成文本筐   
+    newShape.insertBefore(newText);   
+    newText.innerHTML= textPoint;   
+    }   
+}   
+function drawBar(v,t,color)   
+{   
+    var textPoint= "";   
+    var fColWidth = 4200 / (dataarray[0].length + 1);   
+    var iCols = dataarray[0].length + 1;   
+  
+    for(var i = 0; i < iCols - 1; i ++)   
+    {   
+        if(MaxData < dataarray[1][i]) MaxData = dataarray[1][i];   
+        dSumData = dSumData + dataarray[1][i];   
+    }   
+    if(dSumData == 0) dSumData = 1;   
+    if(MaxData == 0) MaxData = 1;   
+    dCs = 2400 / MaxData;   
+    for(var i = 0; i < iCols - 1; i ++)   
+    {   
+        var textPoint = dataarray[1][i];   
+        var h = dCs * dataarray[1][i];   
+        var px=2700 - h;   
+        var py=170 + i * fColWidth + fColWidth / 4 * 3;   
+        var color1="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";   
+        //alert(color1)    
+        var newShape= document.createElement("<v:rect style='position:absolute;left:"+py+";top:"+px+";WIDTH:" + fColWidth / 2 + "px;HEIGHT:"+h+"px;z-index:9;border-width:0' fillcolor='" + color1 + "' title = '本项数值为：" + aoMember[i] + " 总和为：" + count + " 百分比：" + (aoPercent[i]) + "%'></v:rect>");    
+        group2.insertBefore(newShape);   
+   }   
+}   
+function drawBars()   
+{   
+drawLinesX(4500);   
+//画横线   
+drawLinesY();   
+//画X轴的刻度   
+drawBar(2.5,1,"blue");   
+}   
+  
+function window.onload(){   
+    InintaoPercent();   
+    drawBars();   
+}   
+</script>   
+<body style="margin: 0px; border: 0px;">   
+<table align="center" ID="Table1">   
+<tr>   
+<td >   
+<div class="memo" style="width:700;line-height:23px">   
+<center><strong>数据图表</strong></center>   
+<br>   
+<v:group ID="group2" style="WIDTH:700px;HEIGHT:500px" coordsize="4900,3500">   
+<v:line from="200,100" to="200,2700" style="Z-INDEX:8;POSITION:absolute" strokeweight="1pt">   
+<v:stroke StartArrow="classic"/>   
+</v:line>   
+<v:line from="200,2700" to="4500,2700" style="Z-INDEX:8;POSITION:absolute" strokeweight="1pt">   
+<v:stroke EndArrow="classic"/>   
+</v:line>   
+<v:rect style="WIDTH:4600px;HEIGHT:2900px" coordsize="21600,21600" fillcolor="white" strokecolor="black">   
+<v:shadow on="t" type="single" color="silver" offset="4pt,3pt"></v:shadow>   
+</v:rect>   
+    <v:shape style="position:absolute;left:50;top:2650;WIDTH:1000px;HEIGHT:200px;z-index:8" coordsize="21600,21600" fillcolor="white">   
+      <v:textbox id="text1" inset="3pt,0pt,3pt,0pt" align="center" style="font-size:10pt;v-text-anchor:bottom-center-baseline">0</v:textbox>   
+    </v:shape>   
+</v:group>   
+</div>   
+</td>   
+</tr>   
+</table>   
+</body>  
+</html>

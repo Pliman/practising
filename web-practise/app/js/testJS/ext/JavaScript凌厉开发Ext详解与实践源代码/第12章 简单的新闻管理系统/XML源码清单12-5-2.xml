@@ -1,0 +1,16 @@
+<!--XML源码清单12-5-2-->
+<membership defaultProvider="SqlProvider">
+    <providers>
+        <remove name="AspNetSqlMembershipProvider"/>
+        <add name="SqlProvider" type="System.Web.Security.SqlMembershipProvider" connectionStringName="dbConnection" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" passwordFormat="Hashed" minRequiredNonalphanumericCharacters="0" minRequiredPasswordLength="3" maxInvalidPasswordAttempts="5" passwordAttemptWindow="30" enablePasswordReset="true" enablePasswordRetrieval="false" applicationName="/">
+        </add>
+    </providers>
+</membership>
+<roleManager enabled="true" defaultProvider="CustomizedRoleProvider">
+    <providers>
+        <clear/>
+        <add name="CustomizedRoleProvider" type="System.Web.Security.SqlRoleProvider" applicationName="/" connectionStringName="dbConnection"/>
+    </providers>
+</roleManager>
+
+

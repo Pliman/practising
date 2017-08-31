@@ -1,0 +1,19 @@
+* text=auto
+*.c text
+*.h text
+*.js text
+*.l text
+*.md text
+*.py text
+*.rst text
+*.sh text
+*.txt text
+*.y text
+demo/primer.css binary
+demo/libwabt.js binary
+demo/third_party/codemirror/codemirror.css binary
+demo/third_party/codemirror/codemirror.js binary
+
+# Mark this test as binary so git doesn't change the line endings, since this
+# test is testing \r\n.
+test/parse/bad-crlf.txt binary

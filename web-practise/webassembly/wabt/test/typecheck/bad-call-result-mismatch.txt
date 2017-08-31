@@ -1,0 +1,29 @@
+;;; ERROR: 1
+(module
+  (import $import "foo" "bar" (result f32))
+  (func $direct (result i64) (i64.const 0))
+  (type $indirect (func (result i64)))
+  (table anyfunc (elem $direct))
+
+  (func
+    if 
+      call $direct
+    else
+      nop
+    end
+    if 
+      call_import $import 
+    else 
+      nop 
+    end
+    if
+      i32.const 0 
+      call_indirect $indirect 
+    else 
+      nop
+    end))
+(;; STDERR ;;;
+out/test/typecheck/bad-call-result-mismatch.txt:3:11: syntax error, unexpected VAR, expecting TEXT
+  (import $import "foo" "bar" (result f32))
+          ^^^^^^^
+;;; STDERR ;;)

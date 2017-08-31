@@ -1,0 +1,35 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>DomQuery入门_属性选择符</title>
+        <!-- 引入必要的Ext库文件-->
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+		<div id="bar" class="foo">
+			I'm a div ==> my id: bar, my class: foo
+			这是div标签，它的id为bar，class是foo
+			<span class="bar">这是span标签，它有样式bar</span>
+			<a href="http://www.extjs.com" target="_blank">An ExtJs link</a>
+		</div>
+		<div id="foo" class="bar">
+			这是div标签，它的id为foo，class是bar
+			<p>
+				这是段落p标签，外层div的id是foo
+			</p>
+			<span class="bar">这是span标签，它有样式bar </span>
+			<a href="#">内置链接</a>
+		</div>
+		<script>
+			//我们检查出任何存在有class属性的元素。这个查询会返回5个元素的数组。
+			console.log(Ext.query("*[class]")); // 结果：[body#ext-gen2.ext-gecko, div#bar.foo, span.bar, div#foo.bar, span.bar]
+
+		</script>
+    </body>
+</html>

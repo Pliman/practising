@@ -1,0 +1,11 @@
+{
+  "name": "socket-chat-example",
+  "version": "0.0.1",
+  "description": "msg transfer",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.10.2",
+    "multer": "^1.2.0",
+    "socket.io": "^1.5.1"
+  }
+}

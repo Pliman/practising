@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		function arrayconcat(){
+  			var array1 = new Array() ;
+  			var array2 = new Array("1","2","3");
+  			//var array3 = ["1","2","3"];
+  			var array3 = [""];
+  			alert((array1.concat(array2,array3)).toString()) ;
+  			alert((array3.concat(array2)).toString()) ;
+  			alert((array2.concat(array1)).toString()) ;
+  		}
+  	</script>
+    <title>arrayconcat</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <input onclick="arrayconcat()" type="button" id="idarrayconcat" name="arrayconcat" value="arrayconcat" />
+  </body>
+</html>

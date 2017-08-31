@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .main, .sitebar {
+      height: 300px;
+      font: bolder 20px/300px '微软雅黑';
+      color: #fff;
+      text-align: center;
+    }
+
+    .main {
+      /*可写，可不写*/
+      width: 100%;
+
+      /*不能有，导致两个div在同一个文档流中，宽度共享*/
+      /*float: left;*/
+      /*width: 60%;*/
+      /*打开就会换行 但是如果宽度+margin-left能够放得下剩余的空间，就不会换行*/
+      margin-left: 200px;
+      background-color: #9acfea;
+    }
+
+    .sitebar {
+      width: 200px;
+      float: left;
+      background-color: #11c1f3;
+    }
+  </style>
+</head>
+<body>
+<div class="sitebar">菜单</div>
+
+<div class="main">
+  <div class="content">content</div>
+</div>
+</body>
+</html>

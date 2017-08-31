@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>简单的测试页面</title>
+  <style type="text/css">
+  <!--
+    html
+    {
+      height: 100%;
+    }
+    body
+    {
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+    }
+    #dt_3
+    {
+      cursor: pointer;
+    }
+    div#mbDIV
+    {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: #AAAAAA;
+      z-index: 10;
+      filter: alpha(opacity=80);opacity:0.8;
+    }
+    div#loginDIV
+    {
+      position: absolute;
+      width: 300px;
+      height: 150px;
+      background-color: #FFFF00;
+      z-index: 20;
+    }
+    div#loginTopDIV
+    {
+      width: 100%;
+      height: 20px;
+      background-color: #FF0000;
+      cursor: move;
+    }
+  -->
+  </style>
+  <script type="text/javascript">
+  <!--
+    function show(ele)
+    {
+      eval(ele + ".style.display = ''");
+    }
+    function hidden(ele)
+    {
+      eval(ele + ".style.display = 'none'");
+    }
+  //-->
+  </script>
+</head>
+
+<body>
+<div style="overflow: hidden;">
+<h3>请点击 --> 03号拖拉机</h3>
+<p id="dt_1">01号拖拉机</p>
+<p id="dt_2">02号拖拉机</p>
+<p id="dt_3">03号拖拉机</p>
+<p id="dt_4">04号拖拉机</p>
+<p id="dt_5">05号拖拉机</p>
+<p id="dt_6">06号拖拉机</p>
+<p id="dt_7">07号拖拉机</p>
+<p id="dt_8">08号拖拉机</p>
+<p id="dt_9">09号拖拉机</p>
+<p id="dt_101">10号拖拉机</p>
+<p id="dt_102">10号拖拉机</p>
+<p id="dt_103">10号拖拉机</p>
+<p id="dt_104">10号拖拉机</p>
+<p id="dt_105">10号拖拉机</p>
+<p id="dt_106">10号拖拉机</p>
+<p id="dt_107">10号拖拉机</p>
+<p id="dt_108">10号拖拉机</p>
+<p id="dt_109">10号拖拉机</p>
+<p id="dt_1011">10号拖拉机</p>
+<p id="dt_1012">10号拖拉机</p>
+<p id="dt_1013">10号拖拉机</p>
+<p id="dt_1014">10号拖拉机</p>
+<p id="dt_10155">10号拖拉机</p>
+<p id="dt_11">11号拖拉机</p>
+在 window.onresize 的时候
+把灰色层的大小改变为 document.body.offsetWidth 、document.body.offsetHeight 就好了
+</div>
+
+<div id="mbDIV" style="display: none;"></div>
+<div id="loginDIV" style="top: 200px;left: 300px;display: none;">
+<div id="loginTopDIV">Move</div>
+<p style="text-align: center;">登陆内容在这里哦</p>
+<form action="#" method="get" style="text-align: center;">
+<input type="button" value="确定" id="button_1" /> <input type="button" value="取消" id="button_2" />
+</form>
+</div>
+
+<script type="text/javascript">
+<!--
+/**
+ * 这里是乱七八遭信息
+ */
+  for(var i=1;i<=11;i++)
+  {
+    eval("var dt_" + i + " = document.getElementById('dt_" + i + "')");
+  }
+  var mbDIV = document.getElementById("mbDIV");
+  var loginDIV = document.getElementById("loginDIV");
+  var loginTopDIV = document.getElementById("loginTopDIV");
+
+  document.getElementById("button_1").onclick = function()
+                                                {
+                                                  hidden("loginDIV");
+                                                  hidden("mbDIV");
+                                                }
+  document.getElementById("button_2").onclick = function()
+                                                {
+                                                  hidden("loginDIV");
+                                                  hidden("mbDIV");
+                                                }
+  dt_3.onclick = function()
+                 {
+                   loginDIV.style.top = "200px";
+                   loginDIV.style.left = "300px";
+                   show("loginDIV");
+                   show("mbDIV");
+                   var mbDIV = document.getElementById("mbDIV");
+                   mbDIV.style.height = document.body.clientHeight ;
+                   alert(document.body.clientHeight) ;
+                   alert(document.body.offsetHeight) ;
+                 }
+
+/**
+ * 这里写的是拖动信息
+ */
+    loginTopDIV.onmousedown = Down;
+    var tHeight,lWidth;
+    function Down(e)
+    {
+        var event = window.event || e;
+        tHeight = event.clientY  - parseInt(loginDIV.style.top.replace(/px/,""));
+        lWidth  = event.clientX - parseInt(loginDIV.style.left.replace(/px/,""));
+        document.onmousemove = Move;
+        document.onmouseup   = Up;
+    }
+    function Move(e) {
+        var event = window.event || e;
+        var top = event.clientY - tHeight;
+        var left = event.clientX - lWidth;
+        //判断 top 和 left 是否超出边界
+        top = top < 0 ? 0 : top;
+        top = top > document.body.offsetHeight - 150 ? document.body.offsetHeight - 150 : top;
+        left = left < 0 ? 0 : left;
+        left = left > document.body.offsetWidth - 300 ? document.body.offsetWidth - 300 : left;
+        loginDIV.style.top  = top + "px";
+        loginDIV.style.left = left +"px";
+    }
+    function Up() {
+        document.onmousemove = null;
+    }
+//-->
+</script>
+</body>
+</html>

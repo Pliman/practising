@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>一个用continue跳过后面代码，开始循环的下一次重复的Javascript示例代码</title>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//这段 Javascript 代码用来输出1到10之间的奇数。
+			var x ;
+			for (x=1; x<10; x++)
+			{
+				//如果x被2整除，则跳过后面代码，开始下一次重复；
+				//如果x不能被2整除，则执行后面代码，输出 x 。
+				if (x%2==0)
+					continue;
+				document.write (x + "<br>");
+			}
+		</script>
+
+	</body>
+</html>

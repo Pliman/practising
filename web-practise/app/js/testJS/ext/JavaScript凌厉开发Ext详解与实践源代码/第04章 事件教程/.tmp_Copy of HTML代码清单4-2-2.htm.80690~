@@ -1,0 +1,6 @@
+<script>
+	function popUp(){
+		alert('你单击了一个按钮');
+	}
+</script> 
+<button onClick="popUp();">单击我</button>

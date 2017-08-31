@@ -1,0 +1,69 @@
+1.内部dtd：需要声明在<!DOCTYPE note[]>中间，外部dtd直接包含内容即可，用<!DOCTYPE 根元素 SYSTEM "文件名">(<!DOCTYPE note SYSTEM "outerDTD.dtd">)引用进来即可
+
+2.内容格式 <!ELEMENT xxx (值type)>
+
+3.所有的 XML 文档（以及 HTML 文档）均由以下简单的构建模块构成：
+元素 :元素是 XML 以及 HTML 文档的主要构建模块。
+HTML 元素的例子是 "body" 和 "table"。XML 元素的例子是 "note" 和 "message" 。元素可包含文本、其他元素或者是空的。空的 HTML 元素的例子是 "hr"、"br" 以及 "img"。
+
+属性 :属性可提供有关元素的额外信息。
+属性总是被置于某元素的开始标签中。属性总是以名称/值的形式成对出现的。下面的 "img" 元素拥有关于源文件的额外信息：
+
+实体 :实体是用来定义普通文本的变量。实体引用是对实体的引用。
+大多数同学都了解这个 HTML 实体引用："&nbsp;"。这个“无折行空格”实体在 HTML 中被用于在某个文档中插入一个额外的空格。
+
+PCDATA :PCDATA 的意思是被解析的字符数据（parsed character data）。
+可把字符数据想象为 XML 元素的开始标签与结束标签之间的文本。
+被解析的字符数据不应当包含任何 &、< 或者 > 字符；需要使用 &amp;、&lt; 以及 &gt; 实体来分别替换它们。
+
+CDATA :CDATA 的意思是字符数据（character data）。
+CDATA 是不会被解析器解析的文本。在这些文本中的标签不会被当作标记来对待，其中的实体也不会被展开。
+
+4.声明一个元素
+在 DTD 中，XML 元素通过元素声明来进行声明。元素声明使用下面的语法：
+<!ELEMENT 元素名称 类别>或者
+<!ELEMENT 元素名称 (元素内容)>空元素
+空元素通过类别关键词EMPTY进行声明：
+<!ELEMENT 元素名称 EMPTY>
+
+5.带有任何内容的元素
+通过类别关键词 ANY 声明的元素，可包含任何可解析数据的组合：
+<!ELEMENT 元素名称 ANY>
+
+6.<!ELEMENT note (to,from,heading,body)>当子元素按照由逗号分隔开的序列进行声明时，这些子元素必须按照相同的顺序出现在文档中。在一个完整的声明中，子元素也必须被声明，同时子元素也可拥有子元素。
+声明最少出现一次的元素
+<!ELEMENT 元素名称 (子元素名称+)>例子：
+<!ELEMENT note (message+)>
+
+7.声明出现零次或多次的元素
+<!ELEMENT 元素名称 (子元素名称*)>例子：
+<!ELEMENT note (message*)>
+
+明出现零次或一次的元素
+<!ELEMENT 元素名称 (子元素名称?)>例子：
+<!ELEMENT note (message?)>
+
+声明“非.../既...”类型的内容
+例子：
+<!ELEMENT note (to,from,header,(message|body))>上面的例子声明了："note" 元素必须包含 "to" 元素、"from" 元素、"header" 元素，以及非 "message" 元素既 "body" 元素。
+声明混合型的内容
+例子：
+<!ELEMENT note (#PCDATA|to|from|header|message)*>上面的例子声明了："note" 元素可包含出现零次或多次的 PCDATA、"to"、"from"、"header" 或者 "message"。
+
+8.声明属性
+属性声明拥使用下列语法：
+<!ATTLIST 元素名称 属性名称 属性类型 默认值>DTD 实例:
+<!ATTLIST payment type CDATA "check">
+XML 实例:
+<payment type="check" />
+
+9.规定一个默认的属性值
+DTD:
+<!ELEMENT square EMPTY>
+<!ATTLIST square width CDATA "0">合法的 XML:
+<square width="100" />
+
+10.假如您不希望强制作者包含属性，并且您没有默认值选项的话，请使用关键词 #IMPLIED。
+假如您没有默认值选项，但是仍然希望强制作者提交属性的话，请使用关键词 #REQUIRED。
+如果您希望属性拥有固定的值，并不允许作者改变这个值，请使用 #FIXED 关键词。如果作者使用了不同的值，XML 解析器会返回错误。
+如果您希望属性值为一系列固定的合法值之一，请使用列举属性值。

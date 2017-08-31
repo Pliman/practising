@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	function setReqProcessors(req, cb) {
+		req.onsuccess = function (e) {
+			cb && cb(null, e.target.result);
+		};
+		req.onerror = function (e) {
+			cb && cb(e);
+		};
+	}
+
+	IDBTransaction = {
+		READ_WRITE: 'readwrite',
+		READ_ONLY: 'readonly'
+	};
+
+	var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+
+//	var request = indexedDB.open('testDB', 1); //不能downgrade 除非用'-1'
+	var request = indexedDB.open('testDB', 2); //相同版本可以正常使用
+//	var request = indexedDB.open('testDB'); // 不带版本，可以正常使用
+	request.onsuccess = function () {
+		db = request.result;
+
+		var tx = db.transaction('hha', IDBTransaction.READ_WRITE);
+		var store = tx.objectStore('hha');
+		var req = store.put({id: 'a', name: 'b'});
+		setReqProcessors(req, function (err, data) {
+			console.log(data);
+
+
+			req = store.get(['a', 'b']);
+			setReqProcessors(req, function (err, data) {
+				console.log(data);
+			});
+		});
+	};
+	request.onerror = function (e) {
+		console.error(e);
+	};
+
+	request.onupgradeneeded = function (event) {
+		var db = event.target.result;
+
+		store = db.createObjectStore('hha', {keyPath: ['id', 'name']});
+	};
+</script>
+</body>
+</html>

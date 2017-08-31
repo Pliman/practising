@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<treeview>
+	<tree id="p1">
+		<text>山东省</text>
+		<target>_blank</target>
+		<title>省份</title>
+		<link></link>
+		<tree id="p1-1">
+			<text>威海市</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+		</tree>
+		<tree id="p1-2">
+			<text>烟台市</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+			<node id="p1-2-1">
+				<text>长夼村</text>
+				<target>_blank</target>
+				<title>乡镇</title>
+				<link>http://www.baidu.com/</link>
+			</node>
+		</tree>
+		<node id="p1-3">
+			<text>富镇</text>
+			<target>_blank</target>
+			<title>乡镇</title>
+			<link>http://www.baidu.com/</link>
+		</node>
+	</tree>
+
+	<tree id="p2">
+		<text>河北省</text>
+		<target>_blank</target>
+		<title>省份</title>
+		<link></link>
+		<tree id="p2-1">
+			<text>泊头市</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+			<node id="p2-1-1">
+				<text>郊河</text>
+				<target>_blank</target>
+				<title>乡镇</title>
+				<link>http://www.baidu.com/</link>
+			</node>
+		</tree>
+		<tree id="p2-2">
+			<text>石家庄</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+		</tree>
+	</tree>
+
+	<tree id="p3">
+		<text>浙江省</text>
+		<target>_blank</target>
+		<title>省份</title>
+		<link></link>
+		<tree id="p3-1">
+			<text>杭州市</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+			<node id="p3-1-1">
+				<text>某镇</text>
+				<target>_blank</target>
+				<title>乡镇</title>
+				<link>http://www.baidu.com/</link>
+			</node>
+		</tree>
+		<tree id="p3-2">
+			<text>温州市</text>
+			<target>_blank</target>
+			<title>城市</title>
+			<link></link>
+			<node id="p3-2-1">
+				<text>某镇</text>
+				<target>_blank</target>
+				<title>乡镇</title>
+				<link>http://www.baidu.com/</link>
+			</node>
+		</tree>
+	</tree>
+</treeview>

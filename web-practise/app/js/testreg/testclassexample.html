@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	<script type="text/javascript">
+  		var test = function(name,age){   
+       		this.name = name || 'aa';   
+        	this.age = age || 58;   
+	    }   
+	    test.prototype = {   
+	        share : '都是这个prototype',   
+	        show : function(){   
+	            alert(this.name+" "+this.age);   
+	        }   
+	    }   
+	    var t = new test('zhan',25);   
+	    var t1 = new test('a',2);   
+	    t.show();   
+	    t1.show();   
+	    alert(t.share);   
+	    alert(t1.share);   
+  	</script>
+    <title>testclass.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    
+  </body>
+</html>

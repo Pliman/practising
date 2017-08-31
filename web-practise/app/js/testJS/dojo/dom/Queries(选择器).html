@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Queries.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript" src="../dojo/dojo.js"
+			data-dojo-config="async: true"></script>
+
+		<script>
+            // require the query and domReady modules
+			require(["dojo/query", "dojo/NodeList-dom", "dojo/dom-class", "dojo/domReady!"], function(query, domClass) {
+			    // retrieve an array of nodes with the ID "list"
+			    var list = query("#list")[0];
+			    
+			    query(".odd").forEach(function(node, index, nodelist){
+		            // for each node in the array returned by query,
+		            // execute the following code
+		            //domClass.add(node, "two");
+		        });
+			
+				// retrieve an array of nodes with the class name "odd"
+				var odds = query(".odd");
+				
+				// retrieve an array of nodes with the class name "odd"
+				// from the first list using a selector
+				var odds1 = query("#list .odd");
+				 
+				// retrieve an array of nodes with the class name "odd"
+				// from the first list using a DOM node
+				var odds2 = query(".odd", document.getElementById("list"));
+				
+				var oddA = query("a.odd");
+				
+				// Retrieve an array of any a element that has an
+				// li as its ancestor.
+				var allA = query("li a");
+				query("li a").addClass("red");
+				// Retrieve an array of any a element that has an
+				// li as its direct ancestor.
+				var someA = query("li > a");
+				
+				query(".hookUp").on("click", function(){
+		            alert("This button is hooked up!");
+		        });
+			});
+        </script>
+	</head>
+	<body>
+		<ul id="list">
+			<li class="odd">
+				<div class="bold">
+					<a class="odd">Odd</a>
+				</div>
+			</li>
+			<li class="even">
+				<div class="italic">
+					<a class="even">Even</a>
+				</div>
+			</li>
+			<li class="odd">
+				<a class="odd">Odd</a>
+			</li>
+			<li class="even">
+				<div class="bold">
+					<a class="even">Even</a>
+				</div>
+			</li>
+			<li class="odd">
+				<div class="italic">
+					<a class="odd">Odd</a>
+				</div>
+			</li>
+			<li class="even">
+				<a class="even">Even</a>
+			</li>
+		</ul>
+
+		<ul id="list2">
+			<li class="odd">
+				Odd
+			</li>
+		</ul>
+		
+		<button class="hookUp demoBtn">Click Me!</button>
+		<button class="hookUp demoBtn">Click Me!</button>
+		<button class="hookUp demoBtn">Click Me!</button>
+		<button class="hookUp demoBtn">Click Me!</button>
+	</body>
+</html>

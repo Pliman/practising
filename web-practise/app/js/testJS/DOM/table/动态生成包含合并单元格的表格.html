@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>动态生成包含合并单元格的表格 - www.webdm.cn</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<style>
+TABLE {
+	font-family: 宋体;
+	font-size: 9pt;
+	border-color: #7195c6;
+	border-collapse: collapse;
+	border-width: 1px
+}
+
+td {
+	border: #336699 1px solid;
+	font-size: 15px;
+	color: #02027a
+}
+</style>
+
+	</head>
+	<body>
+		<script type="text/JavaScript">
+		//将所有数据绑定在数组中
+var myData=[["姓名","年龄","年级","地址,电话","手机","备注"],
+			[null,null,null,"历史","地理","88888888"],
+			[null,null,null,null,"本例","66666666"],
+			[null,null,"一年级","北京三环","_","33333333"],
+			[null,null,"二年级","上海浦东","_","666666"],
+			[null,"12","三年级","广州深圳","_","33333222"],
+			[null,null,"四年级","香港九龙","_","32432432"]];
+
+var myDataT,rowcell=[];//默认的2个空数组
+
+document.body.appendChild((myDataT = document.createElement("TABLE")));//在当前窗体中动态添加表格
+for(var i=0; i<myData.length; i++){  //遍历表格中每项
+    var atr = myDataT.insertRow();   //动态添加行
+    for(var j=0; j<myData[i].length; j++){//遍历某项中的所有数据
+        if (myData[i][j]==null){          //如果值为空，表示需要合并
+       
+        rowcell[j].rowSpan++;                //使用rowspan
+        }
+        else if(myData[i][j]=="_"){      //如果是_，则使用colspan
+        rowcell[j-1].colSpan++;
+        }
+        else{
+        rowcell[j] = atr.insertCell();      //否则正常添加行
+        rowcell[j].innerText=myData[i][j];   //显示行内容
+        }
+    }
+}
+</script>
+		<br />
+	</body>
+</html>

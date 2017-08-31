@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+</head>
+<body>
+
+<div ng-app="app">
+	<!--如果script放到app外了，就找不到了-->
+	<!--<script type="text/ng-template" id="zippy.html">-->
+		<!--<div>-->
+			<!--<h3 ng-click="toggleContent()">{{title}}</h3>-->
+			<!--<div ng-show="isContentVisible" ng-transclude></div>-->
+		<!--</div>-->
+	<!--</script>-->
+
+	<input type="text" ng-model="model.title">
+	<input type="text" ng-model="model.content">
+
+	<zippy title="{{model.title}}">
+		The content is: {{model.content}}
+	</zippy>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

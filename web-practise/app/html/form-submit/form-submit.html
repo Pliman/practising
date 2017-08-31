@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="application/javascript">
+		function submitA () {
+			console.log('提交');
+			return false;
+		}
+	</script>
+</head>
+<body>
+	<form id="a" method="get" onsubmit="return submitA()" action="http://www.baidu.com">
+		<!--不能写成 onsubmit="submitA()" 否则表单总是提交-->
+		<input type="submit" />
+	</form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+  function go (cb) {
+    setTimeout(2000, function () {
+      console.log('go go go ');
+      cb('go');
+    });
+  }
+
+  function* genGo(){
+    // go(function (str) {
+    //   yield 'str'; -- 是不能这样使用的，会报错
+    // });
+
+    yield 'str';
+  }
+
+  var gen = genGo();
+
+  console.log(gen.next().value); // 0
+</script>
+</body>
+</html>

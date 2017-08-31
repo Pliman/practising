@@ -1,0 +1,4 @@
+/*多个CSS选择符应用同一种规则，可以用“逗号,”分隔开*/ 
+.x-tree-node img.oa-tree-myDesktop-Mail, .x-tree-node-collapsed img.oa-tree-myDesktop-Mail {
+    background: url(/myoffice_Mail_collapsed.gif) no-repeat;
+}

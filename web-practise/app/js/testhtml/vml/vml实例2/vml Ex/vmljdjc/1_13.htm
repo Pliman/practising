@@ -1,0 +1,32 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>shapetype模版</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:shapetype模版 - 实例讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:ShapeType id="m1" coordsize="1000 1000" fillcolor="yellow">
+<v:Path v="m0,0 l30,-30,60,0,0,0 e"/>
+</v:ShapeType>
+<v:Shape style="Z-INDEX:1;LEFT:271;WIDTH:1000;POSITION:absolute;TOP:225;HEIGHT:1000" type="#m1"/>
+<v:Shape style="Z-INDEX:1;LEFT:371;WIDTH:2600;POSITION:absolute;TOP:225;HEIGHT:4600" type="#m1"/>
+<v:Shape style="Z-INDEX:1;LEFT:271;WIDTH:1000;POSITION:absolute;TOP:300;HEIGHT:1000" type="#m1" fillcolor="red"/>
+</textarea>
+
+综合上一章节所学的shape多边形知识，相信在看这个例子不难分析出，shapetype是专门用来定义形状摸版的（不可见），而后在由shape标记引用、将模版实例化的按照path子属性值输出多边形（可见）。
+
+并在摸版里定义coordsize虚拟空间大小为1000 1000，而shape则由CSS定义width、height大小后负责输出，这样做的唯一好处就是节省代码、将长用的多边形路径存储模版方便以后以不同宽度、高度使用
+
+你当然可以定义多个模版，模版以id名称为标识，例如上例模版名称为m1，shape引用时只需将type值写成#m1即可引用。而且摸版也支持VML的通用标记设置默认的效果描述，shape引用时也支持VML的通用标记进一步修饰。
+
+如果你不理解v:Path v="m0,0 l30,-30,60,0,0,0 e"的意思，请参考上一章节。

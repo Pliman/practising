@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>本地模式下动态调整Combobox选择项</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/radiogroup.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+            .thumb {
+                background: #dddddd;
+                padding: 3px;
+            } .thumb table {
+                height: 120px;
+                width: 120px;
+            } .thumb img {
+                border: 1px solid white;
+            } .thumb-wrap {
+                float: left;
+                margin: 4px;
+                margin-right: 0;
+                padding: 5px;
+                width: 130px;
+                height: 144px;
+            } .thumb-wrap span {
+                display: block;
+                overflow: hidden;
+                text-align: center;
+                height: 24px;
+                line-height: 24px;
+            } .x-view-over {
+                border: 1px solid #dddddd;
+                background: #efefef url(../lib/ext/resources/images/default/grid/row-over.gif) repeat-x left top;
+                padding: 4px;
+            } .x-view-selected {
+                background: #eff5fb url(./images/selected.gif) no-repeat right bottom;
+                border: 1px solid #99bbe8;
+                padding: 4px;
+            } .x-view-selected .thumb {
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">本地模式下动态调整Combobox选择项</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                var id = 7;
+                
+                var arrayDatas = [[1, '小学'], [2, '初中'], [3, '高中'], [4, '中专'], [5, '大专'], [6, '大学']];
+                
+                var arrayDatas2 = [[1, '小学'], [2, '初中'], [3, '高中'], [4, '中专'], [5, '大专'], [6, '大学']];
+                
+                var jsonDatas = {
+                    results: 6,
+                    rows: [{
+                        retrunValue: 1,
+                        displayText: '小学'
+                    }, {
+                        retrunValue: 2,
+                        displayText: '初中'
+                    }, {
+                        retrunValue: 3,
+                        displayText: '高中'
+                    }, {
+                        retrunValue: 4,
+                        displayText: '中专'
+                    }, {
+                        retrunValue: 5,
+                        displayText: '大专'
+                    }, {
+                        retrunValue: 6,
+                        displayText: '大学'
+                    }]
+                }
+                
+                var simpleStore = new Ext.data.SimpleStore({
+                    fields: ["retrunValue", "displayText"],
+                    data: arrayDatas2
+                })
+                
+                var jsonStore = new Ext.data.Store({
+                    data: jsonDatas,
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'retrunValue'
+                    }, {
+                        name: 'displayText'
+                    }])
+                })
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 860,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: '本地模式下动态调整Combobox选择项',
+                    items: [{
+                        xtype: 'fieldset',
+                        title: '数组',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: arrayDatas,
+                            mode: 'local',
+                            forceSelection: true,
+                            blankText: '请选择学历',
+                            emptyText: '选择学历',
+                            hiddenName: 'education2',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '学历',
+                            name: 'education1',
+                            anchor: '90%'
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: 0.3,
+                                border: false,
+                                layout: 'form',
+                                items: [{
+                                    xtype: 'textfield',
+                                    hideLabel: true,
+                                    name: 'field1',
+                                    anchor: '90%',
+                                    allowBlank: false
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '增加',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('field1').isValid()) {
+                                            arrayDatas.push([id++, frm.form.findField('field1').getValue()]);
+                                            frm.form.findField('field1').setValue('');
+                                            frm.form.findField('field1').clearInvalid();
+                                            frm.form.findField('education2').store.loadData(arrayDatas);
+                                        }
+                                    }
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '删除当前选择项',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('education2').isValid()) {
+                                            var value = frm.form.findField('education2').getValue();
+                                            var removeIndex = -1;
+                                            for (var i = 0; i < arrayDatas.length; i++) {
+                                                if (arrayDatas[i][0] == value) {
+                                                    removeIndex = i;
+                                                    break;
+                                                }
+                                            }
+                                            if (removeIndex > 0) 
+                                                arrayDatas.splice(removeIndex, 1);
+                                            frm.form.findField('education2').clearValue();
+                                            frm.form.findField('education2').store.loadData(arrayDatas);
+                                        }
+                                    }
+                                }]
+                            }]
+                        }]
+                    }, {
+                        xtype: 'fieldset',
+                        title: 'SimpleStore',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: simpleStore,
+                            valueField: "retrunValue",
+                            displayField: "displayText",
+                            mode: 'local',
+                            forceSelection: true,
+                            blankText: '请选择学历',
+                            emptyText: '选择学历',
+                            hiddenName: 'education4',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '学历',
+                            name: 'education3',
+                            anchor: '90%'
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: 0.3,
+                                border: false,
+                                layout: 'form',
+                                items: [{
+                                    xtype: 'textfield',
+                                    hideLabel: true,
+                                    name: 'field2',
+                                    anchor: '90%'
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '增加',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('field2').isValid()) {
+                                            arrayDatas2.push([id++, frm.form.findField('field2').getValue()]);
+                                            frm.form.findField('field2').setValue('');
+                                            frm.form.findField('field2').clearInvalid();
+                                            simpleStore.loadData(arrayDatas2);
+                                        }
+                                    }
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '删除当前选择项',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('education4').isValid()) {
+                                            var value = frm.form.findField('education4').getValue();
+                                            var removeIndex = -1;
+                                            for (var i = 0; i < arrayDatas2.length; i++) {
+                                                if (arrayDatas2[i][0] == value) {
+                                                    removeIndex = i;
+                                                    break;
+                                                }
+                                            }
+                                            if (removeIndex > 0) 
+                                                arrayDatas2.splice(removeIndex, 1);
+                                            frm.form.findField('education4').clearValue();
+                                            simpleStore.loadData(arrayDatas2);
+                                        }
+                                    }
+                                }]
+                            }]
+                        }]
+                    }, {
+                        xtype: 'fieldset',
+                        title: 'JsonStore',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: jsonStore,
+                            valueField: "retrunValue",
+                            displayField: "displayText",
+                            mode: 'local',
+                            forceSelection: true,
+                            blankText: '请选择学历',
+                            emptyText: '选择学历',
+                            hiddenName: 'education6',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '学历',
+                            name: 'education5',
+                            anchor: '90%'
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: 0.3,
+                                border: false,
+                                layout: 'form',
+                                items: [{
+                                    xtype: 'textfield',
+                                    hideLabel: true,
+                                    name: 'field3',
+                                    anchor: '90%'
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '增加',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('field3').isValid()) {
+                                            jsonDatas.rows.push({
+                                                retrunValue: id++,
+                                                displayText: frm.form.findField('field3').getValue()
+                                            });
+                                            frm.form.findField('field3').setValue('');
+                                            frm.form.findField('field3').clearInvalid();
+                                            jsonStore.loadData(jsonDatas);
+                                        }
+                                    }
+                                }]
+                            }, {
+                                columnWidth: 0.3,
+                                border: false,
+                                items: [{
+                                    xtype: 'button',
+                                    text: '删除当前选择项',
+                                    scope: this,
+                                    handler: function(){
+                                        if (frm.form.findField('education6').isValid()) {
+                                            var value = frm.form.findField('education6').getValue();
+                                            var removeIndex = -1;
+                                            for (var i = 0; i < jsonDatas.rows.length; i++) {
+                                                if (jsonDatas.rows[i].retrunValue == value) {
+                                                    removeIndex = i;
+                                                    break;
+                                                }
+                                            }
+                                            if (removeIndex > 0) 
+                                                jsonDatas.rows.splice(removeIndex, 1);
+                                            frm.form.findField('education6').clearValue();
+                                            jsonStore.loadData(jsonDatas);
+                                        }
+                                    }
+                                }]
+                            }]
+                        }]
+                    }, {
+                        xtype: 'button',
+                        text: "form.getValues()",
+                        scope: this,
+                        handler: function(){
+                            Ext.get('op').dom.value += "执行：frm.form.getValues()\n" +
+                            '结果：' +
+                            Ext.encode(frm.form.getValues()) +
+                            '\n';
+                        }
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+                
+            })
+        </script>
+    </body>
+</html>

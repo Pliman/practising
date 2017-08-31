@@ -1,0 +1,31 @@
+<a href="#" title="" class="openLink">0</a>
+<a href="#" title="" class="openLink">1</a>
+<a href="#" title="" class="openLink">2</a>
+<a href="#" title="" class="openLink">3</a>
+
+
+<script>
+        document.getElementsByClassName = function(eleClassName)
+        {
+                var getEleClass = [];//定义一个数组
+                var myclass = new RegExp("\\b"+eleClassName+"\\b");//创建一个正则表达式对像
+                var elem = this.getElementsByTagName("*");//获取文档里所有的元素
+                for(var h=0;h<elem.length;h++)
+                {
+                        var classes = elem[h].className;//获取class对像
+                        if (myclass.test(classes)) getEleClass.push(elem[h]);//正则比较，取到想要的CLASS对像
+                }
+                return getEleClass;//返回数组
+        }
+
+
+        var openLink = document.getElementsByClassName("openLink");
+        for (i = 0; i< openLink.length ; i++ )
+        {
+                (function(i){
+                        openLink[i].onclick = function (){
+                                alert(i);
+                        }
+                })(i);
+        }
+</script>

@@ -1,0 +1,163 @@
+<!--HTML代码清单8-9-1--> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>TinyMCE Editor例子</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ux/miframe-min.js">
+        </script>
+        <script type="text/javascript" src="../lib/tiny_mce/tiny_mce.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/Ext.ux.TinyMCE.js">
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">TinyMCE Editor例子</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="button">
+                </div>
+                <div id="form">
+                </div>
+            </p>
+            <br/>
+        </div>
+        <script>
+var app = {};
+Ext.ux.TinyMCE.initTinyMCE({
+    language: "zh"
+});
+
+Ext.onReady(function(){
+    var frm = new Ext.form.FormPanel({
+        title: "TinyMCE editor",
+        applyTo: "form",
+        autoHeight: true,
+        width: 750,
+        frame: true,
+        buttons: [{
+            text: "保存方式一",
+            handler: function(){
+                // 同步值
+                tinyMCE.triggerSave();
+                frm.getForm().submit({
+                    url: "/",
+                    method: "GET"
+                });
+            }
+        }, {
+            text: "保存方式2",
+            handler: function(){
+                //同步值到一个特殊的编辑控件
+                Ext.getCmp("richText").syncValue();
+                frm.getForm().submit({
+                    url: "/",
+                    method: "GET"
+                });
+            }
+        }],
+        items: [{
+            xtype: "tinymce",
+            fieldLabel: "内容",
+            id: "richText",
+            name: "richText",
+            width: 600,
+            height: 400,
+            tinymceSettings: {
+                theme: "advanced",
+                skin: "o2k7",
+                language: "zh",
+                plugins: "safari,pagebreak,style,layer,table,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+                theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+                theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+                theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|",
+                theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+                theme_advanced_toolbar_location: "top",
+                theme_advanced_toolbar_align: "left",
+                theme_advanced_statusbar_location: "bottom",
+                theme_advanced_resizing: false,
+                extended_valid_elements: "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+                template_external_list_url: "example_template_list.js"
+            },
+            value: "<h1>演示</h1><p>Ext.ux.TinyMCE ...</p>"
+        }]
+    });
+    
+    var dlg = new Ext.Window({
+        title: "TinyMCE",
+        width: 700,
+        height: 500,
+        minWidth: 100,
+        minHeight: 100,
+        maximizable: true,
+        layout: "fit",
+        modal: true,
+        resizable: true,
+        closeAction: "hide",
+        hideMode: "offsets",
+        constrainHeader: true,
+        buttons: [{
+            text: "保存",
+            handler: function(){
+                Ext.getCmp("myform").getForm().submit({
+                    url: "/test.aspx",
+                    method: "GET"
+                });
+            },
+            scope: this
+        }],
+        items: [{
+            id: "myform",
+            xtype: "form",
+            autoScroll: true,
+            bodyStyle: 'padding: 10px',
+            border: false,
+            labelSeparator: "",
+            bodyBorder: false,
+            items: [{
+                name: "richtext",
+                xtype: "tinymce",
+                hideLabel: true,
+                anchor: "100% 100%",
+                tinymceSettings: {
+                    theme: "advanced",
+                    skin: "o2k7",
+                    language: "zh",
+                    plugins: "safari,pagebreak,style,layer,table,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+                    theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+                    theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+                    theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|",
+                    theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+                    theme_advanced_toolbar_location: "top",
+                    theme_advanced_toolbar_align: "left",
+                    theme_advanced_statusbar_location: "bottom",
+                    theme_advanced_resizing: false,
+                    extended_valid_elements: "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+                    template_external_list_url: "example_template_list.js"
+                },
+                value: "<h1>演示</h1><p>Ext.ux.TinyMCE ...</p>"
+            }]
+        }]
+    });
+    
+    var b = new Ext.Button({
+        text: '在对话框中使用',
+        handler: function(){
+            dlg.show();
+        },
+        renderTo: "button"
+    });
+});
+        </script>
+    </body>
+</html>

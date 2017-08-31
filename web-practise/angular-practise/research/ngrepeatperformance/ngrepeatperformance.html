@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body ng-app="app">
+
+<div ng-controller="AppCtrl">
+	<div ng-repeat="user in users">
+		<div ng-if="$index.toString() =='0'">{{$index}}</div>
+
+		<div>{{user.id}} &nbsp; {{user.name}} {{$index}}
+			<img width="20px" height="20px" src="{{user.pic}}"/>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript" src="ngrepeatperformance.js"></script>
+</body>
+</html>

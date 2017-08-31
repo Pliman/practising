@@ -1,0 +1,141 @@
+<html>
+
+    <head>
+
+        <title>03.grid</title>
+
+        <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript">
+
+Ext.onReady(function(){
+	
+	var datae = {
+				    'results': 2,
+				    'rows': [
+				        { 'id': 1, 'firstname': 'Bill', occupation: 'Gardener' },         // a row object
+				        { 'id': 2, 'firstname': 'Ben' , occupation: 'Horticulturalist' }  // another row object
+				    ]
+				};
+				
+	var Employee = Ext.data.Record.create([
+	    {name: 'firstname'},                  //将记录的 "firstname"字段映射到数据行的对象的同名键
+	    {name: 'job', mapping: 'occupation'}  // 将"job"字段映射到数据行对象的"occupation" 键
+	]);
+	var myReader = new Ext.data.JsonReader({
+	    totalProperty: "results",             // 包含数据集总大小的参数(可选)
+	    root: "rows",                         // 包含一个数据行对象数组的参数
+	    id: "id"                              // The property within each row object that provides an ID for the record (可选)
+	}, Employee);
+	var storee = new Ext.data.Store({
+			        proxy: new Ext.data.MemoryProxy(datae),
+			
+			        reader: myReader
+			        
+			    });
+    storee.load();
+	
+	
+	
+	var transChar = {translator:[{value:'10',text:'哺乳假'},{value:'3',text:'产假'},{value:'5',text:'病假'},{value:'7',text:'丧假'},{value:'2',text:'婚假'},{value:'11',text:'计划生育假'},{value:'9',text:'流产假'},{value:'4',text:'看护假'},{value:'8',text:'探亲假'},{value:'12',text:'工伤假'},{value:'6',text:'事假'},{value:'1',text:'年假'}]} ;
+	
+	var transRec = Ext.data.Record.create([
+	    {name: 'value'},
+	    {name: 'text'}
+	]);
+	var transReader = new Ext.data.JsonReader({
+	    root: "translator",
+	    id: "value"
+	}, transRec);
+	var transStore = new Ext.data.Store({
+		id:'value' ,
+		proxy: new Ext.data.MemoryProxy(transChar),
+		reader: transReader
+	});
+	transStore.load();
+	
+	var yFData = {} ;
+    yFData.translator = new Array() ;
+    var element = {value:'3',text:'sssss'}
+    yFData.translator[0] = element ;
+    //alert(yFData.translator[0].text) ;
+	
+    alert(transStore.getAt(1).data['text']) ;
+
+	var cm = new Ext.grid.ColumnModel([
+
+        //{header:'编号',dataIndex:'id'},
+
+        {header:'值',dataIndex:'value'},
+
+        {header:'显示值',dataIndex:'text'}
+
+    ]);
+
+    var grid = new Ext.grid.GridPanel({
+
+        width:600,
+        
+    	height:200,
+    	
+    	autoExpandColumn : true,
+
+        renderTo: 'grid',
+
+        store: transStore,
+
+        sm: new Ext.grid.RowSelectionModel({singleSelect:true}),//可要可无！如果不设置,按住Ctrl键可多选
+
+        cm: cm
+
+    });
+
+ 
+
+    var ExtButton = new Ext.Button({
+
+        text: '选择行信息',
+
+        renderTo: 'but1',
+
+        handler: function() { //行的选择//////////
+
+        var selections = grid.getSelectionModel().getSelections();
+
+        if (selections.length == 0) { Ext.Msg.alert('提示', "先选择行"); return; }
+
+ 
+
+        for (var i = 0; i < selections.length; i++) {
+
+            var record = selections[i];
+
+            Ext.Msg.alert('提示', record.get("id") + "," + record.get("name") + "," + record.get("descn"));
+            //Ext.Msg.alert窗口不允许弹出多个,只会显示最后一个窗口
+
+        }
+
+        }
+
+    });
+
+ 
+
+});
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <div id="grid" style="height:200px;"></div>
+
+        <div id="but1"></div>
+
+    </body>
+
+</html>

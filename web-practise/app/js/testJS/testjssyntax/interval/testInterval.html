@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>testInterval.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript">
+			var interval = null;
+			
+			function makeInterval(){
+				interval = window.setInterval(setTime,1000);
+			}
+			
+			function setTime(){
+				var msger = document.getElementById('msger');
+				msger.innerHTML = getClientTime();
+			}
+			
+			function getClientTime(){
+				var time = '';
+				var date = new Date();
+				var year = date.getFullYear();
+				
+				var month = date.getMonth() + 1;
+				month = month<10?'0'+month:month;
+				
+				var day = date.getDate();
+				day = day<10?'0'+day:day;
+				
+				var hours = date.getHours();
+				hours = hours<10?'0'+hours:hours;
+				
+				var minutes = date.getMinutes();
+				minutes = minutes<10?'0'+minutes:minutes;
+				
+				var seconds = date.getSeconds();
+				seconds = seconds<10?'0'+seconds:seconds;
+				
+				time = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
+				
+				return time;
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" onclick="makeInterval()" value="设置间隙" />
+		<div id="msger"></div>
+	</body>
+</html>

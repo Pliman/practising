@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+  		function testarray(){
+  			var obj1 = {name:1,age:5};
+  			var obj2 = {name:9};
+  			var obj3 = {name:3,age:77};
+  			var obj4 = {name:7};
+  			var obj5 = {name:5,age:89};
+  			
+  			var arr = [obj1,obj2,obj3,obj4,obj5];
+  			
+  			arr.remove = function(){};
+  			arr.indexOf = function(){};
+  			
+  			arr.sort(function(x,y){
+  				var xage = Number.MAX_VALUE;
+  				if(x.age){
+  					xage = x.age;
+  				}
+  				
+  				var yage = Number.MAX_VALUE;
+  				if(y.age){
+  					yage = y.age;
+  				}
+  				
+  				if(xage >= yage){
+  					return 1;
+  				}
+  				if(xage < yage){
+  					return -1;
+  				}
+  			});
+  			
+  			var arr1 = arr;
+  		}
+  	</script>
+		<title>array</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<input onclick="testarray()" type="button" id="testarray"
+			name="testarray" value="testarray" />
+	</body>
+</html>

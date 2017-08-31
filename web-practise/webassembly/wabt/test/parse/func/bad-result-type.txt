@@ -1,0 +1,7 @@
+;;; ERROR: 1
+(module (func (result foo)))
+(;; STDERR ;;;
+out/test/parse/func/bad-result-type.txt:2:23: unexpected token "foo"
+(module (func (result foo)))
+                      ^^^
+;;; STDERR ;;)

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="angularScroll">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style rel="stylesheet">
+		.section {
+			height: 20px;
+			width: 300px;
+			margin-bottom: 20px;
+			background-color: #88edff;
+			left: 60px;
+			position: relative;
+		}
+
+		.shortcutArea {
+			position: fixed;
+		}
+
+		.shortcut {
+			width: 30px;
+			margin: 3px;
+			background-color: #006dcc;
+			cursor: pointer;
+		}
+
+		div.active {
+			background: #00AC7F;
+			color: #fff;
+		}
+
+		.area {
+			background-color: #50cc5d;
+			position: relative;
+			left: 60px;
+		}
+	</style>
+</head>
+<body ng-controller="angularScrollCtrl">
+	<div class="shortcutArea">
+		<div class="shortcut" ng-repeat="section in sections" ng-click="jumpToSection(section)" href="#{{section}}" du-smooth-scroll du-scrollspy>
+			{{section}}
+		</div>
+	</div>
+
+	<div id="container111" du-scroll-container="container111">
+		<div class="area" ng-repeat="section in sections" id="{{section}}">
+			{{section}}
+			<div class="section" ng-repeat="item in items">
+				{{item}}
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript"
+        src="../../lib/angular/angular1.3.6.js"></script>
+<script type="text/javascript"
+        src="../../lib/angular-scroll/angular-scroll.js"></script>
+<script src="angular-scroll.js"></script>
+</body>
+</html>

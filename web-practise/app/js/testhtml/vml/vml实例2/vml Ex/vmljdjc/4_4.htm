@@ -1,0 +1,258 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>几件精彩脚本</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:几件精彩脚本</span>
+
+最近2年里，自己的WEB前端脚本编程能力随着在一次次开发过程中不断的进步，创作发布了许多精彩的脚本程序、回复了论坛许多网友问题。而所有的脚本不易数计、不易整理，在这里只提供几个精选 - WEB开发中用得着的、特别的、实用的、经典的几例，献给广大的WEB开发人员和网页设计人员。
+
+
+
+1:解决HTML编辑空间回车输入&lt;p>而不是&lt;br>
+<textarea>
+<DIV ID="a" contentEditable="true" style='border:1 solid black'>关于微软HTML编辑控件（也适用于可编辑的iframe）单击回车会插入&lt;p>而不是&lt;br>的解决方案</DIV> <p>
+<div style='border:1 solid black' contentEditable="true">未经过脚本处理的编辑控件</div>
+<script>
+function a.onkeypress(){ 
+if(event.keyCode==13){
+var txtobj=document.selection.createRange()
+txtobj.text==""?txtobj.text="\n":(document.selection.clear())&(txtobj.text="\n") //三目复合表达式,解决有被选文字时回车的光标定位问题
+document.selection.createRange().select()
+return false
+}}
+</script> 
+</textarea>
+
+2:实现多个bgsound声音文件的预加载
+<textarea no>
+<bgsound loop=1 id=bgsound1> <!--用做前景音乐-->
+<bgsound loop=-1 id=bgsound2> <!--用做背景音乐-->
+<bgsound loop=1 volume=-10000 src="homesounds/kaimen.wav">
+<bgsound loop=1 volume=-10000 src="homesounds/toolclick.wav">
+<bgsound loop=1 volume=-10000 src="homesounds/nextimg.wav">
+<bgsound loop=1 volume=-10000 src="homesounds/imgchange.wav">
+<script>
+window.status='相关程序图型音乐资源正在加载中，请等待，Loading'
+function window.onload(){  //加载完成后
+temp1=document.all.tags("BGSOUND").length
+for(i=2;i<temp1;i++){document.all.tags("BGSOUND")[2].removeNode()}  //卸载所有bgsound音效预加载对象
+}
+</script>
+<input type='button' onclick='bgsound1.src="toolclick.wav"' value="快速声音">
+<input type='button' onclick='bgsound1.src="nextimg.wav"' value="快速声音2">
+<input type='button' onclick='bgsound1.src="imgchange.wav"' value="快速声音3">
+<input type='button' onclick='bgsound1.src="kaimen.wav"' value="快速声音4">
+</textarea>
+
+3:最简单的二个下拉菜单连动范例
+<textarea>
+<select onchange='ok(this)' id=a><option>音乐<option>电影</select>
+<select id=b>
+</select>
+<script>
+function ok(objs){
+if(objs.options[objs.selectedIndex].text=="音乐")b.outerHTML="<select id=b><option selected>音乐1<option>音乐2"
+if(objs.options[objs.selectedIndex].text=="电影")b.outerHTML="<select id=b><option selected>电影1<option>电影2"
+}
+ok(a)
+</script>
+</textarea>
+
+4:根据勿及必返原理设计的飞行图片，容器不限制于网页
+<textarea>
+<BODY topmargin='2' leftmargin='2'>
+<BASE target='_top'>
+<div id=a style='table-Layout:fixed;width:100%;height:100%;border:1 solid black'></div>
+<script>
+var wid1,hei1,str1="",xx=0,yy=0,xjia=true,yjia=true   //定义全局变量，为提高运行速度
+wid1=a.offsetWidth-70;hei1=a.offsetHeight-70  //得到容器的宽和高
+ //首次向容器内塞进1个飞行的图片，图片位置属性是随机的
+tempx=Math.round(Math.random()*wid1);tempy=Math.round(Math.random()*hei1);
+str1+="<a href='http://www.51js.com' target='_blank'><img src='haha.gif' style='position:absolute;left:"+tempx+";top:"+tempy+";z-index:10;width:90;height:90;' id='img1' border=0></a>"
+a.innerHTML=str1;
+function play1(){ //播放函数
+wid1=a.offsetWidth;hei1=a.offsetHeight
+if(wid1-xx<90)xjia=false //到达X极限，值为FALSE
+if(xx<5)xjia=true  //到达X起点，值为TRUE
+if(hei1-yy<90)yjia=false
+if(yy<5)yjia=true
+if (xjia==true)xx+=5;else xx-=5 //TRUE的话就++，FALSE的话就--
+if (yjia==true)yy+=5;else yy-=5
+img1.style.left=xx;img1.style.top=yy //更新球的位置
+}
+setInterval("play1()",10) //10毫秒播放一次
+</script>
+</textarea>
+
+5:帝国时代类的游戏JS设计基础，点击与移动
+<textarea>
+<body onclick="moveLayer(a)">
+<div id="a" style="width:10;height:10;background:red;position:absolute;left:10;top:10;font-size:5"></div>
+<div id="b" style="width:3;height:2;background:blue;position:absolute;left:10;top:10;font-size:3;display:none"></div>
+<script>
+var oldx=0,oldy=0,newx=0,newy=0,time1=null,time2=null  //记录旧的坐标、新的坐标，定义2个定时器
+var xmovelen=0,ymovelen=0,objid=null  //记录新的坐标-旧的坐标=移动总值，定义一个记录obj.id的变量
+var xbuchang=0,ybuchang=0  //记录移动步长，可以是-1或1
+function moveLayer(obj){
+oldx=parseInt(obj.style.left)
+oldy=parseInt(obj.style.top)
+newx=event.x;newy=event.y
+b.style.display='';b.style.left=newx;b.style.top=newy  //显示蓝点
+xmovelen=newx-oldx
+ymovelen=newy-oldy
+xmovelen<0?xbuchang=-1:xbuchang=1;  //判断是向左还是向右移动
+ymovelen<0?ybuchang=-1:ybuchang=1;  //判断是向上还是向下移动
+objid=obj.id  //给定时器一个obj.id，供记时执行时控制对象
+if(time1!=null||time2!=null){  //移动未完成时，中途点击鼠标，则取消上次定时器程序
+clearInterval(time1);time1=null;clearInterval(time2);time2=null;
+}
+time1=setInterval("if(xmovelen!=0){xmovelen-=xbuchang;document.all(objid).style.left=parseInt(document.all(objid).style.left)+xbuchang;}else{clearInterval(time1);time1=null;}",10)  //左右移动定时器
+time2=setInterval("if(ymovelen!=0){ymovelen-=ybuchang;document.all(objid).style.top=parseInt(document.all(objid).style.top)+ybuchang}else{clearInterval(time2);time2=null;}",10)  //上下移动定时器
+}
+</script>
+</textarea>
+
+6:网格的绘制（VML）
+
+<textarea>
+<HTML xmlns:v>
+<STYLE>v\:*{behavior:url(#default#VML);}</style><BODY>
+<script>
+function window.onload(){
+temp0="25";  //每个网格的大小
+
+temp3=screen.availWidth;temp4=screen.availHeight;temp5="red"
+temp1=temp4/temp0;temp2=temp3/temp0;
+for(i=0;i<temp1;i++){document.body.appendChild(document.createElement("<v:line to="+temp3+",0 style='position:absolute;z-index:5;left:0;top:"+(temp0*i)+";' strokecolor='"+temp5+"' strokeweight='1px' id='wanggexian'/>"))}
+for(i=0;i<temp2;i++){document.body.appendChild(document.createElement("<v:line to=0,"+temp4+" style='position:absolute;z-index:5;left:"+(temp0*i)+";top:0;' strokecolor='"+temp5+"' strokeweight='1px' id='wanggexian'/>"))}
+}
+</script>
+</textarea>
+
+7:圆形的绘制（VML）
+
+<textarea>
+<HTML xmlns:v>
+<STYLE>v\:*{behavior:url(#default#VML);}</style>
+<BODY oncontextmenu='return false' onselectstart='return false' >
+<v:Oval style='position:absolute;z-index:2000;display:none' id='oval1'>  <!--圆型可视化-->
+<v:Stroke dashstyle='shortdash'/></v:oval>
+<script>
+var xx=0,yy=0,zz=0
+function document.onmousedown(){
+xx=event.x;yy=event.y;zz+=1  //定义基本起始坐标
+oval1.style.left=event.x;oval1.style.top=event.y;oval1.style.width=0;oval1.style.height=0;oval1.style.display=""
+}
+function document.onmousemove(){
+tempx=event.x;tempy=event.y
+if(tempx-xx<0){oval1.style.left=tempx;oval1.style.width=(xx-tempx)}else{oval1.style.width=(tempx-xx)}
+if(tempy-yy<0){oval1.style.top=tempy;oval1.style.height=(yy-tempy)}else{oval1.style.height=(tempy-yy)}
+}
+function document.onmouseup(){
+oval1.style.display="none"
+if (Math.abs(tempx-xx)<=1||Math.abs(tempy-yy)<=1)return false
+document.body.appendChild(document.createElement("<v:oval style='position:absolute;z-index:"+zz+";left:"+oval1.style.left+";top:"+oval1.style.top+";width:"+oval1.style.width+";height:"+oval1.style.height+";' strokecolor='black' strokeweight='1'/>"))
+}</script>
+</textarea>
+
+更多的……，如果你有问题，可以到<a href=http://www.51js.com>http://www.51js.com</a>我推荐的脚本技术论坛咨询，也或许能碰上我在线。
+
+<span>2:几件精彩脚本 - 关于ASP的“通用文件”的应用简化</span>
+
+一个中或大的ASP网站或论坛，最好都要使用“通用文件”，这是我多年开发的经验。通用文件是什么？就是几乎应用于每一个ASP文件的通用文件，引用它的文件只需在其代码的最头部增加一句&lt;!--#include file="pub.asp"-->。
+
+你也须说这算什么经验之谈？不就是引用文件么，什么通用不通用？你别急，先看看我常在pub.asp写的内容。
+
+pub.asp:
+<textarea no>
+<%sub tt2(errmsg2)   '********共用错误提示函数,err.number<>0时引用tt2("错误提示内容")%>
+<script language=vbs>msgbox "<%=replace(replace(replace(replace(replace(server.HTMLEncode(errmsg2),vbcrlf,chr(34) & "& vbcrlf &" & chr(34)),"&quot;",chr(34) & " & chr(34) & " & chr(34)),"&lt;","<"),"&gt;",">"),"&amp;","&")%>",16,"错误侦探提示":history.back()</script>
+<%response.end:end sub              '*************************%>
+
+<%if request.Form.count<>0 then   '********阻止一切跨站提交
+if instr(1,request.ServerVariables("http_referer"),request.ServerVariables("HTTP_HOST"),vbTextCompare)=0 then tt2 "拒绝跨站提交捣蛋。"
+end if                            '********************%>
+
+<%sub guanshui(cookiesmiao)   '*******共用COOKIES灌水检测,所有表单提交页只需写guanshui(20)即增加了20秒的灌水限制
+if isdate(request.cookies("fyw")("guanshui"))=false then
+response.cookies("fyw")("guanshui")=now
+else
+if datediff("s",request.cookies("fyw")("guanshui"),now)<cookiesmiao then tt2 cookiesmiao & "秒内禁止重复提交灌水"
+response.cookies("fyw")("guanshui")=now
+end if
+end sub                           '**********************%>
+
+<%
+on error resume next
+jinzhifu="'<> &?" & chr(34):jinzhifu2="'<>&?" & chr(34):jinzhifu3="'<>"
+sub jiancha(nr,findstr1)      '*********提交数据（字符型）检查函数（不允许为空的）
+if len(trim(nr))=0 then tt2 "所提交的某项必须填写的数据（一般带 * 号）内容不能为空"
+if findstr1<>"" then
+for m=1 to len(findstr1)
+if instr(nr,mid(findstr1,m,1))<>0 then tt2 "参考数据 [" & nr & "] 不能包含违禁字符 [" & mid(findstr1,m,1) & "]"
+next
+end if
+end sub                             '*************************%>
+
+<%
+sub jiancha2(nr2,findstr2)      '*********提交数据（字符型）检查函数（允许为空的）
+if nr2="" then exit sub
+if findstr2<>"" then
+for m=1 to len(findstr2)
+if instr(nr2,mid(findstr2,m,1))<>0 then tt2 "参考数据 [" & nr2 & "] 不能包含违禁字符 [" & mid(findstr2,m,1) & "]"
+next
+end if
+end sub                             '*************************%>
+
+<%
+sub jiancha3(nr3,bitian3)      '*********提交数据（数字型）检查函数
+if len(nr3)=0 and bitian3=false then exit sub
+if not IsNumeric(nr3) then tt2 "参考数据 [" & nr3 & "] 必须为数字格式"
+if nr3<0 then tt2 "参考数据 [" & nr3 & "] 必须大于0"
+end sub                             '*************************%>
+
+<%                                   '*************默认数据库声明
+set link1=server.CreateObject("ADODB.Connection")
+link1.open "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" & server.MapPath("abc.mdb")
+who=session("who")   '定义who为身份验证变量
+if who="沐缘华" then guanli=1 else guanli=0   '判断管理员
+                                     '**************************%>
+
+<%                        '**********通用page变量声明，简化各分页的page声明
+page=request.querystring("page")
+if page="" then page=1
+page=cint(page)
+if err.number<>0 then tt2 "禁止胡闹~"
+if page<1 then page=1     '******************************%>
+</textarea>
+
+所以，每一页均建议引用通用文件简化开发，或可复制、修改以上内容，这样做可以节省你很多时间、简化/统一/高效/清晰的开发。
+
+<span>3:个人编码风格</span>
+
+除非他从属于团队组织，否则每一个程序员都有不同的编码风格。而我自己，经过了这么长时间的学习与实战开发，也形成自己独特的编码风格和习惯（综合了java/c/vb这三种特性）。养成一种好的编码习惯，对进行大型开发时则有益于节省时间、易查找修改、易读、易组织等等好处，养成不好的习惯则恰恰相反。
+
+以下我向WEB编程（JS/DHTML/DVML/VBS/VB/ASP）初学者推荐几种个人习惯，但这些习惯中不全部适合团队开发、非WEB类语言、小程序开发、也因开发工具的不同而有区别。
+
+1:一定要爱写注释 - 至少能让自己读懂的注释
+2:每行程序前不使用“缩进”，那样虽好看，但负面却增加着代码数量、文件大小、不易改
+3:变量尽量使用小写，否则你就苦与切换Caps Lock键
+4:尽量节省行数（即将几句程序写在一行，避免行数过千时老上下拖滚动条）
+5:尽量多的应用变量和数组，养成编写“高效”执行效率、“优质”的程序语句习惯
+6:变量命名有很大学问，但我建议只少喜欢使用str1、temp2、body1、body2这样的变量风格，宗旨是 - 好写好记、不冲突、不怕变量多
+7:变量尽量使用数字或真假类型，相比字符型，这有益于IF的判断效率
+8:数个IF复杂的嵌套时，要在end if或}后面增加注释，表明是哪个IF的结束
+9:要尽可能多将常用程序语句写成函数或过程，这能有效的减少代码体积、组织代码，使修改代码变的容易，且不影响效率。
+10:如果是手写HTML/XML/CSS，则本着减少代码数量去写，允许id=abc就不写成id='abc'、允许width:300就不写成width:300px、常用样式则定义在&lt;style>&lt;/style>标记内，最后如有必要在全部用编辑器提供的功能合并为一行/几行、删除所有的注释，这能使网页/软件代码更少一点、加载的更快一点
+
+至于大型程序什么样的代码风格最好，那就是 - 数量少、行数少、效率高、易读、易改、函数封装多
+至于如何用自己掌握的编程知识开发出出色的大小作品，那就是 - 活学活用

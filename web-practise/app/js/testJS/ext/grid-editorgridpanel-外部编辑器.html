@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
+<html> 
+<head> 
+	<title>grid列表</title> 
+    <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script>
+  	/**
+  	 * 弹出窗体，选择项目
+  	 */
+	function selectProject(rowIndex){
+	    // 把取得的值放到pname中
+	    var url = 'select_proj.html';
+	    window.showModalDialog(url,this,"dialogHeight=588px;dialogWidth=810px;center=yes");
+		
+	    var pname = document.getElementById('pname').value ;
+	    var pcode = document.getElementById('pcode').value ; ;
+	    // 如果没有选择则直接返回
+	    if(!pname || !pcode){
+	        return;
+	    }
+	    setPrj(pname,pcode,rowIndex) ;
+	}
+	
+	/**
+	 * 设置当前选择的项目
+	 */
+	function setPrj(pname,pcode,rowIndex){
+		var grid = Ext.getCmp('gridprj') ;
+		var record = grid.getStore().getAt(rowIndex) ;
+		record.set('pname',pname) ;
+		record.set('pcode',pcode) ;
+		grid.view.refresh() ;
+	}
+	
+	/**
+	 * 刷新grid
+	 */
+	function refreshGrid(){
+		var grid = Ext.getCmp('gridprj') ;
+		grid.view.refresh() ;
+	}
+	
+	/**
+	 * 显示项目
+	 */
+	function displayPrj(){
+		var grid = Ext.getCmp('gridprj') ;
+		var record = grid.getStore().getAt(0) ;
+		Ext.Msg.alert('项目',record.get('pname') + '_' + record.get('pcode')) ;
+	}
+
+	Ext.onReady(function(){ 
+		var data = [ 
+			['1','erdf','aaa'], 
+			['2','w23erf','bbb'], 
+			['3','sdf','ccc'], 
+			['4','vasd','ddd'], 
+			['5','dfg','eee'] 
+		]; 
+		
+		var store = new Ext.data.Store({ 
+			proxy: new Ext.data.MemoryProxy(data), 
+			reader: new Ext.data.ArrayReader({}, [ 
+			{name:'id'}, 
+			{name:'pname'}, 
+			{name:'pcode'} 
+			]) 
+		}); 
+		store.load(); 
+		
+		var Record = new Ext.data.Record.create([ 
+			{name:'id',type:'int'}, 
+			{name:'pname',type:'string'}, 
+			{name:'pcode',type:'string'} 
+		]); 
+		
+		var cm = new Ext.grid.ColumnModel([ 
+			{header:'编号',dataIndex:'id',editor: new Ext.form.TextField({allowBlank:false}),sortable:true}, 
+			{header:'项目名称',dataIndex:'pname',editor: new Ext.form.TextField({allowBlank:false})}, 
+			{header:'项目编码',dataIndex:'pcode',editor: new Ext.form.TextField({allowBlank:false})} 
+		]); 
+		
+		var grid = new Ext.grid.EditorGridPanel({ 
+			id: 'gridprj' ,
+			renderTo: 'gridrender', 
+			store: store, 
+			width: 400, 
+			height:200,
+			listeners: {cellclick:function(grid,rowIndex,columnIndex,e){selectProject(rowIndex)}} ,
+			cm: cm
+		}); 
+	}); 
+    </script> 
+</head> 
+
+<body>
+    <div id="gridrender"></div> 
+	<div id="temper">
+		<input type="text" id="pname" name="pname"/>
+		<input type="text" id="pcode" name="pcode"/>
+		<input type="button" id="refreshGrid" name="refreshGrid" onclick="refreshGrid()" value="刷新grid" />
+		<input type="button" id="displayPrj" name="displayPrj" onclick="displayPrj()" value="显示项目和编码" />
+	</div>
+</body> 
+</html> 

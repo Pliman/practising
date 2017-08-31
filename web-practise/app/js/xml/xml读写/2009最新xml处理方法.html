@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>简单的测试页面</title>
+		<script language="JavaScript"> 
+		// 加载xml文档
+		loadXML = function(xmlFile){
+			var xmlDoc;
+			if (window.ActiveXObject){
+				xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
+				xmlDoc.async = false;
+				xmlDoc.load(xmlFile);
+				alert(xmlDoc.xml) ;
+			}else if (document.implementation && document.implementation.createDocument){
+				xmlDoc = document.implementation.createDocument('', '', null);
+				xmlDoc.load(xmlFile);
+				var x = xmlDoc.getElementsByTagName('book') ;
+				/*for   (i=0;i <x.length;i++){ 
+					var   sitename   =x[i].childNodes[0].nodeValue;	   
+					alert(sitename) ;
+			    }*/
+			    alert(x) ;
+			    alert(x[0].nodeName) ;
+			}else{
+				return null;
+			}
+			return xmlDoc;
+		}
+</script>
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="loadXML('books.xml')" type="button" id="loadXML"
+						name="loadXML" value="loadXML"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

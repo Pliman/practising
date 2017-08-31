@@ -1,0 +1,26 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>
+<script language="javascript">
+		function stringindex(){
+			var string1 = '2009-03-22' ;
+			var string2 = '' ;
+			
+			if(string1.localeCompare(string2)){
+				string2 = string1.indexOf('9') ;
+				alert(string2) ;
+			}
+		}
+</script>
+<body>
+	<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="stringindex()" type="button" id="idstringindex" name="stringindex"
+						value="stringindex"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+</body>
+</html>

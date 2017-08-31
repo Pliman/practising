@@ -1,0 +1,55 @@
+<!--XML源码清单12-12-1-->
+<location path="index.aspx">
+    <system.web>
+      <authorization>
+        <deny users="?"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="changepassword.ashx">
+    <system.web>
+      <authorization>
+        <deny users="?"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="users.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="管理员" />
+        <deny users="*"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="users_action.ashx">
+    <system.web>
+      <authorization>
+        <allow roles="管理员" />
+        <deny users="*"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="news.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="普通用户" />
+        <deny users="*"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="newsclass_action.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="普通用户" />
+        <deny users="*"></deny>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="news_action.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="普通用户" />
+        <deny users="*"></deny>
+      </authorization>
+    </system.web>
+  </location>

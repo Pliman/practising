@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
+		<title>IE - 自定义热区</title>
+		<style type="text/css">
+<!--
+body {
+	text-align: center;
+}
+
+/* 设置link为子对象定位基点(子对象将相对父容器定位) */
+#link {
+	position: relative;
+	width: 524px;
+	margin: 0 auto;
+}
+
+/* 设置所有链接透明度 */
+#link a {
+	filter: alpha(opacity = 50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+/* 把所有链接设置为绝对定位，设置内补丁，设置边框，设置显示模式，设置文本缩进，设置链接修饰，设置背景图片 */
+#link a {
+	position: absolute;
+	padding: 10px;
+	border-width: 2px;
+	display: block;
+	text-indent: -9999px;
+	text-decoration: none;
+	background: url("no.gif");
+}
+
+/* 设置各链接区域位置与高宽 */
+#link a.on1 {
+	width: 240px;
+	height: 110px;
+	left: 0;
+	top: 0;
+}
+
+#link a.on2 {
+	width: 235px;
+	height: 110px;
+	left: 265px;
+	top: 0;
+}
+
+#link a.on3 {
+	width: 240px;
+	height: 600px;
+	left: 0;
+	top: 130px;
+}
+
+#link a.on4 {
+	width: 235px;
+	height: 600px;
+	left: 265px;
+	top: 130px;
+}
+
+/* 设置所有链接鼠标经过状态 */
+#link a:hover {
+	border: dashed red 2px;
+	display: block;
+	color: #000;
+	font-weight: bold;
+	background-color: #fff;
+}
+
+/* 设置各链接当鼠标经过时状态 */
+#link a.on1:hover {
+	filter: alpha(opacity = 100);
+	-moz-opacity: 1;
+	opacity: 1;
+	background-color: transparent;
+}
+
+#link a.on2:hover {
+	text-indent: 0;
+	filter: alpha(opacity = 100);
+	-moz-opacity: 1;
+	opacity: 1;
+}
+
+#link a.on3:hover {
+	border-color: #000;
+}
+
+#link a.on4:hover {
+	background-image: url(http://bjnahan.net/upload/200901061047200413.gif);
+}
+-->
+</style>
+	</head>
+
+	<body>
+		<div id="link">
+			<a href="#" class="on1">玩号热区</a>
+			<a href="#" class="on2">图号热区</a>
+			<a href="#" class="on3">四锐号热区</a>
+			<a href="#" class="on4">佛号热区</a>
+		</div>
+		<div id="pr">
+			<img src="http://bjnahan.net/upload/200901061040588181.gif"
+				alt="用CSS自定义热区" />
+		</div>
+	</body>
+</html>

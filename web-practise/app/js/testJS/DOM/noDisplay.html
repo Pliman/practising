@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<style type="text/css">
+.hidden {
+	display: none;
+}
+</style>
+
+		<script type="text/javascript">
+			
+			function getTdIndex(_tds, dest){	
+	  			for(var i = 0; i < _tds.length; i++){
+	  				if(_tds[i].id == dest && _tds[i].style.display != 'none'){
+	  					//alert(i);
+	  					//alert(_tds[i].style.display);
+	  					return i;
+	  				}
+	  			}
+	  				
+	  			return null;	
+	  		}
+			
+  			function noDisplay(){
+  				var _table = document.getElementById('sourceContainer');
+				var _row1st = _table.rows[0];
+				var _tds = _row1st.cells;
+				
+				//var _newCell = _row1st.insertCell(3);
+				//_newCell.innerHTML = "Inserted Cell.";
+				
+				//_tds[1].style.display = 'block';
+				
+				//_row1st.deleteCell(2);
+				
+				var index = getTdIndex(_tds, '6th');
+				
+				if(index != null){
+					alert(index);
+  					//_row1st.deleteCell(index); --IE对这种方法支持不好。
+  					_row1st.removeChild(_tds[index]);
+  				}
+  			}
+  			
+  			function getDisplayStyle(){
+  				var _table = document.getElementById('sourceContainer');
+				var _row1st = _table.rows[0];
+				var _tds = _row1st.cells;
+				
+				for(var i = 0; i < _tds.length; i++){
+					alert(_tds[i].style.display);
+				}
+  			}
+  		</script>
+		<title>noDisplay</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table border="1px" id="sourceContainer" name="sourceContainer" style="text-align:left">
+			<tr>
+				<td id="1st" name="1st">
+					1st
+				</td>
+				<td id="2nd" name="2nd" style="display: none">
+					2nd
+				</td>
+				<td id="3rd" name="3rd" style="display: none">
+					3rd
+				</td>
+				<td id="4th" name="4th" style="display: none">
+					4th
+				</td>
+				<td id="5th" name="5th" style="display: none">
+					5th
+				</td>
+				<td id="6th" name="6th">
+					6th
+				</td>
+				<td id="7th" name="7th">
+					7th
+				</td>
+				<td id="8th" name="8th">
+					8th
+				</td>
+				<td id="9th" name="9th">
+					9th
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="noDisplay()" type="button" id="noDisplay"
+						name="noDisplay" value="noDisplay"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable1">
+			<tr>
+				<td>
+					<input onclick="getDisplayStyle()" type="button"
+						id="getDisplayStyle" name="getDisplayStyle"
+						value="getDisplayStyle"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

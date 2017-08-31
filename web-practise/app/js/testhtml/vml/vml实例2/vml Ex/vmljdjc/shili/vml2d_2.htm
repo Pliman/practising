@@ -1,0 +1,40 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML2D动画特技2</TITLE>
+<META name='Gemeratpr' content='flashvml2.0'>
+<META name='KeyWords' content='VML2D动画特技2,flashvml,vml,vml画板,vml动画,vml图像画板,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script id="myscript" language="javascript">
+var topos=0,time1=null
+function dong(){
+vml1.control1=(Math.round(Math.random()*200)-100)+"pt,"+(Math.round(Math.random()*200)-100)+"pt"
+vml1.control2=(Math.round(Math.random()*200))+"pt,"+(Math.round(Math.random()*200))+"pt"
+}
+function fun1(){
+dong();topos+=2;vml1.to=50+(topos*3)+"pt,"+(10+topos)+"pt"
+if(topos>200){clearInterval(time1);document.bgColor="white";time1=setInterval("pao()",50)}
+}
+function pao(){
+dong();topos-=10;vml1.to=50+(topos*3)+"pt,"+(10+topos)+"pt";vml1.strokecolor='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+if(topos<10){clearInterval(time1);document.bgColor="black";time1=setInterval("fun1()",50)}
+}</script>
+</HEAD>
+<BODY bgcolor=black scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于大于1024*768显示器分辨率的环境工作，检测您的分辨率低于这个数值，请在[控制面板--显示]中调整为1024*768或大于这个分辨率，而后刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+
+time1=setInterval("fun1()",100)
+}
+</script>
+<v:curve id=vml1 style="Z-INDEX:3003;LEFT:-1px;POSITION:absolute;TOP:59px;rotation:15" from="0,0" control1="74.25pt,-31.5pt" control2="102pt,48.75pt" to="50pt,10pt" filled="f" fillcolor="white" stroked="t" strokecolor="white" strokeweight=".75pt"> <v:stroke startarrow="none" endarrow="block" endarrowwidth="wide" endarrowlength="long"/>
+</v:curve><script>  //以下程序快速执行使预隐藏图型及时隐藏try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}</script></BODY></HTML>

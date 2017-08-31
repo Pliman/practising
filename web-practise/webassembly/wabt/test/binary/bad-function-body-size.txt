@@ -1,0 +1,19 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm-interp
+magic
+version
+section(TYPE) { count[1] function params[0] results[0] }
+section(FUNCTION) { count[1] sig[0] }
+section(CODE) {
+  count[1]
+  0x02 ;; malformed 2 byte function body size (should be 4)
+    locals[0]
+    i32.const
+    leb_i32(42)
+    drop
+}
+(;; STDERR ;;;
+Error running "wasm-interp":
+error: @0x00000019: function body longer than given size
+
+;;; STDERR ;;)

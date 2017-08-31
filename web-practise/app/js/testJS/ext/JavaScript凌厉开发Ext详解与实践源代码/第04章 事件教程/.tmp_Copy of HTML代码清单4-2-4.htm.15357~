@@ -1,0 +1,12 @@
+<button id="btn">
+    单击我
+</button>
+<script>
+    button = document.getElementById('btn');
+    button.attachEvent('onclick', function(){
+        alert('你单击了一个按钮，这是响应的第二个处理函数。')
+    });
+    button.attachEvent('onclick', function(){
+        alert('你单击了一个按钮，这是响应的第一个处理函数。')
+    });
+</script>

@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>Yet More Fun with Moveable!</title>
+		<style type="text/css">
+			.note {
+				background: #FFFFBF;
+				border-bottom: 1px solid black;
+				border-left: 1px solid black;
+				border-right: 1px solid black;
+				width: 302px;
+				height: 300px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.noteHandle {
+				border-left: 1px solid black;
+				border-right: 1px solid black;
+				border-top: 1px solid black;
+				cursor: pointer;
+				background: #FFFF8F;
+				width: 300px;
+				height: 10px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.movingNote {
+				background: #FFFF3F;
+			}
+			#note1, #note2 {
+				width : 302px
+			}
+		</style>
+		<script type="text/javascript"
+			src="../dojo/dojo.js">
+</script>
+		<script type="text/javascript">
+			dojo.require("dojo.dnd.Moveable");
+			dojo.require("dojo.dnd.move");
+			
+			dojo.addOnLoad(function( ) {
+				var f1 = function( ) {
+				//clever calculations to define a bounding box.
+				//keep note1 within 50 pixels to the right/bottom of note2
+				var mb2 = dojo.marginBox("note2");
+				b = {};
+				b["t"] = 0;
+				b["l"] = 0;
+				b["w"] = mb2.l + mb2.w + 50;
+				b["h"] = mb2.h + mb2.t + 50;
+				return b;
+				}
+				var m1 = new dojo.dnd.move.constrainedMoveable("note1",
+				{handle : "dragHandle1", constraints : f1, within : true});
+				
+				//create and keep references to Moveables for connecting later.
+				//var m1 = new dojo.dnd.Moveable("note1", {handle : "dragHandle1"});
+				var m2 = new dojo.dnd.Moveable("note2", {handle : "dragHandle2"});
+				// system-wide topics for all moveables.
+				dojo.subscribe("/dnd/move/start", function(node){
+					console.log("Start moving", node);
+				});
+				dojo.subscribe("/dnd/move/stop", function(node){
+					console.log("Stop moving", node);
+				});
+				// highlight note when it moves...
+				//connect to the Moveables, not the raw nodes.
+				dojo.connect(m1, "onMoveStart", function(mover){
+					console.log("note1 start moving with mover:", mover);
+					dojo.query("#note1 > textarea").addClass("movingNote");
+				});
+				dojo.connect(m1, "onMoveStop", function(mover){
+					console.log("note1 stop moving with mover:", mover);
+					dojo.query("#note1 > textarea").removeClass("movingNote");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="note1" dojoType="dojo.dnd.Moveable">
+			<div id='dragHandle1' class="noteHandle"></div>
+			<textarea class="note">Note1</textarea>
+		</div>
+		<div id="note2" dojoType="dojo.dnd.Moveable">
+			<div id='dragHandle2' class="noteHandle"></div>
+			<textarea class="note">Note2</textarea>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>image图片</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:image图片 - 专用属性</span>
+
+<table width=100%><tr><td>属性名</td><td>默认值</td><td>值类型/范围</td><TD>用途</td></tr>
+<tr><td style="color:red">src</td><td>null</td><td>URLtext</td><td>描述图像URL地址来源</td></tr>
+<tr><td style="color:red">grayscale</td><td>false</td><td>boolean</td><td>描述图像是否为黑白效果</td></tr>
+<tr><td style="color:red">bilevel</td><td>false</td><td>boolean</td><td>描述图像是否为漫画卡通效果</td></tr>
+<tr><td style="color:red">blacklevel</td><td>null</td><td>number/-0.4-0.4</td><td>描述图像亮度</td></tr>
+<tr><td style="color:red">gain</td><td>null</td><td>number/0-100</td><td>描述图像对比度</td></tr>
+<tr><td style="color:red">gamma</td><td>null</td><td>number/0.9-0.1</td><td>描述图像颜色清晰度</td></tr>
+<tr><td style="color:red">chromakey</td><td>none</td><td>colortext</td><td>描述图像透明过滤的颜色</td></tr>
+<tr><td style="color:red">cropleft</td><td>null</td><td>number/0%-100%</td><td>描述图像左边的裁剪</td></tr>
+<tr><td style="color:red">cropright</td><td>null</td><td>number/0%-100%</td><td>描述图像右边的裁剪</td></tr>
+<tr><td style="color:red">croptop</td><td>null</td><td>number/0%-100%</td><td>描述图像上边的裁剪</td></tr>
+<tr><td style="color:red">cropbottom</td><td>null</td><td>number/0%-100%</td><td>描述图像下边的裁剪</td></tr>
+</table>
+
+<span>2:image图片 - 插入图像、与图像处理</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:image src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image grayscale=true src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image bilevel=t src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+
+<v:image blacklevel=-0.05 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image blacklevel=0.1 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image gain=2 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image gain=10 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:310;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image gamma=0.8 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:410;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image gamma=0.2 src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:510;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+</textarea>
+
+<span>3:image图片 - 图像矢量化、与正常大小</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:image src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:10;WIDTH:450;HEIGHT:300;POSITION:absolute;TOP:10;"/>
+<v:image src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:10;WIDTH:234;HEIGHT:174;POSITION:absolute;TOP:320;"/>
+</textarea>
+
+<span>4:image图片 - 颜色遮蔽</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY bgcolor=black>
+<v:image chromakey="white" src="shili/fyw2.jpg" style="Z-INDEX:1;LEFT:10;WIDTH:450;HEIGHT:300;POSITION:absolute;TOP:10;"/>
+</textarea>
+
+chromakey="white"其中的white是白色，表示图像所有的白色变成透明
+
+<span>5:image图片 - 默认动画的支持、与处理后不在支持</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:image src="shili/haha.gif" style="Z-INDEX:1;LEFT:10;WIDTH:450;HEIGHT:300;POSITION:absolute;TOP:10;"/>
+<v:image bilevel=t src="shili/haha.gif" style="Z-INDEX:1;LEFT:10;WIDTH:450;HEIGHT:300;POSITION:absolute;TOP:320;"/>
+</textarea>
+
+<span>6:image图片 - 裁剪后，依然对比矢量化宽度、高度</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:image cropleft="20%" cropright="" croptop="" cropbottom="40%" src="shili/haha.gif" style="Z-INDEX:1;LEFT:10;WIDTH:450;HEIGHT:300;POSITION:absolute;TOP:10;"/>
+</textarea>
+
+<span>7:image图片 - CSS滤镜、VML旋转充分支持</span>
+
+<textarea><HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:image src="shili/fyw2.jpg" style="filter:xray;Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:invert;Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:gray;Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:fliph;Z-INDEX:1;LEFT:310;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:flipv;Z-INDEX:1;LEFT:410;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="rotation:220;Z-INDEX:1;LEFT:510;WIDTH:100;POSITION:absolute;TOP:10;HEIGHT:100"/>
+
+<v:image src="shili/fyw2.jpg" style="filter:alpha(opacity=80);Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:alpha(opacity=80,style=1);Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:alpha(opacity=80,style=2);Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:alpha(opacity=80,style=3);Z-INDEX:1;LEFT:310;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:blur(add=0,direction=14,strength=15);Z-INDEX:1;LEFT:410;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+<v:image src="shili/fyw2.jpg" style="filter:wave(add=0,freq=,lightstrength=5,phase=5,strength=5);Z-INDEX:1;LEFT:510;WIDTH:100;POSITION:absolute;TOP:120;HEIGHT:100"/>
+
+<v:image src="shili/haha.gif" style="filter:shadow(color=green,direction=15);Z-INDEX:1;LEFT:10;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+<v:image src="shili/haha.gif" style="filter:dropshadow(color=navy,offx=5,offy=5,positive=5);Z-INDEX:1;LEFT:110;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+<v:image src="shili/haha.gif" style="filter:glow(color=red,strength=5);Z-INDEX:1;LEFT:210;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+<v:image src="shili/haha.gif" style="filter:progid:DXImageTransform.Microsoft.Emboss(Bias=0.7);Z-INDEX:1;LEFT:310;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+<v:image src="shili/haha.gif" style="filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#5500FF,endColorstr=#55FF00,GradientType=1);Z-INDEX:1;LEFT:410;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+<v:image src="shili/haha.gif" style="filter:progid:DXImageTransform.Microsoft.Matrix(SizingMethod=auto expand,FilterType=bilinear,Dx=0,Dy=0,M11=0.5,M12=0.6,M21=0,M22=1);Z-INDEX:1;LEFT:510;WIDTH:100;POSITION:absolute;TOP:230;HEIGHT:100"/>
+
+<v:oval style="Z-INDEX:1;LEFT:10;WIDTH:200;POSITION:absolute;TOP:340;HEIGHT:150;"/>
+<v:oval style="Z-INDEX:1;LEFT:220;WIDTH:200;POSITION:absolute;TOP:340;HEIGHT:150;filter:wave(add=0,freq=,lightstrength=5,phase=5,strength=15)"/>
+<v:oval style="Z-INDEX:1;LEFT:430;WIDTH:200;POSITION:absolute;TOP:340;HEIGHT:150;filter:progid:DXImageTransform.Microsoft.Engrave(Bias=-0.7)"/>
+</textarea>

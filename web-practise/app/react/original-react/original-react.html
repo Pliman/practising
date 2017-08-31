@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>original-react</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="../babel/babel.min.js"></script>
+<script src="../react-15.4.1/build/react.js"></script>
+<script src="../react-15.4.1/build/react-dom.js"></script>
+<script type="text/jsx">
+    function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+    }
+
+    const element = <Welcome name="Sara" />;
+
+    ReactDOM.render(
+        element,
+        document.getElementById('root')
+    );
+</script>
+</body>
+</html>

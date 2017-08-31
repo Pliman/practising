@@ -1,0 +1,143 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>FlashVml(闪耀之星)图解教程</TITLE>
+<META name='Gemeratpr' content='FlashVml3.0'>
+<META name='KeyWords' content='FlashVml(闪耀之星)图解教程; flashvml; 闪耀之星; vml; VML; vmlflash; vml动画; 矢量; 2D; 3D; 风云舞; FYW; 画板; 在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+<script>
+function window.onerror(){return true;}  //防止您的程序出现错误时弹出提示
+</script>
+<script id="myscript" language="javascript">
+var youbiao=2,thetext1=""
+function changtext(){
+fyw3.style.display='none'
+for(i=8;i<20;i++){if(document.all("fyw"+i).style.display!='none')document.all("fyw"+i).style.display='none'}
+bgsound1.src='di.wav';
+switch(youbiao){
+case 2:fyw4.innerHTML=thetext1
+break;
+case 3:fyw4.innerHTML="本图解教程将以最快的效率，指导您了解FlashVml界面<font color=blue>九大工具栏</font>、滚动条、状态栏的构成、菜单，当你了解了FlashVml的界面构成、各工具栏的作用，即了解了如何使用FlashVml"
+break;
+case 4:
+fyw4.innerHTML="工具栏1“画笔选择”：这里提供了可以绘制各种图型的画笔工具，单击鼠标左键选择一个按钮（如直线、铅笔、圆型）后，在画板内通过点击、按住鼠标左键移动等操作，即可画出各种静态图型。你瞧上边的几个图型，就是通过[圆型、曲线、图片、多边型]画笔画出的"
+fyw3.style.display=''
+break;
+case 5:
+fyw4.innerHTML="工具栏2“属性设置”：这里可以设置画笔、图形处理效果的各项专用参数，你每选择换一个画笔如圆矩形、曲线，或者选择一个边框、填充、立体效果，这里就会出现有关该工具的各项专用属性设置"
+fyw8.style.display=''
+break;
+case 6:
+fyw4.innerHTML="工具栏3“图型编辑”：这里提供了各种编辑、处理已绘制出图型的工具，单击左键选择一个处理任务按钮（如选移[选定移动]、调大小[调整图型大小]、填充[设置图型背景]）后，在单击、或按住鼠标左键拖动画板内需要被处理的图型即可"
+fyw9.style.display=''
+break;
+case 7:
+fyw4.innerHTML="工具栏4“编程工具”：这里提供的各种功能用于存储编程所需要的变量、函数、存取图型的ID名称、控制运行时是否出现错误提示等。如果您只是为了绘制静态图像，不需要制作动画、编写程序那么可以关闭该栏"
+fyw10.style.display=''
+break;
+case 8:
+fyw4.innerHTML="工具栏5“事件编程”：下拉菜单中提供了几种常用鼠标事件（单击、双击、靠近、鼠标按下等），选择一个事件后，然后单击画板内想要增加该事件的图型即可。该工具可以方便的设计用户交互事件编程"
+fyw11.style.display=''
+break;
+case 9:
+fyw4.innerHTML="工具栏6“动画创作”：这里提供的工具是用来创建[侦]式动画的，方法是选择下拉菜单中的某秒（本例选择的是第6秒），然后选择一个ID对应图型（本例操控id是vml8），在点击（编辑动画程序）针对第6秒种进行编程。致使vml8或更多的图形改变效果、或执行相应程序已达到改变，从而实现[侦]式动画"
+fyw12.style.display=''
+break;
+case 10:
+fyw4.innerHTML="工具栏7“流线动画创作”：这里提供的工具是用来创建[流线]式动画的（即很快速的、很圆润流畅的动画），方法是选择一个存储动画程序的蓄电池（本例选择的是动画蓄电池4），然后定义开始秒--程序循环执行速度(毫秒)--结束秒，并在上边的列表中指定一个可用图形对象的ID（本例选择的是vml8），最后点击“编辑动画程序”进行流线动画编程，从而实现流线动画。"
+fyw13.style.display=''
+break;
+case 11:
+fyw4.innerHTML="工具栏8“全局操作”：这里提供的工具是用来操作画板内的所有图型，避免一个一个的去操作带来的烦琐。其中[试运行]是用来在浏览器查看程序、动画的真实效果"
+fyw14.style.display=''
+break;
+case 12:
+fyw4.innerHTML="工具栏9“系统功能”：这里提供的工具可以查看及修改所有VML源代码、对flashvml软件进行设置、将作业保存为文件、播放作业过程录像、以及显示flashvml的关于信息等"
+fyw15.style.display=''
+break;
+case 13:
+fyw4.innerHTML="滚动条:FlashVml的滚动条，是为了避免图型过多时，画布视图不够用而设的滚动条。开发大型动画或图像时，可以将不是很重要的图型元素放在画布视图外"
+fyw16.style.display='';fyw17.style.display=''
+break;
+case 14:
+fyw4.innerHTML="状态栏:这里显示了你使用了FlashVml多少分钟，VMLElements是统计画板内图型的个数以及计算作业共使用了多少VML代码，状态栏每1分钟更新一次。"
+fyw18.style.display=''
+break;
+case 15:
+fyw4.innerHTML="右键菜单:右键单击画布内的图形即会出现该菜单，用该菜单可以完成针对目标图形的各项有用的操作。"
+fyw19.style.display=''
+break;
+case 16:
+fyw4.innerHTML="结束语:FlashVml的强大功能、合理设计、当之无愧全球最好的VML可视化开发工具。熟练使用足以使您设计出满意的VML作品。看完本图解教程，相信你已初步了解FlashVml，那还等什么，快去体验吧。"
+break;
+}
+}</script>
+</HEAD>
+<BODY bgcolor=black>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+
+fyw0.style.width='957';fyw0.style.height='585';
+thetext1=fyw4.innerHTML
+}
+</script>
+<v:Image id=fyw0 style="Z-INDEX:1002;LEFT:23px;WIDTH:86px;POSITION:absolute;TOP:2px;HEIGHT:67px" src="flashvml3.gif"> </v:Image>
+<v:line id=fyw3 style="Z-INDEX:3094;LEFT:396px;POSITION:absolute;TOP:96px;rotation:41" yincang="true" xuanzhuan="395.5" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:Textbox id=fyw4 style="FONT-SIZE:20px;Z-INDEX:1026;LEFT:222px;WIDTH:545px;COLOR:red;WORD-BREAK:break-all;FONT-FAMILY:黑体;WHITE-SPACE:pre;POSITION:absolute;TOP:286px;HEIGHT:98px" inset="5pt,5pt,5pt,5pt" print="false"><FONT color=blue>FlashVml图解教程 - FYW(风云舞)</FONT><BR>建议1024*768分辨率浏览 
+<CENTER></CENTER></v:Textbox>
+<v:line oncontextmenu='return false' id=fyw5 style="Z-INDEX:1015;LEFT:426px;CURSOR:hand;POSITION:absolute;TOP:478px" onmousedown="if(youbiao>2)youbiao--;changtext()" onmouseover="this.strokecolor='green';" onmouseout="this.strokecolor='blue';" from="0,0" to="45.75pt,-.75pt" strokecolor="blue" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line oncontextmenu='return false' id=fyw6 style="Z-INDEX:1015;LEFT:499px;CURSOR:hand;POSITION:absolute;TOP:478px" onmousedown="if(youbiao<16)youbiao++;changtext()" onmouseover="this.strokecolor='green';" onmouseout="this.strokecolor='blue';" from="0,0" to="47.25pt,0" strokecolor="blue" strokeweight="7pt">
+<v:Stroke startarrow="none" endarrow="block"/>
+</v:line>
+<v:line id=fyw8 style="Z-INDEX:1015;LEFT:796px;POSITION:absolute;TOP:23px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="none" endarrow="block"/>
+</v:line>
+<v:line id=fyw9 style="Z-INDEX:3096;LEFT:551px;POSITION:absolute;TOP:91px;rotation:42" yincang="true" xuanzhuan="390.5" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw10 style="Z-INDEX:1015;LEFT:124px;POSITION:absolute;TOP:43px" yincang="true" xuanzhuan="393.5" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw11 style="Z-INDEX:1015;LEFT:129px;POSITION:absolute;TOP:136px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw12 style="Z-INDEX:1015;LEFT:132px;POSITION:absolute;TOP:180px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw13 style="Z-INDEX:1015;LEFT:133px;POSITION:absolute;TOP:330px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw14 style="Z-INDEX:1015;LEFT:791px;POSITION:absolute;TOP:199px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="none" endarrow="block"/>
+</v:line>
+<v:line id=fyw15 style="Z-INDEX:1015;LEFT:790px;POSITION:absolute;TOP:301px" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="none" endarrow="block"/>
+</v:line>
+<v:line id=fyw16 style="Z-INDEX:1015;LEFT:530px;POSITION:absolute;TOP:537px;rotation:-36" yincang="true" xuanzhuan="-41" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw17 style="Z-INDEX:1015;LEFT:912px;POSITION:absolute;TOP:374px;rotation:147" yincang="true" xuanzhuan="-199" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw18 style="Z-INDEX:1015;LEFT:196px;POSITION:absolute;TOP:549px;rotation:-139" yincang="true" xuanzhuan="-119" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line>
+<v:line id=fyw19 style="Z-INDEX:1015;LEFT:495px;POSITION:absolute;TOP:198px;rotation:136" yincang="true" from="0,0" to="45.75pt,-.75pt" strokecolor="red" strokeweight="7pt">
+<v:Stroke startarrow="block" endarrow="none"/>
+</v:line><SCRIPT>  //以下程序快速执行使预隐藏图型及时隐藏
+try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}
+</SCRIPT>
+</BODY>
+</HTML>

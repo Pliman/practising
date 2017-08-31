@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>StackContainer.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		<style>
+			html, body {
+			  width: 100%;
+			  height: 100%;
+			  margin: 0;
+			  overflow:hidden;
+			}
+			
+			#borderContainer {
+			  width: 100%;
+			  height: 100%;
+			}
+			
+			#scontainer-prog {
+			    border: 1px solid #ccc;
+			    margin-top: 10px;
+			}
+			
+			#scontainer-prog div {
+			    padding: 5px;
+			}
+		</style>
+		
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css">
+		<script
+			src="../dojo-release-1.7.2/dojo/dojo.js" data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+			
+		<script>
+			require(["dijit/layout/ContentPane","dijit/layout/StackContainer","dijit/layout/StackController"],function(){
+			    var sc = new dijit.layout.StackContainer({
+			        style: "height: 300px; width: 400px;",
+			        id: "myProgStackContainer"
+			    }, "scontainer-prog");
+			
+			    var cp1 = new dijit.layout.ContentPane({
+			         title: "page 1",
+			         content: "page 1 content"
+			    });
+			    sc.addChild(cp1);
+			
+			    var cp2 = new dijit.layout.ContentPane({
+			         title: "page 2",
+			         content: "page 2 content"
+			    });
+			    sc.addChild(cp2);
+			
+			    var controller = new dijit.layout.StackController({containerId: "myProgStackContainer"}, "scontroller-prog");
+			
+			    sc.startup();
+			    controller.startup();
+			});
+		</script>
+	</head>
+	<body class="claro">
+		<div id="scontainer-prog"></div>
+		<div id="scontroller-prog"></div>
+	</body>
+</html>

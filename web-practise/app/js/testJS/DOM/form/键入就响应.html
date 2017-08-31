@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>键入就响应.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	</head>
+
+	<body>
+		<div id="msg"></div>
+		<form id="idform1" name="form1" action="">
+			<input type="text" name="txt" id="txt" value="txt"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+			//当状态改变的时候执行的函数 
+			function handle() {
+				document.getElementById('msg').innerHTML='输入的文字长度为：'+document.getElementById('txt').value.length; 
+			} 
+			//firefox下检测状态改变只能用oninput,且需要用addEventListener来注册事件。 
+			if(/msie/i.test(navigator.userAgent)){    //ie浏览器
+				document.getElementById('txt').onpropertychange = handle;
+			} 
+			else { //非ie浏览器，比如Firefox
+				document.getElementById('txt').addEventListener("input",handle,false); 
+			} 
+		</script>
+</html>
+

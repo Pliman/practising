@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <display-name>
+        Ext_Dwr
+    </display-name>
+    <context-param>
+        <param-name>
+            contextConfigLocation
+        </param-name>
+        <param-value>
+            /WEB-INF/classes/plantSpring.xml
+        </param-value>
+    </context-param>
+    
+    <!-- Filters -->
+    
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    
+    <!-- Action Servlet Configuration -->
+    
+    <servlet>
+        <servlet-name>
+            dwr-invoker
+        </servlet-name>
+        <servlet-class>
+            org.directwebremoting.servlet.DwrServlet
+        </servlet-class>
+        <init-param>
+            <param-name>
+                debug
+            </param-name>
+            <param-value>
+                true
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>
+                logLevel
+            </param-name>
+            <param-value>
+                warn
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>
+                crossDomainSessionSecurity
+            </param-name>
+            <param-value>
+                false
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>
+                config-invoker
+            </param-name>
+            <param-value>
+                /WEB-INF/plantDWR.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>
+            1
+        </load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>
+            dwr-invoker
+        </servlet-name>
+        <url-pattern>
+            /dwr/*
+        </url-pattern>
+    </servlet-mapping>
+</web-app>

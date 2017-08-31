@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>Grid的本地排序</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">Grid的本地排序</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="panel1">
+                </div>
+                <br>
+                <div>
+                    事件：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            
+            Ext.onReady(function(){
+            
+                Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+                
+                Ext.QuickTips.init();
+                Ext.Msg.minWidth = 300;
+                
+                var myData = [[1, '1', '1', -10.00, '2008-01-01 12:01:01', 'Atlantic Spadefish.jpg', '一'], [11, '11', '11', 1.00, '2008-02-16 12:01:02', 'Bat Ray.jpg', '二'], [13, '13', '13', 0, '2008-03-15 12:01:03', 'Blue Angelfish.jpg', '三'], [2, '2', '2', 10.01, '2008-04-14 12:01:04', 'Bluehead Wrasse.jpg', '四'], [23, '23', '23', 200.90, '2008-05-13 12:01:05', 'Cabezon.jpg', '五'], [62, '62', '62', -200.01, '2008-06-12 12:01:06', 'California Moray.jpg', '六']];
+                
+                var store = new Ext.data.SimpleStore({
+                    remoteSort: false,
+                    fields: [{
+                        name: 'num1'
+                    }, {
+                        name: 'num2',
+                        type: 'int'
+                    }, {
+                        name: 'num3'
+                    }, {
+                        name: 'number',
+                        type: 'float'
+                    }, {
+                        name: 'datetime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'file'
+                    }, {
+                        name: 'tips'
+                    }]
+                });
+                store.loadData(myData);
+                
+                
+                var grid = new Ext.grid.GridPanel({
+                    height: 350,
+                    width: 800,
+                    store: store,
+                    title: '自定义单元格的显示格式',
+                    frame: true,
+                    columns: [{
+                        header: '数字1',
+                        width: 75,
+                        sortable: true,
+                        dataIndex: 'num1'
+                    }, {
+                        header: '数字2',
+                        width: 75,
+                        sortable: true,
+                        dataIndex: 'num2'
+                    }, {
+                        header: '数字3',
+                        width: 75,
+                        sortable: true,
+                        dataIndex: 'num3'
+                    }, {
+                        header: "浮点数",
+                        width: 75,
+                        sortable: true,
+                        dataIndex: 'number'
+                    }, {
+                        header: "时间",
+                        width: 135,
+                        sortable: true,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+                        dataIndex: 'datetime'
+                    }, {
+                        header: "英文",
+                        width: 80,
+                        sortable: true,
+                        dataIndex: 'file'
+                    }, {
+                        header: "中文",
+                        width: 80,
+                        sortable: true,
+                        dataIndex: 'tips'
+                    }],
+                    stripeRows: true
+                });
+                
+                grid.render('panel1');
+                Ext.get('op').dom.value = "";
+            })
+        </script>
+    </body>
+</html>

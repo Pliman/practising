@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>Fun with Moveables!</title>
+		<style type="text/css">
+			.moveable {
+				background: #FFFFBF;
+				border: 1px solid black;
+				width: 100px;
+				height: 100px;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript" src="../dojo/dojo.js"></script>
+		<script type="text/javascript">
+			dojo.require("dojo.dnd.Moveable");
+			dojo.require("dojo.parser");
+		</script>
+	</head>
+	<body>
+		<div class="moveable" dojoType="dojo.dnd.Moveable"></div>
+	</body>
+</html>

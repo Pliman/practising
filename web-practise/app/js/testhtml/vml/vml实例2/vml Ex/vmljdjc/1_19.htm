@@ -1,0 +1,71 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>shadow阴影</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:shadow阴影 - 专用属性参考表</span>
+<table cellspacing=0 cellpadding=2 border=1 bordercolor=black width=100% style='word-Break:break-all;white-Space:nowrap;word-wrap:break-word;border-Collapse:collapse;overflow-y:scroll;'><tr><td width=12%>属性名</td><td width=10%>默认值</td><td width=35%>值类型/范围</td><TD width=35%>用途</td></tr>
+<tr><td style="color:red">on</td><td>true</td><td>boolean</td><td>设置处理是否起效</td></tr>
+<tr><td style="color:red">type</td><td>single</td><td>single,double,emboss,perspective</td><td>描述使用哪种阴影效果</td></tr>
+<tr><td style="color:red">color</td><td>black</td><td>color</td><td>描述主要阴影颜色</td></tr>
+<tr><td>obscured</td><td>false</td><td>boolean</td><td>暗示看穿图像如果没有在形状上填充</td></tr>
+<tr><td style="color:red">opacity</td><td>1.0</td><td>0.0-1.0</td><td>描述阴影透明度</td></tr>
+<tr><td style="color:red">offset</td><td>2pt,2pt</td><td>Vector2D</td><td>描述阴影的XY偏移度</td></tr>
+<tr><td style="color:red">color2</td><td>gray</td><td>color</td><td>当type!=single时，描述二次投影颜色</td></tr>
+<tr><td style="color:red">offset2</td><td>0pt,0pt</td><td>Vector2D</td><td>当type!=single时，描述二次投影XY偏移度</td></tr>
+<tr><td>origin</td><td>0,0</td><td>Vector2D</td><td>当filltype!=solid时，描述阴影与投影的交接度</td></tr>
+<tr><td>matrix</td><td>null</td><td>string</td><td>当filltype!=solid时，描述变换点阵的强度</td></tr>
+</table>
+
+<span>2:shadow阴影 - 应用精彩实例</span>
+
+即使是极道教程，也没有什么好说的，一切靠你自己分析研究、修改代码达到精通为止。对着例子、属性表自己动手，是最佳的学习方法。另外该标记相当重要，务要靠自己的努力学会！
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3131;LEFT:234px;WIDTH:67px;POSITION:absolute;TOP:142px;HEIGHT:53px" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:shadow on="t" color="black" opacity="52428f" offset="1.5pt,1.5pt"/>
+</v:oval>
+<v:rect style="Z-INDEX:3135;LEFT:320px;WIDTH:50px;POSITION:absolute;TOP:145px;HEIGHT:52px" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:shadow on="t" color="black" opacity="52428f" offset="3.75pt,1.5pt"/>
+</v:rect>
+<v:roundrect style="Z-INDEX:3137;LEFT:402px;WIDTH:60px;POSITION:absolute;TOP:139px;HEIGHT:59px" arcsize="9830f" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:shadow on="t" color="red" opacity="52428f" offset="-3.75pt,1.5pt"/>
+</v:roundrect>
+<v:line style="Z-INDEX:3139;LEFT:303px;POSITION:absolute;TOP:228px" from="0,0" to="100.5pt,-.75pt" strokecolor="black" strokeweight="5pt"> <v:shadow on="t" color="red" opacity="52428f" offset="3.75pt,2.25pt"/>
+</v:line>
+<v:curve style="Z-INDEX:3148;LEFT:452px;POSITION:absolute;TOP:235px" from="0,0" control1="42pt,-51.75pt" control2="-4.5pt,49.5pt" to="28.5pt,-4.5pt" filled="f" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:shadow on="t" color="green" opacity="52428f" offset="1.5pt,.75pt"/>
+</v:curve>
+<v:Image style="Z-INDEX:3161;LEFT:509px;WIDTH:67px;POSITION:absolute;TOP:202px;HEIGHT:68px" src="shili\fyw1.jpg" bilevel="f">
+<v:shadow on="t" color="yellow" opacity="52428f" offset="15pt,-15pt"/>
+</v:Image>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3170;LEFT:303px;WIDTH:121px;POSITION:absolute;TOP:139px;HEIGHT:101px" fillcolor="white" strokecolor="black" strokeweight=".75pt"> <v:shadow on="t" type="double" color="blue" opacity="52428f" offset="7.25pt,7.25pt"/>
+</v:oval>
+<v:oval style="Z-INDEX:3170;LEFT:444px;WIDTH:121px;POSITION:absolute;TOP:142px;HEIGHT:101px" fillcolor="white" strokecolor="black" strokeweight=".75pt"> <v:shadow on="t" type="perspective" color="blue" opacity="26214f" matrix="78643f" offset="7.25pt,7.25pt"/>
+</v:oval>
+<v:oval style="Z-INDEX:2999;LEFT:505px;WIDTH:96px;POSITION:absolute;TOP:203px;HEIGHT:110px" fillcolor="yellow" strokecolor="black" strokeweight=".75pt"/>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval style="Z-INDEX:3170;LEFT:303px;WIDTH:121px;POSITION:absolute;TOP:139px;HEIGHT:101px" fillcolor="white" strokecolor="black" strokeweight=".75pt"> <v:shadow on="t" type="double" color="blue" opacity="52428f" offset="7.25pt,7.25pt"/>
+</v:oval>
+<v:oval style="Z-INDEX:3170;LEFT:532px;WIDTH:121px;POSITION:absolute;TOP:226px;HEIGHT:101px" fillcolor="white" strokecolor="black" strokeweight=".75pt">
+<v:shadow on="t" type="double" color="blue" opacity="52428f" color2="green" offset="2.25pt,2.25pt" offset2="4pt,4pt"/>
+</v:oval>
+<v:oval style="Z-INDEX:3170;LEFT:526px;WIDTH:121px;POSITION:absolute;TOP:106px;HEIGHT:101px" filled="t" fillcolor="red" strokecolor="red" strokeweight=".75pt"> <v:shadow on="t" type="double" color="blue" opacity=".5" color2="green" offset="22.25pt,32.25pt" offset2="-22pt,32pt"/>
+</v:oval>
+</textarea>

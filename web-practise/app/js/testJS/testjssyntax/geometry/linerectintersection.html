@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>linecircleintersection</title>
+
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<script type="text/javascript" src="Rect.js"></script>
+		<script type="text/javascript" src="Line.js"></script>
+		<script type="text/javascript" src="Circle.js"></script>
+
+		<script type="text/javascript">
+			
+		</script>
+
+		<style>
+#canvas {
+	width: 800px;
+	height: 800px;
+	background-color: #EEE;
+}
+
+#rect {
+	width: 100px;
+	height: 100px; position = absolute;
+	top: 500px;
+	left: 500px;
+	background-color: orange;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="canvas">
+			<div id="rect"></div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	/**
+	 * 线段与线段的交点
+	 */
+	function getLineLineInter(p1,p2,p3,p4){
+		var I = p1;
+		
+		/* 如果2条线段平行 */
+		if( (p1.y-p2.y)*(p3.x-p4.x)==(p1.x-p2.x)*(p3.y-p4.y) ){
+			return I;
+		}
+		
+		/* 如果L1是水平或者垂直 */
+	   if(Math.abs(p1.x-p2.x) < 0.1 || Math.abs(p1.y-p2.y) < 0.1){
+		  var P = processHV(p1,p2,p3,p4);
+		  return  validatePoint(p1.x,p2.x,p3.x,p4.x,P.x) == 1? P:I;
+	   }
+	   
+	   /* 如果L2是水平或者垂直 */
+	   if(Math.abs(p3.x-p4.x) < 0.1 || Math.abs(p3.y-p4.y) < 0.1){
+		 var P = processHV(p3,p4,p1,p2);
+		 return  validatePoint(p1.x,p2.x,p3.x,p4.x,P.x) == 1? P:I;
+	   }
+	   
+	   /* 如果是2条斜线 */
+	   var k1 = (p2.y-p1.y)/(p2.x-p1.x);
+	   var b1 = (p1.y*p2.x - p1.x*p2.y)/(p2.x-p1.x);
+	   
+	   var k2 = (p4.y-p3.y)/(p4.x-p3.x);
+       var b2 = (p3.y*p4.x - p3.x*p4.y)/(p4.x-p3.x);
+       
+       var P = {}
+       P.x = (b2-b1)/(k1-k2);
+   	   P.y = k1*P.x + b1;
+	   
+	   return validatePoint(p1.x,p2.x,p3.x,p4.x,P.x) == 1?P : I;
+	}
+	
+	/**
+	 * 处理线段是水平或者垂直的特殊情况
+	 */
+	function processHV(p1,p2,p3,p4){
+		/* 如果L1垂直于x轴 */
+		var I = {};
+		
+		//L1垂直
+		if(Math.abs(p1.x-p2.x) < 0.1){ 
+		    I.x = p1.x;
+		    
+			//L2水平
+			if(Math.abs(p3.y-p4.y) < 0.1){  
+			   I.y = p3.y;
+			}else{//L2普通斜线
+				var k = (p4.y-p3.y)/(p4.x-p3.x);
+				var b = (p3.y*p4.x - p3.x*p4.y)/(p4.x-p3.x);
+			    I.y = k*p1.x+b;
+		    }
+		    return I;
+		}
+		
+		//L1水平 
+		if(Math.abs(p1.y-p2.y) < 0.1){ 
+		    I.y = p1.y;
+		    
+		    // L2垂直
+		    if(Math.abs(p3.x-p4.x) < 0.1){  
+			   I.x = p3.x;
+			}else{//L2普通斜线
+				var m = (p3.x-p4.x)/(p3.y-p4.y);
+				var n = (p3.y*p4.x-p3.x*p4.y)/(p3.y-p4.y);
+				I.x = m*p1.y + n;
+			}
+			return I;
+		}
+	}
+	
+	/**
+	 * 验证交点是否在2条线段上
+	 * 方向相反向量的乘积小于0，如果点在端点上，则等于0
+	 */
+	function validatePoint(x1,x2,x3,x4,xI){
+		return ((xI-x1)*(xI-x2) <= 0 && (xI-x3)*(xI-x4) <= 0)? 1 :0;
+	}
+	
+	//var I = getLineLineInter({x:100,y:100},{x:100,y:200},{x:200,y:100},{x:200,y:200});//都垂直
+	//var I = getLineLineInter({x:100,y:100},{x:200,y:100},{x:200,y:200},{x:300,y:200});//都水平
+	//var I = getLineLineInter({x:100,y:100},{x:200,y:200},{x:300,y:300},{x:400,y:400});//斜率相同
+	//var I = getLineLineInter({x:100,y:100},{x:100,y:200},{x:200,y:200},{x:100,y:200});//L1垂直,L2水平，交于(100,200)
+	//var I = getLineLineInter({x:100,y:100},{x:100,y:200},{x:200,y:200},{x:400,y:400});//L1垂直,L2斜，直线交于(100,100)，但线段没有交点
+	//var I = getLineLineInter({x:100,y:100},{x:200,y:100},{x:100,y:100},{x:100,y:200});//L1水平,L2垂直交于(100,100)
+	//var I = getLineLineInter({x:100,y:100},{x:200,y:100},{x:100,y:100},{x:200,y:200});//L1水平,L2斜交于(100,100)
+	var I = getLineLineInter({x:0,y:0},{x:200,y:200},{x:0,y:200},{x:200,y:0});//L1斜,L2斜
+	
+	alert(I.x + ' ' + I.y);
+</script>

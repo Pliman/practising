@@ -1,0 +1,50 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML3D动画特技3</TITLE>
+<META name='Gemeratpr' content='flashvml2.0'>
+<META name='KeyWords' content='VML3D动画特技3,flashvml,vml,vml画板,vml动画,vml图像画板,风云舞,图像画板,在线画板,在线画图'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+
+<script id="myscript" language="javascript">
+var text1="VML特技奉献-沐缘华",text1pos=0
+function kaishi1(){
+if(text1pos<text1.length+1){text1pos++;vml.textPath.string=text1.substr(0,text1pos)}else {clearInterval(time1);time1=setInterval("kaishi2()",50)}
+}
+var rotpos=1
+function kaishi2(){
+rotpos+=0.2;vml.Rotation+=rotpos
+if(rotpos>50){clearInterval(time1);vml.extrusion.foredepth="2pt";vml.extrusion.backdepth="10pt";vml.extrusion.color="green";vml.extrusion.diffusity="1.1";vml.extrusion.rotationangle="0,0";vml.extrusion.on=true;vml.strokeweight="5pt";time1=setInterval("kaishi3()",50)}
+}
+var rotmxpos=1
+function kaishi3(){
+rotmxpos+=2;vml.extrusion.rotationangle=rotmxpos+","+rotmxpos;vml.Rotation=rotmxpos
+if(rotmxpos>550){clearInterval(time1);time1=setInterval("kaishi4()",500)}
+}
+function kaishi4(){
+if(text1pos>0){text1pos--;vml.textPath.string=text1.substr(0,text1pos)}else {clearInterval(time1);location.reload()}
+}
+</script>
+</HEAD>
+<BODY bgcolor=black scroll=no>
+<bgsound loop=1 id=bgsound1>
+<bgsound loop=-1 id=bgsound2>
+<script>
+ //启动更新函数,更新所有使用隐藏功能的物件初期视图
+if(screen.width<1024||screen.height<768){alert("本页最佳适应于大于1024*768显示器分辨率的环境工作，检测您的分辨率低于这个数值，请在[控制面板--显示]中调整为1024*768或大于这个分辨率，而后刷新本页，即可看到最佳效果");}
+var loadtime=null,loadtext='if(document.readyState!="complete"){window.status=window.status+"."}else{clearInterval(loadtime);window.status=""}';
+window.status='相关图型程序图像音乐正在加载，请等待'
+loadtime=setInterval(loadtext,200)
+function window.onload(){
+setTimeout("vml.style.display=''",500)
+time1=setInterval("kaishi1()",500)
+}
+</script>
+<v:line id=vml style="Z-INDEX:3071;LEFT:296px;POSITION:absolute;TOP:282px;display:none" yincang="true" from="0,0" to="328.5pt,-2.25pt" filled="t" fillcolor="white" stroked="t" strokecolor="#68ec4d" strokeweight=".75pt">
+<v:path textpathok="t"/>
+<v:textpath style="FONT-SIZE:50px;FONT-FAMILY:宋体" on="t" fitpath="t" string="VML特技奉献-风云舞"/>
+<v:shadow on="t" color="#68ec4d" opacity="52428f" offset="3pt,3pt"/>
+</v:line>
+</BODY></HTML>

@@ -1,0 +1,87 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>DVML编程学习总结</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:DVML编程学习总结</span>
+
+从精通VML标记、到挑战DVML编程，过程如果你用心学了……那么我的执教心力总算没有白费，并对你寄予了未来VML WEB的厚望。VML在WEB的实际应用 - 充当HTML标记的补足、做数据图表类矢量图形、VML3D WEB网页、VML3D WEB网站、VMLflash动画、VML游戏、做其他你想在WEB用VML实现的事……
+
+《师徒缘》
+亿往昔无所一知、
+思今朝翼丰羽硕、
+恰似一波东去水、
+浮辉玉喻两岸分。
+2005-2-20 1:25:24
+
+是啊，怀念曾经上学的日子、怀念曾经上学时的恩师……。而没想到今日自己却在教着别人，写到此刻才真有感慨那，也总算了解了曾经教吾之师的那份心。。
+
+VML极道教程的正式学科至今已尽结束，你已具备了相当高VML开发实力。而剩下的flashvml课题与实战使用，相信对你来说则是很简单的操作问题、手到擒来的绝活。而接下来，师缘了解的日子也临近结束了，此情此景、此刻的话语。。写到此处又使我联想起来
+
+96年告别执教我2年的小学五年级班主任兼语文恩师 - <b>潘果爽</b>（你要好好的学习，考一中我认为你不行，但实验肯定没问题）
+97年告别执教我3年的古典式摔交教练恩师 - <b>曾勇</b>（今后一定老实点，别光捣蛋！）
+99年告别执教我3年初中班主任兼英语恩师 - <b>马传军</b>（我对你看在眼里是心疼、是担心，但又没有办法 -- 叹息）
+
+那一幕幕的情形。。只待自己到社会闯荡才深深痛痛的体会到。而今日的此时此刻才最深、最痛的感受到。而我可能是与你素未眸面，但却能想象的出、联想的到你是怎样的用心学习。而最后与你了结师缘简短的一句话是：希望我教的东西对你的以后有用。
+
+<span>2:一些标记属性使用技巧 与 DVML编程实用技巧</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:Image src="shili/haha.gif" style="position:absolute;left:100;top:100;width:150;height:150;"/>
+<v:Image src="shili/haha.gif" style="position:absolute;left:270;top:100;width:150;height:150;flip:x"/>
+<v:Image src="shili/haha.gif" style="position:absolute;left:430;top:100;width:150;height:150;flip:y"/>
+<v:Image src="shili/haha.gif" style="position:absolute;left:590;top:100;width:150;height:150;flip:x y"/>
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:Image id="a" src="shili/haha.gif" style="position:absolute;left:300;top:200;width:150;height:150;rotation:50"/>
+<center><input type=button value="左旋" onclick="a.rotation-=10">
+<input type=button value="右旋" onclick="a.rotation+=10">
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:Image id="a" src="shili/haha.gif" style="position:absolute;left:300;top:200;width:150;height:150;zoom:1"/>
+<center><input type=button value="缩放放大3倍" onclick="a.style.zoom=3">
+<input type=button value="缩放缩小50%" onclick="a.style.zoom=0.5;">
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:Image id="a" src="shili/haha.gif" style="position:absolute;left:300;top:200;width:150;height:150;zoom:1"/>
+<center><input type=button value="更改内容" onclick="a.innerHTML='VML<b>极道</b>教程'">
+<input type=button value="读取内容" onclick="alert(a.innerHTML)">
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:Image id="a" src="shili/haha.gif" style="position:absolute;left:300;top:200;width:150;height:150;zoom:1"/>
+<center><input type=button value="更换图片" onclick="a.src='shili/fyw1.jpg'">
+</textarea>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<bgsound id="bgsound1">
+<bgsound id="bgsound2">
+<v:Image id="a" src="shili/haha.gif" style="position:absolute;left:300;top:200;width:150;height:150;zoom:1"/>
+
+<center>
+<input type=button value="播放背景音乐" onclick="bgsound1.src='shili/sounds/THE HYBRID FRONT3.mp3';bgsound1.loop=-1;bgsound1.volume=-800">
+<input type=button value="播放前景音乐" onclick="bgsound2.src='shili/sounds/button_move.wav';bgsound2.loop=1">
+</textarea>
+
+<center><span>《VML极道教程》第二卷[挑战DVML编程] 全文完！
+
+2005-2-20 3:12:30 - 沐缘华</span>
+
+</center><p>

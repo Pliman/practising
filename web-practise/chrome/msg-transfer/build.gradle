@@ -1,0 +1,18 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '1.4.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-messaging', version: '4.3.3.RELEASE'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0-b01'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+}
+

@@ -1,0 +1,9 @@
+;;; ERROR: 1
+(module (func 
+          nop
+          foo))
+(;; STDERR ;;;
+out/test/parse/expr/bad-nop.txt:4:11: unexpected token "foo"
+          foo))
+          ^^^
+;;; STDERR ;;)

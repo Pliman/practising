@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body ng-app="app">
+
+<div ng-app ng-controller="MyCtrl">
+	<select ng-model="opt" ng-options="font as font.text for font in fonts">
+	</select>
+
+	<p>{{opt}}</p>
+</div>
+
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="selectngmodel.js"></script>
+</body>
+</html>

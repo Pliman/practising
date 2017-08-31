@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>一个简单的图库管理例子</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/Ext.ux.TreePanel.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/data-view-plugins.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ImageDragZone.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style type="text/css">
+            .thumb {
+                background: #dddddd;
+                padding: 3px;
+            } .thumb table {
+                height: 120px;
+                width: 120px;
+            } .thumb img {
+                border: 1px solid white;
+            } .thumb-wrap {
+                float: left;
+                margin: 4px;
+                margin-right: 0;
+                padding: 5px;
+                width: 130px;
+                height: 144px;
+            } .thumb-wrap span {
+                display: block;
+                overflow: hidden;
+                text-align: center;
+                height: 24px;
+                line-height: 24px;
+            } .x-view-over {
+                border: 1px solid #dddddd;
+                background: #efefef url(../lib/ext/resources/images/default/grid/row-over.gif) repeat-x left top;
+                padding: 4px;
+            } .x-view-selected {
+                background: #eff5fb url(./images/selected.gif) no-repeat right bottom;
+                border: 1px solid #99bbe8;
+                padding: 4px;
+            } .x-view-selected .thumb {
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body scroll="no">
+        <div id="loading-mask">
+        </div>
+        <div id="loading">
+            <div class="loading-indicator">
+                <img src="resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle"/>正在加载...
+            </div>
+        </div>
+        <script>
+            var app = {}
+            
+            Ext.onReady(function(){
+                Ext.BLANK_IMAGE_URL = '../lib/ext/resources/images/default/s.gif'
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                var store = new Ext.data.Store({
+                    url: 'dataview_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'filename'
+                    }, {
+                        name: 'classid'
+                    }, {
+                        name: 'filesize',
+                        type: 'int'
+                    }, {
+                        name: 'createtime'
+                    }, {
+                        name: 'width'
+                    }, {
+                        name: 'height'
+                    }, {
+                        name: 'sortorder',
+                        type: "int"
+                    }]),
+                    remoteSort: true,
+                    listeners: {
+                        update: function(store, rec, op){
+                            if (op == Ext.data.Record.EDIT) {
+                                Ext.Ajax.request({
+                                    url: 'dataview_action.ashx?act=edit&value=' + escape(rec.data.title) + '&id=' + rec.id,
+                                    scripts: true,
+                                    scope: this,
+                                    success: function(oResponse, op){
+                                        var msg = oResponse.responseText;
+                                        var returnData = Ext.util.JSON.decode(msg);
+                                        if (typeof returnData == "object") {
+                                            if (returnData.success == "true") {
+                                                store.commitChanges();
+                                                return;
+                                            }
+                                            else {
+                                                msg = returnData.data;
+                                            }
+                                        }
+                                        store.rejectChanges();
+                                        Ext.Msg.alert('信息', msg);
+                                    },//success
+                                    failure: function(oResponse, op){
+                                        store.rejectChanges();
+                                        Ext.Msg.alert('信息', oResponse.responseText);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }) //store
+                var tpl = new Ext.XTemplate('<tpl for=".">', '<div class="thumb-wrap" id="{id}">', '<div class="thumb"><table qtip="{tips} border="0"><tr><td align="center" valign="middle">', '<img qtip="{tips}" class="thumb-img" style="width:100px" src="./images/{filename}">', '</td></tr></table></div>', '<span class="x-editable">{showtitle:ellipsis(10)}</span></div>', '</tpl>', '<div class="x-clear"></div>');//tpl
+                var dataView = new Ext.DataView({
+                    store: store,
+                    width: 600,
+                    height: 400,
+                    style: 'overflow:auto',
+                    tpl: tpl,
+                    multiSelect: true,
+                    overClass: 'x-view-over',
+                    itemSelector: 'div.thumb-wrap',
+                    emptyText: '没有上传图片！',
+                    plugins: [new Ext.DataView.DragSelector({
+                        dragSafe: true
+                    }), new Ext.DataView.LabelEditor({
+                        dataIndex: 'title'
+                    })],
+                    prepareData: function(data){
+                        data.sizeString = Ext.util.Format.fileSize(data.filesize);
+                        data.showtitle = (data.title.trim()) ? data.title : '无标题';
+                        data.tips = '标题：　　' + data.showtitle + '<br>尺寸：　　' +
+                        data.width +
+                        '×' +
+                        data.height +
+                        '<br>大小：　　' +
+                        data.sizeString +
+                        '<br>上传时间：' +
+                        data.createtime +
+                        '<br>文件名　：' +
+                        data.filename;
+                        return data;
+                    },
+                    listeners: {
+                        selectionchange: function(dv, selections){
+                            if (selections.length > 0) {
+                                dataAction[1].enable();
+                                dataAction[2].enable();
+                            }
+                            else {
+                                dataAction[1].disable();
+                                dataAction[2].disable();
+                            }
+                        },
+                        dblclick: function(dv, index, node, e){
+                            var data = store.getAt(index);
+                            if (typeof data == 'object') {
+                                window.open('./images/' + data.data.filename);
+                            }
+                        }
+                    }
+                });//dataview
+                var dataAction = [new Ext.Action({
+                    id: 'addimage',
+                    text: '上传',
+                    handler: function(){
+                        Ext.Msg.alert('信息', '上传图片');
+                    }
+                }), new Ext.Action({
+                    id: 'delimage',
+                    text: '删除',
+                    disabled: true,
+                    handler: function(){
+                        var obj = dataView;
+                        if (obj.isSelected) {
+                            var datas = obj.getSelectedRecords();
+                            var ids = '', titles = '';
+                            for (var i = 0; i < datas.length; i++) {
+                                var data = datas[i].data;
+                                ids += data.id + ',';
+                                titles += ((data.title.trim()) ? data.title : '无标题') + '(' + data.filename + ')<br>';
+                            }
+                            ids = ids.substr(0, ids.length - 1);
+                            Ext.MessageBox.confirm('信息', '确定删除以下图片？<br>' + titles, function(btn){
+                                if (btn == 'yes') {
+                                    Ext.Ajax.request({
+                                        url: 'dataview_action.ashx?act=del&value=' + escape(ids),
+                                        scope: this,
+                                        scripts: true,
+                                        success: function(oResponse, op){
+                                            var msg = oResponse.responseText;
+                                            var returnData = Ext.util.JSON.decode(msg);
+                                            if (typeof returnData == "object") {
+                                                if (returnData.success == "true") {
+                                                    store.reload();
+                                                }
+                                                else {
+                                                    Ext.Msg.alert('信息', returnData.data);
+                                                }
+                                            }
+                                        },//success
+                                        failure: function(oResponse, op){
+                                            Ext.Msg.alert('信息', oResponse.responseText);
+                                        }
+                                    })
+                                }
+                            });
+                        }
+                        else {
+                            Ext.Msg.alert('信息', '发生错误');
+                        }
+                    }
+                }), new Ext.Action({
+                    id: 'viewimage',
+                    text: '查看',
+                    disabled: true,
+                    handler: function(){
+                        var obj = dataView;
+                        if (obj.isSelected) {
+                            var datas = obj.getSelectedRecords();
+                            for (var i = 0; i < datas.length; i++) {
+                                var data = datas[i].data;
+                                window.open('./images/' + data.filename);
+                            }
+                        }
+                        else {
+                            Ext.Msg.alert('信息', '请选择一副图片！');
+                        }
+                    }
+                })];
+                
+                
+                var pageToolbar = new Ext.PagingToolbar({
+                    pageSize: 10,
+                    displayInfo: true,
+                    store: store,
+                    items: ['-', dataAction[0], dataAction[1], dataAction[2]]
+                });
+                
+                
+                var tree = new Ext.ux.TreePanel({
+                    title: '图片类别',
+                    actionUrl: 'dvtree_action.ashx',
+                    store: store
+                });
+                
+                var ge = new Ext.tree.TreeEditor(tree, {
+                    allowBlank: false,
+                    blankText: '请输入名称',
+                    selectOnFocus: true
+                });
+                
+                var dataPanel = new Ext.Panel({
+                    style: 'padding:0px 0px 5px 0px',
+                    region: 'center',
+                    title: '图库管理',
+                    layout: 'fit',
+                    autoScroll: true,
+                    closable: true,
+                    tbar: pageToolbar,
+                    items: dataView
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'border',
+                    items: [tree, dataPanel]
+                });
+                
+                var dragZone = new ImageDragZone(dataView, {
+                    containerScroll: true,
+                    ddGroup: 'treeDD'
+                });
+                
+                store.load();
+                setTimeout(function(){
+                    Ext.get('loading').remove();
+                    Ext.get('loading-mask').fadeOut({
+                        remove: true
+                    });
+                }, 250);
+            })//onReady
+        </script>
+    </body>
+</html>

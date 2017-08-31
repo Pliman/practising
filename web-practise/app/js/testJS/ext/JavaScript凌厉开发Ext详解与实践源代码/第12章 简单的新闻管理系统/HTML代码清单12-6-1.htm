@@ -1,0 +1,173 @@
+<!--HTML代码清单12-6-1--> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>登录页</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/application.css" />
+    </head>
+    <body scroll="no">
+        <script type="text/javascript" src="lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="lib/ext/ext-lang-zh_CN.js">
+        </script>
+        <div id="loading-mask">
+        </div>
+        <div id="loading">
+            <div class="loading-indicator">
+                <img alt="" src="lib/ext/resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle"/>正在加载...
+            </div>
+        </div>
+        <script type="text/javascript">
+app = {};
+Ext.onReady(function(){
+    Ext.BLANK_IMAGE_URL = 'lib/ext/resources/images/default/s.gif';
+    Ext.QuickTips.init();
+    Ext.form.Field.prototype.msgTarget = 'side';
+    
+    app.loginForm = new Ext.form.FormPanel({
+        labelAlign: 'left',
+        buttonAlign: 'center',
+        bodyStyle: 'padding:5px',
+        frame: true,
+        labelWidth: 80,
+        items: [{
+            xtype: 'textfield',
+            name: 'txt1',
+            fieldLabel: '用户名称',
+            allowBlank: false,
+            anchor: '90%',
+            enableKeyEvents: true,
+            listeners: {
+                keypress: function(field, e){
+                    if (e.getKey() == 13) {
+                        var obj = app.loginForm.form.findField("txt2");
+                        if (obj) {
+                            obj.focus();
+                        }
+                    }
+                }
+            }
+        }, {
+            xtype: 'textfield',
+            inputType: 'password',
+            name: 'txt2',
+            fieldLabel: '用户密码',
+            allowBlank: false,
+            anchor: '90%',
+            enableKeyEvents: true,
+            listeners: {
+                keypress: function(field, e){
+                    if (e.getKey() == 13) {
+                        var obj = app.loginForm.form.findField("txt3");
+                        if (obj) {
+                            obj.focus();
+                        }
+                    }
+                }
+            }
+        }, {
+            xtype: 'textfield',
+            name: 'txt3',
+            fieldLabel: '验证码',
+            allowBlank: false,
+            anchor: '90%',
+            mixLength: 6,
+            maxLength: 6,
+            enableKeyEvents: true,
+            listeners: {
+                keypress: function(field, e){
+                    if (e.getKey() == 13) {
+                        var obj = Ext.getCmp("submitButton");
+                        if (obj) {
+                            app.submit();
+                        }
+                    }
+                }
+            }
+        }, {
+            xtype: 'panel',
+            height: 100,
+            html: '<div style="margin:5px 0px 0px 60px"><a href="#"><img alt="如果看不清楚请单击图片更换图片。" onclick="javascript:app.changeCode(this)" id="code" height="82" width="272" src="vcode.ashx" border="0"></a></div>',
+            border: false
+        }, {
+            xtype: 'panel',
+            height: 30,
+            html: '<div style="margin:5px 0px 0px 20px;color:red">*如果图片不清晰请单击图片更换图片</div>',
+            border: false
+        }],
+        buttons: [{
+            id: "submitButton",
+            text: '确定',
+            scope: this,
+            handler: function(){
+                app.submit();
+            }
+        }, {
+            text: '重置',
+            scope: this,
+            handler: function(){
+                app.loginForm.form.reset()
+            }
+        }]
+    });
+    app.loginWin = new Ext.Window({
+        width: 400,
+        height: 300,
+        title: '新闻管理系统登录',
+        plain: true,
+        closable: false,
+        resizable: false,
+        frame: true,
+        layout: 'fit',
+        closeAction: 'hide',
+        border: false,
+        modal: true,
+        items: [app.loginForm]
+    });
+    app.loginWin.show();
+    
+    app.submit = function(){
+        if (app.loginForm.form.isValid()) {
+            app.loginForm.form.doAction('submit', {
+                url: 'checklogin.ashx',
+                method: 'post',
+                params: '',
+                success: function(form, action){
+                    var result = action.result.data;
+                    if (result == 'ok') {
+                        window.location = "index.aspx";
+                    }
+                    else 
+                        if (typeof result == 'object') {
+                        }
+                        else {
+                            Ext.Msg.alert('错误', action.result.data);
+                        }
+                },
+                failure: function(){
+                    Ext.Msg.alert('错误', '发生错误！');
+                }
+            });
+        }
+    }
+    
+    app.changeCode = function(obj){
+        if (obj) {
+            var d = new Date();
+            obj.src = "vcode.ashx?d=" + d;
+        }
+    }
+    setTimeout(function(){
+        Ext.get('loading').remove();
+        Ext.get('loading-mask').fadeOut({
+            remove: true
+        });
+    }, 250);
+})//onReady
+        </script>
+    </body>
+</html>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+	<title>Wechat Robert</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		body {
+			font: 13px Helvetica, Arial;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		.message-from {
+			background: #999;
+			padding: 3px;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.message-from input {
+			border: 0;
+			padding: 10px;
+			width: 90%;
+			margin-right: .5%;
+		}
+
+		.message-from button {
+			width: 9%;
+			background: rgb(130, 224, 255);
+			border: none;
+			padding: 10px;
+		}
+
+		#messages {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		#messages li {
+			padding: 5px 10px;
+		}
+
+		#messages li:nth-child(odd) {
+			background: #eee;
+		}
+
+		.contacts {
+			width: 250px;
+			float: left;
+			border-right: 2px solid #ccc;
+			height: 100%;
+			padding: 50px 20px;
+			overflow: auto;
+		}
+
+		.content-wrap {
+			position: relative;
+			margin-left: 250px;
+			height: 98%;
+		}
+
+		.contact-avatar {
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-radius: 2px;
+			-moz-border-radius: 2px;
+			-webkit-border-radius: 2px;
+			float: left;
+			margin: 5px 20px 5px 5px;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.contact {
+			height: 50px;
+			margin: 10px 0;
+			line-height: 50px;
+			cursor: pointer;
+		}
+
+		.contact.current {
+			background: #efefef;
+		}
+
+		.new-message {
+			color: red;
+		}
+	</style>
+</head>
+<body id="app">
+<button v-on:click="reloadContent">RELOAD</button>
+<div class="contacts">
+	<div v-for="contact in contacts"
+	     v-bind:class="['contact', contact.newMessage ? 'new-message' : '', currentContact === contact ? 'current' : '']"
+	     v-on:click="getMessage(contact)">
+		<div class="contact-avatar"><img v-if="contact.avatar != 'loading'"
+		                                 v-bind:src="contact.avatar"/></div>
+		{{ contact.nickname }}
+	</div>
+</div>
+<div class="content-wrap">
+	<ul id="messages">
+		<li v-for="message in messages">
+			<p v-if="message.type == 'text'">{{message.msg}}</p>
+			<p v-if="message.type == 'img'">
+				<a target="_blank"
+				   v-bind:href="getImgUrl(message.id)">图形文件</a>
+			</p>
+			<p v-if="message.type == 'voice'">
+				<a target="_blank"
+				   v-bind:href="getVoiceUrl(message.id)">音频文件</a>
+			</p>
+		</li>
+	</ul>
+
+	<div class="message-from">
+		<input id="m" autocomplete="off"/>
+		<button v-on:click="sendMessage">Send</button>
+		<div id="sendImg">
+			<input type="file" id="selectImg" name="userImg"
+			       v-on:change="imgSelected()"/>
+			<div id="fileName"></div>
+			<div id="fileSize"></div>
+			<div id="fileType"></div>
+			<div id="progressNumber"></div>
+			<div class="row">
+				<input type="button" onclick="uploadImg()" value="Upload Image"/>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/vue.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var init = function () {
+		var socket = null;
+		var input = document.getElementById('m');
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				messages: [],
+				contacts: [],
+				currentContact: null
+			},
+			methods: {
+				connectStartup: function () {
+					socket = io('http://localhost:3000');
+					socket.on('connect', function () {
+						socket.on('messageToClient', function (data) {
+							vm.messages = data.messages || [];
+							vm.contacts = data.contacts || [];
+						});
+
+						socket.on('updateClientAvatar', function (data) {
+							for (var i = 0; i < vm.contacts.length; i++) {
+								var contact = vm.contacts[i];
+								if (contact.nickname == data.nickname) {
+									vm.contacts[i].avatar = data.avatar;
+									break;
+								}
+							}
+
+							vm.contacts = [].concat(vm.contacts);
+						});
+
+						socket.on('updateClientImageMessage', function (data) {
+							if (!vm.currentContact || vm.currentContact.nickname != data.groupName) {
+								return;
+							}
+
+							for (var i = 0; i < vm.messages.length; i++) {
+								var message = vm.messages[i];
+								if (message.id == data.id) {
+									vm.messages.$set(i, Object.assign({}, vm.messages[i], {imageData: data.imageData}));
+									break;
+								}
+							}
+						})
+					})
+				},
+				sendMessage: function () {
+					var value = input.value;
+					if (!value) {
+						return;
+					}
+
+					vm.messages.push({
+						msg: value
+					});
+
+					input.value = '';
+
+					socket.emit('messageFromClient', {
+						msg: value
+					});
+				},
+				getMessage: function (contact) {
+					vm.currentContact = contact;
+					socket.emit('getMessageFromWechat', {
+						nickname: contact.nickname
+					});
+				},
+				reloadContent: function () {
+					socket.emit('reloadWechatContent', {});
+				},
+				sendImageToWechat: function () {
+					console.log('aa');
+					socket.emit('sendImageToWechat', {});
+				},
+				getVoiceUrl: function (id) {
+					return "/" + id + ".mp3";
+				},
+				getImgUrl: function (id) {
+					return "/" + id + ".jpg";
+				},
+				imgSelected: function () {
+					var file = document.getElementById('selectImg').files[0];
+					if (file) {
+						var fileSize = 0;
+						if (file.size > 1024 * 1024)
+							fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+						else
+							fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+
+						document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+						document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+						document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+					}
+				}
+			}
+		});
+
+		vm.connectStartup();
+	};
+
+	function uploadImg() {
+		var fd = new FormData();
+		fd.append("userImg", document.getElementById('selectImg').files[0]);
+
+		var xhr = new XMLHttpRequest();
+		xhr.upload.addEventListener("progress", uploadProgress, false);
+		xhr.addEventListener("load", uploadComplete, false);
+		xhr.open("POST", "/fileupload");
+		xhr.send(fd);
+	}
+
+	function uploadProgress(evt) {
+		if (evt.lengthComputable) {
+			var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+			document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+		} else {
+			document.getElementById('progressNumber').innerHTML = 'unable to compute';
+		}
+	}
+
+	function uploadComplete(evt) {
+		console.log(evt.target.responseText);
+	}
+	init();
+</script>
+</body>
+</html>

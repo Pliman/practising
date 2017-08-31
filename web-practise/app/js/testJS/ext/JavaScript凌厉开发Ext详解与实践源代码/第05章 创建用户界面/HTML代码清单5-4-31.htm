@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>验证后错误信息的显示方式</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">验证后错误信息的显示方式</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="form2">
+                </div>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+                Ext.QuickTips.init();
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    width: 250,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 100,
+                    labelSeparator: "：",
+                    title: 'AnchorLayout的使用方法例子',
+                    items: [{
+                        xtype: 'textfield',
+                        fieldLabel: 'qtip',
+                        allowBlank: false
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: 'title',
+                        allowBlank: false,
+                        anchor: '90%',
+                        msgTarget: 'title'
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: 'under',
+                        allowBlank: false,
+                        anchor: '90%',
+                        msgTarget: 'under'
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: 'side',
+                        allowBlank: false,
+                        anchor: '90%',
+                        msgTarget: 'side'
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: 'element id',
+                        allowBlank: false,
+                        anchor: '90%',
+                        msgTarget: 'msg'
+                    }, {
+                        xtype: 'panel',
+                        id: 'msg'
+                    }]
+                });
+                
+            })
+        </script>
+    </body>
+</html>

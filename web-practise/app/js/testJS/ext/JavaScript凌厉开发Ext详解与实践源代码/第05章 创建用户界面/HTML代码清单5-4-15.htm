@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>实现Combobox的联动</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="city.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+            .thumb {
+                background: #dddddd;
+                padding: 3px;
+            } .thumb table {
+                height: 120px;
+                width: 120px;
+            } .thumb img {
+                border: 1px solid white;
+            } .thumb-wrap {
+                float: left;
+                margin: 4px;
+                margin-right: 0;
+                padding: 5px;
+                width: 130px;
+                height: 144px;
+            } .thumb-wrap span {
+                display: block;
+                overflow: hidden;
+                text-align: center;
+                height: 24px;
+                line-height: 24px;
+            } .x-view-over {
+                border: 1px solid #dddddd;
+                background: #efefef url(../lib/ext/resources/images/default/grid/row-over.gif) repeat-x left top;
+                padding: 4px;
+            } .x-view-selected {
+                background: #eff5fb url(./images/selected.gif) no-repeat right bottom;
+                border: 1px solid #99bbe8;
+                padding: 4px;
+            } .x-view-selected .thumb {
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">实现Combobox的联动</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                
+                var localProvince = new Ext.data.SimpleStore({
+                    fields: ["province", "city"],
+                    data: citys
+                })
+                
+                var localCity = new Ext.data.SimpleStore({
+                    fields: ["city"],
+                    data: []
+                })
+                
+                
+                var remoteProvince = new Ext.data.SimpleStore({
+                    url: 'province_action.ashx?act=province',
+                    fields: ["province"],
+                    remoteSort: true
+                })
+                
+                var remoteCity = new Ext.data.SimpleStore({
+                    baseParams: {
+                        province: ''
+                    },
+                    url: 'province_action.ashx?act=city',
+                    fields: ["city"],
+                    remoteSort: true
+                })
+                
+                var jsonStore = new Ext.data.JsonStore({
+                    url: 'province_action.ashx?act=all',
+                    root: 'rows',
+                    fields: [{
+                        name: 'province'
+                    }, {
+                        name: 'city'
+                    }]
+                })
+                
+                var localCity2 = new Ext.data.SimpleStore({
+                    fields: ["city"],
+                    data: []
+                })
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 860,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: '实现Combobox的联动',
+                    items: [{
+                        xtype: 'fieldset',
+                        title: '本地数据',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: localProvince,
+                            mode: 'local',
+                            forceSelection: true,
+                            displayField: 'province',
+                            blankText: '请选择省份',
+                            emptyText: '选择省份',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '省份',
+                            name: 'province',
+                            anchor: '90%',
+                            listeners: {
+                                scope: this,
+                                change: function(){
+                                    field = frm.form.findField('province');
+                                    if (field.isValid()) {
+                                        cityField = frm.form.findField('city');
+                                        cityField.clearValue();
+                                        var value = field.getValue();
+                                        var index = localProvince.find('province', value);
+                                        if (index >= 0) {
+                                            var rec = localProvince.getAt(index);
+                                            localCity.loadData(rec.data.city);
+                                        }
+                                    }
+                                }
+                            }
+                        }, {
+                            xtype: 'combo',
+                            store: localCity,
+                            mode: 'local',
+                            displayField: 'city',
+                            forceSelection: true,
+                            blankText: '请选择城市',
+                            emptyText: '选择城市',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '城市',
+                            name: 'city',
+                            anchor: '90%'
+                        }]
+                    }, {
+                        xtype: 'fieldset',
+                        title: '远程数据',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: remoteProvince,
+                            mode: 'remote',
+                            displayField: 'province',
+                            forceSelection: true,
+                            blankText: '请选择省份',
+                            emptyText: '选择省份',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '省份',
+                            name: 'province1',
+                            anchor: '90%',
+                            listeners: {
+                                scope: this,
+                                change: function(){
+                                    field = frm.form.findField('province1');
+                                    if (field.isValid()) {
+                                        cityField = frm.form.findField('city1');
+                                        cityField.clearValue();
+                                        var value = field.getValue();
+                                        var index = remoteProvince.find('province', value);
+                                        if (index >= 0) {
+                                            remoteCity.baseParams.province = value;
+                                            remoteCity.load();
+                                        }
+                                    }
+                                }
+                            }
+                        }, {
+                            xtype: 'combo',
+                            store: remoteCity,
+                            mode: 'remote',
+                            displayField: 'city',
+                            forceSelection: true,
+                            blankText: '请选择城市',
+                            emptyText: '选择城市',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '城市',
+                            name: 'city1',
+                            anchor: '90%'
+                        }]
+                    }, {
+                        xtype: 'fieldset',
+                        title: '远程只加载一次数据',
+                        height: 100,
+                        items: [{
+                            xtype: 'combo',
+                            store: jsonStore,
+                            mode: 'remote',
+                            displayField: 'province',
+                            forceSelection: true,
+                            blankText: '请选择省份',
+                            emptyText: '选择省份',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '省份',
+                            name: 'province2',
+                            anchor: '90%',
+                            listeners: {
+                                scope: this,
+                                change: function(){
+                                    field = frm.form.findField('province2');
+                                    if (field.isValid()) {
+                                        cityField = frm.form.findField('city2');
+                                        cityField.clearValue();
+                                        var value = field.getValue();
+                                        var index = jsonStore.find('province', value);
+                                        if (index >= 0) {
+                                            var rec = jsonStore.getAt(index);
+                                            localCity2.loadData(rec.data.city);
+                                        }
+                                    }
+                                }
+                            }
+                        }, {
+                            xtype: 'combo',
+                            store: localCity2,
+                            mode: 'local',
+                            displayField: 'city',
+                            forceSelection: true,
+                            blankText: '请选择城市',
+                            emptyText: '选择城市',
+                            editable: true,
+                            typeAhead: true,
+                            selectOnFocus: true,
+                            triggerAction: 'all',
+                            allowBlank: false,
+                            fieldLabel: '城市',
+                            name: 'city2',
+                            anchor: '90%'
+                        }]
+                    }, {
+                        xtype: 'button',
+                        text: "form.getValues()",
+                        scope: this,
+                        handler: function(){
+                            Ext.get('op').dom.value += "执行：frm.form.getValues()\n" +
+                            '结果：' +
+                            Ext.encode(frm.form.getValues()) +
+                            '\n';
+                        }
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+.comment {
+	position: absolute;
+	left: 0;
+	display: none;
+	position: absolute;
+	border: 1px #09c solid;
+	background: #E8EFFF;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.content {
+	width: 260px;
+	clip: auto;
+	overflow: auto;
+	height: 128px;
+	align: center;
+	background: #EFF3F3;
+	border-color: #add #add #add #add;
+	border-style: solid;
+	border-width: 1px;
+	font-size: 14px;
+	color: #09c;
+	SCROLLBAR-FACE-COLOR: #92C0D1;
+	SCROLLBAR-SHADOW-COLOR: #92C0D1;
+	SCROLLBAR-HIGHLIGHT-COLOR: #92C0D1;
+	SCROLLBAR-3DLIGHT-COLOR: #92C0D1;
+	SCROLLBAR-DARKSHADOW-COLOR: #cEe8fB;
+	SCROLLBAR-TRACK-COLOR: #cEe8fB;
+	SCROLLBAR-ARROW-COLOR: #cEe8fB;
+}
+
+.contentcontainer {
+	text-align: center;
+}
+
+.writelogcontainer {
+	position: absolute;
+	left: 0px;
+	top: 600px;
+	text-align: center;
+}
+
+.titlemessage {
+	font-size: 14px;
+	font-weight: bold;
+	color: #09c;
+}
+
+.tabdiv {
+	height: 2px;
+	line-height: 2px;
+}

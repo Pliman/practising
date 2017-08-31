@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<title>电压合格率波形图</title>
+		<STYLE TYPE="text/css">
+		v\:* { behavior: url(#default#VML);} 
+		o\:* { behavior: url(#default#VML);}
+		
+		body {
+		    margin:0px;
+		    padding:0px;
+		    font-size:12px;
+		    text-align:left
+		}
+		.pBlack {
+		    font-weight:bold;
+		    font-size:12px;
+		}
+		
+		.pRed {
+		    font-weight:bold;
+		    font-size:12px;
+		    color:#FF0000;
+		}
+		
+		/*横坐标轴样式*/
+		.pMonth {
+		    font-size:66px;
+		    font-family:"黑体";
+		    color:#CCCCCC;
+		    letter-spacing: 3px;
+		}
+		
+		/*提示信息样式*/
+		.ToolTip {
+		    padding:4px;
+		    margin:4px;
+		    background-color: #CCCCCC;
+		    border: 1px solid #0066FF;
+		    text-align:left;
+		}
+		
+		/*标题显示样式*/
+		.Title {
+		    font-family:"宋体", "华文仿宋";
+		    font-size:16px;
+		    text-align:center;
+		    font-weight:bold;
+		    color:#996600;
+		    vertical-align:middle;
+		}
+		
+		.curveBody{
+		    margin:0;
+		    padding:0;
+		    height:20px;
+		    font-size:12px;
+		}
+		
+		.curveForm{
+		    margin:0;
+		    padding:0;
+		    height:20px;
+		    font-size:12px;
+		}
+		
+	</style>		
+		<script language="javascript" type="text/javascript">
+/* 说明: javascript/vml 曲线图
+ * 作者：<a href="" target="_blank">大漠穷秋</a>//CSDN博客链接
+ *			 <a href="http://blog.stnn.cc/knight" target="_blank">大漠穷秋</a>//敏思博客链接
+ * 日期：2008-04-08
+ * 邮箱：damoqiongqiu@126.com
+ * 申明：转载，使用，修改请保存版权申明 
+ */
+
+		//定义对象构造函数
+		function LineCurve(DivObj){
+			//区域参数
+			this.gpLeft=100;//与divstyle对应
+			this.gpTop=100;
+			this.gpWidth=800;
+			this.gpHeight=400;
+			
+			//绘图区域参数
+			this.range=1;//倍率（放大参数）
+			this.coordX=this.gpWidth/this.range;// coordsize X
+			this.coordY=this.gpHeight/this.range;// coordsize Y
+			this.bgWidth=this.gpWidth;
+			this.bgHeight=this.gpHeight;
+			this.bgColor="#C4E1FF";
+			this.testColor="red";//坐标轴颜色
+			this.gridColor="#CCCCCC";//网格线颜色
+			
+			this.DivObj=DivObj;
+			this.group=null;
+			this.Background=null;
+			
+			//定义坐标参数
+			var zeroPoint_x=this.gpWidth/10;//原点x像素值
+			var zeroPoint_y=this.gpHeight-20;//原点y像素值
+			this.staticPoint=zeroPoint_x+","+zeroPoint_y;//原点坐标
+			this.yEnd=zeroPoint_x+","+(this.gpHeight/10-20);//y轴终点
+			this.xEnd=(this.gpWidth-2*(this.gpHeight/10)+20)+","+(this.gpHeight-20);//x轴终点
+			
+			//定义刻度标签
+			this.xLabelMax=288;//x轴标签最大值
+			var defaultXvalues=new Array(this.xLabelMax);
+			for(var i=0;i<defaultXvalues.length;i++){
+				defaultXvalues[i]="";//x轴刻度显示的文本
+			}
+			
+			this.xLabels=defaultXvalues;//x轴刻度标签
+			
+			this.yLabelMin=150;//y轴标签最小值
+			this.yLabelMax=400;//y轴标签最大值
+			this.yLabelStep=50;//y轴标签标识步长
+			this.yLabelStepNum=(this.yLabelMax-this.yLabelMin)/this.yLabelStep;
+			var yLabelTemp=new Array(this.yLabelStepNum+1);
+			for(var k=0;k<=this.yLabelStepNum;k++){
+				yLabelTemp[k]=this.yLabelMin+this.yLabelStep*k;
+			}
+			this.yLabels=yLabelTemp//y轴刻度标签
+			
+			this.yLength=this.gpHeight-20-this.gpHeight/10;//计算y轴长度像素数
+			this.xLength=this.gpWidth-2*(this.gpWidth/10);//计算x轴长度像素数
+			
+			this.yStep=eval(this.yLength/this.yLabelStepNum);//y轴步长像素数
+			this.xStep=eval(this.xLength/(this.xLabels.length-1));//x轴步长像素数
+			this.sClass="pBlack";//刻度文本css格式
+			this.xLabelLeft=(this.gpWidth*this.range)/10;//x轴刻度标签距离绘图区左边缘的像素值
+			this.xLabelTop=(this.gpHeight*this.range)-20+5;//x轴刻度标签距离绘图区上边缘的像素值
+			
+			this.yLabelBottom=(this.gpHeight-22)*this.range;//y轴刻度标签距离绘图区底部的像素值
+			this.yLabelLeft=(this.gpWidth/10-30)*this.range;//y轴刻度标签距离绘图区左边缘的像素值
+			
+			//定义一组曲线数组--记录传入绘图函数的对应XY值，最多可以画10条曲线(x,y)
+			this.xvalue_1=new Array(0);
+			this.xvalue_2=new Array(0);
+			this.xvalue_3=new Array(0);
+			this.xvalue_4=new Array(0);
+			this.xvalue_5=new Array(0);
+			this.xvalue_6=new Array(0);
+			this.xvalue_7=new Array(0);
+			this.xvalue_8=new Array(0);
+			this.xvalue_9=new Array(0);
+			this.xvalue_10=new Array(0);
+			
+			this.yvalue_1=new Array(0);
+			this.yvalue_2=new Array(0);
+			this.yvalue_3=new Array(0);
+			this.yvalue_4=new Array(0);
+			this.yvalue_5=new Array(0);
+			this.yvalue_6=new Array(0);
+			this.yvalue_7=new Array(0);
+			this.yvalue_8=new Array(0);
+			this.yvalue_9=new Array(0);
+			this.yvalue_10=new Array(0);
+			
+			this.line_colors=new Array("#000000","#000000","#000000","#000000","#000000","#000000","#000000","#000000","#000000","#000000");//记录每条曲线的颜色
+		}
+		//建立绘图区域
+		LineCurve.prototype.createArea=function(){
+				this.group = document.createElement("<v:group ID=\"group1\" coordsize=\""+this.coordX+","+this.coordY+"\"  style=\"z-index:-10;width:"+this.gpWidth+";height:"+this.gpHeight+"\">");
+				this.DivObj.insertBefore(this.group);
+				//填充背景
+				this.Background = document.createElement("<v:rect fillcolor=\"white\" strokecolor=\"black\" style=\"z-index:-8;width:"+this.bgWidth+";height:"+this.bgHeight+"\" />");
+				this.Background.insertBefore(document.createElement("<v:fill rotate=\"t\" type=\"gradient\" color2=\""+this.bgColor+"\" />"));
+				this.Background.insertBefore(document.createElement("<v:shadow on=\"t\" type=\"single\" color=\"silver\" offset=\"3pt,3pt\" />"));
+				this.group.insertBefore(this.Background);
+		}
+		
+		//建立坐标轴
+		LineCurve.prototype.createXYaxis=function(){
+			var tempLine = document.createElement("<v:line from=\""+this.staticPoint+"\" to=\""+this.yEnd+"\" strokeColor=\""+this.testColor+"\" strokeweight=\"1\" style=\"Z-INDEX:8;POSITION:absolute;/>");
+			this.group.insertBefore(tempLine);
+			tempLine.insertBefore(document.createElement("<v:stroke  EndArrow=\"classic\" />"));
+			
+			var tempLine = document.createElement("<v:line from=\""+this.staticPoint+"\" to=\""+this.xEnd+"\" strokeColor=\""+this.testColor+"\" strokeweight=\"1\" style=\"Z-INDEX:8;POSITION:absolute;/>");
+			this.group.insertBefore(tempLine);
+			tempLine.insertBefore(document.createElement("<v:stroke  EndArrow=\"classic\" />"));
+		}
+		
+		//绘制网格线
+		LineCurve.prototype.createGrid=function(){
+			//y轴网格线
+			var x1,y1,x2,y2,point1,point2;
+			for(var i=0;i<this.yLabelStepNum;i++){
+				x1=this.gpWidth/10+1;
+				y1=(this.gpHeight-20)-this.yStep*(i+1);
+				
+				x2=this.gpWidth-(this.gpWidth/10);
+				y2=y1;
+				
+				point1=x1+","+y1;
+				point2=x2+","+y2;
+				
+				var tempLine = document.createElement("<v:line from=\""+point1+"\" to=\""+point2+"\" strokeColor=\""+this.gridColor+"\" style=\"Z-INDEX:8;POSITION:absolute;/>");
+				this.group.insertBefore(tempLine);
+			}
+			
+			//x轴网格线
+			for(var j=0;j<this.xLabels.length-1;j++){
+				x1=(this.gpWidth/10)+(j+1)*this.xStep;
+				y1=this.gpHeight-20-1;
+				
+				x2=x1;
+				y2=this.gpHeight/10;
+				
+				point1=x1+","+y1;
+				point2=x2+","+y2;
+				
+				var tempLine = document.createElement("<v:line from=\""+point1+"\" to=\""+point2+"\" strokeColor=\""+this.gridColor+"\" style=\"Z-INDEX:8;POSITION:absolute;/>");
+				this.group.insertBefore(tempLine);
+			}
+		}
+		
+		//绘制刻度标签
+		LineCurve.prototype.createLabel=function(){
+				//绘制x轴刻度标签
+				for(var i=0;i<this.xLabels.length;i++){
+					var text1=this.xLabelLeft+i*this.xStep*this.range;
+					var tempObj = document.createElement("<p style=\"Z-INDEX:8;LEFT:"+text1+";POSITION:absolute;TOP:"+this.xLabelTop+";\"/>");
+					tempObj.innerHTML =this.xLabels[i];
+					this.group.insertBefore(tempObj);
+				}
+				
+				//绘制y轴刻度标签
+				for(var j=0;j<this.yLabels.length;j++){
+					var text1=this.yLabelBottom-j*this.yStep*this.range;
+					var tempObj = document.createElement("<p style=\"Z-INDEX:8;LEFT:"+this.yLabelLeft+";POSITION:absolute;TOP:"+text1+";\"/>");
+					tempObj.innerHTML =this.yLabels[j];
+					this.group.insertBefore(tempObj);
+				}
+		}
+		
+		//绘制曲线
+		var linecounter=1;//曲线条数计数器
+		
+		//对输入进行绘图的数据格式化--超过y轴标尺上限的值全部赋值为上限，超过下限的值全部赋值为下限
+		LineCurve.prototype.dataFormat=function(values){
+				if(values==null){
+					return null;
+				}
+				for(var i=0;i<values.length;i++){
+					if(values[i]>this.yLabelMax){
+							values[i]=this.yLabelMax;
+							//显示超出边界提示
+							var tempObj= document.createElement("<v:rect  style=\"left:"+this.gpWidth/3+";top:"+this.gpHeight/2+";width:"+this.gpWidth/3+";height:"+this.gpHeight/10+";z-index:10\" strokeColor=\"red\" strokeWeight=\"2\" filled=t/>");
+							tempObj.innerHTML="<table><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td align='center' valign='middle'><font color='green'>数据超出边界，请调整y轴标尺</font></td></tr></table>";
+							this.group.insertBefore(tempObj);
+					}else if(values[i]<this.yLabelMin){
+							values[i]=this.yLabelMin;
+							//显示超出边界提示
+							var tempObj= document.createElement("<v:rect  style=\"left:"+this.gpWidth/3+";top:"+this.gpHeight/2+";width:"+this.gpWidth/3+";height:"+this.gpHeight/10+";z-index:10\" strokeColor=\"red\" strokeWeight=\"2\" filled=t/>");
+							tempObj.innerHTML="<table><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td align='center' valign='middle'><font color='green'>数据超出边界，请调整y轴标尺</font></td></tr></table>";
+							this.group.insertBefore(tempObj);
+					}
+				}
+				return values;
+		}
+		
+		LineCurve.prototype.createLine=function(xvalues,yvalues,linename,linecolor){
+			//容错处理
+			if(xvalues==null||yvalues==null){//null值
+					return null;
+			}
+			if(xvalues.length==0||yvalues.length==0){//空数组
+				  return null;
+			}
+			//数据格式化
+			yvalues=this.dataFormat(yvalues);
+			//绘图
+			for(var i=0;i<xvalues.length-1;i++){
+				this.lineutil(xvalues[i],yvalues[i],xvalues[i+1],yvalues[i+1],linecolor);
+			}
+			
+			//保存传入的数组
+			if(linecounter==1){
+					this.xvalue_1=xvalues;
+					this.yvalue_1=yvalues;
+					this.line_colors[0]=linecolor;
+			}else if(linecounter==2){
+					this.xvalue_2=xvalues;
+					this.yvalue_2=yvalues;
+					this.line_colors[1]=linecolor;
+			}else if(linecounter==3){
+					this.xvalue_3=xvalues;
+					this.yvalue_3=yvalues;
+					this.line_colors[2]=linecolor;
+			}else if(linecounter==4){
+					this.xvalue_4=xvalues;
+					this.yvalue_4=yvalues;
+					this.line_colors[3]=linecolor;
+			}else if(linecounter==5){
+					this.xvalue_5=xvalues;
+					this.yvalue_5=yvalues;
+					this.line_colors[4]=linecolor;
+			}else if(linecounter==6){
+					this.xvalue_6=xvalues;
+					this.yvalue_6=yvalues;
+					this.line_colors[5]=linecolor;
+			}else if(linecounter==7){
+					this.xvalue_7=xvalues;
+					this.yvalue_7=yvalues;
+					this.line_colors[6]=linecolor;
+			}else if(linecounter==8){
+					this.xvalue_8=xvalues;
+					this.yvalue_8=yvalues;
+					this.line_colors[7]=linecolor;
+			}else if(linecounter==9){
+					this.xvalue_9=xvalues;
+					this.yvalue_9=yvalues;
+					this.line_colors[8]=linecolor;
+			}else if(linecounter==10){
+					this.xvalue_10=xvalues;
+					this.yvalue_10=yvalues;
+					this.line_colors[9]=linecolor;
+			}
+			
+			//绘制右侧曲线名称
+			var temp=25*linecounter;
+			var tempObj= document.createElement("<v:rect style=\"left:"+720+";top:"+temp+";width:70;height:15;z-index:8\" onclick=\"alert('这里可以进行脚本输入')\"/>");
+			tempObj.innerHTML ="<font color=\""+linecolor+"\">&nbsp;"+linename+"<font>";
+			this.group.insertBefore(tempObj);
+			linecounter++;
+		}
+		
+		//在两点间绘制直线
+		LineCurve.prototype.lineutil=function(x1,y1,x2,y2,linecolor){
+			var point1=(this.gpWidth/10+x1*this.xStep)+","+(this.gpHeight-20-((y1-this.yLabelMin)/this.yLabelStep)*this.yStep);
+			var point2=(this.gpWidth/10+x2*this.xStep)+","+(this.gpHeight-20-((y2-this.yLabelMin)/this.yLabelStep)*this.yStep);
+			var tempLine = document.createElement("<v:line from=\""+point1+"\" to=\""+point2+"\" strokeColor=\""+linecolor+"\" strokeweight=\"2\" filled=\"f\" style=\"Z-INDEX:8;POSITION:absolute;/>");
+			this.group.insertBefore(tempLine);
+		}
+		
+		//绘制标题
+		LineCurve.prototype.createTitle=function(){
+			var tempObj = document.createElement("<div class=\"Title\" style=\"POSITION:absolute;Z-INDEX:8;visibility:visible;LEFT:"+(this.gpWidth/2-100)*this.range+";TOP:"+(this.gpHeight/10-30)*this.range+";width:"+this.gpWidth/3*this.range+";height:"+this.gpHeight/3*this.range+";/>");
+			tempObj.innerHTML ="2008-04-07 电压合格率实时曲线";
+			this.group.insertBefore(tempObj);
+		}
+		
+		//绘制提示线、提示框
+		LineCurve.prototype.createTipLine=function(){
+				//绘制提示线
+				var point1=this.gpWidth/10+","+0;
+				var point2=this.gpWidth/10+","+this.gpHeight;
+				
+				var linecounter_temp=linecounter-1;
+				if(linecounter_temp==0){
+						linecounter_temp=linecounter;
+				}
+				
+				var tempObj = document.createElement("<v:line id=\"tipline\" from=\""+point1+"\" to=\""+point2+"\" strokeColor=\"red\" style=\"z-index:10\"/>");
+				this.group.insertBefore(tempObj);
+				//绘制提示框
+				var tempObj1= document.createElement("<v:rect id=\"tipbox\" style=\"left:"+this.gpWidth/10+";top:"+this.gpHeight/10+";width:"+this.gpWidth/10+";height:"+(this.gpHeight/10)*(linecounter_temp)+";z-index:10\" strokeColor=\"red\" filled=t/>");
+				//框内提示文字
+				var tempObj2= document.createElement("<div id=\"tiptext\"style=\"width:100;height:40;z-index:10\"	/>");
+				tempObj2.innerHTML ="<br>获取数据中...";
+				tempObj1.insertBefore(tempObj2);
+				this.group.insertBefore(tempObj1);
+		}
+		
+		//获得提示线处x,y值
+		LineCurve.prototype.showXYvalues=function(xvalue,yvalue){
+				xvalue=xvalue/this.range-this.gpLeft;//+10*this.range;
+			  var x1=xvalue/(this.xStep)-this.gpWidth/(10*this.xStep);//由像素值反向算出x值
+			  var t1=parseInt(x1,0)+1;
+			  var current_time="<br>&nbsp;时间:"+parseInt((t1*5/60),0)+"时"+t1*5%60+"分";//计算出时间
+			  //没有曲线绘出时的提示框显示值
+			  if(this.yvalue_1==null||this.yvalue_1.length==0){
+						 var result=current_time+"<br>"+"<font color='red'>没有数据<font>";
+						 return result;
+				}
+				
+				var current_data="";	
+				for(var line_num=0;line_num<=linecounter-1;line_num++){
+					 if(line_num==1){
+					 		var x_index=getXindex(t1-1,this.xvalue_1);
+					 		var line_color=this.line_colors[0];
+					 		if((x_index!=-1)&&this.yvalue_1.length>x_index){
+									 current_data=current_data+"<font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_1[x_index]+"</font>";
+							}
+						}
+						if(line_num==2){
+							var x_index=getXindex(t1-1,this.xvalue_2);
+							var line_color=this.line_colors[1];
+							if((x_index!=-1)&&this.yvalue_2.length>x_index){
+									 current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_2[x_index]+"</font>";
+							}
+						}
+					  if(line_num==3){
+					  	var x_index=getXindex(t1-1,this.xvalue_3);
+					  	var line_color=this.line_colors[2];
+							if((x_index!=-1)&&this.yvalue_3.length>x_index){
+									current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_3[x_index]+"</font>";
+							}
+						}
+						if(line_num==4){
+							var x_index=getXindex(t1-1,this.xvalue_4);
+							var line_color=this.line_colors[3];
+							if((x_index!=-1)&&this.yvalue_4.length>x_index){
+									current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_4[x_index]+"</font>";
+							}
+						}
+						if(line_num==5){
+							var x_index=getXindex(t1-1,this.xvalue_5);
+							var line_color=this.line_colors[4];
+							if((x_index!=-1)&&this.yvalue_5.length>x_index){
+									 current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_5[x_index]+"</font>";
+							}
+						}
+						if(line_num==6){
+							var x_index=getXindex(t1-1,this.xvalue_6);
+							var line_color=this.line_colors[5];
+							if((x_index!=-1)&&this.yvalue_6.length>x_index){
+									 current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_6[x_index]+"</font>";
+							}
+						}
+						if(line_num==7){
+							var x_index=getXindex(t1-1,this.xvalue_7);
+							var line_color=this.line_colors[6];
+							if((x_index!=-1)&&this.yvalue_7.length>x_index){
+									 current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_7[x_index]+"</font>";
+							}
+						}
+						if(line_num==8){
+							var x_index=getXindex(t1-1,this.xvalue_8);
+							var line_color=this.line_colors[7];
+							if((x_index!=-1)&&this.yvalue_8.length>x_index){
+									current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_8[x_index]+"</font>";
+							}
+						}if(line_num==9){
+							var x_index=getXindex(t1-1,this.xvalue_9);
+							var line_color=this.line_colors[8];
+							if((x_index!=-1)&&this.yvalue_9.length>x_index){
+									 current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_9[x_index]+"</font>";
+							}
+						}
+						if(line_num==10){
+							var x_index=getXindex(t1-1,this.xvalue_10);
+							var line_color=this.line_colors[9];
+							if((x_index!=-1)&&this.yvalue_10.length>x_index){
+									current_data=current_data+"<br><font color="+line_color+">"+"&nbsp;数值:"+this.yvalue_10[x_index]+"</font>";
+							}
+						}
+				}
+			  var result=current_time+"<br>"+current_data;
+			  return result;
+		}
+		
+		//获得X值对应的index--工具函数
+		function getXindex(x_val,x_value_i){
+				var x_index=-1;
+			  for(var i=0;i<x_value_i.length;i++){
+			  		if(x_value_i[i]==x_val){
+			  				x_index=i;
+			  		}
+			  }
+			  return x_index;
+		}
+	</script>
+	</head>
+	
+	<body  >
+		<div  id="curve" style="visibility:visible;left:100;top:100;width:800;height:400;position:absolute;" onmousemove="movetipline()">
+		</div>
+		<script language="javascript" type="text/javascript">
+				var line_curve=new LineCurve(document.all.curve);
+				line_curve.createArea();
+				line_curve.createXYaxis();
+				line_curve.createGrid();
+				line_curve.createLabel();
+				
+				var xval=new Array('1','2','3','4','5','6','7','8','9','10','11','12','13','55','110','117','123');
+				var yval=new Array('250','310','268','300','287','289','301','320','277','253','329','255','179','234','179','333','256');
+				line_curve.createLine(xval,yval,"黄棠村首","blue");
+				
+				var xval1=new Array('1','12','23','32','115','163','172','184','199','286');
+				var yval1=new Array('300','160','376','222','178','235','179','289','299','343');
+				line_curve.createLine(xval1,yval1,"夏楼末","red");
+				
+				line_curve.createTitle();
+				line_curve.createTipLine();
+				
+				//获取div层的参数
+				var div_range=line_curve.range;
+				var div_left=line_curve.gpLeft;
+				var div_top=line_curve.gpTop;
+				var div_width=line_curve.gpWidth*line_curve.range;
+				var div_height=line_curve.gpHeight*line_curve.range;
+				var gp_left=div_width/10;
+				var gp_top=div_height/10;
+				//提示线和提示框的鼠标跟随函数
+					function movetipline(){
+						var current_cursor_x=event.clientX;
+						var current_cursor_y=event.clientY;
+						
+						if(current_cursor_x>(div_left+gp_left-2)&&current_cursor_x<(div_left+div_width-gp_left+2)){//控制提示线和提示框显示的区域范围
+								if(current_cursor_y>div_top&&current_cursor_y<div_top+div_height){
+										if((current_cursor_x>div_left+div_width-100)&&(current_cursor_y>div_top+div_height-div_top)){
+												document.all.tipline.style.left=(current_cursor_x-div_left-gp_left)/div_range;
+									 			document.all.tipbox.style.posLeft=(current_cursor_x-div_left-100)/div_range;
+									 			document.all.tipbox.style.posTop=(current_cursor_y-div_top-80+20)/div_range;
+									 			document.all.tiptext.innerHTML=line_curve.showXYvalues(current_cursor_x,current_cursor_y,"hello");
+										}else if(current_cursor_x>div_left+div_width-100){
+												document.all.tipline.style.left=(current_cursor_x-div_left-gp_left)/div_range;
+									 			document.all.tipbox.style.posLeft=(current_cursor_x-div_left-100)/div_range;
+									 			document.all.tipbox.style.posTop=(current_cursor_y-div_top+20)/div_range;
+									 			document.all.tiptext.innerHTML=line_curve.showXYvalues(current_cursor_x,current_cursor_y,"hello");
+										}else if(current_cursor_y>div_top+div_height-50){
+												document.all.tipline.style.left=(current_cursor_x-div_left-gp_left)/div_range;
+									 			document.all.tipbox.style.posLeft=(current_cursor_x-div_left)/div_range;
+									 			document.all.tipbox.style.posTop=(current_cursor_y-div_top-80+20)/div_range;
+									 			document.all.tiptext.innerHTML=line_curve.showXYvalues(current_cursor_x,current_cursor_y,"hello");
+										}else{
+												document.all.tipline.style.left=(current_cursor_x-div_left-gp_left)/div_range;
+									 			document.all.tipbox.style.posLeft=(current_cursor_x-div_left)/div_range;
+									 			document.all.tipbox.style.posTop=(current_cursor_y-div_top+20)/div_range;
+									 			document.all.tiptext.innerHTML=line_curve.showXYvalues(current_cursor_x,current_cursor_y,"hello");
+										}
+								}
+						}
+				 	}
+		</script>	
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<table>
+					<tr><td>说明: javascript/vml 曲线图</td></tr>
+					<tr><td>作者：<a href="http://blog.csdn.net/damoqiongqiu" target="_blank">大漠穷秋</a>//CSDN博客链接<a href="http://blog.stnn.cc/knight" target="_blank">大漠穷秋</a>//敏思博客链接</td></tr>
+					<tr><td>日期：2008-04-08</td></tr>
+					<tr><td>邮箱：damoqiongqiu@126.com</td></tr>
+					<tr><td>QQ：253445528</td></tr>
+					<tr><td>申明：转载，使用，修改请保存版权申明 如有指正、疑问，欢迎联系</td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td><font color="blue">简要说明如下:</font></td></tr>
+					<tr><td>1、直接在浏览器里面画动态图并不是很方便，曾经用jfreechart+applet做过，但是涉及到虚拟机以及精确定位、动态控制曲线等问题，用起来不是很方便，JFreeChart用来绘制图片式的曲线还是挺不错的。</td></tr>
+					<tr><td>2、花了几天时间用vml+javascript写了这个控件，自己目前要用的功能已经基本满足了，如果想使用这个控件，稍微改造一下应该可以满足。</td></tr>
+					<tr><td>3、是否使用X轴刻度标签，在这一行调整<b>110行:defaultXvalues[i]="";//x轴刻度显示的文本</b></td></tr>
+					<tr><td>4、调整整个绘图区的位置和大小在<b>80行:			this.gpLeft=100;
+						this.gpTop=100;this.gpWidth=800;this.gpHeight=400;
+			</b></td></tr>
+					<tr><td>5、调整Y轴的最大、最小显示的值和步长在<b>115行:			this.yLabelMin=150;
+			this.yLabelMax=400;
+			this.yLabelStep=50;</b></td></tr>
+			
+			<tr><td>6、由于我的需求是最多画288个点，一个点对应5分钟，所以跟随鼠标的提示线和提示框显示的是从像素换算的x-y值，如果要将提示内容更改为自己的内容请修改<b>showXYvalues()</b>的相关内容。调整X轴最大点数在<b>107行:this.xLabelMax=288;</b></td></tr>
+			<tr><td><font color="red">使用必须注意：</font></td></tr>
+			<tr><td><font color="red">1、XY值在正数时显示和功能都测试正常；由于目前没有需求，所以没有处理负数的情况</font></td></tr>
+			<tr><td><font color="red">2、由于控制像素点不是很方便，所以在调整了整个绘图区的大小后，如果显示的比例和位置不对，可以微调一下</font></td></tr>
+			<tr><td><font color="red">3、输入的x坐标的值最好都是整数，如从1-288等(从小到大排序好)</font></td></tr>
+			<tr><td><font color="red">4、设定最多同时绘制10条曲线</font></td></tr>
+			<tr><td><font color="red">5、Y值超过刻度边界时，超出的点全部置为刻度的最大/最小值，同时会显示提示信息，如果不喜欢可以注释掉<b>248行、254行处</b></font></td></tr>
+			
+			<tr><td><font color="blue">参考资料:</font></td></tr>
+			<tr><td>Think in vml:美洲豹编</td></tr>
+			<tr><td>vml极道教程:风云舞</td></tr>
+			
+			<tr><td><font color="blue">最终:</font></td></tr>
+			<tr><td>制作过程中参考了"风云舞"、网友"梦想年华"的相关实例，一并致谢，在我的CSDN博客打包附上所有参考资料</td></tr>
+		</table>
+	</body>
+</html>

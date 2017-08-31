@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>content-to-original-event-clipboarddata</title>
+</head>
+<body>
+<button id="firePasteEvent">trigger paste</button>
+<div>content-script发事件，其中的自定义数据，不能在页面内脚本监听事件并获取，反之亦然，需要注入一个脚本，然后在注入脚本中发送</div>
+<script src="content-to-original-event-clipboarddata.js"></script>
+</body>
+</html>

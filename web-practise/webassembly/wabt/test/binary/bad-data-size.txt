@@ -1,0 +1,21 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm-interp
+magic
+version
+section(MEMORY) {
+  count[1]
+  has_max[0]
+  initial[0]
+}
+section(DATA) {
+  count[1]
+  memory_index[0]
+  offset[i32.const 0 end]
+  data[str("overflow")]
+}
+(;; STDERR ;;;
+Error running "wasm-interp":
+error: data segment is out of bounds: [0, 8) >= max value 0
+error: @0x0000001d: OnDataSegmentData callback failed
+
+;;; STDERR ;;)

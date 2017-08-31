@@ -1,0 +1,13 @@
+;;; ERROR: 1
+(module (func 
+          block $foo 
+            br foo 
+          end))
+(;; STDERR ;;;
+out/test/parse/expr/bad-br-name.txt:4:16: unexpected token "foo"
+            br foo 
+               ^^^
+out/test/parse/expr/bad-br-name.txt:5:11: syntax error, unexpected END, expecting NAT or VAR
+          end))
+          ^^^
+;;; STDERR ;;)

@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "sendMsg",
+  "description": "",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "downloads"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ct.js"
+      ]
+    }
+  ]
+}

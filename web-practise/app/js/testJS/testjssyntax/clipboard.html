@@ -1,0 +1,28 @@
+<HTML> 
+<HEAD> 
+<TITLE>测试操作剪贴板2</TITLE> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</HEAD> 
+<script> 
+  
+function transferDrop() { 
+      window.event.srcElement.innerText = window.event.dataTransfer.getData("text"); 
+      window.event.returnValue = false; 
+} 
+function transferDrag() { 
+  window.event.dataTransfer.dropEffect = 'move'; 
+  window.event.returnValue = false; 
+} 
+
+</script> 
+<BODY 
+
+<p id="mySource" ondragstart="window.event.dataTransfer.effectAllowed = 
+'move';">选择我们并把我们拖到下面的textarea</p> 
+
+<textarea id="myTarget" ondrop="transferDrop();" 
+ondragover="window.event.returnValue = false;" ondragenter="transferDrag();"> 
+</textarea> 
+
+</BODY> 
+</HTML> 

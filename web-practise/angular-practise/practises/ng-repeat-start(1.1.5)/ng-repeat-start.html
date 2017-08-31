@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../../lib/foundation/css/foundation.css">
+</head>
+<body ng-app="app" ng-controller="AppCtrl as app">
+
+<div ng-repeat-start="thing in app.products">{{thing}}</div>
+Anything in here
+<div ng-repeat-end="">Also in here with binding {{thing}}</div>
+
+<script type="text/javascript" src="../../lib/angular/angular1.2.0.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

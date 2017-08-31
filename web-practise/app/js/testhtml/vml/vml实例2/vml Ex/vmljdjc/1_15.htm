@@ -1,0 +1,65 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>background背景</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:background背景 - 详解</span>
+
+你也许一直在好奇，《VML极道教程》内容页面的黄、白相交的渐变背景是怎么做的？其实非常简单、我们本章节所讲的background(网页背景控制标记)，就是用来完成这项任务的。
+
+在说明具体怎么做之前，请先对比以下几例的代码区别、勿需死记！
+
+平行渐变填充的例子:
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<div style='height:2000'></div>
+<v:background fillcolor="yellow">
+<v:fill type='gradient' color2="purple"/>
+</v:background>
+</textarea>
+
+折射渐变填充的例子:
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<div style='height:2000'></div>
+<v:background fillcolor="white">
+<v:fill type='gradientradial' color2="red"/>
+</v:background>
+</textarea>
+
+平行渐变+角度调整的例子:
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<div style='height:2000'></div>
+<v:background fillcolor="white">
+<v:fill angle=50 type='gradient' color2="yellow"/>
+</v:background>
+</textarea>
+
+怎么样？第三个例子有点相近了吧？但还不是，请看下边例子
+
+平行渐变+角度调整+对比融色的例子:
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<div style='height:2000'></div>
+<v:background fillcolor="white">
+<v:fill angle=50 type='gradient' colors="50% #f1f0c7"/>
+</v:background>
+</textarea>
+
+OK，第四个例子终于实现了！在重新回顾一下上边四个例子，一个结论是代码都是“大同小异”。而且用到了VML二级标记 - fill(填充)，而background标记本身，只有id、fillcolor这两个通用属性，是无法实现背景渐变的，必须配合二级标记 - fill。而二级标记(fill填充处理、stroke边框处理、extrusion立体处理、等)往往跟通用属性一样，不是针对某一个一级标记(oval圆、roundrect圆矩形、line线、background背景、等)而专门设计的，而是能应用到多个一级标记，影响一级标记输出或代表的图形的图形效果。
+
+而目前还不到讲二级标记的时机，本章节只要求你简单的了解一下“二级标记”的语法，了解一下VML强大的图形效果处理功能、二级标记所拥有的丰富属性！以及知道background就是这么用的、就是这么完成网页背景颜色渐变效果的。上边的4则代码其中的&lt;div style='height:2000'>&lt;/div>可以不用，本4则例子加入它是为了加长网页的长度、更好的展示效果而用的。
+
+至于二级标记stroke边框处理、fill填充处理等，将在以后的章节里一一详尽讲解。待你以后会了，在回过头来将二级标记应用到一级标记中，实现各种图形处理效果。

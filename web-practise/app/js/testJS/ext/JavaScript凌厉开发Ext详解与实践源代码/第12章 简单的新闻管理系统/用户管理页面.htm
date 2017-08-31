@@ -1,0 +1,519 @@
+<%@ Page Language="C#" %>
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>用户管理页面</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" xmlns="" />
+        <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/application.css" />
+    </head>
+    <script type="text/javascript" src="lib/ext/ext-base.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/ext-all.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/locale/ext-lang-zh_CN.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/RowExpander.js">
+    </script>
+    <script type="text/javascript" src="lib/ext/Ext.ux.FieldReadOnlyPlugin.js">
+    </script>
+    <body scroll="no">
+        <div id="loading-mask">
+        </div>
+        <div id="loading">
+            <div class="loading-indicator">
+                <img alt="" src="lib/ext/resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle"/>正在加载...
+            </div>
+        </div>
+        <script type="text/javascript">
+            
+            var app = {}
+            
+            Ext.onReady(function(){
+                Ext.BLANK_IMAGE_URL = 'lib/ext/resources/images/default/s.gif'
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                Ext.Msg.minWidth = 300;
+                
+                app.store = new Ext.data.Store({
+                    url: 'users_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "name"
+                    }, [{
+                        name: 'name'
+                    }, {
+                        name: 'roles'
+                    }, {
+                        name: 'createtime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'lastlogintime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'locked',
+                        type: 'bool'
+                    }]),
+                    remoteSort: false,
+                    listeners: {
+                        update: function(store, rec, op){
+                            if (op == Ext.data.Record.EDIT) {
+                                Ext.Ajax.request({
+                                    url: 'users_action.ashx?act=check&value=' + escape(rec.data.locked) + '&id=' + escape(rec.data.name),
+                                    scripts: true,
+                                    callback: function(oElement, bSuccess, oResponse){
+                                        if (bSuccess) {
+                                            if (oResponse.responseText == "ok") 
+                                                app.store.commitChanges();
+                                            else {
+                                                Ext.Msg.alert('用户管理', oResponse.responseText, function(){
+                                                    app.store.rejectChanges();
+                                                });
+                                            }
+                                        }
+                                        else {
+                                            Ext.Msg.alert('用户管理', '更新用户锁定状态失败', function(){
+                                                app.store.rejectChanges();
+                                            });
+                                        }
+                                    }//callback
+                                });
+                            }
+                        }
+                    }
+                }) //store
+                app.currentFormValue = {};
+                app.formField = ['username', 'pw1', 'pw2', 'role', 'islocked'];
+                
+                app.setFormValue = function(op){
+                    app.currentFormValue['act'] = op;
+                    for (var i = 0; i < app.formField.length; i++) {
+                        app.currentFormValue[app.formField[i]] = '';
+                    }
+                    app.currentFormValue['role'] = '普通用户';
+                    app.currentFormValue['islocked'] = '否';
+                    if (op == 'edit') {
+                        var rec = app.grid.getSelectionModel().getSelected();
+                        if (rec) {
+                            app.currentFormValue.username = rec.data.name;
+                            app.currentFormValue.role = rec.data.roles;
+                            app.currentFormValue.islocked = (rec.data.locked ? "是" : "否");
+                        }
+                    }
+                    app.editWin.show();
+                }
+                
+                app.dataAction = [new Ext.Action({
+                    id: 'addarticle',
+                    text: '增加',
+                    handler: function(){
+                        app.hasChange = false;
+                        app.setFormValue('add');
+                    }
+                }), new Ext.Action({
+                    id: 'editarticle',
+                    text: '编辑',
+                    disabled: true,
+                    handler: function(){
+                        app.hasChange = false;
+                        if (app.grid.getSelectionModel().hasSelection()) {
+                            app.setFormValue('edit');
+                        }
+                        else {
+                            Ext.Msg.alert('编辑用户', '请选择一个用户！');
+                        }
+                    }
+                }), new Ext.Action({
+                    id: 'delarticle',
+                    text: '删除',
+                    disabled: true,
+                    handler: function(){
+                        var obj = app.grid;
+                        var datas = obj.getSelectionModel().getSelections();
+                        if (datas) {
+                            var ids = '', titles = '';
+                            for (var i = 0; i < datas.length; i++) {
+                                var data = datas[i].data;
+                                ids += data.name + ',';
+                                titles += data.name + '<br>';
+                            }
+                            ids = ids.substr(0, ids.length - 1);
+                            Ext.MessageBox.confirm('删除用户', '确定删除以下用户？<br><font color="red">' + titles + '</font>', function(btn){
+                                if (btn == 'yes') {
+                                    Ext.Ajax.request({
+                                        url: 'users_action.ashx?act=del&value=' + escape(ids),
+                                        scripts: true,
+                                        callback: function(oElement, bSuccess, oResponse){
+                                            if (bSuccess) {
+                                                Ext.Msg.alert('删除用户', oResponse.responseText, function(){
+                                                    app.store.reload()
+                                                });
+                                            }
+                                            else 
+                                                Ext.Msg.alert('错误信息', oResponse.responseText);
+                                        }//callback
+                                    })
+                                }
+                            });
+                        }
+                        else {
+                            Ext.Msg.alert('删除用户', '请选择要删除的用户！');
+                        }
+                    }
+                })];
+                
+                app.CheckColumnOntop = new Ext.grid.CheckColumn({
+                    header: "禁止登录？",
+                    dataIndex: 'locked',
+                    width: 80,
+                    sortable: true
+                });
+                app.grid = new Ext.grid.GridPanel({
+                    tbar: app.pageToolbar,
+                    width: 600,
+                    store: app.store,
+                    plugins: [app.CheckColumnOntop],
+                    clicksToEdit: 1,
+                    columns: [{
+                        id: 'name',
+                        header: "用户",
+                        width: 120,
+                        dataIndex: 'name',
+                        sortable: true,
+                        width: Ext.grid.GridView.autoFill
+                    }, {
+                        header: "角色",
+                        width: 120,
+                        dataIndex: 'roles',
+                        sortable: true
+                    }, {
+                        header: "创建时间",
+                        width: 160,
+                        dataIndex: 'createtime',
+                        sortable: true,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                    }, {
+                        header: "最后登录时间",
+                        width: 160,
+                        dataIndex: 'lastlogintime',
+                        sortable: true,
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                    }, app.CheckColumnOntop],
+                    listeners: {
+                        click: function(){
+                            var datas = app.grid.getSelectionModel().getSelections();
+                            if (datas.length > 0) {
+                                app.dataAction[1].enable();
+                                app.dataAction[2].enable();
+                            }
+                            else {
+                                app.dataAction[1].disable();
+                                app.dataAction[2].disable();
+                            }
+                        }
+                    }
+                })
+                
+                
+                app.pageToolbar = new Ext.PagingToolbar({
+                    pageSize: 50,
+                    displayInfo: true,
+                    store: app.store,
+                    items: [app.dataAction[0], app.dataAction[1], app.dataAction[2]]
+                });
+                
+                
+                app.dataPanel = new Ext.Panel({
+                    id: 'mainpanel',
+                    region: 'center',
+                    layout: 'fit',
+                    autoScroll: true,
+                    closable: true,
+                    tbar: app.pageToolbar,
+                    items: app.grid
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'border',
+                    items: [app.dataPanel]
+                });
+                
+                app.editWin = new Ext.Window({
+                    width: 600,
+                    height: 260,
+                    title: '',
+                    plain: true,
+                    closable: true,
+                    resizable: false,
+                    frame: true,
+                    layout: 'fit',
+                    closeAction: 'hide',
+                    border: false,
+                    modal: true,
+                    hideMode: "offsets",
+                    constrainHeader: true,
+                    items: [app.editForm = new Ext.form.FormPanel({
+                        labelAlign: 'left',
+                        buttonAlign: 'center',
+                        bodyStyle: 'padding:5px',
+                        frame: true,
+                        labelWidth: 80,
+                        items: [{
+                            xtype: 'hidden',
+                            name: 'act',
+                            value: 'add'
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'textfield',
+                                    labelSeparator: '：',
+                                    fieldLabel: '用户名',
+                                    name: 'username',
+                                    anchor: '90%',
+                                    allowBlank: false,
+                                    maxLength: 20,
+                                    maskRe: /[A-Za-z0-9]/,
+                                    plugins: [new Ext.ux.FieldReadOnlyPlugin()]
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span id='txt1Msg' style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'textfield',
+                                    inputType: 'password',
+                                    labelSeparator: '：',
+                                    fieldLabel: '密码',
+                                    name: 'pw1',
+                                    anchor: '90%',
+                                    allowBlank: false,
+                                    maxLength: 20
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span id='pwdMsg' style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'textfield',
+                                    inputType: 'password',
+                                    labelSeparator: '：',
+                                    fieldLabel: '确认密码',
+                                    name: 'pw2',
+                                    anchor: '90%',
+                                    allowBlank: false,
+                                    maxLength: 20
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'combo',
+                                    name: 'role',
+                                    valueField: "displayText",
+                                    displayField: "displayText",
+                                    mode: 'local',
+                                    triggerAction: 'all',
+                                    fieldLabel: '角色',
+                                    width: 100,
+                                    store: new Ext.data.SimpleStore({
+                                        fields: ["displayText"],
+                                        data: [['普通用户'], ['管理员']]
+                                    }),
+                                    blankText: '请选择角色',
+                                    emptyText: '请选择角色',
+                                    editable: true,
+                                    value: '普通用户'
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }, {
+                            layout: 'column',
+                            border: false,
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'combo',
+                                    name: 'islocked',
+                                    valueField: "displayText",
+                                    displayField: "displayText",
+                                    mode: 'local',
+                                    triggerAction: 'all',
+                                    store: new Ext.data.SimpleStore({
+                                        fields: ["displayText"],
+                                        data: [['是'], ['否']]
+                                    }),
+                                    blankText: '禁止登录？',
+                                    emptyText: '禁止登录？',
+                                    editable: true,
+                                    value: '否',
+                                    width: 100,
+                                    fieldLabel: '禁止登录'
+                                }]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                border: false,
+                                items: [{
+                                    xtype: 'panel',
+                                    border: false,
+                                    html: "<span style='color:red;'>*</span>"
+                                }]
+                            }]
+                        }],
+                        buttons: [{
+                            text: '确定',
+                            scope: this,
+                            handler: function(){
+                                var obj = app.editForm
+                                if (obj.form.isValid()) {
+                                    var p1 = obj.form.findField('pw1');
+                                    var p2 = obj.form.findField('pw2');
+                                    if (p1.getValue() == p2.getValue()) {
+                                        app.editForm.form.doAction('submit', {
+                                            url: 'users_action.ashx',
+                                            method: 'post',
+                                            params: '',
+                                            success: function(form, action){
+                                                var result = action.result.data;
+                                                if (result == 'ok') {
+                                                    app.hasChange = true;
+                                                    var msg = "";
+                                                    if (app.currentFormValue.act == "edit") {
+                                                        msg = "用户信息已更新！";
+                                                        Ext.Msg.alert('保存用户', msg, function(){
+                                                            app.editWin.hide();
+                                                        });
+                                                    }
+                                                    else {
+                                                        app.editForm.form.setValues(app.currentFormValue);
+                                                        app.editForm.form.clearInvalid();
+                                                        Ext.Msg.alert('信息', "新用户保存成功！");
+                                                    }
+                                                }
+                                                else {
+                                                    Ext.Msg.alert('错误', action.result.data);
+                                                }
+                                            },
+                                            failure: function(){
+                                                Ext.Msg.alert('错误', '发生错误！');
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        p1.markInvalid('两次输入的密码不同！');
+                                    }
+                                }
+                            }
+                        }, {
+                            text: '重置',
+                            scope: this,
+                            handler: function(){
+                                app.editForm.form.reset();
+                                app.editForm.form.setValues(app.currentFormValue)
+                            }
+                        }, {
+                            text: '关闭',
+                            scope: this,
+                            handler: function(){
+                                app.editWin.hide();
+                            }
+                        }]
+                    }) //form 
+            ]        , //window items
+                    listeners: {
+                        hide: function(){
+                            if (app.hasChange) 
+                                app.store.reload();
+                        },
+                        show: function(win){
+                            app.editForm.form.setValues(app.currentFormValue);
+                            if (app.currentFormValue.act == "add") {
+                                app.editWin.setTitle('增加用户');
+                                app.editForm.form.findField("username").setReadOnly(false);
+                                app.editForm.form.findField("pw1").allowBlank = false;
+                                app.editForm.form.findField("pw2").allowBlank = false;
+                                Ext.get("pwdMsg").dom.innerHTML = "<span style='color:red;'>* 如果不修改密码请不要输入改项</span>";
+                            }
+                            else {
+                                app.editWin.setTitle('编辑用户：' + app.editForm.form.findField("username").getValue());
+                                app.editForm.form.findField("username").setReadOnly(true);
+                                app.editForm.form.findField("pw1").allowBlank = true;
+                                app.editForm.form.findField("pw2").allowBlank = true;
+                                Ext.get("pwdMsg").dom.innerHTML = "<span style='color:red;'>*</span>";
+                            }
+                            app.editForm.form.clearInvalid();
+                        }
+                    }
+                })//app.editWin
+                app.store.load();
+                
+                
+                setTimeout(function(){
+                    Ext.get('loading').remove();
+                    Ext.get('loading-mask').fadeOut({
+                        remove: true
+                    });
+                }, 250);
+            })//onReady
+        </script>
+    </body>
+</html>

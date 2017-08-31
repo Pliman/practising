@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>LitJSON</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+		<p>
+			<button id="mb3">返回Ext树格式的JSON文本</button>
+		</p>
+		<br />
+		<p>
+			<button id="mb4">返回Ext表格格式的JSON文本</button>
+		</p>
+		<script>
+				Ext.get('mb3').on('click', function(e){
+					Ext.Ajax.request({
+					url: 'litjson.ashx?act=tree',
+					method:'post',
+					callback:function(oElement, bSuccess, oResponse){
+						if(bSuccess){
+							Ext.get('result').dom.innerHTML=oResponse.responseText;
+						}
+						}
+					})
+				});
+
+				Ext.get('mb4').on('click', function(e){
+					Ext.Ajax.request({
+					url: 'litjson.ashx?act=grid',
+					method:'post',
+					callback:function(oElement, bSuccess, oResponse){
+						if(bSuccess){
+							Ext.get('result').dom.innerHTML=oResponse.responseText;
+							}
+						}
+					});
+				});
+		</script>
+    </body>
+</html>
+

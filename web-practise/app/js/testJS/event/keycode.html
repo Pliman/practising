@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>keycode.html</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <script type="text/javascript">
+    	function showKey(){
+    		alert(event.keyCode);
+    	}
+  	</script>
+  	<style type="text/css">
+  		.click_area {
+  			width:400px;
+  			height:400px;
+  			background-color:#ccc;
+  		}
+  	</style>
+  </head>
+  
+  <!-- 全局触发 -->
+  <body onkeydown="">
+  	<!-- 只有当input获取焦点的时候，才能触发 -->
+  	<input type="button" id="tigger" value="测试" onkeydown="showKey();" />
+    <br>
+    <div id="click_area" class="click_area"></div>
+  </body>
+  
+  <script type="text/javascript">
+  		function areaClicked (evt){
+  			var evtObj = evt || window.event;
+  			alert(evtObj.keyCode);
+  		}
+  		
+    	var click_area = document.getElementById('click_area');
+    	//ff不支持对div按键处理，所以还是同意使用document或者body处理吧
+    	click_area.onkeydown = areaClicked;
+  	</script>
+</html>

@@ -1,0 +1,25 @@
+<HTML>
+	<HEAD>
+		<META http-equiv='Content-Type' content='text/html;   charset=UTF-8'>
+		<TITLE>可输入的下拉框</TITLE>
+	</HEAD>
+	<BODY style="clear: both">
+		<div style="position: relative; width: 550px; margin: 0px auto">
+			<span style="margin-left: 100px; width: 18px; overflow: hidden;">
+				<select style="width: 118px; margin-left: -100px"
+					onchange="this.parentNode.nextSibling.value=this.value">
+					<option value="www.bbsou.com">
+						WebASP
+					</option>
+					<option value="www.eWebSoft.com">
+						eWebSoft
+					</option>
+					<option value="WEB开发者">
+						WEB开发者
+					</option>
+				</select>
+			</span>
+			<input name="box" style="width: 100px">
+		</div>
+	</BODY>
+</HTML>

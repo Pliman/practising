@@ -1,0 +1,46 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>DVML侦式动画编程</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:DVML侦式动画编程 - 引语</span>
+
+同学们，通过以上章节的DVML事件编程的学习，是否以让你感觉自己脱胎换骨成为程序员了？别对自己谦虚、更不需要吹嘘，我不喜欢。如果你学习后感觉良好，那么我恭喜你，你算是一位DVML程序员了，只待更好的资材使你更胜一筹了。不过在那之前，我还是奉劝你不要先急着向下学，而是要充分的动手去编、去写、去实现自己想实现的效果。待自己事件编程熟悉了以后，在学习DVML动画不迟，因为事件编程的知识会变相加深了你对DVML程序的认识、掌握能力。在学起DVML动画编程开发来，将会是顺水行舟、事半功倍的。否则啊…………，举步为艰、甚至于听不懂我接下来讲的课了。
+
+<span>2:DVML侦式动画编程 - 概念、实例、讲解</span>
+
+你也许怀疑了，DVML能实现像电视动画片、flash那样的动画？我的回答是 - 当然可以。不过不会是件像学VML标记、DVML事件编程那样容易的事情，而且用纯手写代码不是件理智的事，必须借助flashvml+你对DVML动画的概念理解+你的DVML编程能力才可以实现。
+
+至于“DVML侦式动画编程”，我不先解释，先让你看例子。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:oval id=a style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:100;HEIGHT:90"/>
+<script>
+function window.onload(){
+setTimeout("a.fillcolor='red'",1000);
+setTimeout("a.fillcolor='green'",2000);
+setTimeout("a.style.left=500",3000);
+setTimeout("a.style.top=300;a.fillcolor='blue'",3500);
+setTimeout("a.style.left=200;a.fillcolor='yellow'",4000);
+setTimeout("a.style.top=100;a.fillcolor='white'",4500);
+setTimeout("a.style.display='none';",5500);setTimeout("a.style.display='';",6500);
+}
+</script>
+</textarea>
+
+怎么样，小有所悟？是的，这就是侦式动画，就是这么一侦、接一侦来实现的WEB动画。上面只是个在简单不过的应用了，你可想如果在多几个形状？在多几副图？我的程序在复杂一点？那就是一个好看的动画片了。。
+
+分析程序，发现就一个VML标记，还有一个&lt;script>脚本。而脚本内“function window.onload(){ 所有执行的程序 }”解释为中文即是“创建函数 window窗口.onload触发加载完成事件(){ 所有执行的程序 }”，你就理解为网页加载之后执行{}内的程序。而{}内都是些什么程序哪？分析上边代码，都是大同小异，setTimeout("xxxx",1234)做着主要角色，而实现侦式动画的源动力就是它！
+
+setTimeout(value1,value2)，这是DHTML对象模型中window对象所有的一个“定时器”方法。该方法有两个参数书写位置，即value1,value2。value1是设置需要执行的程序，而value2则设置程序执行的“毫秒”定时数。500即表示0.5秒时执行、1000表示1秒时执行、10000表示10秒、60000表示60秒……
+
+你懂了这些知识，在综合你在DVML事件编程章节所学的程序语句自己去分析上边的代码，就会看懂了吧？唯一没说过的就是style.display，其实display这个CSS属性在动画开发中很关键，就是控制对象显示与否。

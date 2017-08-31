@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>zIndex</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<!-- 下面这个div 的 z-index 是级别比较高 -->
+		<br />
+		<div style="position: relative">
+			<div
+				style="position: absolute; top: 20; left: 20; height: 100px; width: 100px; background-color: blue; font-size: 20px; font-weight: bold; z-index: 99; color: #fff">
+				div1
+			</div>
+		</div>
+		<div style="position: relative">
+			<br />
+			<div
+				style="position: absolute; top: 28; left: 20; height: 100px; width: 100px; background-color: red; font-size: 20px; font-weight: bold; z-index: 0; color: #fff">
+				div2
+			</div>
+			<br />
+		</div>
+	</body>
+</html>

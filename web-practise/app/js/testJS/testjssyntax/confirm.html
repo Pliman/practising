@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<script>
+			function testconfirm(){
+				//var name = confirm('请输入你的姓名');
+				//alert(name) ;
+				if(confirm('请输入你的姓名')){
+					alert(1);
+				}else{
+					alert(2);
+				}
+			}
+		</script>
+		<title>confirm</title>
+	</head>
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="testconfirm()" type="button" id="split" name="testconfirm"
+						value="testconfirm"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>两列高度自适应</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      overflow: hidden;
+      text-align: center;
+      height: 300px;
+    }
+
+    .sidebar {
+      float: left;
+      width: 150px;
+      background: #9acfea;
+    }
+
+    .content {
+      background: #11c1f3;
+      overflow: hidden;
+      _float: left; /*兼容IE6*/
+    }
+
+    .row {
+      margin-bottom: -10000px;
+      padding-bottom: 10000px; /*内外补丁是关键*/
+    }
+  </style>
+</head>
+<body>
+
+<div id="main">
+
+  <div class="sidebar row">
+    左侧150px
+  </div>
+
+  <div class="content row">
+    右侧自适应
+    <span style="float:right; font-size:0; position:relative; ">&nbsp;</span>
+    <!--为了万恶的ie6-->
+  </div>
+
+</div>
+
+</body>
+</html>

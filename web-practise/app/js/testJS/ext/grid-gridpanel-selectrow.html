@@ -1,0 +1,127 @@
+<html>
+
+    <head>
+
+        <title>03.grid</title>
+
+        <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript">
+
+Ext.onReady(function(){
+
+    var cm = new Ext.grid.ColumnModel([
+
+        {header:'编号',dataIndex:'id'},
+
+        {header:'名称',dataIndex:'name'},
+
+        {header:'描述',dataIndex:'descn'}
+
+    ]);
+
+ 
+
+    var data = [
+
+        ['1','name1','descn1'],
+
+        ['2','name2','descn2'],
+
+        ['3','name3','descn3'],
+
+        ['4','name4','descn4'],
+
+        ['5','name5','descn5']
+
+    ];
+
+ 
+
+    var store = new Ext.data.Store({
+
+        proxy: new Ext.data.MemoryProxy(data),
+
+        reader: new Ext.data.ArrayReader({}, [
+
+            {name: 'id'},
+
+            {name: 'name'},
+
+            {name: 'descn'}
+
+        ])
+
+    });
+
+    store.load();
+
+ 
+
+    var grid = new Ext.grid.GridPanel({
+
+        width:600,
+        
+    	height:200,
+    	
+    	autoExpandColumn : true,
+
+        renderTo: 'grid',
+
+        store: store,
+
+        sm: new Ext.grid.RowSelectionModel({singleSelect:true}),//可要可无！如果不设置,按住Ctrl键可多选
+
+        cm: cm
+
+    });
+
+ 
+
+    var ExtButton = new Ext.Button({
+
+        text: '选择行信息',
+
+        renderTo: 'but1',
+
+        handler: function() { //行的选择//////////
+
+        var selections = grid.getSelectionModel().getSelections();
+
+        if (selections.length == 0) { Ext.Msg.alert('提示', "先选择行"); return; }
+
+ 
+
+        for (var i = 0; i < selections.length; i++) {
+
+            var record = selections[i];
+
+            Ext.Msg.alert('提示', record.get("id") + "," + record.get("name") + "," + record.get("descn"));
+            //Ext.Msg.alert窗口不允许弹出多个,只会显示最后一个窗口
+
+        }
+
+        }
+
+    });
+
+ 
+
+});
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <div id="grid" style="height:200px;"></div>
+
+        <div id="but1"></div>
+
+    </body>
+
+</html>

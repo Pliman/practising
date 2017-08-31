@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>节点事件（更多）</title>
+        <script src="../../extjs/ext-base.js">
+        </script>
+        <script src="../../extjs/ext-all.js">
+        </script>
+        <script>
+            Ext.BLANK_IMAGE_URL = '/images/s.gif';
+            Ext.onReady(function(){
+                var rootNode = new Ext.tree.TreeNode({
+                    text: '根节点'
+                });
+                var asyncTreeNode = new Ext.tree.AsyncTreeNode({
+                    text: '点击该节点进行数据异步加载'
+                })
+                
+                var RightClickMenu = new Ext.menu.Menu({
+                    items: [{
+                        text: "添加大类别",
+                        iconCls: 'folder',
+                        handler: function(){
+                            alert(node.id)
+                        }
+                    }, {
+                        text: "编辑大类别",
+                        iconCls: 'folder',
+                        handler: function(){
+                            alert("执行事件代码")
+                        }
+                    }, {
+                        text: "删除大类别",
+                        iconCls: 'folder',
+                        handler: function(){
+                            alert("执行事件代码")
+                        }
+                    }]
+                });
+                
+                function showRightClickMenu(node, e){
+                    //参数node是右击的那个节点，即事件源
+                    //参数e是事件对象
+                    this.showAt(e.getPoint());
+                }
+                asyncTreeNode.on('append', function(tree, node, newNode){
+                    //参数tree是TreePanel
+                    //参数node是父节点
+                    //参数newNode是新添加的节点
+                    alert(newNode.text);
+                    if (newNode.attributes && newNode.attributes['myProperty']) {
+                        alert(newNode.attributes['myProperty']); //自定义属性
+                    }
+                    //每个新增加的子节点都会在这里设置一个右键的事件监听器
+                    newNode.on('contextmenu', showRightClickMenu, RightClickMenu);
+                });
+                //右键的事件监听器
+                asyncTreeNode.on('contextmenu', showRightClickMenu, RightClickMenu);
+                
+                rootNode.appendChild(asyncTreeNode);
+                
+                var tree = new Ext.tree.TreePanel({
+                    el: 'tree-div',
+                    useArrows: true,
+                    autoScroll: true,
+                    animate: true,
+                    enableDD: true,
+                    containerScroll: true,
+                    loader: new Ext.tree.TreeLoader({
+                        url: 'returnJSON_withAttributes.asp'
+                    }),
+                    root: rootNode
+                });
+                
+                tree.render();
+                tree.getRootNode().expand();
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="../../extjs/resources/css/ext-all.css" />
+    </head>
+    <body>
+        <div id="tree-div" style="overflow:auto; height:300px;width:250px;border:1px solid #c3daf9;">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+.g-layout-sidebar {
+    width: 96px;
+    position: fixed;
+    z-index: 100;
+    height: 500px;
+    border-right: 1px solid #a4a4a4;
+}
+li {
+    list-style: none;
+}
+.recent-contact-list {
+    height: 100%;
+    overflow-y: hidden;
+    -webkit-perspective: 1000px;
+    -webkit-perspective-origin: 50% 150%;
+    perspective: 1000px;
+    perspective-origin: 50% 150%;
+}
+
+.recent-contact-list > li {
+    padding: 8px 0;
+    line-height: 24px;
+    text-align: center;
+    position: relative;
+}
+.recent-contact-list > li:hover {
+    background: rgba(219, 219, 219, 0.1);
+}
+.recent-contact-list > li.active {
+    background: rgba(219, 219, 219, 0.5);
+    color: #fff;
+}
+.recent-contact-list > li.active .dricon,
+.recent-contact-list > li.active .contact-name,
+.recent-contact-list > li.active .time {
+    color: #fff;
+}

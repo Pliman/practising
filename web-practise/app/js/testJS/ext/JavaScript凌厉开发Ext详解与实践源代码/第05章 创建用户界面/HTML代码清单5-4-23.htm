@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>客户端验证</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">第4章 客户端验证</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+                <div>
+                    执行操作：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.apply(Ext.form.VTypes, {
+                //ip验证函数
+                ip: function(val, field){
+                    var ip = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/i;
+                    return ip.test(val);
+                },
+                //ip验证错误信息
+                ipText: '错误的IP地址',
+                //过滤ip输入
+                ipMask: /[0-9.]/i
+            })
+            
+            
+            Ext.onReady(function(){
+            
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 400,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 120,
+                    labelSeparator: "：",
+                    title: '客户端验证',
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'postcode',
+                        fieldLabel: '姓名',
+                        anchor: '90%',
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'postcode',
+                        fieldLabel: '邮政编码',
+                        anchor: '90%',
+                        maxLength: 6,
+                        minLength: 6,
+                        allowBlank: false
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'age',
+                        fieldLabel: '年龄',
+                        anchor: '90%',
+                        minValue: 20,
+                        maxValue: 40,
+                        allowBlank: false
+                    }, {
+                        xtype: 'textfield',
+                        name: 'ip1',
+                        maskRe: /[0-9.]/i,
+                        regex: /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/i,
+                        regexText: '错误的IP地址',
+                        fieldLabel: 'IP（regex）',
+                        anchor: '90%',
+                        allowBlank: false
+                    }, {
+                        xtype: 'textfield',
+                        name: 'ip2',
+                        fieldLabel: 'IP（vtype）',
+                        vtype: 'ip',
+                        anchor: '90%',
+                        allowBlank: false
+                    }, {
+                        xtype: 'button',
+                        text: "form.getValues()",
+                        scope: this,
+                        handler: function(){
+                            Ext.get('op').dom.value += "执行：frm.form.getValues()\n" +
+                            '结果：' +
+                            Ext.encode(frm.form.getValues()) +
+                            '\n';
+                        }
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+                
+                
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv=Content-Type content=text/html;charset=gb2312>
+<TITLE>游戏开发实例</TITLE>
+<META name='Gemeratpr' content='FlashVml1.0(在线Flash&Vml动画画板)'>
+<META name='KeyWords' content='吾之画 FlashVml FlashVml1.0(在线Flash&Vml动画画板) FYWVml Flash Vml Vml图像画板 在线图像画板 在线画板 FlashVml1.0 FYW 风云舞 动画回放 教学录影回放'>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+*{font-size:12px;}
+</STYLE>
+</HEAD>
+<BODY bgcolor=#EEEEEE>
+<bgsound loop=-1 id=bgsound1>
+<script>
+ //启动更新函数,更新所有使用旋转/隐藏功能的物件初期视图
+function window.onload(){try{var bodyobjs=document.body.children;for(i=0;i<bodyobjs.length;i++){if(bodyobjs[i].xuanzhuan!=null)bodyobjs[i].Rotation=bodyobjs[i].xuanzhuan;
+if(bodyobjs[i].yincang!=null)bodyobjs[i].style.display='none';}}catch(e){}
+FlashVmlIntervalVar0="fyw1.fillcolor='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';";
+lashVmlIntervalTime0=setInterval(FlashVmlIntervalVar0,100)
+FlashVmlIntervalVar1="fyw1.strokecolor='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';";
+lashVmlIntervalTime0=setInterval(FlashVmlIntervalVar1,200)
+}
+
+function document.onkeydown(){
+keycode1=event.keyCode
+if(keycode1==38){  //键盘上键
+fyw2.strokecolor="Red"
+str1=fyw1.Rotation%360;len1=8;oldleft=parseInt(fyw1.style.left);oldtop=parseInt(fyw1.style.top)
+if(str1<0){str1=360+str1}
+if(str1==0){fyw1.style.top=oldtop-(len1/2);}
+if(str1==90){fyw1.style.left=oldleft+len1;}
+if(str1==180){fyw1.style.top=oldtop+(len1/2);}
+if(str1==270){fyw1.style.left=oldleft-len1;}
+if(str1!=0&&str1!=90&&str1!=180&&str1!=270){
+if(str1<90){fyw1.style.left=oldleft+len1;fyw1.style.top=oldtop-(len1/2)}
+if(str1>90&&str1<180){fyw1.style.left=oldleft+len1;fyw1.style.top=oldtop+(len1/2)}
+if(str1>180&&str1<270){fyw1.style.left=oldleft-len1;fyw1.style.top=oldtop+(len1/2)}
+if(str1>270&&str1<360){fyw1.style.left=oldleft-len1;fyw1.style.top=oldtop-(len1/2)}
+}}
+if(keycode1==40){  //键盘下键
+fyw4.strokecolor="Red"
+str1=fyw1.Rotation%360;len1=8;oldleft=parseInt(fyw1.style.left);oldtop=parseInt(fyw1.style.top)
+if(str1<0){str1=360+str1}
+if(str1==0){fyw1.style.top=oldtop+(len1/2);}
+if(str1==90){fyw1.style.left=oldleft-len1;}
+if(str1==180){fyw1.style.top=oldtop-(len1/2);}
+if(str1==270){fyw1.style.left=oldleft+len1;}
+if(str1!=0&&str1!=90&&str1!=180&&str1!=270){
+if(str1<90){fyw1.style.left=oldleft-len1;fyw1.style.top=oldtop+(len1/2)}
+if(str1>90&&str1<180){fyw1.style.left=oldleft-len1;fyw1.style.top=oldtop-(len1/2)}
+if(str1>180&&str1<270){fyw1.style.left=oldleft+len1;fyw1.style.top=oldtop-(len1/2)}
+if(str1>270&&str1<360){fyw1.style.left=oldleft+len1;fyw1.style.top=oldtop+(len1/2)}
+}}
+if(keycode1==37){  //键盘左键
+fyw1.Rotation>-360?fyw1.Rotation-=5:fyw1.Rotation=0;fyw3.strokecolor="Red"
+}
+if(keycode1==39){  //键盘右键
+fyw1.Rotation<360?fyw1.Rotation+=5:fyw1.Rotation=0;fyw5.strokecolor="Red"
+}
+}
+function document.onkeyup(){
+for(i=2;i<6;i++){document.all("fyw"+i).strokecolor="black"}
+}
+</script>
+<!--This is Project Use The FlashVml1.0,Used 17.53 minutes-->
+<v:Polyline id=fyw1 style="Z-INDEX:1007;LEFT:411px;POSITION:absolute;TOP:226px" points="45pt,46pt,67.5pt,0,90pt,45pt,43.5pt,45pt" strokecolor="black" strokeweight="5pt">
+</v:Polyline>
+<v:line id=fyw2 style="Z-INDEX:1001;LEFT:500px;POSITION:absolute;TOP:354px" from="0,0" to="0,51.75pt" strokecolor="black" strokeweight="10pt">
+<v:Stroke startarrow="block" endarrow="none">
+</v:Stroke>
+</v:line>
+<v:line id=fyw3 style="Z-INDEX:1006;LEFT:408px;POSITION:absolute;TOP:443px" from="0,0" to="54pt,0" strokecolor="black" strokeweight="10pt">
+<v:Stroke startarrow="block" endarrow="none">
+</v:Stroke>
+</v:line>
+<v:line id=fyw4 style="Z-INDEX:1001;LEFT:501px;POSITION:absolute;TOP:462px" from="0,0" to="0,51.75pt" strokecolor="black" strokeweight="10pt">
+<v:Stroke startarrow="none" endarrow="block">
+</v:Stroke>
+</v:line>
+<v:line id=fyw5 style="Z-INDEX:1006;LEFT:520px;POSITION:absolute;TOP:443px" from="0,0" to="54pt,0" strokecolor="black" strokeweight="10pt">
+<v:Stroke startarrow="none" endarrow="block">
+</v:Stroke>
+</v:line>
+
+</BODY></HTML>

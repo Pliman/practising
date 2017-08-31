@@ -1,0 +1,44 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>RoundRect圆矩型</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:RoundRect圆矩型 - 专用属性</span>
+
+<font color=red>arcsize</font>  用于描述圆矩形四角的弧度值，0-0.5，默认值0.05
+
+<span>2:RoundRect圆矩型 - 实例讲解</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:roundrect style="POSITION:absolute;Z-INDEX:1;LEFT:100;WIDTH:100;TOP:100;HEIGHT:100" strokecolor="black" strokeweight="1px"/>
+<v:roundrect style="POSITION:absolute;Z-INDEX:1;LEFT:220;WIDTH:100;TOP:100;HEIGHT:100" strokecolor="red" strokeweight="1px" arcsize="0.15"/>
+<v:roundrect style="POSITION:absolute;Z-INDEX:1;LEFT:340;WIDTH:250;TOP:120;HEIGHT:200" strokecolor="green" strokeweight="1px" arcsize="0.3" fillcolor="yellow"/>
+</textarea>
+
+不难看出，roundrect圆矩形与oval圆、rect矩形的标记很类似，只是多了一个arcsize专用属性。该专用属性就是控制圆矩形四角弧度的，值越小弧度越小、值越大弧度越大
+
+<span>3:RoundRect圆矩型 - 小试牛刀</span>
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:roundrect style="POSITION:absolute;Z-INDEX:1;LEFT:100;WIDTH:70;TOP:100;HEIGHT:30;text-align:center;padding-top:8" strokecolor="black" strokeweight="1px" arcsize="0.2" href="http://www.microsoft.com" title="单击访问微软网站" target="window1">
+微软
+</v:roundrect>
+<v:roundrect style="POSITION:absolute;Z-INDEX:1;LEFT:170;WIDTH:70;TOP:100;HEIGHT:30;text-align:center;padding-top:8" strokecolor="black" strokeweight="1px" arcsize="0.2" href="http://www.google.com" title="单击访问google网站" target="window1">
+google
+</v:roundrect>
+<v:roundrect style="POSITION:absolute;Z-INDEX:5;LEFT:80;WIDTH:400;TOP:126;HEIGHT:250;text-align:center;padding-top:12" strokecolor="black" strokeweight="1px" arcsize="0.06">
+<iframe src="" name="window1" width=95% height=95%></iframe>
+</v:roundrect>
+</textarea>
+
+本例综合本章节及本章节以前的知识，做了一个小范例，该简单的范例主要演示VML 3D WEB页面的制作、以及如何用CSS控制图形HTML内容的排版（text-align:center;描述内容左右居中、padding-top:8;描述内容距离图形上方内边界8个像素）

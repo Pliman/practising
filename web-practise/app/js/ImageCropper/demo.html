@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div>
+	<canvas id="cropper" width="600px" height="600px"></canvas>
+</div>
+
+<div>
+	<canvas id="preview140" width="140px" height="140px"></canvas>
+</div>
+
+<div>
+	<canvas id="preview50" width="50px" height="50px"></canvas>
+</div>
+
+<input id="imageInput" type="file" onchange="selectImage(this.files)"/>
+<input type="button" id="rotateRight" value="Rotate Right 90 degrees"/>
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="ImageCropper.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

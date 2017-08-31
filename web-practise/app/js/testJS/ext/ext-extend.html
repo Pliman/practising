@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>New Document</title>
+<link rel="stylesheet" type="text/css"
+	href="extjs/resources/css/ext-all.css" />
+<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="extjs/ext-all.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+
+	<br>
+	<script>
+		/*Ext.onReady(function(){ 
+		
+		});*/
+
+		var a = function(id) {
+			this.id = id;
+		};
+		a.prototype = {
+			tostring : function() {
+				return this.id;
+			}
+		};
+		b = function(id) {
+			b.superclass.constructor.call(this, id);
+		};
+		Ext.extend(b, a, {
+			tostring : function() {
+				return String.format("b:{0}", this.id);
+			}
+		});
+
+		//测试一下
+		var obj1 = new a("obj1");
+		alert(obj1.tostring());
+		var obj2 = new b("obj2");
+		alert(obj2.tostring());
+	</script>
+
+
+	<table border="1" align="center">
+		<tr>
+			<td><font color="red">grid表格样式如下：</font></td>
+		</tr>
+		<tr>
+			<td>
+				<div id="grid"></div>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="button" id="remove" value="删除第二行" /></td>
+		</tr>
+
+	</table>
+</body>
+</html>

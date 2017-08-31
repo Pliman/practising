@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>通过拖拽改变图片的顺序</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/data-view-plugins.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ImageDragZone.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+            .thumb {
+                background: #dddddd;
+                padding: 3px;
+            } .thumb table {
+                height: 120px;
+                width: 120px;
+            } .thumb img {
+                border: 1px solid white;
+            } .thumb-wrap {
+                float: left;
+                margin: 4px;
+                margin-right: 0;
+                padding: 5px;
+                width: 130px;
+                height: 144px;
+            } .thumb-wrap span {
+                display: block;
+                overflow: hidden;
+                text-align: center;
+                height: 24px;
+                line-height: 24px;
+            } .x-view-over {
+                border: 1px solid #dddddd;
+                background: #efefef url(../lib/ext/resources/images/default/grid/row-over.gif) repeat-x left top;
+                padding: 4px;
+            } .x-view-selected {
+                background: #eff5fb url(./images/selected.gif) no-repeat right bottom;
+                border: 1px solid #99bbe8;
+                padding: 4px;
+            } .x-view-selected .thumb {
+                background: transparent;
+            } .up {
+                background-image: url(images/up.png) !important;
+            } .down {
+                background-image: url(images/down.png) !important;
+            } .save {
+                background-image: url(images/save.gif) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">通过拖拽改变图片的顺序</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="panel1">
+                </div>
+                <br>
+                <div>
+                    事件：
+                </div>
+                <textarea id='op' rows="10" style="width:800px;">
+                </textarea>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+                Ext.QuickTips.init();
+                
+                Ext.QuickTips.init();
+                Ext.Msg.minWidth = 300;
+                
+                var store = new Ext.data.Store({
+                    url: 'grid2_action.ashx?act=list',
+                    baseParams: {},
+                    reader: new Ext.data.JsonReader({
+                        totalProperty: "results",
+                        root: "rows",
+                        id: "id"
+                    }, [{
+                        name: 'id',
+                        type: 'int'
+                    }, {
+                        name: 'title'
+                    }, {
+                        name: 'filename'
+                    }, {
+                        name: 'classid'
+                    }, {
+                        name: 'filesize',
+                        type: 'int'
+                    }, {
+                        name: 'createtime',
+                        type: 'date',
+                        dateFormat: 'Y-m-d H:i:s'
+                    }, {
+                        name: 'width'
+                    }, {
+                        name: 'height'
+                    }, {
+                        name: 'sortorder',
+                        type: "int"
+                    }]),
+                    remoteSort: true
+                }) //store
+                var tpl = new Ext.XTemplate('<tpl for=".">', '<div class="thumb-wrap" id="{id}">', '<div class="thumb"><table qtip="{tips} border="0"><tr><td align="center" valign="middle">', '<img qtip="{tips}" class="thumb-img" style="width:100px" src="./images/{filename}">', '</td></tr></table></div>', '<span class="x-editable">{title:ellipsis(10)}</span></div>', '</tpl>', '<div class="x-clear"></div>');//tpl
+                var dataview = new Ext.DataView({
+                    store: store,
+                    width: 800,
+                    height: 400,
+                    style: 'overflow:auto',
+                    tpl: tpl,
+                    multiSelect: true,
+                    overClass: 'x-view-over',
+                    itemSelector: 'div.thumb-wrap',
+                    emptyText: '没有上传图片！',
+                    plugins: [new Ext.DataView.DragSelector({
+                        dragSafe: true
+                    })],
+                    prepareData: function(data){
+                        data.sizeString = Ext.util.Format.fileSize(data.filesize);
+                        data.showtitle = (data.title.trim()) ? data.title : '无标题';
+                        data.tips = '标题：　　' + data.showtitle + '<br>尺寸：　　' +
+                        data.width +
+                        '¡Á' +
+                        data.height +
+                        '<br>大小：　　' +
+                        data.sizeString +
+                        '<br>上传时间：' +
+                        data.createtime +
+                        '<br>文件名　：' +
+                        data.filename;
+                        return data;
+                    }
+                });//dataview
+                var panel = new Ext.Panel({
+                    title: '通过拖拽改变图片的顺序',
+                    renderTo: "panel1",
+                    items: dataview,
+                    width: 800,
+                    tbar: [{
+                        text: '上移',
+                        iconCls: 'up',
+                        scope: this,
+                        handler: function(){
+                            buttonMove(-1);
+                        }
+                    }, {
+                        text: '下移',
+                        iconCls: 'down',
+                        scope: this,
+                        handler: function(){
+                            buttonMove(1);
+                        }
+                    }, '-', {
+                        text: '保存',
+                        iconCls: 'save',
+                        scope: this,
+                        handler: function(){
+                            var ds = grid.getStore();
+                            var sortIndex = [];
+                            for (var i = 0; i < ds.getCount(); i++) {
+                                sortIndex.push(ds.data.items[i].id);
+                            }
+                            Ext.get('op').dom.value += '------------\n' + sortIndex + '\n';
+                            Ext.Ajax.request({
+                                url: 'grid2_action.ashx?act=save',
+                                params: {
+                                    sortIndex: sortIndex
+                                },
+                                success: function(response, op){
+                                    var msg = response.responseText;
+                                    var obj = Ext.decode(msg);
+                                    if (obj) {
+                                        if (obj.success) {
+                                            msg = "新的行顺序已保存！"
+                                        }
+                                        else {
+                                            msg = obj.data;
+                                        }
+                                    }
+                                    Ext.Msg.alert('信息', msg);
+                                },
+                                failure: function(response, op){
+                                    Ext.Msg.alert('信息', response.responseText);
+                                }
+                            });
+                        }
+                    }]
+                });
+                
+                function buttonMove(toward){
+                    var data = dataview.getSelectedRecords();
+                    if (data.length > 0) {
+                        //获取选择行第1行
+                        var rec = data[0];
+                        var ds = dataview.store;
+                        //默认的插入行
+                        var rowIndex = ds.indexOfId(rec.id) + toward;
+                        //判断插入是否已选择，如果已选择，重新获取插入行
+                        var ri = dataview.getSelectedIndexes();
+                        ri.slice(1);
+                        //对插入行数组进行排序，下移顺序排序，上移倒序排序
+                        if (toward == 1) {
+                            ri.sort(function(x, y){
+                                if (parseInt(x) > parseInt(y)) 
+                                    return 1
+                                else 
+                                    return -1
+                            })
+                        }
+                        else {
+                            ri.sort(function(x, y){
+                                if (parseInt(x) > parseInt(y)) 
+                                    return -1
+                                else 
+                                    return 1
+                            })
+                        }
+                        //如果插入行是选择行，则插入行前移或后移
+                        for (var i = 0; i < ri.length; i++) {
+                            if (rowIndex == ri[i]) 
+                                rowIndex += toward;
+                        }
+                        //判断插入行是否已在顶部或底部，不是则执行移动操作
+                        if (rowIndex < 0) {
+                            Ext.Msg.alert('信息', '记录已在顶部');
+                        }
+                        else 
+                            if (rowIndex >= ds.getCount()) {
+                                Ext.Msg.alert('信息', '记录已在底部');
+                            }
+                            else {
+                                move(rowIndex, data);
+                            }
+                    }
+                    else {
+                        Ext.Msg.alert('信息', '请选择记录');
+                    }
+                }
+                
+                
+                function move(rindex, data){
+                    var ds = dataview.store;
+                    //获取插入行的记录
+                    var rdata = ds.getAt(rindex);
+                    //默认是上移操作
+                    var toward = 0;
+                    var index = ds.indexOfId(data[0].id);
+                    if (rindex > index) 
+                        toward = 1 //如果是下移，修改方向值
+                    //移除选择行
+                    for (i = 0; i < data.length; i++) {
+                        ds.remove(ds.getById(data[i].id));
+                    }
+                    //根据id获取插入行的新位置并根据移动操作计算出插入位置
+                    rindex = ds.indexOfId(rdata.id) + toward;
+                    //从插入位置依次插入选择行
+                    var start = rindex;
+                    for (i = 0; i < data.length; i++) {
+                        ds.insert(rindex, data[i]);
+                        rindex++;
+                    }
+                    //重新选择选择行
+                    dataview.selectRange(start, rindex - 1)
+                }
+                
+                var dragZone = new ImageDragZone(dataview, {
+                    containerScroll: true,
+                    ddGroup: 'dataviewDD'
+                });
+                
+                
+                var target = new Ext.dd.DropTarget(dataview.getEl(), {
+                    ddGroup: dataview.ddGroup || 'dataviewDD',
+                    dataview: dataview,
+                    //        gridDropTarget: this,
+                    notifyDrop: function(dd, e, data){
+                        //获取选择行
+                        var t = e.getTarget('.thumb-wrap');
+                        var rec = this.dataview.getRecord(t);
+                        var ds = this.dataview.store;
+                        rindex = false;
+                        if (rec) {
+                            var rindex = ds.indexOfId(rec.id);
+                        }
+                        if (rindex === false) 
+                            return false;
+                        var rdata = ds.getAt(rindex);
+                        //判断插入行是否选择行，如果是不允许插入
+                        for (i = 0; i < data.nodes.length; i++) {
+                            var rowIndex = ds.indexOfId(data.nodes[i].id);
+                            if (rindex == rowIndex) 
+                                rindex = false;
+                        }
+                        var recs = [];
+                        for (var i = 0; i < data.nodes.length; i++) {
+                            var rec = this.dataview.getRecord(data.nodes[i]);
+                            recs.push(rec);
+                        }
+                        move(rindex, recs)
+                        return true;
+                    },
+                    
+                    notifyOver: function(dd, e, data){
+                        var t = e.getTarget('.thumb-wrap');
+                        var rec = this.dataview.getRecord(t);
+                        var ds = this.dataview.store;
+                        rindex = false;
+                        if (rec) {
+                            var rindex = ds.indexOfId(rec.id);
+                        }
+                        for (i = 0; i < data.nodes.length; i++) {
+                            var rowIndex = ds.indexOfId(data.nodes[i].id);
+                            if (rindex == rowIndex) 
+                                rindex = false;
+                        }
+                        return (rindex === false) ? this.dropNotAllowed : this.dropAllowed;
+                    }
+                })
+                Ext.get('op').dom.value = "";
+                store.load();
+            })
+        </script>
+    </body>
+</html>

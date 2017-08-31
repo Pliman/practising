@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>动画弹出层</title>
+<style>
+	.list{
+		position:relative;;
+		background:#eee;
+		border:1px #ccc solid;
+		margin:10px;
+		height:30px;
+		width:100px;
+		cursor :pointer ;
+	}
+	.listShow{
+		position:relative;
+		background:#eff;
+		border:1px #ddd solid;
+		margin:10px;
+		height:30px;
+		width:100px;
+		//cursor :pointer ;
+	}
+	.comment{
+		position:absolute;
+		left:0;
+		display:none;
+		position:absolute;
+		border:1px #ccc solid;
+		background:#fee;
+		width:200px;
+		height:200px;
+		overflow:hidden;
+		z-index:100;
+	}
+	.content{
+		width:190px;
+		height:90px;
+		align:center;
+	}
+	.contentcontainer{
+		text-align:center;
+	}
+</style>
+</head>
+<body>
+<div class="" id="show">0</div>
+<div class="list" id="list1">1
+<input type="textarea" />
+	<div class="comment" id="comment1">
+		<div>请输入内容：</div>
+		<div id="contentcontainer" class="contentcontainer">
+			<input type="textarea" id="content" class="content" />
+		</div>
+		<div class="contentcontainer">
+			<input type="button" id="sure" value="确定"/>
+			<input type="button" id="cancel" value="取消"/>
+		</div>
+	</div>
+</div>
+<div><input type="button" id="writelog" value="填写"/></div>
+</body>
+</html>
+<script>
+    var zindex=1;
+	function $id(id){
+		return document.getElementById(id);
+	}
+	var Bind = function(object,fun){
+		var args = Array.prototype.slice.call(arguments).slice(2);
+		return function(){
+			return fun.apply(object,args);
+		}
+	}
+	function addEventHandler(oTarget, sEventType, fnHandler){ 
+	  if(oTarget.addEventListener){oTarget.addEventListener(sEventType, fnHandler, false);}
+	  else if(oTarget.attachEvent){oTarget.attachEvent('on' + sEventType, fnHandler);}
+	  else{oTarget['on' + sEventType] = fnHandler;}
+	}
+	function MC(t) {
+		return document.createElement(t);// 用MC()方法代替document.createElement(t)
+	};
+	// 判断浏览器是否为IE
+	function isIE() {
+		return (document.all && window.ActiveXObject && !window.opera)? true: false;
+	}
+	// 取得页面的高宽
+	function getBodySize() {
+		var bodySize = [];
+		with (document.documentElement) {
+			bodySize[0] = (scrollWidth > clientWidth) ? scrollWidth : clientWidth;// 如果滚动条的宽度大于页面的宽度，取得滚动条的宽度，否则取页面宽度
+			bodySize[1] = (scrollHeight > clientHeight)
+					? scrollHeight
+					: clientHeight;// 如果滚动条的高度大于页面的高度，取得滚动条的高度，否则取高度
+		}
+		return bodySize;
+	}
+	var Shower=function(){
+		this.list=null;
+		this.comment=null;
+		this.cover='' ;
+		this.moveLeft=80;  
+		this.moveTop=20;
+		this.height=150;
+		this.width=250;
+		this.time=800;
+		this.init=function(lisObj,comObj,ifCover){
+			this.list=lisObj;
+			this.comment=comObj;
+			this.cover=ifCover;
+			var _this=this;
+			this._fnMove=Bind(this,this.move);
+			this._fnSureBtn=Bind(this,this.sureBtn);
+			this._fnCancelBtn=Bind(this,this.cancelBtn);
+			addEventHandler(_this.list,"click",_this._fnMove);
+			//addEventHandler($id("sure"),"click",_this._fnMove);
+			addEventHandler($id("sure"),"click",function(){alert('4444')});
+			addEventHandler($id("cancel"),"click",_this._fnMove);
+			//_this._fnSureBtn() ;
+			//_this._fnCancelBtn() ;
+		};
+		this.initCover=function(ifcover){
+			if(ifcover){
+				if ($id("cover_div")) {
+					// 如果存在遮盖层，则让其显示
+					$id("cover_div").style.display = 'block';
+				} else {
+					// 否则创建遮盖层
+					var coverDiv = MC('div');
+					document.body.appendChild(coverDiv);
+					coverDiv.id = 'cover_div';
+					with (coverDiv.style) {
+						position = 'absolute';
+						background = '#CCCCCC';
+						left = '0px';
+						top = '0px';
+						var bodySize = getBodySize();
+						width = bodySize[0] + 'px'
+						height = bodySize[1] + 'px';
+						zIndex = 0;
+						if (isIE()) {
+							filter = "Alpha(Opacity=60)";// IE逆境
+						} else {
+							opacity = 0.6;
+						}
+					}
+				}
+			}else{
+				if ($id("cover_div")) {
+					// 如果存在遮盖层，则让其显示
+					$id("cover_div").style.display = 'none';
+				}
+			}
+		};
+		this.move=function(){
+			var _this=this;
+			var w=0; 
+			var h=0; 
+			var height=0; //弹出div的高
+			var width=0;  //弹出div的宽
+			var t=0;
+			var startTime = new Date().getTime();//开始执行的时间
+			if(!_this.comment.style.display||_this.comment.style.display=="none"){
+				_this.initCover(true);
+				_this.comment.style.display="block";
+				_this.comment.style.height=0+"px";
+				_this.comment.style.width=0+"px";
+				_this.comment.style.zIndex=++zindex;
+				_this.list.style.zIndex=++zindex;
+				_this.list.className="listShow";
+				var comment=_this.comment.innerHTML;  
+				_this.comment.innerHTML="";  //去掉显示内容
+				var timer=setInterval(function(){
+					var newTime = new Date().getTime();
+					var timestamp = newTime - startTime;
+					_this.comment.style.left=Math.ceil(w)+"px";
+					_this.comment.style.top=Math.ceil(h)+"px";
+					_this.comment.style.height=height+"px";
+					_this.comment.style.width=width+"px";
+					t++;
+					var change=(Math.pow((timestamp/_this.time-1), 3) +1); //根据运行时间得到基础变化量
+					w=_this.moveLeft*change;
+					h=_this.moveTop*change;
+					height=_this.height*change;
+					width=_this.width*change;
+					$id("show").innerHTML=w;
+					if(w>_this.moveLeft){
+						clearInterval(timer);
+						_this.comment.style.left=_this.moveLeft+"px";
+						_this.comment.style.top=_this.moveTop+"px";
+						_this.comment.style.height=_this.height+"px";
+						_this.comment.style.width=_this.width+"px";
+						_this.comment.innerHTML=comment; //回复显示内容
+					}
+				},1,_this.comment);
+			}else{
+				_this.initCover(false);
+				_this.hidden();
+			}
+		};
+		this.hidden=function(){
+			var _this=this;
+			var flag=1;
+			var hiddenTimer=setInterval(function(){
+				if(flag==1){
+					_this.comment.style.height=parseInt(_this.comment.style.height)-10+"px";
+				}else{
+					_this.comment.style.width=parseInt(_this.comment.style.width)-15+"px";
+					_this.comment.style.left=parseInt(_this.comment.style.left)+5+"px";
+				}
+				if(flag==1 && parseInt(_this.comment.style.height)<10){
+					flag=-flag;
+				}
+				if(parseInt(_this.comment.style.width)<20){
+					clearInterval(hiddenTimer);
+					_this.comment.style.left="0px";
+					_this.comment.style.top="0px";
+					_this.comment.style.height="0px";
+					_this.comment.style.width="0px";
+					_this.comment.style.display="none";
+					if(_this.list.style.zIndex==zindex){
+						zindex--;
+					};
+					_this.list.style.zIndex=0;
+					_this.list.className="list";
+				}
+			},1)
+		};
+	
+		/*this.sureBtn=function(){
+			addEventHandler($id('sure'),"click",_this._fnMove);
+		};
+		this.cancelBtn=function(){
+			addEventHandler($id('cancel'),"click",_this._fnMove);
+		};*/
+	}
+	window.onload=function(){//建立各个菜单对象
+		var shower1=new Shower();
+		//shower1.init($id("list1"),$id("comment1"),true);
+		shower1.init($id("writelog"),$id("comment1"),true);
+	}
+</script>

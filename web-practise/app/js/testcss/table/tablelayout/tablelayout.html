@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>tablelayout</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript">
+			function tableLayout(){
+				var fixedTable = document.getElementById('fixedTable');
+				
+				fixedTable.style.height = '100px';
+			}
+		</script>
+		<style>
+			table {
+				width: 400px;
+				height: 400px;
+				background-color: #00FF80;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="fixedTable"></table>
+		<input type="button" value="改变表格大小" onclick="tableLayout" />
+	</body>
+</html>

@@ -1,0 +1,157 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>VML语言入门</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:VML语言入门 - 极道学法</span>
+
+在我正式开始讲解、你正式开始学习VML语言以前，请务必遵循以下规则，可以达到最佳效果、极道学习方法。
+
+1:如果你学过HTML、CSS或精通HTML、CSS，那么建议你把学VML的过程看做跟学HTML的过程是一样的，因为，根本就是大同小异。
+
+2:从本章节和本章节以后的每一个章节，我会使用最简单、易懂、有效的语言讲解和分析。但这是不够的，重要的是，你一定要活学活用。毕竟就算是神剑，如果握在不会用它的人手中，只会糟蹋了这把剑。活学活用是你未来实战应用、独立开发的关键……
+
+3:建议学习时，开启Lshdic2005、或Editplus、或其他HTML/VML代码编辑器、甚至是记事本。每学会一个标记，就要综合以前学的标记、新学的标记，练习、写出不同的效果，如此才能加深你对该标记的理解、以后会很好的使用、更重要的是巩固以前所学的标记不至于学新忘旧。有基底的IT精英，可以边学、边分解FlashVml3.0所绘制图型的代码，但对于90%的人，我个人不推荐这么做。勤学勤练、VML语言功底是活学活用VML之基础……
+
+4:如何达到精通？建议每学一个标记、属性、语句等，以后建议能用键盘默写出来（即记在脑子里，不看例子，能直接写出正确的标记、实现自己需要的效果），只要你肯勤学勤练，这并不困难。
+
+<span>2:VML语言入门 - 如何编写、保存、运行VML程序</span>
+
+VML的编写：
+
+VML是一种类似HTML的标记语言，它最简单的开发工具其实就是记事本，好点的开发工具就是HTML编辑器（主要能够适时、迅速的在浏览器浏览VML效果）。我比较推荐“网络程序员伴侣(Lshdic)2005”简称LD5，你可以在www.GOOGLE.com或www.baidu.com中搜索找到它的下载地址。这个软件有很多辅助功能（动态提示、语法加亮、编程铺助输入、适时浏览）等实用功能，特别适合进行网络程序的编辑和开发。不过你现在是学习阶段，就算下载了它，我只建议你只用它的“适时浏览”功能（即在编码器内写完VML标记，按下F1键即能自己创建HTM浏览文件，在浏览器运行，比较剩时剩力）。
+
+VML文件的保存、运行VML程序
+
+以前说过，VML是跟HTML、CSS、DHTML、JS等等网页设计语言搀杂在一起的，所以VML文件其实就是一个HTML文件。比如你用记事本写完了VML代码，你可以直接另存为xxx.htm或xxx.html文件放在电脑硬盘的任一个地方，然后找到它双击打开，就会在浏览器中看到运行效果。你如果用LD5或其他HTML编辑工具，则直接在其核心编码器内写好VML语句，然后通过该软件提供的“在浏览器运行查看”功能，迅速的打开浏览器浏览，比较节省时间
+
+<span>3:VML语言入门 - VML网页文件的基本格式</span>
+
+以下代码是VML网页文件的标准格式
+
+<textarea><HTML xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office">
+<HEAD>
+<STYLE>
+v\:* { behavior: url(#default#VML);} 
+o\:* { behavior: url(#default#VML);}
+</STYLE>
+<TITLE>网页的标题</TITLE>
+</HEAD>
+<BODY>
+
+</BODY>
+</HTML>
+</textarea>
+
+我们可以简写成
+
+<textarea><HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<Meta name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<TITLE>网页的标题</TITLE>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+</HEAD>
+<BODY>
+
+</BODY>
+</HTML></textarea>
+
+很显然，跟HTML网页的结构很类似，以上标记的意思你可以理解为如下（//符号后是解释）
+
+<textarea no><HTML xmlns:v>  //关键语句，指明该网页创建一个名为 v 的XML名域命名空间
+<HEAD>  //网页声明部分，被<head></head>包围的语句可以是一些网页信息、资源定义语句
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>  //说明网页使用的编码,text/html表示该页是HTML网页,gb2312表示网页编码为“简体中文(GB2312)”
+<Meta name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>  //说明网页使用的开发工具
+<TITLE>网页的标题</TITLE>
+<STYLE>  //所包含的内容是CSS样式表的定义语句
+v\:*{behavior:url(#default#VML);}  //关键语句，指明XML名域“v”引用的数据是VML标记语言
+</STYLE>
+</HEAD>
+<BODY>  //网页正文部分
+
+ //这里即是网页的正文部分（被<body></body>标记包围），以后我们就是在这里编写各种VML标记（线、圆形、矩形）等。当然也支持在这里编写HTML标记、JS或VBS脚本
+
+</BODY>
+</HTML> //网页结束语句</textarea>
+
+而至于xmlns:o="urn:schemas-microsoft-com:office:office"名域命名，则是引用office相关的标记处理扩展（例如歪斜效果等）。但我觉得学习它没有太高的意义（它主要为了修饰vml图形，但那些修饰标记的大多数我看起来根本是为office艺术设计的，在WEB页中没有意义、甚至不起作用，就个歪斜效果我还比较喜欢，但跟vml的填充、立体等效果处理则相形见拙），因为就vml本身而言以相当健全了。所以我不会讲述有关它的标记，而是让你充分精通vml！
+
+<span>4:VML语言入门 - VML网页文件格式的自由性</span>
+
+我说过，VML语言跟HTML很类似，不仅指的他们都是标记语言。更重要的是VML语句同样不区分大小写、属性可以是 value=参数值 或 value='参数值' 或 value="参数值"。编写起来感觉相当自由，精通了VML以后，你会不分VML、HTML般的编辑网页！
+
+<span>5:VML语言入门 - 第一个VML网页实例</span>
+
+<textarea><HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<Meta name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<TITLE>hello vml!!!</TITLE>
+<STYLE>
+v\:*{behavior:url(#default#VML);}
+</STYLE>
+</HEAD>
+<BODY>
+<b>第一个VML实例（2个OVAL圆形，1个roundrect圆矩形）：</b><p>
+<v:Oval fillcolor='red' style='width:100;height:150'/>
+
+<v:oval strokecolor=blue style="position:absolute;z-index:2;left:300;top:100;width:100;height:150"></v:oval>
+
+<v:ROUndREct FILLCoLOr=green strokecolor=blue style=position:absolute;z-index:3;left:350;top:200;width:100;height:150;color:white;font-size:25px;>
+包含<b>内容</b>
+</v:roundrect>
+
+</BODY>
+</HTML></textarea>
+
+请你务必仔细分析上边的代码，不难看出编写VML标记的高度自由性（大小写、与HTML结合、与CSS结合……）。不但支持传统HTML的2D顺序输出结构（一个对象紧跟一个对象），以及3D输出（通过CSS的样式修改position:absolute;[使对象以3D形式绝对定位]left:350;[定义对象距离页面左边多少像素]top:200;[定义对象距离页面上边多少像素]z-index:3;[定义对象的3D高度]）
+
+<span>6:VML语言入门 - 最简形式</span>
+
+其实上面的简单实例，不必非要输入那么多的代码，如果只为了测试、运行、学习VML代码，我们最简可以写成以下形式
+
+<textarea><HTML xmlns:v>
+<STYLE>v\:*{behavior:url(#default#VML);}</STYLE>
+<BODY>
+
+<b>第一个VML实例（2个OVAL圆形，1个roundrect圆矩形）：</b><p>
+<v:Oval fillcolor='red' style='width:100;height:150'/>
+
+<v:oval strokecolor=blue style="position:absolute;z-index:2;left:300;top:100;width:100;height:150"></v:oval>
+
+<v:ROUndREct FILLCoLOr=green strokecolor=blue style=position:absolute;z-index:3;left:350;top:200;width:100;height:150;color:white;font-size:25px;>
+包含<b>内容</b>
+</v:roundrect></textarea>
+
+无必要的标签，可以不要，只有需要在一一追加
+
+<span>7:VML语言入门 - 名域自由命名</span>
+
+你也许会问，只有用“v”做为VML标记的名域么？当然不是，你完全可以使用其他名称，只要名称格式英文、或英文+数字的格式，例如
+
+<textarea><HTML xmlns:fyw>
+<STYLE>FYw\:*{behavior:url(#default#VML);}</STYLE>
+<BODY>
+
+<b>第一个VML实例（2个OVAL圆形，1个roundrect圆矩形）：</b><p>
+<fyw:Oval fillcolor='red' style='width:100;height:150'/>
+
+<FYW:oval strokecolor=blue style="position:absolute;z-index:2;left:300;top:100;width:100;height:150"></fyw:oval>
+
+<Fyw:ROUndREct FILLCoLOr=green strokecolor=blue style=position:absolute;z-index:3;left:350;top:200;width:100;height:150;color:white;font-size:25px;>
+包含<b>内容</b>
+</fYW:roundrect></textarea>
+
+而且同样不区分大小写，不过我仍然建议尽量使用“小写”（打字节省时间），以及名域命名为“v”（好写好记）

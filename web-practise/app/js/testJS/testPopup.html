@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript">
+  		function testPopup(){
+  			
+  		}
+  		
+  		function showMenu(linkObj, menuID) { 
+
+	　　 	var popupObj = window.createPopup(); 
+	
+	　　 	var popupBodyObj = popupObj.document.body; 
+	
+	　　 	popupBodyObj.style.border = "1px purple solid"; 
+			
+			var menuIDouterHTML = menuID.outerHTML; 
+			alert(menuIDouterHTML);
+			
+	　　 	popupBodyObj.innerHTML = menuID.outerHTML; 
+	
+	　　 	for (var i = 0; i < popupBodyObj.all.length; i++) { 
+	
+	　　　　		if (popupBodyObj.all[i].tagName == "A") 
+	
+	　　　　 		popupBodyObj.all[i].onclick = doClick; 
+	
+	　　 	} 
+	
+	　　 	popupObj.show(0, linkObj.offsetHeight, menuID.offsetWidth, menuID.offsetHeight, linkObj); 
+	
+	　　} 
+		
+		function doClick() { 
+
+	　　 	parent.location = this.href; 
+	
+	　　 	return false; 
+	
+	　　} 
+			
+  	</script>
+		<STYLE>
+　　 	.menu {
+		position: absolute;
+		top: -1000;
+		left: -1000
+		}
+　　
+		</STYLE>
+
+		<title>testPopup</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<input onclick="testPopup()" type="button" id="testPopup"
+						name="testPopup" value="testPopup"
+						style="background: #999999 url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<A HREF=# ONCLICK=showMenu(this,submenu)>Tutorials Pages</A>
+		<TABLE CLASS='menu' id=submenu>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="names.html" TARGET="CONTENT">How to name your windows
+						and frames</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="open.html">How to open a new window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="features.html">How to specify the features of a new
+						window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="utilize.html">How to utilize the window features</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="exist.html">How to check if a window exists</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="reference.html">How to close a window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="manipulate.html">How to manipulate a window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="write.html">How to write content to a window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="opener.html">How to reference the opener</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="dialog.html">How to create a dialog box</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD NOWRAP>
+
+					<A HREF="popup.html">How to create a pop-up window</A>
+
+				</TD>
+			</TR>
+
+			<TR>
+				<TD></TD>
+			</TR>
+
+		</TABLE>
+
+	</body>
+</html>

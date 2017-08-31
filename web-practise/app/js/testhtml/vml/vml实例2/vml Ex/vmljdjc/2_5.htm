@@ -1,0 +1,63 @@
+<HTML xmlns:v>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<TITLE>DVML流线动画编程</TITLE>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<link rel=stylesheet href="css.css" type="text/css">
+<script language='javascript' src='js.js'></script>
+</HEAD>
+<BODY>
+<v:background id='bk1'></v:background>
+<div id='menudiv1' style='text-align:center' class=menu1></div>
+<base target='_blank'>
+<pre>
+<span>1:DVML流线动画编程 - 概念、实例、讲解</span>
+
+上一节DVML侦式动画很有趣？那么接下来的流线动画则更会让你心动。在学完了流线动画编程以后，有机的结合上你的侦式动画编程知识，你就可以靠自己在WEB页上直接做动画了！
+
+那么流线动画是什么概念那？同样，先看例子。
+
+<textarea>
+<HTML xmlns:v><STYLE>v\:*{behavior:url(#default#VML);}</STYLE><BODY>
+<v:textbox id=xx style="Z-INDEX:1;LEFT:380;POSITION:absolute;TOP:50;display:none;">
+DVML流线动画
+</v:textbox>
+<v:oval id=a style="Z-INDEX:1;LEFT:200;WIDTH:90;POSITION:absolute;TOP:150;HEIGHT:90;display:none;"/>
+<v:oval id=b style="Z-INDEX:2;LEFT:600;WIDTH:90;POSITION:absolute;TOP:150;HEIGHT:90;display:none;" fillcolor="yellow"/>
+
+<script>
+var time1=null
+function window.onload(){
+setTimeout("xx.style.display=''",1000);
+setTimeout("a.style.display=''",2000);
+setTimeout("b.style.display=''",3000);
+setTimeout("time1=setInterval('a.style.left=parseInt(a.style.left)+5;b.style.left=parseInt(b.style.left)-5;',20)",4000)
+setTimeout("clearInterval(time1);",6000)
+setTimeout("time1=setInterval('b.style.width=parseInt(b.style.width)+3;b.style.height=parseInt(b.style.height)+3;a.fillcolor=\"rgb(\"+Math.round(Math.random()*255)+\",\"+Math.round(Math.random()*255)+\",\"+Math.round(Math.random()*255)+\")\"',30)",6500)
+setTimeout("clearInterval(time1);",8500)
+setTimeout("time1=setInterval('b.style.top=parseInt(b.style.top)-10;',20)",9000)
+setTimeout("clearInterval(time1);",10500)
+setTimeout("time1=setInterval('a.style.left=parseInt(a.style.left)-10;',20)",10500)
+setTimeout("clearInterval(time1);",13000)
+setTimeout("xx.innerText='我服了~';xx.style.fontSize=50;xx.style.color='red';",13500)
+}
+</script>
+</textarea>
+
+流线动画应用起来要比侦式动画复杂的多，而完成流线动画所需的源动力则是DHTML对象模型中window对象所有的一个“循环定时器”方法。
+
+setInterval(value1,value2)，它跟setTimeout“定时器”写法类似，只是稍有不同。该方法有两个参数书写位置，即value1,value2。value1是设置需要执行的程序，而value2则设置程序执行的“循环毫秒执行数”。20即表示每20毫秒重复执行一次value1程序、50表示50毫秒、100表示100毫秒……
+
+如果用它来实现流线动画，则必须配合setTimeout定时器在特定的时间“启动setInterval、销毁setInterval”。不然你想啊，setInterval如果老是这样循环下去，不在某一时间销毁它不就乱套了？在又说，没有setTimeout在指定时间启动它，它又怎么会听话？
+
+在上例中，我们定义了一个全局变量“var time1=null”time1，而后又有诸如“setTimeout("time1=setInterval('b.style.top=parseInt(b.style.top)-10;',20)",9000)”的语句。我们先分析“time1=setInterval('b.style.top=parseInt(b.style.top)-10;',20)”即是把“setInterval('b.style.top=parseInt(b.style.top)-10;',20)”绑定给“time1”变量。而在它的外围又用setTimeout方法设定为9000毫秒时执行该语句，就完成了流线动画启动。
+
+在说“setTimeout("clearInterval(time1);",10500)”，clearInterval(time1)的意思就是“销毁循环定时器”，而销毁的对象正是time1。它的外围用setTimeout设定为在10500毫秒时执行，就会在10500秒销毁time1结束一次流线动画。也就算出time1的生存时间为10500-9000=1500毫秒这么长。
+
+<span>2:DVML流线动画编程 - 学习与实际开发的转行</span>
+
+上边的演示、分析都讲完了，但我觉的没有几个同学能做出流线动画。因为有些知识就算我在会讲也是很难讲清楚、你能听的懂的。而真理是你必须的多学、多练，从实际开发中体会、从浏览器一次次报错中找到问题所在。
+
+VML极道教程讲到这里，已到了学习中最难掌握的地方了 - 就是流线动画，不必说别人，就算是我也不可能靠纯手写代码实现像电视动画片、flash动画片那样的动画效果。这时最明智的选择就是flashvml，凭借它强大的绘图功能、图像处理功能、动画设计功能在加上你对VML标记的认识、DVML编程的能力，想实现类似电视动画、flash动画片、甚至于3D动画将不是件困难的事情。
+
+就像上边那例DVML流线动画，我是手写的，用了10几分钟。而如果要我在flashvml里实现？最快只需不到1分钟就能搞定。由于现阶段你已经进入了VML应用阶段，而非学习阶段了，所以这时我不是反对你用VML开发工具，而是非常赞成你用。

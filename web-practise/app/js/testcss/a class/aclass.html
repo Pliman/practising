@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>a class</title>
+
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<style>
+			/*-------------小块 start------------*/
+			.sml_blk {
+				width: 10px;
+				height: 10px;
+				position: absolute;
+			}
+			
+			.sml_blk a {
+				display: block;
+				width: 10px;
+				height: 10px;
+			}
+			
+			.sml_blk a:link {
+				text-decoration: none;
+				background-color: blue;
+			}
+			
+			.sml_blk a:visited {
+				background-color: blue;
+			}
+			
+			.sml_blk a:hover {
+				background-color: orange;
+			}
+			
+			.sml_blk a:active {
+				background-color: blue;
+			}
+			
+			/*-------------小块 end------------*/
+			.aclass {
+				height: 100px;
+				width: 100px;
+				background-color: yellow;
+				display: inline-block;
+			}
+			
+			.aclass:hover{
+				background-color: blue !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table id="operatortable">
+			<tr>
+				<td>
+					<div class="">
+						<a class="aclass">123</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>AccordionContainer.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		<style>
+			html, body {
+			  width: 100%;
+			  height: 100%;
+			  margin: 0;
+			  overflow:hidden;
+			}
+			
+			#borderContainer {
+			  width: 100%;
+			  height: 100%;
+			}
+			
+			#scontainer-prog {
+			    border: 1px solid #ccc;
+			    margin-top: 10px;
+			}
+			
+			#scontainer-prog div {
+			    padding: 5px;
+			}
+		</style>
+		
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css">
+		<script
+			src="../dojo-release-1.7.2/dojo/dojo.js" data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+			
+		<script>
+			require(["dijit/layout/AccordionContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dojo/domReady!"], 
+				function(AccordionContainer, ContentPane) {
+				    var aContainer = new AccordionContainer({style:"height: 300px"}, "markup");
+				    // true alert(aContainer.domNode == aContainer.containerNode);
+				    var btnContainer = new ContentPane({
+				        title:"This is a content pane",
+				        content:"Hi!"
+				    });
+				    
+				    // true alert(btnContainer.domNode == btnContainer.containerNode);
+				    
+				    var button = new dijit.form.Button({
+		                label: "Click Me!",
+		                title: "111",
+		                onClick: function(){ console.log("button was clicked!"); }
+		            });
+		            
+					//button.placeAt(btnContainer.containerNode);
+				
+				    //aContainer.addChild(btnContainer);
+				    aContainer.addChild(button);
+				    
+				    aContainer.addChild(new ContentPane({
+				        title:"This is as well",
+				        content:"Hi how are you?"
+				    }));
+				    aContainer.addChild(new ContentPane({
+				        title:"This too",
+				        content:"Hello im fine.. thnx"
+				    }));
+				    aContainer.startup();
+				});
+		</script>
+	</head>
+	<body class="claro">
+		<div id="markup" style="width:300px; height: 300px"></div>
+	</body>
+</html>

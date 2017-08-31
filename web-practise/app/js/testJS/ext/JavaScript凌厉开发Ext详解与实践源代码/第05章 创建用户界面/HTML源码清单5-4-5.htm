@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>一行设置多个FiledSet的技巧</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/radiogroup.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">一行设置多个FiledSet的技巧</h1>
+        <br/>
+        <div style="padding-left:20px;">
+            <p>
+                <div id="form1">
+                </div>
+                <br>
+            </p>
+            <br/>
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+                var frm = new Ext.form.FormPanel({
+                    applyTo: "form1",
+                    autoHeight: true,
+                    width: 860,
+                    height: 300,
+                    frame: true,
+                    labelWidth: 80,
+                    labelSeparator: "：",
+                    title: '一行设置多个FiledSet的技巧',
+                    items: [{
+                        layout: 'column',
+                        border: false,
+                        items: [{
+                            columnWidth: .5,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'fieldset',
+                                title: '控件名不同',
+                                height: 110,
+                                items: [{
+                                    xtype: 'textfield',
+                                    fieldLabel: '控件一',
+                                    anchor: '90%'
+                                }]
+                            }]
+                        }, {
+                            columnWidth: .5,
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'fieldset',
+                                title: '控件名相同',
+                                height: 110,
+                                items: [{
+                                    xtype: 'textfield',
+                                    fieldLabel: '控件二',
+                                    anchor: '90%'
+                                }]
+                            }]
+                        }]
+                    }, {
+                        layout: 'column',
+                        border: false,
+                        items: [{
+                            columnWidth: .5,
+                            bodyStyle: 'padding: 2px 2px 2px 2px',
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'fieldset',
+                                title: '控件名不同',
+                                height: 110,
+                                items: [{
+                                    xtype: 'textfield',
+                                    fieldLabel: '控件三',
+                                    anchor: '90%'
+                                }]
+                            }]
+                        }, {
+                            columnWidth: .5,
+                            bodyStyle: 'padding: 2px 2px 2px 2px',
+                            layout: 'form',
+                            border: false,
+                            items: [{
+                                xtype: 'fieldset',
+                                title: '控件名相同',
+                                height: 110,
+                                items: [{
+                                    xtype: 'textfield',
+                                    fieldLabel: '控件四',
+                                    anchor: '90%'
+                                }]
+                            }]
+                        }]
+                    }],
+                    buttons: [{
+                        text: '保存',
+                        scope: this,
+                        handler: function(){
+                            if (frm.form.isValid()) {
+                                frm.form.doAction('submit', {
+                                    url: 'form.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        Ext.Msg.alert('操作', action.result.data);
+                                    },
+                                    failure: function(){
+                                        //Ext.Msg.alert('操作','保存失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        scope: this,
+                        handler: function(){
+                            frm.form.reset();
+                        }
+                    }]
+                });
+            })
+        </script>
+    </body>
+</html>

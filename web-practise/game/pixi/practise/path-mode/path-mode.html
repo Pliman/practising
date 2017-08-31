@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zoom-in-out</title>
+</head>
+<body>
+<script src="../lib/pixi.js"></script>
+<script src="path.js"></script>
+<script src="runner.js"></script>
+<script src="controller.js"></script>
+<script>
+    var baseWidth = 302;
+    var baseHeight = 302;
+
+    var stage = new PIXI.Container();
+
+    var path = [{
+        id: 1,
+        center: {
+            x: 50,
+            y: 50
+        }
+    }, {
+        id: 2,
+        center: {
+            x: 150,
+            y: 50
+        }
+    }, {
+        id: 3,
+        center: {
+            x: 250,
+            y: 50
+        }
+    }, {
+        id: 4,
+        center: {
+            x: 250,
+            y: 150
+        }
+    }, {
+        id: 5,
+        center: {
+            x: 250,
+            y: 250
+        }
+    }, {
+        id: 6,
+        center: {
+            x: 150,
+            y: 250
+        }
+    }, {
+        id: 7,
+        center: {
+            x: 50,
+            y: 250
+        }
+    }, {
+        id: 8,
+        center: {
+            x: 50,
+            y: 150
+        }
+    }];
+    createPath(stage);
+
+    var runners = [{
+        id: 1,
+        text: 1
+    }, {
+        id: 2,
+        text: 2
+    },{
+        id: 3,
+        text: 3
+    },{
+        id: 4,
+        text: 4
+    },{
+        id: 5,
+        text: 5
+    }];
+    var runnerArr = createRunner(stage);
+
+    var controllerArr = createController(stage);
+
+    function run (runnerIndex, fromPointIndex, steps) {
+        // 循环处理
+        let nextPointIndex = ++fromPointIndex;
+        if (nextPointIndex >= path.length) {
+            nextPointIndex = 0;
+        }
+
+        if (steps) {
+            setTimeout(function () {
+
+                runOneStep(runnerIndex, path[nextPointIndex]);
+                run (runnerIndex, nextPointIndex, --steps);
+            }, 300);
+        }
+    }
+
+    function runOneStep(runnerIndex, toPoint) {
+        let runner = runnerArr[runnerIndex];
+
+        runner.position.x = toPoint.center.x;
+        runner.position.y = toPoint.center.y;
+    }
+
+    run(2, 0, 7); // 3, 1起步
+    setTimeout(function () {
+        run(1, 0, 7);
+    }, 100);
+
+
+    var renderer = PIXI.autoDetectRenderer(baseWidth, baseHeight, {backgroundColor: 0x1099bb});
+    document.body.appendChild(renderer.view);
+    adjustScreen();
+
+    // start animating
+    animate();
+    function animate() {
+        requestAnimationFrame(animate);
+        // render the container
+        renderer.render(stage);
+    }
+
+    function getViewPortSize() {
+        var o = {"w": NaN, "h": NaN};
+        o.w = document.documentElement.clientWidth || document.body.clientWidth;
+        o.h = document.documentElement.clientHeight || document.body.clientHeight;
+        return o;
+    }
+
+    function adjustScreen() {
+        var size = getViewPortSize();
+        var scale = Math.min(size.w / baseWidth, size.h / baseHeight);
+
+        renderer.view.style.width = baseWidth * scale + 'px';
+        renderer.view.style.height = baseHeight * scale + 'px';
+    }
+
+    window.onresize = adjustScreen;
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+<META http-equiv='Content-Type' content='text/html;charset=gb2312'>
+<META name='Gemeratpr' content='网络程序员伴侣(Lshdic)2005'>
+<TITLE>LD5工具</TITLE>
+<style>
+*{font-size:12px}
+td{width:180;cursor:hand;text-align:center}
+.n1{font-size:18px}
+.n2{font-size:18px;font-family:wingdings}
+.n3{font-size:18px;font-family:wingdings 2}
+.n4{font-size:18px;font-family:wingdings 3}
+.n5{font-size:18px;font-family:webdings}
+.n6{font-size:18px;font-family:Marlett}
+.n7{font-size:18px;font-family:华文彩云}
+</style>
+</HEAD>
+<BODY onselectstart='if(event.srcElement.tagName!="INPUT")return false' scroll=no style='margin:0;border:1 solid menu' bgcolor='menu'>
+<table style='border-Collapse:collapse;border:2 solid white;' cellpadding=2 rules=all><tr><td style='width:100%'>
+<select onchange='change1(this.selectedIndex)' id='sel1' style='width:150'><Optgroup label='特殊符号与字符集' style='color:red'>
+<option>中文特殊符号<option>Assic实体对照<option>HTML已命名实体<option>HTML附加命名实体<option>他国单字与符号</Optgroup><Optgroup label='常用颜色预览表' style='color:green'><option>W3C16色对照表<option>Windows系统色盘</Optgroup><Optgroup label='图形字体集' style='color:blue'><option>Wingdings字体<option>Wingdings 2字体<option>Wingdings 3字体<option>Webdings字体<option>Marlett字体<option>华文彩云字体</Optgroup><Optgroup label='数据探测与计算' style='color:purple'><option>键盘键值探测器<option>简易计算器<option>进制转换工具<option>查看网页源文件</select><input style='width:80' id='txt' value='输入值'>
+</td></tr><tr><td style='padding:0'>
+<div style='scrollbar-shadow-color:white;scrollbar-base-color:menu;scrollbar-arrow-color:black;overflow-Y:scroll;word-Break:break-all;width:240;height:250' id='a'></div>
+</td></tr></table>
+<script>
+/******************
+Author:lshdic(FYW)
+Website:http://www.lshdic.com
+Resume:本程序的资料整理、编写、最终审查等工作由LD2、4、5原作者独立完成,难免存在疏忽并不能保证数据100%正确,一页原代码,可独立运行于非LD2005开发环境的WEB浏览器内,另存后即可在本地使用
+******************/
+var str1="",toolcolor="bbbbbb",movecolor="#ffffff"
+function write1(){
+a.innerHTML="<table cellspacing=0 cellpadding=3 rules=all style='border-Collapse:collapse;border:1 solid cccccc;' onmouseup='if(event.srcElement.tagName==\"TD\")txt.value=event.srcElement.innerText' onmouseover='if(event.srcElement.tagName==\"TD\"&&event.srcElement.bgColor==\"\")event.srcElement.bgColor=movecolor' onmouseout='if(event.srcElement.tagName==\"TD\"&&event.srcElement.bgColor==movecolor.toLowerCase())event.srcElement.bgColor=\"\"'>"+str1+"</table>"
+document.title=sel1.options[sel1.selectedIndex].text+"_参考输入工具["+(sel1.selectedIndex+1)+"]"
+}
+function write2(strs1,strs2){
+strs1==160?strss1="空格":strss1="&#"+strs1+";"
+str1+="<tr><td>&amp;#"+strs1+";</td><td>&amp;"+strs2+";</td><td class='n1'>"+strss1+"</td></tr>"
+}
+function change1(changeindex){
+str1=""
+switch(changeindex){
+case 0:                //中文特殊符号
+str0="·ˇ¨〃々-～‖…〔〕〈〉《》「」『』〖〗【】±×÷∧∨∑∏∪∩∈∷√⊥∥∠⌒⊙∫∮≡≌≈∽∝≠≮≯≤≥∞∵∴♂♀°℃＄¤￠￡‰§№☆★○●◎◇◆□■△▲※→←↑↓〓ˊˋ˙-―‥℅℉↖↗↘↙∕∟≒≦≧⊿═║╒╓╔╕╖╗╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬╭╮╯╰╱╲╳▁▂▃▅▇█▉▊▋▌▍▎▏▓▔▕▼▽◢◣◤◥☉⊕〒‵′〝″ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹ⒈⒉⒊⒋⒌⒍⒎⒏⒐⒑⒒⒓⒔⒕⒖⒗⒘⒙⒚⒛⑴⑵⑶⑷⑸⑹⑺⑻⑼⑽⑾⑿⒀⒁⒂⒃⒄⒅⒆⒇①②③④⑤⑥⑦⑧⑨⑩㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ─━│┃┄┅┆┇┈┉┊┋┌┍┎┏┐┑┒┓└┕┖┗┘┙┚┛├┝┞┟┠┡┢┣┤┥┦┧┨┩┪┫┬┭┮┯┰┱┲┳┴┵┶┷┸┹┺┻┼┽┾┿╀╁╂╃╄╅╆╇╈╉╊╋︵︶︹︺︿﹀︽︾﹁﹂﹃﹄︻︼︷︸︱"
+for(i=0;i<str0.length-1;i++){
+str1+="<tr>"
+for(j=0;j<7;j++){str1+="<td>"+str0.charAt(i)+"</td>";i++}
+str1+="</tr>";i--
+}
+break;
+case 4:                //他国单字与符号
+str0="абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψωāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜüêɑńňǹɡㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦㄧㄨㄩぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶ"
+for(i=0;i<str0.length-1;i++){
+str1+="<tr>"
+for(j=0;j<7;j++){str1+="<td class='n1'>"+str0.charAt(i)+"</td>";i++}
+str1+="</tr>";i--
+}
+break;
+case 1:                //Assic实体对照
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>浏览</td><td>VB表示</td></tr>"
+for(i=1;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td>chr("+i+")</td></tr>"}
+break;
+case 7:                //wingdings字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=33;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n2'>&#"+i+";</td></tr>"}
+break;
+case 8:                //wingdings 2字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=33;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n3'>&#"+i+";</td></tr>"}
+break;
+case 9:                //wingdings 3字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=33;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n4'>&#"+i+";</td></tr>"}
+break;
+case 10:                //webdings字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=33;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n5'>&#"+i+";</td></tr>"}
+break;
+case 11:                //Marlett字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=48;i<58;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n6'>&#"+i+";</td></tr>"}
+for(i=97;i<122;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n6'>&#"+i+";</td></tr>"}
+break;
+case 12:                //华文彩云字体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>常规</td><td>应用字体</td></tr>"
+for(i=33;i<384;i++){str1+="<tr><td>&amp;#"+i+";</td><td class='n1'>&#"+i+";</td><td class='n7'>&#"+i+";</td></tr>"}
+break;
+case 2:                //HTML已命名实体
+var str0="iexcl;&cent;&pound;&curren;&yen;&brvbar;&sect;&uml;&copy;&ordf;&laquo;&not;&shy;&reg;&macr;&deg;&plusmn;&sup2;&sup3;&acute;&micro;&para;&middot;&cedil;&sup1;&ordm;&raquo;&frac14;&frac12;&frac34;&iquest;&Agrave;&Aacute;&Acirc;&Atilde;&Auml;&Aring;&AElig;&Ccedil;&Egrave;&Eacute;&Ecirc;&Euml;&Igrave;&Iacute;&Icirc;&Iuml;&ETH;&Ntilde;&Ograve;&Oacute;&Ocirc;&Otilde;&Ouml;&times;&Oslash;&Ugrave;&Uacute;&Ucirc;&Uuml;&Yacute;&THORN;&szlig;&agrave;&aacute;&acirc;&atilde;&auml;&aring;&aelig;&ccedil;&egrave;&eacute;&ecirc;&euml;&igrave;&iacute;&icirc;&iuml;&eth;&ntilde;&ograve;&oacute;&ocirc;&otilde;&ouml;&divide;&oslash;&ugrave;&uacute;&ucirc;&uuml;&yacute;&thorn;&yuml;".split('&')
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>命名</td><td>浏览</td></tr>"
+write2(34,"quot");write2(38,"amp");write2(60,"lt");write2(62,"gt");write2(160,"nbsp");
+for(i=161;i<256;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-161]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+break;
+case 3:                //HTML附加命名实体
+str1="<tr bgcolor='"+toolcolor+"'><td>HTM表示</td><td>命名</td><td>浏览</td></tr>"
+write2(402,"fnof");
+var str0="Alpha;&Beta;&Gamma;&Delta;&Epsilon;&Zeta;&Eta;&Theta;&Iota;&Kappa;&Lambda;&Mu;&Nu;&Xi;&Omicron;&Pi;&Rho;".split('&')
+for(i=913;i<930;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-913]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+str0="Sigma;&Tau;&Upsilon;&Phi;&Chi;&Psi;&Omega;".split('&')
+for(i=931;i<938;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-931]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+str0="alpha;&beta;&gamma;&delta;&epsilon;&zeta;&eta;&theta;&iota;&kappa;&lambda;&mu;&nu;&xi;&omicron;&pi;&rho;&sigmaf;&sigma;&tau;&upsilon;&phi;&chi;&psi;&omega;".split('&')
+for(i=945;i<970;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-945]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+write2(977,"thetasym");write2(978,"upsih");write2(982,"piv");
+write2(8226,"bull");write2(8230,"hellip");write2(8242,"prime");write2(8243,"Prime");write2(8254,"oline");write2(8260,"frasl");write2(8472,"weierp");write2(8465,"image");write2(8476,"real");write2(8482,"trade");write2(8501,"alefsym");
+str0="larr;&uarr;&rarr;&darr;&harr;".split('&')
+for(i=8592;i<8597;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-8592]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+write2(8629,"crarr");
+str0="lArr;&uArr;&rArr;&dArr;&hArr;".split('&')
+for(i=8656;i<8661;i++){str1+="<tr><td>&amp;#"+i+";</td><td>&amp;"+str0[i-8656]+"</td><td class='n1'>&#"+i+";</td></tr>"}
+write2(8704,"forall");write2(8706,"part");write2(8707,"exist");write2(8709,"empty");write2(8711,"nabla");write2(8712,"isin");write2(8713,"notin");write2(8715,"ni");write2(8719,"prod");write2(8722,"sum");write2(8722,"minus");write2(8727,"lowast");write2(8730,"radic");write2(8733,"prop");write2(8734,"infin");write2(8736,"ang");write2(8869,"and");write2(8870,"or");write2(8745,"cap");write2(8746,"cup");write2(8747,"int");write2(8756,"there4");write2(8764,"sim");write2(8773,"cong");write2(8773,"asymp");write2(8800,"ne");write2(8801,"equiv");write2(8804,"le");write2(8805,"ge");write2(8834,"sub");write2(8835,"sup");write2(8836,"nsub");write2(8838,"sube");write2(8839,"supe");write2(8853,"oplus");write2(8855,"otimes");write2(8869,"perp");write2(8901,"sdot");write2(8968,"lceil");write2(8969,"rceil");write2(8970,"lfloor");write2(8971,"rfloor");write2(9001,"lang");write2(9002,"rang");write2(9674,"loz");write2(9824,"spades");write2(9827,"clubs");write2(9829,"hearts");write2(9830,"diams");
+break;
+case 5:               //W3C16色对照表
+str1="<tr bgcolor='"+toolcolor+"'><td>效果</td><td>名称</td><td>16进制表示</td></tr>"
+str0="Black,White,Red,Yellow,Lime,Aqua,Blue,Fuchsia,Gray,Silver,Maroon,Olive,Green,Teal,Navy,Purple,Transparent".split(",")
+str00="000000,ffffff,ff0000,ffff00,00ff00,00ffff,0000ff,ff00ff,808080,c0c0c0,800000,808000,008000,008080,000080,800080,透明色".split(",")
+for(i=0;i<str0.length;i++){str1+="<tr><td bgcolor='"+str0[i]+"'></td><td>"+str0[i]+"</td><td style='color:#"+str00[i]+"'>#"+str00[i]+"</td></tr>"}
+break;
+case 6:               //Windows系统色盘
+str1="<tr bgcolor='"+toolcolor+"'><td>效果1</td><td>效果2</td><td>名称</td></tr>"
+str0="windowtext,windowframe,window,threedshadow,buttonshadow,threedlightshadow,threedhighlight,threedface,buttonface,threeddarkshadow,scrollbar,menutext,menu,infotext,infobackground,inactivecaptiontext,inactivecaption,inactiveborder,highlighttext,highlight,graytext,captiontext,buttontext,buttonhighlight,background,appworkspace,activecaption,activeborder".split(",")
+for(i=0;i<str0.length;i++){str1+="<tr><td bgcolor='"+str0[i]+"'></td><td style='color:"+str0[i]+"'>Lshdic</td><td style='word-Break:keep-all;'>"+str0[i]+"</td></tr>"}
+break;
+case 13:             //键盘键值探测器
+str1="<center>&nbsp;<p>现在请您按下您键盘上的任意一个键</center><p><center>其键值会显示在上方输入框中</center>"
+break;
+case 14:             //简易计算器
+str1="<center>&nbsp;<p>请在下边输入框中输入需要计算的公式</center><p><center>公式如 12+64 20/5 100+(77*44)</center><p><center><input id='txt2'><br><input type='button' value='开始计算' onclick='try{txt.value=eval(txt2.value)}catch(e){alert(\"错误的公式！\")}'></center>"
+break;
+case 15:             //进制转换工具
+for(i=2;i<129;i++){str0+="<option>"+i;i++}
+str1="<center>&nbsp;<p>请在下边输入框中输入一组数字</center><p><center><input id='txt2'><br>转换为:<select id='sel2'>"+str0+"</select>进制<br><input type='button' value='开始转换' onclick='try{txt.value=new Number(txt2.value).toString(sel2.options[sel2.selectedIndex].text)}catch(e){alert(\"异常错误！\")}'></center>"
+break;
+case 16:             //查看网页源文件
+for(i=2;i<129;i++){str0+="<option>"+i;i++}
+str1="<center>&nbsp;<p>请在下边输入框中输入目标URL</center><p><center><input id='txt2' value='http://' style='width:200'><br><input type='button' value='查看源文件' onclick='location.href=\"view-source:\"+txt2.value'></center>"
+break;
+}
+write1()
+}
+function document.onkeydown(){             //页面按键时
+if(sel1.selectedIndex==13){     //检测是否开启键盘键值探测器
+txt.value=event.keyCode;event.keyCode=0;event.returnValue=false;
+}}
+
+temp1=location.href    //初始化启动部分（附加的URL参数可以控制预先选取的列表，形式如xxx.htm?xxx=*，其中*应为0-12之间的数字，用于配合Lshdic2005软体附属工具的默认启动调用）
+try{
+sel1.options[temp1.substr(temp1.indexOf('=')+1)].selected=true;sel1.onchange()
+}catch(e){
+sel1.onchange()
+}
+</script>
+</BODY>
+</HTML>

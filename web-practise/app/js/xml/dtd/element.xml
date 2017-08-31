@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE note[
+	<!ELEMENT note (br,any+,password?,name*,(man|women),to,from,heading,body)>
+	<!ELEMENT br EMPTY>
+	<!ELEMENT any ANY>
+	<!ELEMENT to (#PCDATA)>
+	<!ELEMENT from (#PCDATA)>
+	<!ELEMENT heading (#PCDATA)>
+	<!ELEMENT body (#PCDATA)>
+]>
+<note>ss
+	<br />
+	<any key="anytesst" />
+	<any key="anytesst" />
+	<any key="anytesst" />
+	<password value="password" />
+	<name name="name" />
+	<name name="name" />
+	<name name="name" />
+	<name name="name" />
+	<man value="Y" />
+	<to name="kkkk">George</to>
+	<from>John</from>
+	<heading>Reminder</heading>
+	<body>Don't forget the meeting!</body>
+</note>

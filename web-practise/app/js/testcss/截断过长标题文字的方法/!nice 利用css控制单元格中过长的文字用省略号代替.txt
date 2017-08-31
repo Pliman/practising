@@ -1,0 +1,51 @@
+有时我们需要截取字符串，以便使界面更加简洁。为此我们可以用css设置table和td样式，使单元格中过多的文字自动用…显示。而省去了在后台截取字符串的麻烦，既节省资源又提高效率。以下是针对table和div的两个例子：
+
+例一：
+
+采用css中的word-break: keep-all对td强制换行。
+ word-break: break-all;是不换行的意思。
+
+<style>
+
+td{
+overflow:hidden;
+text-overflow:ellipsis;
+word-break: keep-all;    //这个是必须的
+}
+
+</style>
+ 
+
+<table width="550" border="0" cellpadding="5" cellspacing="1" bgcolor="#007373" style="table-layout:fixed">
+<tr>
+<td  bgcolor="#E8FFFF" s>用CSS实现超长字段被省略的简单方法阿隆索打开解放拉山口</td>
+<td  bgcolor="#E8FFFF" >用CSS实现超长字段被省略的简单方法阿斯蒂芬</td>
+<td  bgcolor="#E8FFFF" >aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+</tr>
+</table>
+
+例二：
+
+<table>
+<tr>
+<td>
+<div style="width: 100px; height: 18px; overflow:hidden; padding:3px 2px 0px 2px; text-overflow:ellipsis">
+<nobr title='这里放置要显示的文本'>
+这里放置要显示的文本
+</nobr>
+</div>
+</td>
+</tr>
+</table>
+
+例三：
+
+采用td中的属性nowrap对td强制换行。
+
+<table width="400" border="0" cellpadding="5" cellspacing="1" bgcolor="#007373" style="table-layout:fixed">
+<tr>
+<td nowrap bgcolor="#E8FFFF" style="overflow:hidden; text-overflow:ellipsis;">用CSS实现超长字段被省略的简单方法阿隆索打</td>
+<td nowrap bgcolor="#E8FFFF" style="overflow:hidden; text-overflow:ellipsis;">用CSS实现超长字段被省略的简单方法阿斯蒂芬</td>
+<td nowrap bgcolor="#E8FFFF" style="overflow:hidden; text-overflow:ellipsis; b">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+</tr>
+</table>

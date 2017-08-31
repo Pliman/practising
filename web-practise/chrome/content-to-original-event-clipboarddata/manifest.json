@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "content-to-original-event-clipboarddata",
+    "description": "",
+    "version": "1.0",
+    "permissions": [
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "ct.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        "page-script.js"
+    ]
+}

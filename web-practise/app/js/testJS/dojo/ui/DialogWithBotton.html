@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>DialogWithBotton.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		<link rel="stylesheet"
+			href="../dojo-release-1.7.2/dijit/themes/claro/claro.css" />
+		
+		<script type="text/javascript" src="../dojo-release-1.7.2/dojo/dojo.js"
+			data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+
+		<script type="text/javascript">
+			var secondDlg;
+			
+			require(["dijit/form/Button", "dijit/Dialog", "dojo/domReady!"], function(Button) {
+	            // create the dialog:
+			    secondDlg = new dijit.Dialog({
+			        title: "Programmatic Dialog Creation",
+			        style: "width: 300px;background-color:red;color:red;"
+			    });
+			    
+			    //alert(secondDlg.containerNode); // div
+			    //alert(secondDlg.domNode); // div
+			    // false alert(secondDlg.domNode == secondDlg.containerNode);
+			    
+			    // 要show了以后，才能添加子节点 -- set的时候，把内容清掉了？--right!!!!!!
+			    var div = document.createElement("div");
+			    div.innerHTML = "div+++++++++++++++";
+			    //secondDlg.show();
+			    secondDlg.containerNode.appendChild(div);
+	        });
+			
+			showDialogTwo = function(){
+			    // set the content of the dialog:
+			    secondDlg.set("content", "Hey, I wasn't there before, I was added at " + new Date() + "!");
+			    secondDlg.set("title", "Hey, I wasn't like this before");
+			    
+			    var button = new dijit.form.Button({
+	                label: "Click Me!",
+	                title: "111",
+	                onClick: function(){ console.log("button was clicked!"); }
+	            });
+	            
+	            secondDlg.set("content", button);
+	            //alert(button);
+			    // button.plactAt(secondDlg.domNode);
+			    //secondDlg.addChild();
+			    secondDlg.show();
+			}
+		</script>
+	</head>
+	<body class="claro">
+		<p>When pressing this button the dialog will popup. Notice this time there is no DOM node with content for the dialog:</p>
+		<button id="buttonTwo" data-dojo-type="dijit.form.Button" data-dojo-props="onClick:showDialogTwo" type="button">Show me!</button>
+	</body>
+</html>

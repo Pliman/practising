@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>selectcell&merge.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			table td {
+				width:100px;
+				height:100px;
+				background-color:orange;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<div tabindex=0
+			style='border: 1px solid red; width: 500px; height: 50px'
+			onkeydown="alert('key down:...')">
+			鼠标点中此区域后，按键盘 IE会发生键盘事件，Firefox也可以了
+		</div>
+	</body>
+	<table>
+		<tr><td tabindex=1 onmousedown="selectTd(this,1)">1</td><td tabindex=2 onmousedown="selectTd(this,2)">2</td></tr>
+		<tr><td tabindex=3 onmousedown="selectTd(this,3)">3</td><td tabindex=4 onmousedown="selectTd(this,4)">4</td></tr>
+		<tr><td tabindex=5 onmousedown="selectTd(this,5)">5</td><td tabindex=6 onmousedown="selectTd(this,6)">6</td></tr>
+	</table>
+</html>
+<script language="javascript">
+  var selectedTd = [];
+  var selectedStr = '';
+  var addflag = 'select';
+  
+  function selectTd(td,key){
+  	alert(addflag);
+  	if(addflag == 'add'){
+  		td.style.backgroundColor = 'yellow';
+  	}else {
+  		td.style.backgroundColor = 'blue';
+  	}
+  	
+  	//mergeTd();
+  };
+  
+  document.onkeydown = function ( evt ){
+	  var evt = evt || window.event;
+	  
+	  if(evt.ctrlKey){
+	  	addflag = 'add';
+	  }
+  };
+  
+  document.onkeyup = function ( evt ){
+	addflag = 'select';
+  };
+  
+  function mergeTd(){
+  	for(t in selectedTd){
+  		value = selectedTd[t];
+  		selectedStr += value;
+  	}
+  	alert(selectedStr);
+  }
+</script>

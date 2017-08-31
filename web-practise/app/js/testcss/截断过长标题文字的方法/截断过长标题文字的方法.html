@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<title>使用CSS截断过长标题文字的方法-HTMer</title>
+		<style type="text/css">
+			.htmer {
+				width: 200px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis; /*兼容IE*/
+				-moz-binding: url('ellipsis.xml#ellipsis');
+				/*兼容Firefox，调用ellipsis.xml文件，注意ellipsis.xml文件路径*/
+			}
+		</style>
+	</head>
+	<body>
+		<div class="htmer" title="使用CSS截断过长标题文字的方法-HTMer">
+			使用CSS截断过长标题文字的方法-HTMer
+		</div>
+	</body>
+</html>

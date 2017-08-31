@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<ns1:getUrmsVersionResponse
+			soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+			xmlns:ns1="http://impl.service.core.urms.gdcn.com">
+			<getUrmsVersionReturn xsi:type="xsd:string">
+				URMS.1.0.12.20081209
+			</getUrmsVersionReturn>
+		</ns1:getUrmsVersionResponse>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<ns1:findUserByLogonidResponse
+			soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+			xmlns:ns1="http://impl.service.core.urms.gdcn.com">
+			<findUserByLogonidReturn xsi:type="ns2:UmUser"
+				xsi:nil="true" xmlns:ns2="http://model.core.urms.gdcn.com" />
+		</ns1:findUserByLogonidResponse>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<ns1:findUserByIdResponse
+			soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+			xmlns:ns1="http://impl.service.core.urms.gdcn.com">
+			<findUserByIdReturn href="#id0" />
+		</ns1:findUserByIdResponse>
+		<multiRef id="id0" soapenc:root="0"
+			soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+			xsi:type="ns2:UmUser"
+			xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+			xmlns:ns2="http://model.core.urms.gdcn.com">
+			<age xsi:type="xsd:dateTime">2020-01-22T16:00:00.000Z</age>
+			<createdate xsi:type="xsd:dateTime">
+				2008-08-06T16:00:00.000Z
+			</createdate>
+			<email xsi:type="xsd:string">youzh@gdcn.com</email>
+			<emploeeid xsi:type="xsd:string" xsi:nil="true" />
+			<enname xsi:type="xsd:string" xsi:nil="true" />
+			<fax xsi:type="xsd:string" xsi:nil="true" />
+			<freezetime xsi:type="x" " sd:dateTime " xsi:nil="true" />
+			<fullname xsi:type="xsd:string">youzh</fullname>
+			<lastlogin xsi:type="xsd:dateTime">
+				2009-09-11T09:55:59.000Z
+			</lastlogin>
+			<leader xsi:type="xsd:string" xsi:nil="true" />
+			<logintype xsi:type="xsd:string" xsi:nil="true" />
+			<logonid xsi:type="xsd:string">youzh</logonid>
+			<memo xsi:type="xsd:string" xsi:nil="true" />
+			<mobile xsi:type="xsd:string">13580349321</mobile>
+			<mulriple xsi:type="xsd:string" xsi:nil="true" />
+			<officephone xsi:type="xsd:string" xsi:nil="true" />
+			<orgid xsi:type="xsd:string">
+				D4ECBC85AC391D7085FCEB547930AF0F
+			</orgid>
+			<parentids xsi:type="xsd:string">
+				F8CA392BD54CC164FDA88B85581C70F6,13DCCCCDC1807180500BFD71DD655474,D4ECBC85AC391D7085FCEB547930AF0F
+			</parentids>
+			<parentnames xsi:type="xsd:string">
+				&#x5E7F;&#x4E1C;&#x6570;&#x636E;&#x901A;&#x4FE1;&#x7F51;&#x7EDC;&#x6709;&#x9650;&#x516C;&#x53F8;-&#x8FD0;&#x8425;&#x5546;&#x8F6F;&#x4EF6;&#x4E2D;&#x5FC3;-&#x5F00;&#x53D1;&#x4E00;&#x90E8;
+			</parentnames>
+			<parenttypes xsi:type="xsd:string">GS,BM,BM</parenttypes>
+			<password xsi: "" type="xsd:string">
+				21218cca77804d2ba1922c33e0151105
+			</password>
+			<postid xsi:type="xsd:string">11</postid>
+			<pwdupdate xsi:type="xsd:dateTime">
+				2009-04-17T18:15:28.000Z
+			</pwdupdate>
+			<sapid xsi:type="xsd:string" xsi:nil="true" />
+			<showorder xsi:type="xsd:float">1000.0</showorder>
+			<status xsi:type="xsd:string" xsi:nil="true" />
+			<title xsi:type="xsd:string">
+				&#x4E8C;&#x7EA7;&#x7A0B;&#x5E8F;&#x5458;
+			</title>
+			<ukeyenabled xsi:type="xsd:string" xsi:nil="true" />
+			<userid xsi:type="xsd:string">
+				618C699CCEF0326F80B70443C422D5D5
+			</userid>
+			<username xsi:type="xsd:string">
+				&#x6E38;&#x5FD7;&#x534E;
+			</username>
+			<valid xsi:type="xsd:boolean">true</valid>
+		</multiRef>
+	</soapenv:Body>
+</soapenv:Envelope>
+"

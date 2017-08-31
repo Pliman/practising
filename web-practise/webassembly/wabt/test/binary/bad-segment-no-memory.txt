@@ -1,0 +1,14 @@
+;;; ERROR: 1
+;;; TOOL: run-gen-wasm
+magic
+version
+section(DATA) {
+  count[1]
+  addr[i32.const 0 end]
+  data[str("hi")]
+}
+(;; STDERR ;;;
+Error running "wasm2wast":
+error: @0x0000000b: data section without memory section
+
+;;; STDERR ;;)

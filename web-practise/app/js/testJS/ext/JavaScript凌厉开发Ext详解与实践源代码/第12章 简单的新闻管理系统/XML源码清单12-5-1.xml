@@ -1,0 +1,16 @@
+<!--XML源码清单12-5-1-->
+<configSections>
+    <section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <section name="dynamicQueryConfiguration" type="NCI.EasyObjects.Configuration.DynamicQuerySettings, NCI.EasyObjects"/>
+</configSections>
+<dataConfiguration defaultDatabase="dbConnection"/>
+<connectionStrings>
+    <add name="dbConnection" connectionString="Data Source=HUANG\sqlexpress;Initial Catalog=extinaction;Persist Security Info=True;User ID=sa;password=sa"
+     providerName="System.Data.SqlClient"/>
+</connectionStrings>
+<dynamicQueryConfiguration defaultProvider="SQL Server">
+    <dynamicQueryProviders>
+        <add name="SQL Server" type="NCI.EasyObjects.DynamicQueryProvider.SqlServerDynamicQuery, NCI.EasyObjects"/>
+    </dynamicQueryProviders>
+</dynamicQueryConfiguration>
+

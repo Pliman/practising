@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>editorgridpanel</title>
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="extjs/ext-all.js"></script>
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+		<script type="text/javascript"><!--
+	  		/**
+			 * 判断ext是否引入
+			 */
+			function fn() {
+				alert('ExtJS库已添加'); 
+			} 
+			//Ext.onReady(fn);
+			//Ext.onReady(function () { alert('ExtJS库已加载!'); } );
+			
+			Ext.onReady(function(){
+				
+				var dataTest = [
+				    ['boy', 0],
+				    ['girl', 1]
+				];
+				
+				var datafor0 = [
+				    ['man', 0],
+				    ['littleboy', 1]
+				];
+				
+				var datafor1 = [
+				    ['woman', 0],
+				    ['littlegirl', 1]
+				];
+				
+				var storeTest = new Ext.data.Store({
+				    proxy: new Ext.data.MemoryProxy(dataTest),
+				    id:'name',
+				    reader: new Ext.data.ArrayReader({}, Ext.data.Record.create([  
+				        {name: 'name', type: 'string'},
+						{name: 'sex', type: 'int'}
+				    ]))
+				});
+				//alert(storeTest.getById('boy')) ;
+				storeTest.load();
+				
+				var storefor0 = new Ext.data.Store({
+				    proxy: new Ext.data.MemoryProxy(datafor0),
+				    reader: new Ext.data.ArrayReader({}, Ext.data.Record.create([  
+				        {name: 'calling', type: 'string'},
+						{name: 'catalog', type: 'int'}
+				    ]))
+				});
+				storefor0.load();
+				
+				var storefor1 = new Ext.data.Store({
+				    proxy: new Ext.data.MemoryProxy(datafor1),
+				    reader: new Ext.data.ArrayReader({}, Ext.data.Record.create([  
+				        {name: 'calling', type: 'string'},
+						{name: 'catalog', type: 'int'}
+				    ]))
+				});
+				storefor1.load();
+			
+				var data=[
+					{id:1,
+					name:'小王',
+					email:'xiaowang@easyjf.com',
+					sex:'0',
+					called:'0',
+					bornDate:'1991-4-4'},
+					{id:2,
+					name:'小李',
+					email:'xiaoli@easyjf.com',
+					sex:'0',
+					called:'1',
+					bornDate:'1992-5-6'},
+					{id:3,
+					name:'小兰',
+					email:'xiaoxiao@easyjf.com',
+					sex:'1',
+					called:'0',
+					bornDate:'1993-3-7'}
+				];
+				
+				var store=new Ext.data.JsonStore({
+					data:data,
+					id:'id',
+					//fields:["id","name","sex","email",{name:"bornDate",type:"date",dateFormat:"Y-n-j"}]
+					fields:["id","name","sex","called","email","bornDate"]
+				});
+				//store.load() ;
+				
+				var dataSex={'results': 2,sexCatalog:
+					[
+						{id:1,value:'male',text:'男'},
+						{id:2,value:'female',text:'女'}
+					]} ;
+				
+				/*var dataSex=[
+					['male','男'],
+					['female','女']
+				] ;
+				
+				var sex_store=new Ext.data.SimpleStore({data:dataSex});
+				sex_store.load();*/
+				
+				var sex_store=new Ext.data.JsonStore({
+					proxy: new Ext.data.MemoryProxy(dataSex),
+					reader: new Ext.data.JsonReader({  
+				        id:'id'
+				    },Ext.data.Record.create([  
+				        {name:'tid',mapping:'id',type:'int'},  
+				        {name:'tvalue',mapping:'value'},  
+				        {name:'ttext',mapping:'text'}
+				    ]))
+					//fields:["id","value","text"]
+				});
+				//sex_store.load();
+				
+				var sm = new Ext.grid.CheckboxSelectionModel({singleSelect:false});
+				var colM=new Ext.grid.ColumnModel([
+					sm,
+					{header:"姓名",
+					dataIndex:"name",
+					sortable:true,
+					renderer:function (value,meta,rdata){
+						//alert('111') ;
+						return (value+111) ;
+					},
+					editor:new Ext.form.TextField()}, 
+					{header:"性别",
+					dataIndex:"sex",
+					renderer:function(v){
+					    //var rec = this.editor.getStore().getAt(v);
+					    var rec = storeTest.getAt(v);
+					    if (rec == null) {
+					        return v;
+					    }else {
+					        //return rec.data[this.editor.displayField];
+					        return rec.data['name'];
+					    }
+					},
+					//editor:new Ext.form.ComboBox({id:'id_combo_sex',typeAhead: true,triggerAction: 'all',store:sex_store,emptyText : '请选择',lazyRender:true,valueField : 'value',displayField : 'text',listClass: 'x-combo-list-small',listeners: { select:{ fn:function(combo,record,index) {var r = grid.getSelectionModel().getSelected(); if (r){ r.set('_'+'sex',record.get('text')); }}}}})
+					//editor:new Ext.form.ComboBox({id:'id_combo_sex',typeAhead: true,triggerAction: 'all',store:sex_store})
+					//editor:new Ext.form.ComboBox({id:'id_combo_sex',triggerAction: 'all',store:storeTest,lazyRender:true})
+					editor:new Ext.form.ComboBox({id:'id_combo_sex',typeAhead: true,triggerAction: 'all',store:storeTest,emptyText : '请选择',lazyRender:true,valueField : 'sex',displayField : 'name',listClass: 'x-combo-list-small',listeners: { select:{ fn:function(combo,record,index) {var r = grid2.getSelectionModel().getSelected(); if (r){r.set('sex',record.get('name'));}}}}})
+					},
+					{header:"类属",
+					dataIndex:"called",
+					renderer:function(v,meta,record){var cStore=''; var cSex='';
+						//alert(rowIndex);alert(colIndex);
+						//alert(record.get('sex')) ;
+						//alert(v) ;
+						if(record.get('sex') == 0){
+							var store = Ext.getCmp('id_combo_called').store ;
+							store.proxy = new Ext.data.MemoryProxy(datafor0);
+							store.load() ;
+							cStore = store ;
+							//alert(cStore.getAt(0).get('calling')) ;
+						}else if(record.get('sex') == 1){
+							var store = Ext.getCmp('id_combo_called').store ;
+							store.proxy = new Ext.data.MemoryProxy(datafor1);
+							store.load() ;
+							cStore = store ;
+						}else{
+							//alert('无性别') ;
+							var store = Ext.getCmp('id_combo_called').store ;
+							store.proxy = new Ext.data.MemoryProxy(datafor0);
+							store.load() ;
+							cStore = store ;
+						}
+						//alert(cStore) ;
+						var rec = cStore.getAt(v);
+						//var num = cStore.find('catalog',v);
+						//alert(num) ;
+						//var rec = cStore.getAt(num);
+					    if (rec == null) {
+					        return v;
+					    }else {
+					        //return rec.data[this.editor.displayField];
+					        //return rec.data['calling'];
+					        return rec.get('calling');
+					    }
+					},
+					editor:new Ext.form.ComboBox({id:'id_combo_called',lazyRender:true,typeAhead: true,triggerAction: 'all',store:storefor0,emptyText : '请选择',valueField : 'catalog',displayField : 'calling',listClass: 'x-combo-list-small',listeners: { select:{ fn:function(combo,record,index) {var r = grid2.getSelectionModel().getSelected(); if (r){r.set('called',record.get('name'));}}}}})
+					},
+					{header:"出生日期",
+					dataIndex:"bornDate",
+					width:120
+					//,
+					//renderer:Ext.util.Format.dateRenderer('Y年m月d日')
+					},
+					{header:"电子邮件",
+					dataIndex:"email",
+					sortable:true,
+					editor:new Ext.form.TextField()}
+				]);
+				
+				var editingRow = 'initValue' ;
+				var editingColumn = '' ;
+				var orgValue = '' ;
+				var newValue = '' ;
+				
+				/**
+				 * 编辑之后事件
+				 */
+				var afteredit = function(){
+					//alert('afteredit') ;
+					//var grid = Ext.getCmp('grid2') ;
+					if(editingColumn == 2){
+						var record = grid2.getStore().getAt(editingRow);   //Get the Record
+						var fieldName = grid2.getColumnModel().getDataIndex(editingColumn); //Get field name
+						var data = record.get(fieldName);
+						newValue = data ;
+						//Ext.MessageBox.alert('show','当前选中的数据是'+data);
+						alert('orgValue: ' + orgValue) ;
+						alert('newValue: ' + newValue) ;
+						if(orgValue != newValue){
+							changeWorkType() ;
+						}
+					}
+				};
+				
+				/**
+				 * 编辑子类
+				 */
+				var changeWorkType = function(){
+					if(newValue == 0){
+						var store = Ext.getCmp('id_combo_called').store ;
+						store.proxy = new Ext.data.MemoryProxy(datafor0);
+						store.load() ;
+						cStore = store ;
+					}else if(newValue == 1){
+						var store = Ext.getCmp('id_combo_called').store ;
+						store.proxy = new Ext.data.MemoryProxy(datafor1);
+						store.load() ;
+						cStore = store ;
+						alert(store.getAt(0).get('calling')) ;
+					}else{
+						alert('无性别') ;
+					}
+				}
+				
+				/**
+				 * 单元格单击事件
+				 */
+				var cellclick = function(grid, rowIndex, columnIndex, e) {
+					if(editingRow != rowIndex){
+						editingRow = rowIndex ;
+						editingColumn = columnIndex ;
+						var record = grid.getStore().getAt(rowIndex);   //Get the Record
+						var data = record.get('sex');
+						if(data == 0){
+							var store = Ext.getCmp('id_combo_called').store ;
+							store.proxy = new Ext.data.MemoryProxy(datafor0);
+							store.load() ;
+							cStore = store ;
+						}else if(data == 1){
+							var store = Ext.getCmp('id_combo_called').store ;
+							store.proxy = new Ext.data.MemoryProxy(datafor1);
+							store.load() ;
+							cStore = store ;
+						}else{
+							alert('无性别') ;
+						}
+					}
+					editingRow = rowIndex ;
+					if(columnIndex == 2){
+						var record = grid.getStore().getAt(rowIndex);   //Get the Record
+						var fieldName = grid.getColumnModel().getDataIndex(columnIndex); //Get field name
+						var data = record.get(fieldName);
+						orgValue = data ;
+					}
+				};
+				
+				var grid2 = new Ext.grid.EditorGridPanel({
+					renderTo:"hello",
+					title:"学生基本信息管理",
+					height:200,
+					width:600, 
+					cm:colM,
+					store:store,
+					clicksToEdit:1,
+					//afteredit : afteredit ,
+					//cellclick : cellclick ,
+					selModel: new Ext.grid.RowSelectionModel({singleSelect:false}) ,
+					listeners:{
+						//rowclick:{fn:function(grid,  rowIndex,  e ) {alert('click'); }}
+					} ,
+					autoExpandColumn:3
+				});
+				
+				grid2.addListener('cellclick', cellclick);
+				grid2.addListener('afteredit', afteredit);
+				
+				var ExtButton = new Ext.Button({
+			        text: '选择行信息',
+			        renderTo: 'but1',
+			        handler: function() { //行的选择//////////
+			        var selections = grid.getSelectionModel().getSelections();
+			        if (selections.length == 0) { Ext.Msg.alert('提示', "先选择行"); return; }
+			        for (var i = 0; i < selections.length; i++) {
+			            var record = selections[i];
+			            Ext.Msg.alert('提示', record.get("id") + "," + record.get("name") + "," + record.get("sex"));
+			            //Ext.Msg.alert窗口不允许弹出多个,只会显示最后一个窗口
+			        }
+			        }
+			    });
+			    
+			    var alertR = new Ext.Button({
+			        text: '显示R',
+			        renderTo: 'but1',
+			        handler: function() { //行的选择//////////
+			        var selections = grid.getSelectionModel().getSelections();
+			        if (selections.length == 0) { Ext.Msg.alert('提示', "先选择行"); return; }
+			        for (var i = 0; i < selections.length; i++) {
+			            var record = selections[i];
+			            Ext.Msg.alert(record.get("sex"));
+			            //Ext.Msg.alert窗口不允许弹出多个,只会显示最后一个窗口
+			        }
+			        }
+			    });
+				
+			});
+						
+  		--></script>
+
+	</head>
+
+	<body>
+		<table id="operatortable1">
+			<tr>
+				<td>
+					<div id="hello">
+				</td>
+			</tr>
+		</table>
+		<div id="but1"></div>
+		<table id="operatortable2">
+			<tr>
+				<td>
+					<input onclick="assembleCurrDate()" type="button" id="assembleCurrDate" name="assembleCurrDate"
+						value="assembleCurrDate"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+		<table id="operatortable3">
+			<tr>
+				<td>
+					<input onclick="testDate()" type="button" id="testDate" name="testDate"
+						value="testDate"
+						style="background: white url(../../img/submit.gif) no-repeat center;" />
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

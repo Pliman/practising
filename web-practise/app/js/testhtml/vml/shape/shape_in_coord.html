@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<title>shape_in_coord.html</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<?import namespace="v" implementation="#default#VML" ?>
+		<style>
+			/* shape和path这些样式应该是默认引入的，想rect，imagedata才是需要引入的 */ /* 就像java的lang包 */
+		</style>
+	</head>
+	<body>
+		<!-- 坐标注释
+		DOM的左上角始终是(0,0)--绘制的时候，可以超出0,0
+		style:top坐标系0,0点相对于屏幕的Y值
+		style:left坐标系0,0点相对于屏幕的X值
+		
+		CoordOrig: 没有此属性
+		 坐标系的调整是通过改变CoordSize和shap本身的style.left/style.top来调整的 
+		CoordSize:设定右下角坐标如(400,400) 将shape区域分成多少份 以后，一个单位就是一份，并可以指定正负
+			坐标轴 例如设置为(-400,-400)，那么右下角的坐标就是(-400,-400)
+			注意：这个是没有单位的，如果硬要加个单位，应该叫份。
+		style:width 定义shape区域的大小
+		style:height 定义shape区域的高度
+		filled:是否填充 在没有路径的情况下是没有的
+		fillcolor:填充颜色,当Filled="true"(默认),fillcolor才有效果
+		-->
+		<v:shape
+			style="Z-INDEX:1;LEFT:71px;WIDTH:100px;POSITION:absolute;TOP:225px;HEIGHT:100px"
+			coordsize="100,100" filled="t" fillcolor="white"
+			path="m0,0 l30,-30 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:171px;WIDTH:100px;POSITION:absolute;TOP:225px;HEIGHT:100px"
+			coordsize="100,100" filled="t" fillcolor="white"
+			path="m0,0 l30,-30,60,0 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:271px;WIDTH:100px;POSITION:absolute;TOP:225px;HEIGHT:100px"
+			coordsize="100,100" filled="t" fillcolor="white"
+			path="m0,0 l30,-30,60,0,0,0 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:371px;WIDTH:100px;POSITION:absolute;TOP:225px;HEIGHT:100px"
+			coordsize="100,100" filled="f" strokecolor="blue"
+			path="m0,0 l30,30,60,0,0,0 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:471px;WIDTH:50px;POSITION:absolute;TOP:225px;HEIGHT:100px"
+			coordsize="100,100" filled="f" strokecolor="blue"
+			path="m0,0 l30,30,60,0,0,0 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:571px;WIDTH:2000px;POSITION:absolute;TOP:225px;HEIGHT:2000px"
+			coordsize="1000,1000" filled="t" strokecolor="blue"
+			path="m0,0 l30,30,60,0,0,0 e" />
+		<v:shape
+			style="Z-INDEX:1;LEFT:571px;WIDTH:5000px;POSITION:absolute;TOP:300px;HEIGHT:5000px"
+			coordsize="1000,1000" filled="t" strokecolor="blue"
+			path="m0,0 l30,30,60,0,0,0 e" />
+	</body>
+</html>

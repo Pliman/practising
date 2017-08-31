@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html debug='true'>
+    <head>
+        <title>调试动态树</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../lib/ext/resources/css/ext-all.css" />
+        <script type="text/javascript" src="../lib/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../lib/ext/locale/ext-lang-zh_CN.js">
+        </script>
+    </head>
+    <body>
+        <h1 style="margin:20px 0px 0px 20px;">调试动态树</h1>
+        <div id="tree-div" style="overflow:auto; height:300px;width:250px;border:1px solid #c3daf9;margin:20px 0px 0px 20px">
+        </div>
+        <div id="form-div" style="overflow:auto; height:180px;width:250px;border:1px solid #c3daf9;margin:20px 0px 0px 20px">
+        </div>
+        <script>
+            var app = {};
+            
+            Ext.onReady(function(){
+                Ext.form.Field.prototype.msgTarget = 'side';
+                
+                app.tree = new Ext.tree.TreePanel({
+                    el: 'tree-div',
+                    useArrows: true,
+                    autoScroll: true,
+                    animate: true,
+                    enableDD: false,
+                    containerScroll: true,
+                    loader: new Ext.tree.TreeLoader({
+                        dataUrl: 'tree_action.ashx?act=list'
+                    }),
+                    listeners: {
+                        click: function(node, e){
+                            console.log(node);
+                            var obj = app.form.form.findField("parentid");
+                            if (obj) 
+                                obj.setValue(node.id);
+                        }
+                    }
+                });
+                
+                app.root = new Ext.tree.AsyncTreeNode({
+                    text: '根节点',
+                    draggable: false,
+                    id: '0'
+                });
+                app.tree.setRootNode(app.root);
+                
+                app.form = new Ext.FormPanel({
+                    labelWidth: 75,
+                    el: 'form-div',
+                    frame: true,
+                    title: '增加树节点',
+                    bodyStyle: 'padding:5px 5px 0',
+                    width: 350,
+                    defaults: {
+                        width: 230
+                    },
+                    defaultType: 'textfield',
+                    items: [{
+                        xtype: 'hidden',
+                        name: 'act',
+                        value: 'add'
+                    }, {
+                        xtype: 'hidden',
+                        name: 'parentid',
+                        value: '0'
+                    }, {
+                        fieldLabel: '名称',
+                        name: 'name',
+                        allowBlank: false,
+                        anchor: '90%'
+                    }, {
+                        xtype: 'textarea',
+                        height: 60,
+                        fieldLabel: '描述',
+                        name: 'description',
+                        anchor: '90%'
+                    }],
+                    
+                    buttons: [{
+                        text: '保存',
+                        handler: function(){
+                            if (app.form.form.isValid()) {
+                                app.form.form.doAction('submit', {
+                                    url: 'tree_action.ashx',
+                                    method: 'post',
+                                    params: '',
+                                    success: function(form, action){
+                                        var result = action.result.data;
+                                        if (result == 'ok') {
+                                            Ext.Msg.alert('信息', '树节点已保存！');
+                                        }
+                                        else {
+                                            Ext.Msg.alert('信息', action.result);
+                                        }
+                                    },
+                                    failure: function(form, action){
+                                        Ext.Msg.alert('信息', action.result);
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '重置',
+                        handler: function(){
+                            app.form.form.reset();
+                        }
+                    }]
+                });
+                
+                
+                app.tree.render();
+                app.form.render();
+                app.root.expand();
+            });
+        </script>
+    </body>
+</html>

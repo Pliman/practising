@@ -1,0 +1,1 @@
+var tpl = new Ext.XTemplate('<tpl for=".">', '<div class="thumb-wrap" id="{id}">', '<div class="thumb"><table border="0"><tr><td align="center" valign="middle">', '<img class="thumb-img" style="width:100px" src="./images/{filename}">', '</td></tr></table></div>', '<span>{title:ellipsis(10)}</span></div>', '</tpl>', '<div class="x-clear"></div>');//tpl

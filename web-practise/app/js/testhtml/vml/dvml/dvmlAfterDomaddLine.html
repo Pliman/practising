@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>dvmlAfterDomaddLine</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script>
+			document.createStyleSheet().addRule(".vml", "behavior:url(#default#VML);display:inline-block;"); 
+		</script>
+	</head>
+
+	<body>
+		<v:line style="POSITION:absolute;left:200px;top:200px" class="vml" from="0,0" to="100,0" >
+	    </v:line>
+	</body>
+</html>
+<script type="text/javascript">
+	/* 添加名称空间后，新的line元素可以显示 */
+	document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+	
+	var line1 = document.createElement('<v:line>');
+	line1.className = 'vml'; 
+	line1.style.position = 'absolute';
+	line1.style.left = '100px';
+	line1.style.top = '100px';
+	line1.from="0,0";
+	line1.to="100,0"
+	
+	document.body.appendChild(line1);
+</script>

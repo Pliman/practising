@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>Object Constructor Catch</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script>
+			function showConstructor() {
+				// an empty object
+				var o = new Object();
+				alert(o.constructor === Object); // true
+				// a number object
+				var o = new Object(1);
+				alert('1 ' + o.constructor);
+				alert(o.constructor === Number); // true
+				alert(o.toFixed(2)); // "1.00"
+				// a string object
+				var o = new Object("I am a string");
+				alert(o.constructor === String); // true
+				// normal objects don't have a substring()
+				// method but string objects do
+				alert(typeof o.substring); // "function"
+				// a boolean object
+				var o = new Object(true);
+				alert(o.constructor === Boolean); // true
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="Object Constructor Catch"
+			onclick="showConstructor()" />
+	</body>
+</html>
