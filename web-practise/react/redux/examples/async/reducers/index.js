@@ -53,9 +53,20 @@ function postsByReddit(state = { }, action) {
   }
 }
 
+function aaa(state = 'reactjs123123123', action) {
+  console.log('++++++++++++++++++');
+  switch (action.type) {
+    case SELECT_REDDIT:
+      return action.reddit
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   postsByReddit,
-  selectedReddit
+  selectedReddit,
+  aaa
 })
 
 export default rootReducer
