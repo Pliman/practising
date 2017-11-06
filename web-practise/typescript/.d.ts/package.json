@@ -1,0 +1,12 @@
+{
+  "name": "dts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.ts",
+//   "types": "a.d.ts", 没起作用
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
