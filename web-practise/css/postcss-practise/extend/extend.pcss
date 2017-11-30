@@ -1,0 +1,30 @@
+%container {
+  padding-left: 15px;
+}
+@media (--md-viewport) {
+  %container {
+    padding-left: 2em;
+  }
+}
+.extendingClass {
+  @extend %container;
+}
+
+.potato {
+  color: white;
+}
+
+.potato:first-child,
+.potato a::after {
+  background: brown;
+}
+
+#superfun {
+  @extend .potato;
+  color: red;
+}
+
+.aa {
+  @extend .potato;
+  color: blue;
+}
