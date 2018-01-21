@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <style type="text/css">
+        .container {}
+
+        .floater {
+            width: 200px;
+            height: 200px;
+            background-color: #0D48A8;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .divider {
+            margin-top: 50px;
+        }
+
+        .clearfix:after{
+            display:block;
+            content:"";
+            clear:both;
+        }
+    </style>
+	<title>float-clear</title>
+</head>
+<body>
+<div>
+    <div class="floater float-left">1</div>
+    <div class="floater float-right">2</div>
+    <div style="clear:both"></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="clearfix">
+    <div class="floater float-left">1</div>
+    <div class="floater float-right">2</div>
+</div>
+
+<div class="divider"></div>
+
+<div style="overflow:hidden;">
+    <div class="floater float-left">1</div>
+    <div class="floater float-right">2</div>
+</div>
+
+<div class="divider"></div>
+
+<div style="float:left;width: 100%">
+    <div class="floater float-left">1</div>
+    <div class="floater float-right">2</div>
+</div>
+
+</body>
+</html>

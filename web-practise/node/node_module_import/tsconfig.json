@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "commonjs",
+        "target": "es5",
+        "lib": [
+            "es2015.promise",
+            "es7",
+            "es5",
+            "dom"
+        ],
+        "noImplicitAny": false,
+        "removeComments": false,
+        "noEmitHelpers": false,
+        "allowSyntheticDefaultImports": true,
+        "outDir": "./ts_dist",
+        "allowJs": true
+    },
+    "include": [
+        "node_modules/*",
+        "node_modules/**/*"
+    ]
+}

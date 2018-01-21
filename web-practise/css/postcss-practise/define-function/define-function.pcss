@@ -1,0 +1,7 @@
+@define-function rem($val) {
+    @return $val / 640 * 10 * 1rem;
+}
+@callFn .foo {
+    /* Input example */
+    height: rem(640);
+}

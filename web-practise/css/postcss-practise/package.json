@@ -1,0 +1,24 @@
+{
+    "name": "postcss-practise",
+    "description": "",
+    "main": "index.js",
+    "author": "",
+    "license": "ISC",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "node app.js",
+        "postcss": "postcss --config postcss.json"
+    },
+    "devDependencies": {
+        "autoprefixer": "^7.1.6",
+        "postcss": "^6.0.14",
+        "postcss-cli": "^2.6.0",
+        "postcss-cssnext": "^3.0.2",
+        "postcss-define-function": "^0.1.1",
+        "postcss-extend": "^1.0.5",
+        "postcss-import": "^11.0.0",
+        "postcss-mixins": "^6.2.0",
+        "postcss-nested": "^2.1.2",
+        "postcss-simple-vars": "^4.1.0"
+    }
+}
