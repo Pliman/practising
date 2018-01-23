@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iterator</title>
+</head>
+<body>
+<script>
+    var it = makeIterator(['a', 'b']);
+
+    console.log(it.next()) // { value: "a", done: false }
+    console.log(it.next()) // { value: "b", done: false }
+    console.log(it.next()) // { value: undefined, done: true }
+    // 此处不能使用for of，因为不是系统认为可以遍历的
+
+    function makeIterator(array) {
+        var nextIndex = 0;
+        return {
+            next: function () {
+                return nextIndex < array.length ?
+                    {value: array[nextIndex++], done: false} :
+                    {value: undefined, done: true};
+            }
+        };
+    }
+
+    ////////////////////////////////
+    //    var a = {a: 'a'}
+    //    for (let k of a) { //a is not iterable
+    //        console.log(k)
+    //    }
+    ////////////////////////////////
+    const obj = {
+        [Symbol.iterator]: function () {
+            let countDown = 10;
+
+            return {
+                next: function () {
+                    if (countDown) {
+                        return {
+                            value: countDown--,
+                            done: false
+                        }
+                    } else {
+                        return {
+                            done: true
+                        };
+                    }
+s                }
+            };
+        },
+        a: 'a',
+        b: 'b'
+    };
+
+    for (let k of obj) {
+        console.log(k)
+    }
+</script>
+</body>
+</html>

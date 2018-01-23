@@ -10,8 +10,11 @@ function getFoo () {
 // api 调用 - 业务 - 主体
 var g = function* () {
 	try {
-		var foo = yield getFoo();
-		console.log(foo);
+		var foo1 = yield getFoo();
+		console.log(foo1);
+
+        var foo2 = yield getFoo();
+        console.log(foo2);
 	} catch (e) {
 		console.log(e);
 	}

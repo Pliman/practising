@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reflect</title>
+</head>
+<body>
+<script>
+    var myObject = {
+        foo: 1,
+        bar: 2,
+        get baz() {
+            return this.foo + this.bar;
+        },
+    }
+
+    console.log(Reflect.get(myObject, 'foo')) // 1
+    console.log(Reflect.get(myObject, 'bar')) // 2
+    console.log(Reflect.get(myObject, 'baz')) // 3
+</script>
+</body>
+</html>

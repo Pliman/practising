@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>object-create</title>
+</head>
+<body>
+<script>
+    var creator = function (o) {
+        var F = function () {
+        };
+        F.prototype = o;
+        return new F();
+    };
+
+    var a = {a: 'a'}
+    var b = creator(a);
+
+    console.log(a)
+    console.log(b)
+    console.log(b.a)
+
+    var c = {c: 'c'}
+    var d = Object.create(c);
+    console.log('------------------------')
+    console.log(c)
+    console.log(d)
+    console.log(d.c)
+</script>
+</body>
+</html>

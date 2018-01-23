@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>getter&setter</title>
+</head>
+<body>
+<script>
+    //demo1
+    var obj = {
+        val:100,
+        get getval(){
+            return this.val + 1
+        },
+        set setval(x){
+            this.val = x + 2
+        }
+    }
+
+    console.log(obj.getval)
+    obj.setval = 101
+    console.log(obj.getval)
+
+
+    var obj2 = {
+        val:200
+    }
+
+    obj2.__defineGetter__('name',function(){return this.val + 2})
+    obj2.__defineSetter__('name',function(name){this.val = name+1})
+
+    console.log(obj2.name)
+    obj2.name = 201
+    console.log(obj2.name)
+</script>
+</body>
+</html>
