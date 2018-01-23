@@ -21,4 +21,6 @@ async function exec() {
   }, 1000);
 }
 
-exec();
+var a = exec();
+console.log(111111);
+console.log(a);
