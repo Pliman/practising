@@ -3,11 +3,13 @@ var p1 = new Promise(function (res, rej) {
 });
 
 p1.then(function (val) {
+    console.log(`p1 resovled ${val}`);
+
 	return {
 		then: function (resolvePromise, rejectPromise) {
 			console.log(resolvePromise);
 			console.log(rejectPromise);
-			resolvePromise(1);
+			resolvePromise(2);
 		}
 	}
 }).then(function (a) {
@@ -20,6 +22,7 @@ var p2 = new Promise(function (res, rej) {
 });
 
 p2.then(function (val) {
+    console.log(`p2 resovled ${val}`);
 	return new Promise(function (res, rej) {
 		res('3');
 	});
