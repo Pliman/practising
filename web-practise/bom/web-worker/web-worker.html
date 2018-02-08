@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web-worker</title>
+</head>
+<body>
+<input type="text" id="inputter">
+
+<script>
+    if (window.Worker) {
+        var myWorker = new Worker('web-worker.js');
+    }
+
+    let inputter = document.getElementById("inputter");
+
+    inputter.addEventListener("change", function () {
+        myWorker.postMessage([2, 5]);
+        console.log('Message posted to worker');
+    })
+
+    myWorker.onmessage = function(e) {
+        console.log(`got data ${e.data}`);
+        console.log('Message received from worker');
+    }
+</script>
+</body>
+</html>
