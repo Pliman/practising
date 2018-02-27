@@ -27,6 +27,7 @@ function partition(list, start, end) {
 }
 
 
-var list = [8, 2, 4, 65, 2, 4, 7, 1, 9, 0, 2, 34, 12];
+// var list = [8, 2, 4, 65, 2, 4, 7, 1, 9, 0, 2, 34, 12];
+var list = [6, 2, 7, 1, 8, 9, 5];
 quick_sort(list, 0, list.length)
 console.log(list)
