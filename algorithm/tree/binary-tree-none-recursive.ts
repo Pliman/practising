@@ -75,7 +75,7 @@ function main(){
   let A: number[] = [1,2,3,4,5,6,7,8,9]
   let n: number = A.length
   let root: TreeNode = constructTree(A, 0, n-1)
-  // console.log(root)
+  console.log(root)
   prevOrder(root)
   // postOrder(root)
   return 0
