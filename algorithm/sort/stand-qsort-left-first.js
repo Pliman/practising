@@ -25,6 +25,7 @@ function quick_sort(arr, i, j) {
     }
 
 
+    // 之所以要从右边检查小于数，是为了避免弄过来小于数，防止两个大数被循环交换，或者检测不到小于数，直接设定center该在的index
     //从右向左扫描是否存在比基数小的数字
     while (left < right && arr[right] >= center) {
       right--;
