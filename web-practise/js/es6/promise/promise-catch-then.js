@@ -3,15 +3,13 @@ new Promise((res, rej) => {
 }).then((rtn) => {
     // throw new Error('no no no')
     return rtn
-}).catch((e) => {
-    console.log('catch')
-    console.log(e)
-    // return e
 }).then((rtn) => {
-    console.log('last then')
-    console.log(rtn)
+    return rtn + 3
+}).then((rtn) => {
+    console.log(`rtn: ${rtn}`)
+}, (e) => {
+    console.log(`e: ${e}`)
 })
-
 
 // new Promise((res, rej) => {
 //     res(123)
