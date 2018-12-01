@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>parent</title>
+</head>
+<body>
+<button onclick="openEdit()">打开新窗口</button>
+
+<script type="text/javascript">
+    var openedEdit = null
+
+    function openEdit() {
+        openedEdit = window.open("./edit.html")
+    }
+
+    window.onbeforeunload = function closeEdit(){
+        openedEdit.close()
+    }
+</script>
+</body>
+</html>
