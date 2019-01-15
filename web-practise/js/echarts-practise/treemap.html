@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1200px;height:800px;"></div>
+<!--<script src="treemapdata.js"></script>-->
+<script src="treemapdata1.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    function getLevelOption() {
+        return [
+            {
+                itemStyle: {
+                    normal: {
+                        borderWidth: 0,
+                        gapWidth: 5
+                    }
+                }
+            },
+            {
+                itemStyle: {
+                    normal: {
+                        gapWidth: 1
+                    }
+                }
+            },
+            {
+                colorSaturation: [0.35, 0.5],
+                itemStyle: {
+                    normal: {
+                        gapWidth: 1,
+                        borderColorSaturation: 0.6
+                    }
+                }
+            }
+        ];
+    }
+
+    myChart.setOption(option = {
+        // title: {
+        //     // text: 'Disk Usage',
+        //     // left: 'center'
+        // },
+
+        tooltip: {
+            formatter: function (info) {
+                var value = info.value;
+                var treePathInfo = info.treePathInfo;
+                var treePath = [];
+
+                for (var i = 1; i < treePathInfo.length; i++) {
+                    treePath.push(treePathInfo[i].name);
+                }
+
+                return [
+                    '<div class="tooltip-title">' + formatUtil.encodeHTML(treePath.join('/')) + '</div>',
+                    'Disk Usage: ' + formatUtil.addCommas(value) + ' KB',
+                ].join('');
+            }
+        },
+
+        series: [
+            {
+                name:'Disk Usage',
+                type:'treemap',
+                visibleMin: 300,
+                label: {
+                    show: true,
+                    formatter: '{b}'
+                },
+                itemStyle: {
+                    normal: {
+                        borderColor: '#fff'
+                    }
+                },
+                levels: getLevelOption(),
+                data: data
+            }
+        ]
+    })
+</script>
+</body>
+</html>
