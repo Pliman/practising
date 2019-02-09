@@ -39,6 +39,20 @@
             z-index: 50;
             border: 0 none;
         }
+
+        .page-break-line{}
+
+        .page-break-line .page-breaker {}
+
+        .page-break-line .page-breaker:before {
+            content: "";
+            page-break-after: always;
+            display: block;
+        }
+
+        .page-break-line .page-breaker:after {
+            content: ""
+        }
     </style>
 </head>
 <body class="templateDesigner">
@@ -55,23 +69,19 @@
     <tr style="height:56px;">
         <td style="width:188px;"></td>
         <td style="width:100px;"></td>
-        <td style="width:264px;" class="font-vertical-align-top indent-left-1">12312312</td>
+        <td style="width:264px;" class="font-vertical-align-top indent-left-1">aaaaaa</td>
         <td style="border:1px solid red;width:100px;"
-            class="font-text-align-right border-top-style-solid border-top-color-000000 border-top-width-1 border-left-style-solid border-left-color-000000 border-left-width-1">
-            1234566
-        </td>
+            class="font-text-align-right border-top-style-solid border-top-color-000000 border-top-width-1 border-left-style-solid border-left-color-000000 border-left-width-1">bbb</td>
         <td style="border:1px solid red;width:100px;"
-            class="border-left-style-solid border-left-color-000000 border-left-width-1">123
-        </td>
+            class="border-left-style-solid border-left-color-000000 border-left-width-1">ccc</td>
     </tr>
     <tr style="height:24px;">
-        <td style="width:188px;" class="font-text-align-center page-break-line"></td>
-        <td style="width:100px;" class="font-text-align-right page-break-line"></td>
-        <td style="width:264px;" class="page-break-line font-size-14 indent-left-5">123123</td>
+        <td style="width:188px;" class="font-text-align-center page-break-line"><div class="page-breaker"></div>123</td>
+        <td style="width:100px;" class="font-text-align-right page-break-line"><div class="page-breaker"></div>123</td>
+        <td style="width:264px;" class="page-break-line font-size-14 indent-left-5"><div class="page-breaker"></div>123123</td>
         <td style="border:1px solid red;width:100px;"
-            class="border-top-style-solid border-top-color-000000 border-top-width-1 page-break-line">123
-        </td>
-        <td style="border:1px solid red;width:100px;" class="page-break-line">123</td>
+            class="border-top-style-solid border-top-color-000000 border-top-width-1 page-break-line"><div class="page-breaker"></div>123</td>
+        <td style="border:1px solid red;width:100px;" class="page-break-line"><div class="page-breaker"></div>123</td>
     </tr>
     <tr style="height:24px;">
         <td style="width:188px;"></td>
