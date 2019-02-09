@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 14px">
+<head>
+    <meta charset="UTF-8">
+    <title>page-break</title>
+    <style>
+        td {
+            position: relative;
+            overflow: visible;
+        }
+
+        td:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            border: 0 none;
+        }
+
+        .page-break-line {
+        }
+
+        .page-break-line .breaker{
+            page-break-after: always
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>456</td>
+        <td>456</td>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td>456</td>
+        <td>456</td>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            123
+        </td>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            123
+        </td>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            123
+        </td>
+    </tr>
+    <tr>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            <div>123</div>
+        </td>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            <div>123</div>
+        </td>
+        <td class="page-break-line">
+            <div class="breaker"></div>
+            <div>123</div>
+        </td>
+    </tr>
+    <tr>
+        <td>456</td>
+        <td>456</td>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td>456</td>
+        <td>456</td>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td>456</td>
+        <td>456</td>
+        <td>456</td>
+    </tr>
+</table>
+</body>
+</html>

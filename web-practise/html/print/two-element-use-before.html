@@ -20,7 +20,11 @@
             border: 0 none;
         }
 
-        .break-line {
+        .page-break-line {
+        }
+
+        .page-break-line .breaker{
+            page-break-before: always
         }
     </style>
 </head>
@@ -37,12 +41,18 @@
         <td>456</td>
     </tr>
     <tr>
-        <td class="break-line">
+        <td class="page-break-line">
             <div></div>
-            <div style="page-break-before: always">123</div>
+            <div class="breaker">123</div>
         </td>
-        <td>456</td>
-        <td>456</td>
+        <td class="page-break-line">
+            <div></div>
+            <div class="breaker">123</div>
+        </td>
+        <td class="page-break-line">
+            <div></div>
+            <div class="breaker">123</div>
+        </td>
     </tr>
     <tr>
         <td>456</td>
