@@ -7,6 +7,19 @@
         td {
             position: relative;
             overflow: visible;
+            font-size: 11pt;
+            line-height: 1.5;
+            background: 0;
+            font-family: SimSun;
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: pre-wrap;
+
+            /*display: table-cell;*/
+            /*vertical-align: inherit;*/
+
+            /*border-collapse: separate;*/
+            /*border-spacing: 0;*/
         }
 
         td:before {
@@ -21,6 +34,7 @@
         }
 
         .page-break-line {
+            border-top: 2px solid blue;
         }
 
         .page-break-line .page-breaker{
@@ -41,33 +55,15 @@
         <td>456</td>
     </tr>
     <tr>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            123
-        </td>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            123
-        </td>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            123
-        </td>
+        <td class="page-break-line"><div class="page-breaker"></div>123</td>
+        <td class="page-break-line">123<div>22</div></td>
+        <td class="page-break-line">123<div>22</div></td>
     </tr>
-    <tr>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            <div>123</div>
-        </td>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            <div>123</div>
-        </td>
-        <td class="page-break-line">
-            <div class="page-breaker"></div>
-            <div>123</div>
-        </td>
-    </tr>
+    <!--<tr>-->
+        <!--<td class="page-break-line"><div class="page-breaker"></div><div>123</div></td>-->
+        <!--<td class="page-break-line"><div class="page-breaker"></div><div>123</div></td>-->
+        <!--<td class="page-break-line"><div class="page-breaker"></div><div>123</div></td>-->
+    <!--</tr>-->
     <tr>
         <td>456</td>
         <td>456</td>
