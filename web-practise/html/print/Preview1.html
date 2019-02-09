@@ -1,0 +1,2869 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+        .templateDesigner, body {
+            font-size: 9pt;
+            font-family: Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, 微软雅黑, Arial, sans-serif;
+            background: #fff;
+            -webkit-print-color-adjust: exact;
+            margin: 3px
+        }
+
+        .templateDesigner table {
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            border-width: 0;
+            table-layout: fixed;
+            width: 0;
+            outline-width: 0;
+            max-width: none;
+            max-height: none
+        }
+
+        .templateDesigner table td {
+            position: relative;
+            overflow: visible;
+            font-size: 11pt;
+            line-height: 1.5;
+            background: 0;
+            font-family: SimSun;
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: pre-wrap
+        }
+
+        .templateDesigner table td .contains {
+            margin: -1px 0 0 -1px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle
+        }
+
+        .templateDesigner table td .contains .tab {
+            display: table;
+            width: 100%;
+            height: 100%
+        }
+
+        .templateDesigner table td .contains .tab .data {
+            vertical-align: middle;
+            display: table-cell;
+            padding: 2px
+        }
+
+        .templateDesigner table td:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            border: 0 none
+        }
+
+        .templateDesigner table td.hasFilter:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-left: 6px solid transparent;
+            border-top: 6px solid red
+        }
+
+        .templateDesigner table td .inside-image {
+            position: absolute;
+            left: 0;
+            top: 0;
+            max-width: 100%;
+            max-height: 100%
+        }
+
+        .templateDesigner table td .digest {
+            text-align: left;
+            padding: 5px
+        }
+
+        .templateDesigner table td .digest p {
+            margin: 0;
+            padding: 0
+        }
+
+        .templateDesigner .border-top-width-1:before {
+            border-top-width: 1px;
+            margin-top: -1px
+        }
+
+        .templateDesigner .border-right-width-1:before {
+            border-right-width: 1px;
+            margin-right: -1px
+        }
+
+        .templateDesigner .border-bottom-width-1:before {
+            border-bottom-width: 1px;
+            margin-bottom: -1px
+        }
+
+        .templateDesigner .border-left-width-1:before {
+            border-left-width: 1px;
+            margin-left: -1px
+        }
+
+        .templateDesigner .border-top-width-2:before {
+            border-top-width: 2px;
+            margin-top: -2px
+        }
+
+        .templateDesigner .border-right-width-2:before {
+            border-right-width: 2px;
+            margin-right: -2px
+        }
+
+        .templateDesigner .border-bottom-width-2:before {
+            border-bottom-width: 2px;
+            margin-bottom: -2px
+        }
+
+        .templateDesigner .border-left-width-2:before {
+            border-left-width: 2px;
+            margin-left: -2px
+        }
+
+        .templateDesigner .border-top-width-3:before {
+            border-top-width: 3px;
+            margin-top: -3px
+        }
+
+        .templateDesigner .border-right-width-3:before {
+            border-right-width: 3px;
+            margin-right: -3px
+        }
+
+        .templateDesigner .border-bottom-width-3:before {
+            border-bottom-width: 3px;
+            margin-bottom: -3px
+        }
+
+        .templateDesigner .border-left-width-3:before {
+            border-left-width: 3px;
+            margin-left: -3px
+        }
+
+        .templateDesigner .border-top-style-solid:before {
+            border-top-style: solid
+        }
+
+        .templateDesigner .border-right-style-solid:before {
+            border-right-style: solid
+        }
+
+        .templateDesigner .border-bottom-style-solid:before {
+            border-bottom-style: solid
+        }
+
+        .templateDesigner .border-left-style-solid:before {
+            border-left-style: solid
+        }
+
+        .templateDesigner .border-top-style-dotted:before {
+            border-top-style: dotted
+        }
+
+        .templateDesigner .border-right-style-dotted:before {
+            border-right-style: dotted
+        }
+
+        .templateDesigner .border-bottom-style-dotted:before {
+            border-bottom-style: dotted
+        }
+
+        .templateDesigner .border-left-style-dotted:before {
+            border-left-style: dotted
+        }
+
+        .templateDesigner .border-top-style-dashed:before {
+            border-top-style: dashed
+        }
+
+        .templateDesigner .border-right-style-dashed:before {
+            border-right-style: dashed
+        }
+
+        .templateDesigner .border-bottom-style-dashed:before {
+            border-bottom-style: dashed
+        }
+
+        .templateDesigner .border-left-style-dashed:before {
+            border-left-style: dashed
+        }
+
+        .templateDesigner .border-top-style-double:before {
+            border-top-style: double
+        }
+
+        .templateDesigner .border-right-style-double:before {
+            border-right-style: double
+        }
+
+        .templateDesigner .border-bottom-style-double:before {
+            border-bottom-style: double
+        }
+
+        .templateDesigner .border-left-style-double:before {
+            border-left-style: double
+        }
+
+        .templateDesigner .border-top-color-ffffff:before {
+            border-top-color: #fff
+        }
+
+        .templateDesigner .border-top-color-000000:before {
+            border-top-color: #000
+        }
+
+        .templateDesigner .border-top-color-EEECE1:before {
+            border-top-color: #eeece1
+        }
+
+        .templateDesigner .border-top-color-1F497D:before {
+            border-top-color: #1f497d
+        }
+
+        .templateDesigner .border-top-color-4F81BD:before {
+            border-top-color: #4f81bd
+        }
+
+        .templateDesigner .border-top-color-C0504D:before {
+            border-top-color: #c0504d
+        }
+
+        .templateDesigner .border-top-color-9BBB59:before {
+            border-top-color: #9bbb59
+        }
+
+        .templateDesigner .border-top-color-8064A2:before {
+            border-top-color: #8064a2
+        }
+
+        .templateDesigner .border-top-color-4BACC6:before {
+            border-top-color: #4bacc6
+        }
+
+        .templateDesigner .border-top-color-F79646:before {
+            border-top-color: #f79646
+        }
+
+        .templateDesigner .border-top-color-F2F2F2:before {
+            border-top-color: #f2f2f2
+        }
+
+        .templateDesigner .border-top-color-DDD9C3:before {
+            border-top-color: #ddd9c3
+        }
+
+        .templateDesigner .border-top-color-C6D9F0:before {
+            border-top-color: #c6d9f0
+        }
+
+        .templateDesigner .border-top-color-DBE5F1:before {
+            border-top-color: #dbe5f1
+        }
+
+        .templateDesigner .border-top-color-F2DCDB:before {
+            border-top-color: #f2dcdb
+        }
+
+        .templateDesigner .border-top-color-EBF1DD:before {
+            border-top-color: #ebf1dd
+        }
+
+        .templateDesigner .border-top-color-E5E0EC:before {
+            border-top-color: #e5e0ec
+        }
+
+        .templateDesigner .border-top-color-DBEEF3:before {
+            border-top-color: #dbeef3
+        }
+
+        .templateDesigner .border-top-color-FDEADA:before {
+            border-top-color: #fdeada
+        }
+
+        .templateDesigner .border-top-color-D8D8D8:before {
+            border-top-color: #d8d8d8
+        }
+
+        .templateDesigner .border-top-color-595959:before {
+            border-top-color: #595959
+        }
+
+        .templateDesigner .border-top-color-C4BD97:before {
+            border-top-color: #c4bd97
+        }
+
+        .templateDesigner .border-top-color-8DB3E2:before {
+            border-top-color: #8db3e2
+        }
+
+        .templateDesigner .border-top-color-B8CCE4:before {
+            border-top-color: #b8cce4
+        }
+
+        .templateDesigner .border-top-color-E5B9B7:before {
+            border-top-color: #e5b9b7
+        }
+
+        .templateDesigner .border-top-color-D7E3BC:before {
+            border-top-color: #d7e3bc
+        }
+
+        .templateDesigner .border-top-color-CCC1D9:before {
+            border-top-color: #ccc1d9
+        }
+
+        .templateDesigner .border-top-color-B7DDE8:before {
+            border-top-color: #b7dde8
+        }
+
+        .templateDesigner .border-top-color-FBD5B5:before {
+            border-top-color: #fbd5b5
+        }
+
+        .templateDesigner .border-top-color-BFBFBF:before {
+            border-top-color: #bfbfbf
+        }
+
+        .templateDesigner .border-top-color-3F3F3F:before {
+            border-top-color: #3f3f3f
+        }
+
+        .templateDesigner .border-top-color-938953:before {
+            border-top-color: #938953
+        }
+
+        .templateDesigner .border-top-color-548DD4:before {
+            border-top-color: #548dd4
+        }
+
+        .templateDesigner .border-top-color-95B3D7:before {
+            border-top-color: #95b3d7
+        }
+
+        .templateDesigner .border-top-color-D99694:before {
+            border-top-color: #d99694
+        }
+
+        .templateDesigner .border-top-color-C3D69B:before {
+            border-top-color: #c3d69b
+        }
+
+        .templateDesigner .border-top-color-B2A2C7:before {
+            border-top-color: #b2a2c7
+        }
+
+        .templateDesigner .border-top-color-92CDDC:before {
+            border-top-color: #92cddc
+        }
+
+        .templateDesigner .border-top-color-FAC08F:before {
+            border-top-color: #fac08f
+        }
+
+        .templateDesigner .border-top-color-A5A5A5:before {
+            border-top-color: #a5a5a5
+        }
+
+        .templateDesigner .border-top-color-262626:before {
+            border-top-color: #262626
+        }
+
+        .templateDesigner .border-top-color-494429:before {
+            border-top-color: #494429
+        }
+
+        .templateDesigner .border-top-color-17365D:before {
+            border-top-color: #17365d
+        }
+
+        .templateDesigner .border-top-color-366092:before {
+            border-top-color: #366092
+        }
+
+        .templateDesigner .border-top-color-953734:before {
+            border-top-color: #953734
+        }
+
+        .templateDesigner .border-top-color-76923C:before {
+            border-top-color: #76923c
+        }
+
+        .templateDesigner .border-top-color-5F497A:before {
+            border-top-color: #5f497a
+        }
+
+        .templateDesigner .border-top-color-31849B:before {
+            border-top-color: #31849b
+        }
+
+        .templateDesigner .border-top-color-E36C09:before {
+            border-top-color: #e36c09
+        }
+
+        .templateDesigner .border-top-color-7F7F7F:before {
+            border-top-color: #7f7f7f
+        }
+
+        .templateDesigner .border-top-color-0C0C0C:before {
+            border-top-color: #0c0c0c
+        }
+
+        .templateDesigner .border-top-color-1D1B10:before {
+            border-top-color: #1d1b10
+        }
+
+        .templateDesigner .border-top-color-0F243E:before {
+            border-top-color: #0f243e
+        }
+
+        .templateDesigner .border-top-color-244061:before {
+            border-top-color: #244061
+        }
+
+        .templateDesigner .border-top-color-632423:before {
+            border-top-color: #632423
+        }
+
+        .templateDesigner .border-top-color-4F6128:before {
+            border-top-color: #4f6128
+        }
+
+        .templateDesigner .border-top-color-3F3151:before {
+            border-top-color: #3f3151
+        }
+
+        .templateDesigner .border-top-color-205867:before {
+            border-top-color: #205867
+        }
+
+        .templateDesigner .border-top-color-984806:before {
+            border-top-color: #984806
+        }
+
+        .templateDesigner .border-top-color-C00000:before {
+            border-top-color: #c00000
+        }
+
+        .templateDesigner .border-top-color-FF0000:before {
+            border-top-color: red
+        }
+
+        .templateDesigner .border-top-color-FFC000:before {
+            border-top-color: #ffc000
+        }
+
+        .templateDesigner .border-top-color-FFFF00:before {
+            border-top-color: #ff0
+        }
+
+        .templateDesigner .border-top-color-92D050:before {
+            border-top-color: #92d050
+        }
+
+        .templateDesigner .border-top-color-00B050:before {
+            border-top-color: #00b050
+        }
+
+        .templateDesigner .border-top-color-00B0F0:before {
+            border-top-color: #00b0f0
+        }
+
+        .templateDesigner .border-top-color-0070C0:before {
+            border-top-color: #0070c0
+        }
+
+        .templateDesigner .border-top-color-002060:before {
+            border-top-color: #002060
+        }
+
+        .templateDesigner .border-top-color-7030A0:before {
+            border-top-color: #7030a0
+        }
+
+        .templateDesigner .border-right-color-ffffff:before {
+            border-right-color: #fff
+        }
+
+        .templateDesigner .border-right-color-000000:before {
+            border-right-color: #000
+        }
+
+        .templateDesigner .border-right-color-EEECE1:before {
+            border-right-color: #eeece1
+        }
+
+        .templateDesigner .border-right-color-1F497D:before {
+            border-right-color: #1f497d
+        }
+
+        .templateDesigner .border-right-color-4F81BD:before {
+            border-right-color: #4f81bd
+        }
+
+        .templateDesigner .border-right-color-C0504D:before {
+            border-right-color: #c0504d
+        }
+
+        .templateDesigner .border-right-color-9BBB59:before {
+            border-right-color: #9bbb59
+        }
+
+        .templateDesigner .border-right-color-8064A2:before {
+            border-right-color: #8064a2
+        }
+
+        .templateDesigner .border-right-color-4BACC6:before {
+            border-right-color: #4bacc6
+        }
+
+        .templateDesigner .border-right-color-F79646:before {
+            border-right-color: #f79646
+        }
+
+        .templateDesigner .border-right-color-F2F2F2:before {
+            border-right-color: #f2f2f2
+        }
+
+        .templateDesigner .border-right-color-DDD9C3:before {
+            border-right-color: #ddd9c3
+        }
+
+        .templateDesigner .border-right-color-C6D9F0:before {
+            border-right-color: #c6d9f0
+        }
+
+        .templateDesigner .border-right-color-DBE5F1:before {
+            border-right-color: #dbe5f1
+        }
+
+        .templateDesigner .border-right-color-F2DCDB:before {
+            border-right-color: #f2dcdb
+        }
+
+        .templateDesigner .border-right-color-EBF1DD:before {
+            border-right-color: #ebf1dd
+        }
+
+        .templateDesigner .border-right-color-E5E0EC:before {
+            border-right-color: #e5e0ec
+        }
+
+        .templateDesigner .border-right-color-DBEEF3:before {
+            border-right-color: #dbeef3
+        }
+
+        .templateDesigner .border-right-color-FDEADA:before {
+            border-right-color: #fdeada
+        }
+
+        .templateDesigner .border-right-color-D8D8D8:before {
+            border-right-color: #d8d8d8
+        }
+
+        .templateDesigner .border-right-color-595959:before {
+            border-right-color: #595959
+        }
+
+        .templateDesigner .border-right-color-C4BD97:before {
+            border-right-color: #c4bd97
+        }
+
+        .templateDesigner .border-right-color-8DB3E2:before {
+            border-right-color: #8db3e2
+        }
+
+        .templateDesigner .border-right-color-B8CCE4:before {
+            border-right-color: #b8cce4
+        }
+
+        .templateDesigner .border-right-color-E5B9B7:before {
+            border-right-color: #e5b9b7
+        }
+
+        .templateDesigner .border-right-color-D7E3BC:before {
+            border-right-color: #d7e3bc
+        }
+
+        .templateDesigner .border-right-color-CCC1D9:before {
+            border-right-color: #ccc1d9
+        }
+
+        .templateDesigner .border-right-color-B7DDE8:before {
+            border-right-color: #b7dde8
+        }
+
+        .templateDesigner .border-right-color-FBD5B5:before {
+            border-right-color: #fbd5b5
+        }
+
+        .templateDesigner .border-right-color-BFBFBF:before {
+            border-right-color: #bfbfbf
+        }
+
+        .templateDesigner .border-right-color-3F3F3F:before {
+            border-right-color: #3f3f3f
+        }
+
+        .templateDesigner .border-right-color-938953:before {
+            border-right-color: #938953
+        }
+
+        .templateDesigner .border-right-color-548DD4:before {
+            border-right-color: #548dd4
+        }
+
+        .templateDesigner .border-right-color-95B3D7:before {
+            border-right-color: #95b3d7
+        }
+
+        .templateDesigner .border-right-color-D99694:before {
+            border-right-color: #d99694
+        }
+
+        .templateDesigner .border-right-color-C3D69B:before {
+            border-right-color: #c3d69b
+        }
+
+        .templateDesigner .border-right-color-B2A2C7:before {
+            border-right-color: #b2a2c7
+        }
+
+        .templateDesigner .border-right-color-92CDDC:before {
+            border-right-color: #92cddc
+        }
+
+        .templateDesigner .border-right-color-FAC08F:before {
+            border-right-color: #fac08f
+        }
+
+        .templateDesigner .border-right-color-A5A5A5:before {
+            border-right-color: #a5a5a5
+        }
+
+        .templateDesigner .border-right-color-262626:before {
+            border-right-color: #262626
+        }
+
+        .templateDesigner .border-right-color-494429:before {
+            border-right-color: #494429
+        }
+
+        .templateDesigner .border-right-color-17365D:before {
+            border-right-color: #17365d
+        }
+
+        .templateDesigner .border-right-color-366092:before {
+            border-right-color: #366092
+        }
+
+        .templateDesigner .border-right-color-953734:before {
+            border-right-color: #953734
+        }
+
+        .templateDesigner .border-right-color-76923C:before {
+            border-right-color: #76923c
+        }
+
+        .templateDesigner .border-right-color-5F497A:before {
+            border-right-color: #5f497a
+        }
+
+        .templateDesigner .border-right-color-31849B:before {
+            border-right-color: #31849b
+        }
+
+        .templateDesigner .border-right-color-E36C09:before {
+            border-right-color: #e36c09
+        }
+
+        .templateDesigner .border-right-color-7F7F7F:before {
+            border-right-color: #7f7f7f
+        }
+
+        .templateDesigner .border-right-color-0C0C0C:before {
+            border-right-color: #0c0c0c
+        }
+
+        .templateDesigner .border-right-color-1D1B10:before {
+            border-right-color: #1d1b10
+        }
+
+        .templateDesigner .border-right-color-0F243E:before {
+            border-right-color: #0f243e
+        }
+
+        .templateDesigner .border-right-color-244061:before {
+            border-right-color: #244061
+        }
+
+        .templateDesigner .border-right-color-632423:before {
+            border-right-color: #632423
+        }
+
+        .templateDesigner .border-right-color-4F6128:before {
+            border-right-color: #4f6128
+        }
+
+        .templateDesigner .border-right-color-3F3151:before {
+            border-right-color: #3f3151
+        }
+
+        .templateDesigner .border-right-color-205867:before {
+            border-right-color: #205867
+        }
+
+        .templateDesigner .border-right-color-984806:before {
+            border-right-color: #984806
+        }
+
+        .templateDesigner .border-right-color-C00000:before {
+            border-right-color: #c00000
+        }
+
+        .templateDesigner .border-right-color-FF0000:before {
+            border-right-color: red
+        }
+
+        .templateDesigner .border-right-color-FFC000:before {
+            border-right-color: #ffc000
+        }
+
+        .templateDesigner .border-right-color-FFFF00:before {
+            border-right-color: #ff0
+        }
+
+        .templateDesigner .border-right-color-92D050:before {
+            border-right-color: #92d050
+        }
+
+        .templateDesigner .border-right-color-00B050:before {
+            border-right-color: #00b050
+        }
+
+        .templateDesigner .border-right-color-00B0F0:before {
+            border-right-color: #00b0f0
+        }
+
+        .templateDesigner .border-right-color-0070C0:before {
+            border-right-color: #0070c0
+        }
+
+        .templateDesigner .border-right-color-002060:before {
+            border-right-color: #002060
+        }
+
+        .templateDesigner .border-right-color-7030A0:before {
+            border-right-color: #7030a0
+        }
+
+        .templateDesigner .border-bottom-color-ffffff:before {
+            border-bottom-color: #fff
+        }
+
+        .templateDesigner .border-bottom-color-000000:before {
+            border-bottom-color: #000
+        }
+
+        .templateDesigner .border-bottom-color-EEECE1:before {
+            border-bottom-color: #eeece1
+        }
+
+        .templateDesigner .border-bottom-color-1F497D:before {
+            border-bottom-color: #1f497d
+        }
+
+        .templateDesigner .border-bottom-color-4F81BD:before {
+            border-bottom-color: #4f81bd
+        }
+
+        .templateDesigner .border-bottom-color-C0504D:before {
+            border-bottom-color: #c0504d
+        }
+
+        .templateDesigner .border-bottom-color-9BBB59:before {
+            border-bottom-color: #9bbb59
+        }
+
+        .templateDesigner .border-bottom-color-8064A2:before {
+            border-bottom-color: #8064a2
+        }
+
+        .templateDesigner .border-bottom-color-4BACC6:before {
+            border-bottom-color: #4bacc6
+        }
+
+        .templateDesigner .border-bottom-color-F79646:before {
+            border-bottom-color: #f79646
+        }
+
+        .templateDesigner .border-bottom-color-F2F2F2:before {
+            border-bottom-color: #f2f2f2
+        }
+
+        .templateDesigner .border-bottom-color-DDD9C3:before {
+            border-bottom-color: #ddd9c3
+        }
+
+        .templateDesigner .border-bottom-color-C6D9F0:before {
+            border-bottom-color: #c6d9f0
+        }
+
+        .templateDesigner .border-bottom-color-DBE5F1:before {
+            border-bottom-color: #dbe5f1
+        }
+
+        .templateDesigner .border-bottom-color-F2DCDB:before {
+            border-bottom-color: #f2dcdb
+        }
+
+        .templateDesigner .border-bottom-color-EBF1DD:before {
+            border-bottom-color: #ebf1dd
+        }
+
+        .templateDesigner .border-bottom-color-E5E0EC:before {
+            border-bottom-color: #e5e0ec
+        }
+
+        .templateDesigner .border-bottom-color-DBEEF3:before {
+            border-bottom-color: #dbeef3
+        }
+
+        .templateDesigner .border-bottom-color-FDEADA:before {
+            border-bottom-color: #fdeada
+        }
+
+        .templateDesigner .border-bottom-color-D8D8D8:before {
+            border-bottom-color: #d8d8d8
+        }
+
+        .templateDesigner .border-bottom-color-595959:before {
+            border-bottom-color: #595959
+        }
+
+        .templateDesigner .border-bottom-color-C4BD97:before {
+            border-bottom-color: #c4bd97
+        }
+
+        .templateDesigner .border-bottom-color-8DB3E2:before {
+            border-bottom-color: #8db3e2
+        }
+
+        .templateDesigner .border-bottom-color-B8CCE4:before {
+            border-bottom-color: #b8cce4
+        }
+
+        .templateDesigner .border-bottom-color-E5B9B7:before {
+            border-bottom-color: #e5b9b7
+        }
+
+        .templateDesigner .border-bottom-color-D7E3BC:before {
+            border-bottom-color: #d7e3bc
+        }
+
+        .templateDesigner .border-bottom-color-CCC1D9:before {
+            border-bottom-color: #ccc1d9
+        }
+
+        .templateDesigner .border-bottom-color-B7DDE8:before {
+            border-bottom-color: #b7dde8
+        }
+
+        .templateDesigner .border-bottom-color-FBD5B5:before {
+            border-bottom-color: #fbd5b5
+        }
+
+        .templateDesigner .border-bottom-color-BFBFBF:before {
+            border-bottom-color: #bfbfbf
+        }
+
+        .templateDesigner .border-bottom-color-3F3F3F:before {
+            border-bottom-color: #3f3f3f
+        }
+
+        .templateDesigner .border-bottom-color-938953:before {
+            border-bottom-color: #938953
+        }
+
+        .templateDesigner .border-bottom-color-548DD4:before {
+            border-bottom-color: #548dd4
+        }
+
+        .templateDesigner .border-bottom-color-95B3D7:before {
+            border-bottom-color: #95b3d7
+        }
+
+        .templateDesigner .border-bottom-color-D99694:before {
+            border-bottom-color: #d99694
+        }
+
+        .templateDesigner .border-bottom-color-C3D69B:before {
+            border-bottom-color: #c3d69b
+        }
+
+        .templateDesigner .border-bottom-color-B2A2C7:before {
+            border-bottom-color: #b2a2c7
+        }
+
+        .templateDesigner .border-bottom-color-92CDDC:before {
+            border-bottom-color: #92cddc
+        }
+
+        .templateDesigner .border-bottom-color-FAC08F:before {
+            border-bottom-color: #fac08f
+        }
+
+        .templateDesigner .border-bottom-color-A5A5A5:before {
+            border-bottom-color: #a5a5a5
+        }
+
+        .templateDesigner .border-bottom-color-262626:before {
+            border-bottom-color: #262626
+        }
+
+        .templateDesigner .border-bottom-color-494429:before {
+            border-bottom-color: #494429
+        }
+
+        .templateDesigner .border-bottom-color-17365D:before {
+            border-bottom-color: #17365d
+        }
+
+        .templateDesigner .border-bottom-color-366092:before {
+            border-bottom-color: #366092
+        }
+
+        .templateDesigner .border-bottom-color-953734:before {
+            border-bottom-color: #953734
+        }
+
+        .templateDesigner .border-bottom-color-76923C:before {
+            border-bottom-color: #76923c
+        }
+
+        .templateDesigner .border-bottom-color-5F497A:before {
+            border-bottom-color: #5f497a
+        }
+
+        .templateDesigner .border-bottom-color-31849B:before {
+            border-bottom-color: #31849b
+        }
+
+        .templateDesigner .border-bottom-color-E36C09:before {
+            border-bottom-color: #e36c09
+        }
+
+        .templateDesigner .border-bottom-color-7F7F7F:before {
+            border-bottom-color: #7f7f7f
+        }
+
+        .templateDesigner .border-bottom-color-0C0C0C:before {
+            border-bottom-color: #0c0c0c
+        }
+
+        .templateDesigner .border-bottom-color-1D1B10:before {
+            border-bottom-color: #1d1b10
+        }
+
+        .templateDesigner .border-bottom-color-0F243E:before {
+            border-bottom-color: #0f243e
+        }
+
+        .templateDesigner .border-bottom-color-244061:before {
+            border-bottom-color: #244061
+        }
+
+        .templateDesigner .border-bottom-color-632423:before {
+            border-bottom-color: #632423
+        }
+
+        .templateDesigner .border-bottom-color-4F6128:before {
+            border-bottom-color: #4f6128
+        }
+
+        .templateDesigner .border-bottom-color-3F3151:before {
+            border-bottom-color: #3f3151
+        }
+
+        .templateDesigner .border-bottom-color-205867:before {
+            border-bottom-color: #205867
+        }
+
+        .templateDesigner .border-bottom-color-984806:before {
+            border-bottom-color: #984806
+        }
+
+        .templateDesigner .border-bottom-color-C00000:before {
+            border-bottom-color: #c00000
+        }
+
+        .templateDesigner .border-bottom-color-FF0000:before {
+            border-bottom-color: red
+        }
+
+        .templateDesigner .border-bottom-color-FFC000:before {
+            border-bottom-color: #ffc000
+        }
+
+        .templateDesigner .border-bottom-color-FFFF00:before {
+            border-bottom-color: #ff0
+        }
+
+        .templateDesigner .border-bottom-color-92D050:before {
+            border-bottom-color: #92d050
+        }
+
+        .templateDesigner .border-bottom-color-00B050:before {
+            border-bottom-color: #00b050
+        }
+
+        .templateDesigner .border-bottom-color-00B0F0:before {
+            border-bottom-color: #00b0f0
+        }
+
+        .templateDesigner .border-bottom-color-0070C0:before {
+            border-bottom-color: #0070c0
+        }
+
+        .templateDesigner .border-bottom-color-002060:before {
+            border-bottom-color: #002060
+        }
+
+        .templateDesigner .border-bottom-color-7030A0:before {
+            border-bottom-color: #7030a0
+        }
+
+        .templateDesigner .border-left-color-ffffff:before {
+            border-left-color: #fff
+        }
+
+        .templateDesigner .border-left-color-000000:before {
+            border-left-color: #000
+        }
+
+        .templateDesigner .border-left-color-EEECE1:before {
+            border-left-color: #eeece1
+        }
+
+        .templateDesigner .border-left-color-1F497D:before {
+            border-left-color: #1f497d
+        }
+
+        .templateDesigner .border-left-color-4F81BD:before {
+            border-left-color: #4f81bd
+        }
+
+        .templateDesigner .border-left-color-C0504D:before {
+            border-left-color: #c0504d
+        }
+
+        .templateDesigner .border-left-color-9BBB59:before {
+            border-left-color: #9bbb59
+        }
+
+        .templateDesigner .border-left-color-8064A2:before {
+            border-left-color: #8064a2
+        }
+
+        .templateDesigner .border-left-color-4BACC6:before {
+            border-left-color: #4bacc6
+        }
+
+        .templateDesigner .border-left-color-F79646:before {
+            border-left-color: #f79646
+        }
+
+        .templateDesigner .border-left-color-F2F2F2:before {
+            border-left-color: #f2f2f2
+        }
+
+        .templateDesigner .border-left-color-DDD9C3:before {
+            border-left-color: #ddd9c3
+        }
+
+        .templateDesigner .border-left-color-C6D9F0:before {
+            border-left-color: #c6d9f0
+        }
+
+        .templateDesigner .border-left-color-DBE5F1:before {
+            border-left-color: #dbe5f1
+        }
+
+        .templateDesigner .border-left-color-F2DCDB:before {
+            border-left-color: #f2dcdb
+        }
+
+        .templateDesigner .border-left-color-EBF1DD:before {
+            border-left-color: #ebf1dd
+        }
+
+        .templateDesigner .border-left-color-E5E0EC:before {
+            border-left-color: #e5e0ec
+        }
+
+        .templateDesigner .border-left-color-DBEEF3:before {
+            border-left-color: #dbeef3
+        }
+
+        .templateDesigner .border-left-color-FDEADA:before {
+            border-left-color: #fdeada
+        }
+
+        .templateDesigner .border-left-color-D8D8D8:before {
+            border-left-color: #d8d8d8
+        }
+
+        .templateDesigner .border-left-color-595959:before {
+            border-left-color: #595959
+        }
+
+        .templateDesigner .border-left-color-C4BD97:before {
+            border-left-color: #c4bd97
+        }
+
+        .templateDesigner .border-left-color-8DB3E2:before {
+            border-left-color: #8db3e2
+        }
+
+        .templateDesigner .border-left-color-B8CCE4:before {
+            border-left-color: #b8cce4
+        }
+
+        .templateDesigner .border-left-color-E5B9B7:before {
+            border-left-color: #e5b9b7
+        }
+
+        .templateDesigner .border-left-color-D7E3BC:before {
+            border-left-color: #d7e3bc
+        }
+
+        .templateDesigner .border-left-color-CCC1D9:before {
+            border-left-color: #ccc1d9
+        }
+
+        .templateDesigner .border-left-color-B7DDE8:before {
+            border-left-color: #b7dde8
+        }
+
+        .templateDesigner .border-left-color-FBD5B5:before {
+            border-left-color: #fbd5b5
+        }
+
+        .templateDesigner .border-left-color-BFBFBF:before {
+            border-left-color: #bfbfbf
+        }
+
+        .templateDesigner .border-left-color-3F3F3F:before {
+            border-left-color: #3f3f3f
+        }
+
+        .templateDesigner .border-left-color-938953:before {
+            border-left-color: #938953
+        }
+
+        .templateDesigner .border-left-color-548DD4:before {
+            border-left-color: #548dd4
+        }
+
+        .templateDesigner .border-left-color-95B3D7:before {
+            border-left-color: #95b3d7
+        }
+
+        .templateDesigner .border-left-color-D99694:before {
+            border-left-color: #d99694
+        }
+
+        .templateDesigner .border-left-color-C3D69B:before {
+            border-left-color: #c3d69b
+        }
+
+        .templateDesigner .border-left-color-B2A2C7:before {
+            border-left-color: #b2a2c7
+        }
+
+        .templateDesigner .border-left-color-92CDDC:before {
+            border-left-color: #92cddc
+        }
+
+        .templateDesigner .border-left-color-FAC08F:before {
+            border-left-color: #fac08f
+        }
+
+        .templateDesigner .border-left-color-A5A5A5:before {
+            border-left-color: #a5a5a5
+        }
+
+        .templateDesigner .border-left-color-262626:before {
+            border-left-color: #262626
+        }
+
+        .templateDesigner .border-left-color-494429:before {
+            border-left-color: #494429
+        }
+
+        .templateDesigner .border-left-color-17365D:before {
+            border-left-color: #17365d
+        }
+
+        .templateDesigner .border-left-color-366092:before {
+            border-left-color: #366092
+        }
+
+        .templateDesigner .border-left-color-953734:before {
+            border-left-color: #953734
+        }
+
+        .templateDesigner .border-left-color-76923C:before {
+            border-left-color: #76923c
+        }
+
+        .templateDesigner .border-left-color-5F497A:before {
+            border-left-color: #5f497a
+        }
+
+        .templateDesigner .border-left-color-31849B:before {
+            border-left-color: #31849b
+        }
+
+        .templateDesigner .border-left-color-E36C09:before {
+            border-left-color: #e36c09
+        }
+
+        .templateDesigner .border-left-color-7F7F7F:before {
+            border-left-color: #7f7f7f
+        }
+
+        .templateDesigner .border-left-color-0C0C0C:before {
+            border-left-color: #0c0c0c
+        }
+
+        .templateDesigner .border-left-color-1D1B10:before {
+            border-left-color: #1d1b10
+        }
+
+        .templateDesigner .border-left-color-0F243E:before {
+            border-left-color: #0f243e
+        }
+
+        .templateDesigner .border-left-color-244061:before {
+            border-left-color: #244061
+        }
+
+        .templateDesigner .border-left-color-632423:before {
+            border-left-color: #632423
+        }
+
+        .templateDesigner .border-left-color-4F6128:before {
+            border-left-color: #4f6128
+        }
+
+        .templateDesigner .border-left-color-3F3151:before {
+            border-left-color: #3f3151
+        }
+
+        .templateDesigner .border-left-color-205867:before {
+            border-left-color: #205867
+        }
+
+        .templateDesigner .border-left-color-984806:before {
+            border-left-color: #984806
+        }
+
+        .templateDesigner .border-left-color-C00000:before {
+            border-left-color: #c00000
+        }
+
+        .templateDesigner .border-left-color-FF0000:before {
+            border-left-color: red
+        }
+
+        .templateDesigner .border-left-color-FFC000:before {
+            border-left-color: #ffc000
+        }
+
+        .templateDesigner .border-left-color-FFFF00:before {
+            border-left-color: #ff0
+        }
+
+        .templateDesigner .border-left-color-92D050:before {
+            border-left-color: #92d050
+        }
+
+        .templateDesigner .border-left-color-00B050:before {
+            border-left-color: #00b050
+        }
+
+        .templateDesigner .border-left-color-00B0F0:before {
+            border-left-color: #00b0f0
+        }
+
+        .templateDesigner .border-left-color-0070C0:before {
+            border-left-color: #0070c0
+        }
+
+        .templateDesigner .border-left-color-002060:before {
+            border-left-color: #002060
+        }
+
+        .templateDesigner .border-left-color-7030A0:before {
+            border-left-color: #7030a0
+        }
+
+        .templateDesigner .font-size-8 {
+            font-size: 8pt
+        }
+
+        .templateDesigner .font-size-9 {
+            font-size: 9pt
+        }
+
+        .templateDesigner .font-size-10 {
+            font-size: 10pt
+        }
+
+        .templateDesigner .font-size-11 {
+            font-size: 11pt
+        }
+
+        .templateDesigner .font-size-12 {
+            font-size: 1pc
+        }
+
+        .templateDesigner .font-size-13 {
+            font-size: 13pt
+        }
+
+        .templateDesigner .font-size-14 {
+            font-size: 14pt
+        }
+
+        .templateDesigner .font-size-15 {
+            font-size: 15pt
+        }
+
+        .templateDesigner .font-size-16 {
+            font-size: 16pt
+        }
+
+        .templateDesigner .font-size-18 {
+            font-size: 18pt
+        }
+
+        .templateDesigner .font-size-20 {
+            font-size: 20pt
+        }
+
+        .templateDesigner .font-size-22 {
+            font-size: 22pt
+        }
+
+        .templateDesigner .font-size-24 {
+            font-size: 2pc
+        }
+
+        .templateDesigner .font-size-26 {
+            font-size: 26pt
+        }
+
+        .templateDesigner .font-size-28 {
+            font-size: 28pt
+        }
+
+        .templateDesigner .font-size-36 {
+            font-size: 3pc
+        }
+
+        .templateDesigner .font-size-48 {
+            font-size: 4pc
+        }
+
+        .templateDesigner .font-size-72 {
+            font-size: 6pc
+        }
+
+        .templateDesigner .font-weight-bold {
+            font-weight: 700
+        }
+
+        .templateDesigner .font-style-italic {
+            font-style: italic
+        }
+
+        .templateDesigner .font-text-decoration-underline, .templateDesigner .font-text-decoration-underline .contains {
+            text-decoration: underline
+        }
+
+        .templateDesigner .font-family-Calibri {
+            font-family: Calibri
+        }
+
+        .templateDesigner .font-family-FangSong {
+            font-family: FangSong
+        }
+
+        .templateDesigner .font-family-SimSun {
+            font-family: SimSun
+        }
+
+        .templateDesigner .font-family-LiSu {
+            font-family: LiSu
+        }
+
+        .templateDesigner .font-family-KaiTi {
+            font-family: KaiTi
+        }
+
+        .templateDesigner .font-family-NSimSun {
+            font-family: NSimSun
+        }
+
+        .templateDesigner .font-family-SimHei {
+            font-family: SimHei
+        }
+
+        .templateDesigner .font-family-MicrosoftYaHei {
+            font-family: Microsoft YaHei
+        }
+
+        .templateDesigner .font-text-align-left {
+            text-align: left
+        }
+
+        .templateDesigner .font-text-align-center {
+            text-align: center
+        }
+
+        .templateDesigner .font-text-align-right {
+            text-align: right
+        }
+
+        .templateDesigner .font-vertical-align-top, .templateDesigner .font-vertical-align-top .contains {
+            vertical-align: top
+        }
+
+        .templateDesigner .font-vertical-align-middle, .templateDesigner .font-vertical-align-middle .contains {
+            vertical-align: middle
+        }
+
+        .templateDesigner .font-vertical-align-bottom, .templateDesigner .font-vertical-align-bottom .contains {
+            vertical-align: bottom
+        }
+
+        .templateDesigner .page-break-line {
+            border-top: 2px solid blue;
+        }
+
+        .templateDesigner .page-break-line > * {
+            page-break-before: always;
+        }
+
+        @media (-ms-high-contrast: none), screen and (-ms-high-contrast: active) {
+            .templateDesigner table td .contains {
+                position: static
+            }
+
+            .templateDesigner .border-top-width-1:before {
+                border-top-width: 0;
+                margin-top: -1px
+            }
+
+            .templateDesigner .border-right-width-1:before {
+                border-right-width: 0;
+                margin-right: -1px
+            }
+
+            .templateDesigner .border-bottom-width-1:before {
+                border-bottom-width: 0;
+                margin-bottom: -1px
+            }
+
+            .templateDesigner .border-left-width-1:before {
+                border-left-width: 0;
+                margin-left: -1px
+            }
+
+            .templateDesigner .border-top-width-2:before {
+                border-top-width: 0;
+                margin-top: -2px
+            }
+
+            .templateDesigner .border-right-width-2:before {
+                border-right-width: 0;
+                margin-right: -2px
+            }
+
+            .templateDesigner .border-bottom-width-2:before {
+                border-bottom-width: 0;
+                margin-bottom: -2px
+            }
+
+            .templateDesigner .border-left-width-2:before {
+                border-left-width: 0;
+                margin-left: -2px
+            }
+
+            .templateDesigner .border-top-width-3:before {
+                border-top-width: 0;
+                margin-top: -3px
+            }
+
+            .templateDesigner .border-right-width-3:before {
+                border-right-width: 0;
+                margin-right: -3px
+            }
+
+            .templateDesigner .border-bottom-width-3:before {
+                border-bottom-width: 0;
+                margin-bottom: -3px
+            }
+
+            .templateDesigner .border-left-width-3:before {
+                border-left-width: 0;
+                margin-left: -3px
+            }
+
+            .templateDesigner .border-top-width-1 {
+                border-top-width: 1px
+            }
+
+            .templateDesigner .border-right-width-1 {
+                border-right-width: 1px
+            }
+
+            .templateDesigner .border-bottom-width-1 {
+                border-bottom-width: 1px
+            }
+
+            .templateDesigner .border-left-width-1 {
+                border-left-width: 1px
+            }
+
+            .templateDesigner .border-top-width-2 {
+                border-top-width: 2px
+            }
+
+            .templateDesigner .border-right-width-2 {
+                border-right-width: 2px
+            }
+
+            .templateDesigner .border-bottom-width-2 {
+                border-bottom-width: 2px
+            }
+
+            .templateDesigner .border-left-width-2 {
+                border-left-width: 2px
+            }
+
+            .templateDesigner .border-top-width-3 {
+                border-top-width: 3px
+            }
+
+            .templateDesigner .border-right-width-3 {
+                border-right-width: 3px
+            }
+
+            .templateDesigner .border-bottom-width-3 {
+                border-bottom-width: 3px
+            }
+
+            .templateDesigner .border-left-width-3 {
+                border-left-width: 3px
+            }
+
+            .templateDesigner .border-top-style-solid {
+                border-top-style: solid
+            }
+
+            .templateDesigner .border-right-style-solid {
+                border-right-style: solid
+            }
+
+            .templateDesigner .border-bottom-style-solid {
+                border-bottom-style: solid
+            }
+
+            .templateDesigner .border-left-style-solid {
+                border-left-style: solid
+            }
+
+            .templateDesigner .border-top-style-dotted {
+                border-top-style: dotted
+            }
+
+            .templateDesigner .border-right-style-dotted {
+                border-right-style: dotted
+            }
+
+            .templateDesigner .border-bottom-style-dotted {
+                border-bottom-style: dotted
+            }
+
+            .templateDesigner .border-left-style-dotted {
+                border-left-style: dotted
+            }
+
+            .templateDesigner .border-top-style-dashed {
+                border-top-style: dashed
+            }
+
+            .templateDesigner .border-right-style-dashed {
+                border-right-style: dashed
+            }
+
+            .templateDesigner .border-bottom-style-dashed {
+                border-bottom-style: dashed
+            }
+
+            .templateDesigner .border-left-style-dashed {
+                border-left-style: dashed
+            }
+
+            .templateDesigner .border-top-style-double {
+                border-top-style: double
+            }
+
+            .templateDesigner .border-right-style-double {
+                border-right-style: double
+            }
+
+            .templateDesigner .border-bottom-style-double {
+                border-bottom-style: double
+            }
+
+            .templateDesigner .border-left-style-double {
+                border-left-style: double
+            }
+
+            .templateDesigner .border-top-color-ffffff {
+                border-top-color: #fff
+            }
+
+            .templateDesigner .border-top-color-000000 {
+                border-top-color: #000
+            }
+
+            .templateDesigner .border-top-color-EEECE1 {
+                border-top-color: #eeece1
+            }
+
+            .templateDesigner .border-top-color-1F497D {
+                border-top-color: #1f497d
+            }
+
+            .templateDesigner .border-top-color-4F81BD {
+                border-top-color: #4f81bd
+            }
+
+            .templateDesigner .border-top-color-C0504D {
+                border-top-color: #c0504d
+            }
+
+            .templateDesigner .border-top-color-9BBB59 {
+                border-top-color: #9bbb59
+            }
+
+            .templateDesigner .border-top-color-8064A2 {
+                border-top-color: #8064a2
+            }
+
+            .templateDesigner .border-top-color-4BACC6 {
+                border-top-color: #4bacc6
+            }
+
+            .templateDesigner .border-top-color-F79646 {
+                border-top-color: #f79646
+            }
+
+            .templateDesigner .border-top-color-F2F2F2 {
+                border-top-color: #f2f2f2
+            }
+
+            .templateDesigner .border-top-color-DDD9C3 {
+                border-top-color: #ddd9c3
+            }
+
+            .templateDesigner .border-top-color-C6D9F0 {
+                border-top-color: #c6d9f0
+            }
+
+            .templateDesigner .border-top-color-DBE5F1 {
+                border-top-color: #dbe5f1
+            }
+
+            .templateDesigner .border-top-color-F2DCDB {
+                border-top-color: #f2dcdb
+            }
+
+            .templateDesigner .border-top-color-EBF1DD {
+                border-top-color: #ebf1dd
+            }
+
+            .templateDesigner .border-top-color-E5E0EC {
+                border-top-color: #e5e0ec
+            }
+
+            .templateDesigner .border-top-color-DBEEF3 {
+                border-top-color: #dbeef3
+            }
+
+            .templateDesigner .border-top-color-FDEADA {
+                border-top-color: #fdeada
+            }
+
+            .templateDesigner .border-top-color-D8D8D8 {
+                border-top-color: #d8d8d8
+            }
+
+            .templateDesigner .border-top-color-595959 {
+                border-top-color: #595959
+            }
+
+            .templateDesigner .border-top-color-C4BD97 {
+                border-top-color: #c4bd97
+            }
+
+            .templateDesigner .border-top-color-8DB3E2 {
+                border-top-color: #8db3e2
+            }
+
+            .templateDesigner .border-top-color-B8CCE4 {
+                border-top-color: #b8cce4
+            }
+
+            .templateDesigner .border-top-color-E5B9B7 {
+                border-top-color: #e5b9b7
+            }
+
+            .templateDesigner .border-top-color-D7E3BC {
+                border-top-color: #d7e3bc
+            }
+
+            .templateDesigner .border-top-color-CCC1D9 {
+                border-top-color: #ccc1d9
+            }
+
+            .templateDesigner .border-top-color-B7DDE8 {
+                border-top-color: #b7dde8
+            }
+
+            .templateDesigner .border-top-color-FBD5B5 {
+                border-top-color: #fbd5b5
+            }
+
+            .templateDesigner .border-top-color-BFBFBF {
+                border-top-color: #bfbfbf
+            }
+
+            .templateDesigner .border-top-color-3F3F3F {
+                border-top-color: #3f3f3f
+            }
+
+            .templateDesigner .border-top-color-938953 {
+                border-top-color: #938953
+            }
+
+            .templateDesigner .border-top-color-548DD4 {
+                border-top-color: #548dd4
+            }
+
+            .templateDesigner .border-top-color-95B3D7 {
+                border-top-color: #95b3d7
+            }
+
+            .templateDesigner .border-top-color-D99694 {
+                border-top-color: #d99694
+            }
+
+            .templateDesigner .border-top-color-C3D69B {
+                border-top-color: #c3d69b
+            }
+
+            .templateDesigner .border-top-color-B2A2C7 {
+                border-top-color: #b2a2c7
+            }
+
+            .templateDesigner .border-top-color-92CDDC {
+                border-top-color: #92cddc
+            }
+
+            .templateDesigner .border-top-color-FAC08F {
+                border-top-color: #fac08f
+            }
+
+            .templateDesigner .border-top-color-A5A5A5 {
+                border-top-color: #a5a5a5
+            }
+
+            .templateDesigner .border-top-color-262626 {
+                border-top-color: #262626
+            }
+
+            .templateDesigner .border-top-color-494429 {
+                border-top-color: #494429
+            }
+
+            .templateDesigner .border-top-color-17365D {
+                border-top-color: #17365d
+            }
+
+            .templateDesigner .border-top-color-366092 {
+                border-top-color: #366092
+            }
+
+            .templateDesigner .border-top-color-953734 {
+                border-top-color: #953734
+            }
+
+            .templateDesigner .border-top-color-76923C {
+                border-top-color: #76923c
+            }
+
+            .templateDesigner .border-top-color-5F497A {
+                border-top-color: #5f497a
+            }
+
+            .templateDesigner .border-top-color-31849B {
+                border-top-color: #31849b
+            }
+
+            .templateDesigner .border-top-color-E36C09 {
+                border-top-color: #e36c09
+            }
+
+            .templateDesigner .border-top-color-7F7F7F {
+                border-top-color: #7f7f7f
+            }
+
+            .templateDesigner .border-top-color-0C0C0C {
+                border-top-color: #0c0c0c
+            }
+
+            .templateDesigner .border-top-color-1D1B10 {
+                border-top-color: #1d1b10
+            }
+
+            .templateDesigner .border-top-color-0F243E {
+                border-top-color: #0f243e
+            }
+
+            .templateDesigner .border-top-color-244061 {
+                border-top-color: #244061
+            }
+
+            .templateDesigner .border-top-color-632423 {
+                border-top-color: #632423
+            }
+
+            .templateDesigner .border-top-color-4F6128 {
+                border-top-color: #4f6128
+            }
+
+            .templateDesigner .border-top-color-3F3151 {
+                border-top-color: #3f3151
+            }
+
+            .templateDesigner .border-top-color-205867 {
+                border-top-color: #205867
+            }
+
+            .templateDesigner .border-top-color-984806 {
+                border-top-color: #984806
+            }
+
+            .templateDesigner .border-top-color-C00000 {
+                border-top-color: #c00000
+            }
+
+            .templateDesigner .border-top-color-FF0000 {
+                border-top-color: red
+            }
+
+            .templateDesigner .border-top-color-FFC000 {
+                border-top-color: #ffc000
+            }
+
+            .templateDesigner .border-top-color-FFFF00 {
+                border-top-color: #ff0
+            }
+
+            .templateDesigner .border-top-color-92D050 {
+                border-top-color: #92d050
+            }
+
+            .templateDesigner .border-top-color-00B050 {
+                border-top-color: #00b050
+            }
+
+            .templateDesigner .border-top-color-00B0F0 {
+                border-top-color: #00b0f0
+            }
+
+            .templateDesigner .border-top-color-0070C0 {
+                border-top-color: #0070c0
+            }
+
+            .templateDesigner .border-top-color-002060 {
+                border-top-color: #002060
+            }
+
+            .templateDesigner .border-top-color-7030A0 {
+                border-top-color: #7030a0
+            }
+
+            .templateDesigner .border-right-color-ffffff {
+                border-right-color: #fff
+            }
+
+            .templateDesigner .border-right-color-000000 {
+                border-right-color: #000
+            }
+
+            .templateDesigner .border-right-color-EEECE1 {
+                border-right-color: #eeece1
+            }
+
+            .templateDesigner .border-right-color-1F497D {
+                border-right-color: #1f497d
+            }
+
+            .templateDesigner .border-right-color-4F81BD {
+                border-right-color: #4f81bd
+            }
+
+            .templateDesigner .border-right-color-C0504D {
+                border-right-color: #c0504d
+            }
+
+            .templateDesigner .border-right-color-9BBB59 {
+                border-right-color: #9bbb59
+            }
+
+            .templateDesigner .border-right-color-8064A2 {
+                border-right-color: #8064a2
+            }
+
+            .templateDesigner .border-right-color-4BACC6 {
+                border-right-color: #4bacc6
+            }
+
+            .templateDesigner .border-right-color-F79646 {
+                border-right-color: #f79646
+            }
+
+            .templateDesigner .border-right-color-F2F2F2 {
+                border-right-color: #f2f2f2
+            }
+
+            .templateDesigner .border-right-color-DDD9C3 {
+                border-right-color: #ddd9c3
+            }
+
+            .templateDesigner .border-right-color-C6D9F0 {
+                border-right-color: #c6d9f0
+            }
+
+            .templateDesigner .border-right-color-DBE5F1 {
+                border-right-color: #dbe5f1
+            }
+
+            .templateDesigner .border-right-color-F2DCDB {
+                border-right-color: #f2dcdb
+            }
+
+            .templateDesigner .border-right-color-EBF1DD {
+                border-right-color: #ebf1dd
+            }
+
+            .templateDesigner .border-right-color-E5E0EC {
+                border-right-color: #e5e0ec
+            }
+
+            .templateDesigner .border-right-color-DBEEF3 {
+                border-right-color: #dbeef3
+            }
+
+            .templateDesigner .border-right-color-FDEADA {
+                border-right-color: #fdeada
+            }
+
+            .templateDesigner .border-right-color-D8D8D8 {
+                border-right-color: #d8d8d8
+            }
+
+            .templateDesigner .border-right-color-595959 {
+                border-right-color: #595959
+            }
+
+            .templateDesigner .border-right-color-C4BD97 {
+                border-right-color: #c4bd97
+            }
+
+            .templateDesigner .border-right-color-8DB3E2 {
+                border-right-color: #8db3e2
+            }
+
+            .templateDesigner .border-right-color-B8CCE4 {
+                border-right-color: #b8cce4
+            }
+
+            .templateDesigner .border-right-color-E5B9B7 {
+                border-right-color: #e5b9b7
+            }
+
+            .templateDesigner .border-right-color-D7E3BC {
+                border-right-color: #d7e3bc
+            }
+
+            .templateDesigner .border-right-color-CCC1D9 {
+                border-right-color: #ccc1d9
+            }
+
+            .templateDesigner .border-right-color-B7DDE8 {
+                border-right-color: #b7dde8
+            }
+
+            .templateDesigner .border-right-color-FBD5B5 {
+                border-right-color: #fbd5b5
+            }
+
+            .templateDesigner .border-right-color-BFBFBF {
+                border-right-color: #bfbfbf
+            }
+
+            .templateDesigner .border-right-color-3F3F3F {
+                border-right-color: #3f3f3f
+            }
+
+            .templateDesigner .border-right-color-938953 {
+                border-right-color: #938953
+            }
+
+            .templateDesigner .border-right-color-548DD4 {
+                border-right-color: #548dd4
+            }
+
+            .templateDesigner .border-right-color-95B3D7 {
+                border-right-color: #95b3d7
+            }
+
+            .templateDesigner .border-right-color-D99694 {
+                border-right-color: #d99694
+            }
+
+            .templateDesigner .border-right-color-C3D69B {
+                border-right-color: #c3d69b
+            }
+
+            .templateDesigner .border-right-color-B2A2C7 {
+                border-right-color: #b2a2c7
+            }
+
+            .templateDesigner .border-right-color-92CDDC {
+                border-right-color: #92cddc
+            }
+
+            .templateDesigner .border-right-color-FAC08F {
+                border-right-color: #fac08f
+            }
+
+            .templateDesigner .border-right-color-A5A5A5 {
+                border-right-color: #a5a5a5
+            }
+
+            .templateDesigner .border-right-color-262626 {
+                border-right-color: #262626
+            }
+
+            .templateDesigner .border-right-color-494429 {
+                border-right-color: #494429
+            }
+
+            .templateDesigner .border-right-color-17365D {
+                border-right-color: #17365d
+            }
+
+            .templateDesigner .border-right-color-366092 {
+                border-right-color: #366092
+            }
+
+            .templateDesigner .border-right-color-953734 {
+                border-right-color: #953734
+            }
+
+            .templateDesigner .border-right-color-76923C {
+                border-right-color: #76923c
+            }
+
+            .templateDesigner .border-right-color-5F497A {
+                border-right-color: #5f497a
+            }
+
+            .templateDesigner .border-right-color-31849B {
+                border-right-color: #31849b
+            }
+
+            .templateDesigner .border-right-color-E36C09 {
+                border-right-color: #e36c09
+            }
+
+            .templateDesigner .border-right-color-7F7F7F {
+                border-right-color: #7f7f7f
+            }
+
+            .templateDesigner .border-right-color-0C0C0C {
+                border-right-color: #0c0c0c
+            }
+
+            .templateDesigner .border-right-color-1D1B10 {
+                border-right-color: #1d1b10
+            }
+
+            .templateDesigner .border-right-color-0F243E {
+                border-right-color: #0f243e
+            }
+
+            .templateDesigner .border-right-color-244061 {
+                border-right-color: #244061
+            }
+
+            .templateDesigner .border-right-color-632423 {
+                border-right-color: #632423
+            }
+
+            .templateDesigner .border-right-color-4F6128 {
+                border-right-color: #4f6128
+            }
+
+            .templateDesigner .border-right-color-3F3151 {
+                border-right-color: #3f3151
+            }
+
+            .templateDesigner .border-right-color-205867 {
+                border-right-color: #205867
+            }
+
+            .templateDesigner .border-right-color-984806 {
+                border-right-color: #984806
+            }
+
+            .templateDesigner .border-right-color-C00000 {
+                border-right-color: #c00000
+            }
+
+            .templateDesigner .border-right-color-FF0000 {
+                border-right-color: red
+            }
+
+            .templateDesigner .border-right-color-FFC000 {
+                border-right-color: #ffc000
+            }
+
+            .templateDesigner .border-right-color-FFFF00 {
+                border-right-color: #ff0
+            }
+
+            .templateDesigner .border-right-color-92D050 {
+                border-right-color: #92d050
+            }
+
+            .templateDesigner .border-right-color-00B050 {
+                border-right-color: #00b050
+            }
+
+            .templateDesigner .border-right-color-00B0F0 {
+                border-right-color: #00b0f0
+            }
+
+            .templateDesigner .border-right-color-0070C0 {
+                border-right-color: #0070c0
+            }
+
+            .templateDesigner .border-right-color-002060 {
+                border-right-color: #002060
+            }
+
+            .templateDesigner .border-right-color-7030A0 {
+                border-right-color: #7030a0
+            }
+
+            .templateDesigner .border-bottom-color-ffffff {
+                border-bottom-color: #fff
+            }
+
+            .templateDesigner .border-bottom-color-000000 {
+                border-bottom-color: #000
+            }
+
+            .templateDesigner .border-bottom-color-EEECE1 {
+                border-bottom-color: #eeece1
+            }
+
+            .templateDesigner .border-bottom-color-1F497D {
+                border-bottom-color: #1f497d
+            }
+
+            .templateDesigner .border-bottom-color-4F81BD {
+                border-bottom-color: #4f81bd
+            }
+
+            .templateDesigner .border-bottom-color-C0504D {
+                border-bottom-color: #c0504d
+            }
+
+            .templateDesigner .border-bottom-color-9BBB59 {
+                border-bottom-color: #9bbb59
+            }
+
+            .templateDesigner .border-bottom-color-8064A2 {
+                border-bottom-color: #8064a2
+            }
+
+            .templateDesigner .border-bottom-color-4BACC6 {
+                border-bottom-color: #4bacc6
+            }
+
+            .templateDesigner .border-bottom-color-F79646 {
+                border-bottom-color: #f79646
+            }
+
+            .templateDesigner .border-bottom-color-F2F2F2 {
+                border-bottom-color: #f2f2f2
+            }
+
+            .templateDesigner .border-bottom-color-DDD9C3 {
+                border-bottom-color: #ddd9c3
+            }
+
+            .templateDesigner .border-bottom-color-C6D9F0 {
+                border-bottom-color: #c6d9f0
+            }
+
+            .templateDesigner .border-bottom-color-DBE5F1 {
+                border-bottom-color: #dbe5f1
+            }
+
+            .templateDesigner .border-bottom-color-F2DCDB {
+                border-bottom-color: #f2dcdb
+            }
+
+            .templateDesigner .border-bottom-color-EBF1DD {
+                border-bottom-color: #ebf1dd
+            }
+
+            .templateDesigner .border-bottom-color-E5E0EC {
+                border-bottom-color: #e5e0ec
+            }
+
+            .templateDesigner .border-bottom-color-DBEEF3 {
+                border-bottom-color: #dbeef3
+            }
+
+            .templateDesigner .border-bottom-color-FDEADA {
+                border-bottom-color: #fdeada
+            }
+
+            .templateDesigner .border-bottom-color-D8D8D8 {
+                border-bottom-color: #d8d8d8
+            }
+
+            .templateDesigner .border-bottom-color-595959 {
+                border-bottom-color: #595959
+            }
+
+            .templateDesigner .border-bottom-color-C4BD97 {
+                border-bottom-color: #c4bd97
+            }
+
+            .templateDesigner .border-bottom-color-8DB3E2 {
+                border-bottom-color: #8db3e2
+            }
+
+            .templateDesigner .border-bottom-color-B8CCE4 {
+                border-bottom-color: #b8cce4
+            }
+
+            .templateDesigner .border-bottom-color-E5B9B7 {
+                border-bottom-color: #e5b9b7
+            }
+
+            .templateDesigner .border-bottom-color-D7E3BC {
+                border-bottom-color: #d7e3bc
+            }
+
+            .templateDesigner .border-bottom-color-CCC1D9 {
+                border-bottom-color: #ccc1d9
+            }
+
+            .templateDesigner .border-bottom-color-B7DDE8 {
+                border-bottom-color: #b7dde8
+            }
+
+            .templateDesigner .border-bottom-color-FBD5B5 {
+                border-bottom-color: #fbd5b5
+            }
+
+            .templateDesigner .border-bottom-color-BFBFBF {
+                border-bottom-color: #bfbfbf
+            }
+
+            .templateDesigner .border-bottom-color-3F3F3F {
+                border-bottom-color: #3f3f3f
+            }
+
+            .templateDesigner .border-bottom-color-938953 {
+                border-bottom-color: #938953
+            }
+
+            .templateDesigner .border-bottom-color-548DD4 {
+                border-bottom-color: #548dd4
+            }
+
+            .templateDesigner .border-bottom-color-95B3D7 {
+                border-bottom-color: #95b3d7
+            }
+
+            .templateDesigner .border-bottom-color-D99694 {
+                border-bottom-color: #d99694
+            }
+
+            .templateDesigner .border-bottom-color-C3D69B {
+                border-bottom-color: #c3d69b
+            }
+
+            .templateDesigner .border-bottom-color-B2A2C7 {
+                border-bottom-color: #b2a2c7
+            }
+
+            .templateDesigner .border-bottom-color-92CDDC {
+                border-bottom-color: #92cddc
+            }
+
+            .templateDesigner .border-bottom-color-FAC08F {
+                border-bottom-color: #fac08f
+            }
+
+            .templateDesigner .border-bottom-color-A5A5A5 {
+                border-bottom-color: #a5a5a5
+            }
+
+            .templateDesigner .border-bottom-color-262626 {
+                border-bottom-color: #262626
+            }
+
+            .templateDesigner .border-bottom-color-494429 {
+                border-bottom-color: #494429
+            }
+
+            .templateDesigner .border-bottom-color-17365D {
+                border-bottom-color: #17365d
+            }
+
+            .templateDesigner .border-bottom-color-366092 {
+                border-bottom-color: #366092
+            }
+
+            .templateDesigner .border-bottom-color-953734 {
+                border-bottom-color: #953734
+            }
+
+            .templateDesigner .border-bottom-color-76923C {
+                border-bottom-color: #76923c
+            }
+
+            .templateDesigner .border-bottom-color-5F497A {
+                border-bottom-color: #5f497a
+            }
+
+            .templateDesigner .border-bottom-color-31849B {
+                border-bottom-color: #31849b
+            }
+
+            .templateDesigner .border-bottom-color-E36C09 {
+                border-bottom-color: #e36c09
+            }
+
+            .templateDesigner .border-bottom-color-7F7F7F {
+                border-bottom-color: #7f7f7f
+            }
+
+            .templateDesigner .border-bottom-color-0C0C0C {
+                border-bottom-color: #0c0c0c
+            }
+
+            .templateDesigner .border-bottom-color-1D1B10 {
+                border-bottom-color: #1d1b10
+            }
+
+            .templateDesigner .border-bottom-color-0F243E {
+                border-bottom-color: #0f243e
+            }
+
+            .templateDesigner .border-bottom-color-244061 {
+                border-bottom-color: #244061
+            }
+
+            .templateDesigner .border-bottom-color-632423 {
+                border-bottom-color: #632423
+            }
+
+            .templateDesigner .border-bottom-color-4F6128 {
+                border-bottom-color: #4f6128
+            }
+
+            .templateDesigner .border-bottom-color-3F3151 {
+                border-bottom-color: #3f3151
+            }
+
+            .templateDesigner .border-bottom-color-205867 {
+                border-bottom-color: #205867
+            }
+
+            .templateDesigner .border-bottom-color-984806 {
+                border-bottom-color: #984806
+            }
+
+            .templateDesigner .border-bottom-color-C00000 {
+                border-bottom-color: #c00000
+            }
+
+            .templateDesigner .border-bottom-color-FF0000 {
+                border-bottom-color: red
+            }
+
+            .templateDesigner .border-bottom-color-FFC000 {
+                border-bottom-color: #ffc000
+            }
+
+            .templateDesigner .border-bottom-color-FFFF00 {
+                border-bottom-color: #ff0
+            }
+
+            .templateDesigner .border-bottom-color-92D050 {
+                border-bottom-color: #92d050
+            }
+
+            .templateDesigner .border-bottom-color-00B050 {
+                border-bottom-color: #00b050
+            }
+
+            .templateDesigner .border-bottom-color-00B0F0 {
+                border-bottom-color: #00b0f0
+            }
+
+            .templateDesigner .border-bottom-color-0070C0 {
+                border-bottom-color: #0070c0
+            }
+
+            .templateDesigner .border-bottom-color-002060 {
+                border-bottom-color: #002060
+            }
+
+            .templateDesigner .border-bottom-color-7030A0 {
+                border-bottom-color: #7030a0
+            }
+
+            .templateDesigner .border-left-color-ffffff {
+                border-left-color: #fff
+            }
+
+            .templateDesigner .border-left-color-000000 {
+                border-left-color: #000
+            }
+
+            .templateDesigner .border-left-color-EEECE1 {
+                border-left-color: #eeece1
+            }
+
+            .templateDesigner .border-left-color-1F497D {
+                border-left-color: #1f497d
+            }
+
+            .templateDesigner .border-left-color-4F81BD {
+                border-left-color: #4f81bd
+            }
+
+            .templateDesigner .border-left-color-C0504D {
+                border-left-color: #c0504d
+            }
+
+            .templateDesigner .border-left-color-9BBB59 {
+                border-left-color: #9bbb59
+            }
+
+            .templateDesigner .border-left-color-8064A2 {
+                border-left-color: #8064a2
+            }
+
+            .templateDesigner .border-left-color-4BACC6 {
+                border-left-color: #4bacc6
+            }
+
+            .templateDesigner .border-left-color-F79646 {
+                border-left-color: #f79646
+            }
+
+            .templateDesigner .border-left-color-F2F2F2 {
+                border-left-color: #f2f2f2
+            }
+
+            .templateDesigner .border-left-color-DDD9C3 {
+                border-left-color: #ddd9c3
+            }
+
+            .templateDesigner .border-left-color-C6D9F0 {
+                border-left-color: #c6d9f0
+            }
+
+            .templateDesigner .border-left-color-DBE5F1 {
+                border-left-color: #dbe5f1
+            }
+
+            .templateDesigner .border-left-color-F2DCDB {
+                border-left-color: #f2dcdb
+            }
+
+            .templateDesigner .border-left-color-EBF1DD {
+                border-left-color: #ebf1dd
+            }
+
+            .templateDesigner .border-left-color-E5E0EC {
+                border-left-color: #e5e0ec
+            }
+
+            .templateDesigner .border-left-color-DBEEF3 {
+                border-left-color: #dbeef3
+            }
+
+            .templateDesigner .border-left-color-FDEADA {
+                border-left-color: #fdeada
+            }
+
+            .templateDesigner .border-left-color-D8D8D8 {
+                border-left-color: #d8d8d8
+            }
+
+            .templateDesigner .border-left-color-595959 {
+                border-left-color: #595959
+            }
+
+            .templateDesigner .border-left-color-C4BD97 {
+                border-left-color: #c4bd97
+            }
+
+            .templateDesigner .border-left-color-8DB3E2 {
+                border-left-color: #8db3e2
+            }
+
+            .templateDesigner .border-left-color-B8CCE4 {
+                border-left-color: #b8cce4
+            }
+
+            .templateDesigner .border-left-color-E5B9B7 {
+                border-left-color: #e5b9b7
+            }
+
+            .templateDesigner .border-left-color-D7E3BC {
+                border-left-color: #d7e3bc
+            }
+
+            .templateDesigner .border-left-color-CCC1D9 {
+                border-left-color: #ccc1d9
+            }
+
+            .templateDesigner .border-left-color-B7DDE8 {
+                border-left-color: #b7dde8
+            }
+
+            .templateDesigner .border-left-color-FBD5B5 {
+                border-left-color: #fbd5b5
+            }
+
+            .templateDesigner .border-left-color-BFBFBF {
+                border-left-color: #bfbfbf
+            }
+
+            .templateDesigner .border-left-color-3F3F3F {
+                border-left-color: #3f3f3f
+            }
+
+            .templateDesigner .border-left-color-938953 {
+                border-left-color: #938953
+            }
+
+            .templateDesigner .border-left-color-548DD4 {
+                border-left-color: #548dd4
+            }
+
+            .templateDesigner .border-left-color-95B3D7 {
+                border-left-color: #95b3d7
+            }
+
+            .templateDesigner .border-left-color-D99694 {
+                border-left-color: #d99694
+            }
+
+            .templateDesigner .border-left-color-C3D69B {
+                border-left-color: #c3d69b
+            }
+
+            .templateDesigner .border-left-color-B2A2C7 {
+                border-left-color: #b2a2c7
+            }
+
+            .templateDesigner .border-left-color-92CDDC {
+                border-left-color: #92cddc
+            }
+
+            .templateDesigner .border-left-color-FAC08F {
+                border-left-color: #fac08f
+            }
+
+            .templateDesigner .border-left-color-A5A5A5 {
+                border-left-color: #a5a5a5
+            }
+
+            .templateDesigner .border-left-color-262626 {
+                border-left-color: #262626
+            }
+
+            .templateDesigner .border-left-color-494429 {
+                border-left-color: #494429
+            }
+
+            .templateDesigner .border-left-color-17365D {
+                border-left-color: #17365d
+            }
+
+            .templateDesigner .border-left-color-366092 {
+                border-left-color: #366092
+            }
+
+            .templateDesigner .border-left-color-953734 {
+                border-left-color: #953734
+            }
+
+            .templateDesigner .border-left-color-76923C {
+                border-left-color: #76923c
+            }
+
+            .templateDesigner .border-left-color-5F497A {
+                border-left-color: #5f497a
+            }
+
+            .templateDesigner .border-left-color-31849B {
+                border-left-color: #31849b
+            }
+
+            .templateDesigner .border-left-color-E36C09 {
+                border-left-color: #e36c09
+            }
+
+            .templateDesigner .border-left-color-7F7F7F {
+                border-left-color: #7f7f7f
+            }
+
+            .templateDesigner .border-left-color-0C0C0C {
+                border-left-color: #0c0c0c
+            }
+
+            .templateDesigner .border-left-color-1D1B10 {
+                border-left-color: #1d1b10
+            }
+
+            .templateDesigner .border-left-color-0F243E {
+                border-left-color: #0f243e
+            }
+
+            .templateDesigner .border-left-color-244061 {
+                border-left-color: #244061
+            }
+
+            .templateDesigner .border-left-color-632423 {
+                border-left-color: #632423
+            }
+
+            .templateDesigner .border-left-color-4F6128 {
+                border-left-color: #4f6128
+            }
+
+            .templateDesigner .border-left-color-3F3151 {
+                border-left-color: #3f3151
+            }
+
+            .templateDesigner .border-left-color-205867 {
+                border-left-color: #205867
+            }
+
+            .templateDesigner .border-left-color-984806 {
+                border-left-color: #984806
+            }
+
+            .templateDesigner .border-left-color-C00000 {
+                border-left-color: #c00000
+            }
+
+            .templateDesigner .border-left-color-FF0000 {
+                border-left-color: red
+            }
+
+            .templateDesigner .border-left-color-FFC000 {
+                border-left-color: #ffc000
+            }
+
+            .templateDesigner .border-left-color-FFFF00 {
+                border-left-color: #ff0
+            }
+
+            .templateDesigner .border-left-color-92D050 {
+                border-left-color: #92d050
+            }
+
+            .templateDesigner .border-left-color-00B050 {
+                border-left-color: #00b050
+            }
+
+            .templateDesigner .border-left-color-00B0F0 {
+                border-left-color: #00b0f0
+            }
+
+            .templateDesigner .border-left-color-0070C0 {
+                border-left-color: #0070c0
+            }
+
+            .templateDesigner .border-left-color-002060 {
+                border-left-color: #002060
+            }
+
+            .templateDesigner .border-left-color-7030A0 {
+                border-left-color: #7030a0
+            }
+        }
+
+        @media print {
+            a:link {
+                text-decoration: underline
+            }
+
+            a:link:after {
+                content: '(' attr(href) ')';
+                font-size: 6pt;
+                font-type: italic
+            }
+
+            img {
+                max-width: 100% !important
+            }
+
+            .page-break + table, .page-break + tr {
+                margin-top: 1px
+            }
+
+            .templateDesigner table td, .templateDesigner table td .inside-image, .templateDesigner table tr {
+                page-break-inside: avoid
+            }
+        }
+
+        .page-break {
+            page-break-before: always
+        }
+
+
+    </style>
+</head>
+<body class="templateDesigner">
+<table>
+    <tr style="height:134px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;"></td>
+        <td style="width:100px;">12</td>
+        <td style="width:100px;"></td>
+    </tr>
+    <tr style="height:56px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;" class="font-vertical-align-top indent-left-1">aaa</td>
+        <td style="border:1px solid red;width:100px;"
+            class="font-text-align-right border-top-style-solid border-top-color-000000 border-top-width-1 border-left-style-solid border-left-color-000000 border-left-width-1">
+            bbb
+        </td>
+        <td style="border:1px solid red;width:100px;"
+            class="border-left-style-solid border-left-color-000000 border-left-width-1">ccc
+        </td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;" class="font-text-align-center page-break-line"></td>
+        <td style="width:100px;" class="font-text-align-right page-break-line"></td>
+        <td style="width:264px;" class="page-break-line font-size-14 indent-left-5">123123</td>
+        <td style="border:1px solid red;width:100px;"
+            class="border-top-style-solid border-top-color-000000 border-top-width-1 page-break-line">123
+        </td>
+        <td style="border:1px solid red;width:100px;" class="page-break-line">123</td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;" class="font-weight-bold">5&nbsp;&nbsp;&nbsp;55</td>
+        <td style="border:1px solid red;width:100px;">123</td>
+        <td style="border:1px solid red;width:100px;">123</td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="color:#31849B;width:264px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:100px;"></td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;" class="font-text-align-left font-vertical-align-top indent-left-2">123</td>
+        <td style="width:264px;" class="font-vertical-align-middle indent-left-19">123</td>
+        <td style="width:100px;" class="font-text-align-right font-vertical-align-bottom">123</td>
+        <td style="width:100px;"></td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;">1</td>
+        <td style="width:100px;">1</td>
+        <td style="width:100px;">1</td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;">1</td>
+        <td style="width:100px;">1</td>
+        <td style="width:100px;">1</td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;">1</td>
+        <td style="width:100px;">1</td>
+        <td style="width:100px;">1</td>
+    </tr>
+    <tr style="height:24px;">
+        <td style="width:188px;"></td>
+        <td style="width:100px;"></td>
+        <td style="width:264px;">1</td>
+        <td style="width:100px;">1</td>
+        <td style="width:100px;">1</td>
+    </tr>
+</table>
+<script type="text/javascript">window.onload = function () {
+    window.print()
+}</script>
+</body>
+</html>
