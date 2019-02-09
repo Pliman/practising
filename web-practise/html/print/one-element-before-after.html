@@ -20,7 +20,7 @@
 
             border-collapse: collapse;
             border-spacing: 0;
-            border: 1px solid blue;
+            /*border: 1px solid blue;*/
         }
 
         td:before {
@@ -38,8 +38,18 @@
             border-top: 1px solid blue;
         }
 
-        .page-break-line .page-breaker{
-            page-break-after: always
+        .page-breaker{
+
+        }
+
+        .page-breaker:before {
+            content: "";
+            page-break-after: always;
+            display: block;
+        }
+
+        .page-breaker:after {
+            content: ""
         }
     </style>
 </head>
@@ -57,8 +67,8 @@
     </tr>
     <tr>
         <td class="page-break-line"><div class="page-breaker"></div>123</td>
-        <td class="page-break-line">123<div>22</div></td>
-        <td class="page-break-line">123<div>22</div></td>
+        <td class="page-break-line"><div class="page-breaker"></div>123<div>22</div></td>
+        <td class="page-break-line"><div class="page-breaker"></div>123<div>22</div></td>
     </tr>
     <!--<tr>-->
         <!--<td class="page-break-line"><div class="page-breaker"></div><div>123</div></td>-->
