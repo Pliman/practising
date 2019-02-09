@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>center</title>
+    <style type="text/css">
+        /*可行方案1*/
+        /*html {*/
+            /*height: 100%*/
+        /*}*/
+        /*body {*/
+            /*display: flex;*/
+            /*align-items: center;*/
+            /*height: 100%*/
+        /*}*/
+        /*.box {*/
+            /*height: 50vw;*/
+            /*!*width: 50vw;*!*/
+            /*border: 1px solid red;*/
+            /*flex: 0 0 50vw;*/
+        /*}*/
+
+        html {
+            height: 100%
+        }
+        body {
+            height: 100%;
+            display:table-cell;
+            text-align:center;
+            vertical-align:middle;
+            /*line-height: 100%;*/
+            /*vertical-align: middle;*/
+        }
+        .box {
+            height: 50vw;
+            width: 50vw;
+            border: 1px solid red;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+ <div class="box"></div>
+</body>
+</html>
