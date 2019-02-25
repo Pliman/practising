@@ -1,0 +1,60 @@
+<!-- https://www.cnblogs.com/CCHUncle/p/6252597.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片等比缩放</title>
+    <style>
+        div {
+            width: 1400px;
+            height: 1000px;
+        }
+
+        img {
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <img src="风景.jpeg" id="image"/>
+</div>
+<script>
+    function scalingImage(imgWidth, imgHeight, containerWidth, containerHeight) {
+        var containerRatio = containerWidth / containerHeight;
+        var imgRatio = imgWidth / imgHeight;
+
+        if (imgRatio > containerRatio) {
+            imgWidth = containerWidth;
+            imgHeight = containerWidth / imgRatio;
+        } else if (imgRatio < containerRatio) {
+            imgHeight = containerHeight;
+            imgWidth = containerHeight * imgRatio;
+        } else {
+            imgWidth = containerWidth;
+            imgHeight = containerHeight;
+        }
+
+        return { width: imgWidth, height: imgHeight };
+    }
+
+    var container = document.getElementById('container'),
+        image = document.getElementById('image');
+
+    let imgWidth = image.getBoundingClientRect().width;
+    let imgHeight = image.getBoundingClientRect().height;
+    let containerWidth = container.getBoundingClientRect().width;
+    let containerHeight = container.getBoundingClientRect().height;
+    let scalingImageSize = scalingImage(
+        imgWidth,
+        imgHeight,
+        containerWidth,
+        containerHeight
+    );
+
+    console.log(scalingImageSize)
+
+    image.width = scalingImageSize.width
+    image.height = scalingImageSize.height
+</script>
+</body>
+</html>
