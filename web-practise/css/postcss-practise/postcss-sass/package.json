@@ -1,0 +1,31 @@
+{
+    "name": "postcss-sass",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "webpack-dev-server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "babel-loader": "^8.0.5",
+        "css-loader": "^2.1.1",
+        "postcss-aspect-ratio-mini": "^1.0.1",
+        "postcss-flexbugs-fixes": "^4.1.0",
+        "postcss-import": "^12.0.1",
+        "postcss-loader": "^3.0.0",
+        "postcss-preset-env": "^6.6.0",
+        "postcss-px-to-viewport": "^1.1.0",
+        "postcss-url": "^8.0.0",
+        "postcss-write-svg": "^3.0.1",
+        "sass-loader": "^6.0.5",
+        "style-loader": "^0.23.1"
+    },
+    "devDependencies": {
+        "webpack": "^4.19.1",
+        "webpack-cli": "^3.2.3",
+        "webpack-dev-server": "^3.3.0"
+    }
+}
