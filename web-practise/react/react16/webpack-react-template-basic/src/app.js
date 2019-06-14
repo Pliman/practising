@@ -27,7 +27,6 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        console.log('m1')
         console.time('mount')
     }
 
@@ -36,7 +35,6 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('r2')
         console.time('render items')
 
         let renderedItems = this.state.items && this.state.items.length > 0

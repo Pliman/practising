@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>直接渲染</title>
+</head>
+<body>
+<div id="app">
+    loading...
+</div>
+
+<script>
+    let startTime = new Date().getTime()
+
+    function genItems() {
+        console.time('gen items')
+
+        let items = []
+
+        for (let i = 0; i < 10000; i++) {
+            items.push({
+                name: `name${i}`,
+                age: i
+            })
+        }
+
+        console.timeEnd('gen items')
+
+        return items
+    }
+
+    let items = genItems()
+    console.log(`generated items, time passed ${(new Date().getTime() - startTime)}ms`)
+
+    let fragment = document.createDocumentFragment()
+
+    console.time('gen el')
+    items.forEach(item => {
+        let el = document.createElement('div')
+        el.key = item.age
+
+        let labelEl = document.createElement('label')
+        labelEl.innerText = item.name
+
+        let inputEl = document.createElement('input')
+        inputEl.value = item.age
+
+        el.appendChild(labelEl)
+        el.appendChild(inputEl)
+
+        fragment.append(el)
+    })
+    console.timeEnd('gen el')
+    console.log(`generated el, time passed ${(new Date().getTime() - startTime)}ms`)
+
+    console.time('mount')
+    let appEl = document.getElementById('app');
+    appEl.replaceChild(fragment, appEl.firstChild)
+    console.timeEnd('mount')
+    console.log(`mounted, time passed ${(new Date().getTime() - startTime)}ms`)
+    console.log(appEl.children.length)
+</script>
+</body>
+</html>
