@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce</title>
+</head>
+<body>
+
+<script>
+    function 标准实现(idle, action){
+        var last
+        return function(){
+            var ctx = this, args = arguments
+            clearTimeout(last)
+            last = setTimeout(function(){
+                action.apply(ctx, args)
+            }, idle)
+        }
+    }
+
+    function debounce(fn, delay) {
+        var lastTriggerTime = 0, execution
+
+        return function () {
+            var _arguments = arguments
+            var now = new Date().getTime()
+
+            if (!lastTriggerTime || now - lastTriggerTime <= delay) {
+                if (execution) {
+                    clearTimeout(execution)
+                }
+
+                execution = setTimeout(function() {
+                    fn.apply(this, _arguments)
+                    lastTriggerTime = 0
+                }, delay)
+                lastTriggerTime = now
+            }
+        }
+    }
+
+    function say(a, b) {
+        console.log('say')
+        console.log(a, b)
+    }
+
+    var newFunc = debounce(say, 55)
+
+    newFunc()
+    // setTimeout(function () {
+    //     newFunc(1,2)
+    // }, 50)
+    setTimeout(function () {
+        newFunc()
+    }, 100)
+    setTimeout(function () {
+        newFunc()
+    }, 150)
+    setTimeout(function () {
+        newFunc()
+    }, 200)
+    setTimeout(function () {
+        newFunc()
+    }, 250)
+    setTimeout(function () {
+        newFunc()
+    }, 300)
+    setTimeout(function () {
+        newFunc()
+    }, 350)
+    setTimeout(function () {
+        newFunc()
+    }, 400)
+    setTimeout(function () {
+        newFunc()
+    }, 450)
+    setTimeout(function () {
+        newFunc()
+    }, 500)
+    setTimeout(function () {
+        newFunc()
+    }, 600)
+</script>
+</body>
+</html>

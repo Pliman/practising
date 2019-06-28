@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>throttle</title>
+</head>
+<body>
+
+<script>
+    function 标准实现(delay, action){
+        var last = 0
+        return function(){
+            var curr = +new Date() //+new Date()只是将new Date()转为数值
+            if (curr - last > delay){
+                action.apply(this, arguments)
+                last = curr
+            }
+        }
+    }
+
+    function throttle(fn, interval) {
+        var lastExeTime = 0
+
+        return function () {
+            var now = new Date().getTime()
+
+            if (lastExeTime) {
+                if (now - lastExeTime <= interval) {
+                    return
+                }
+            }
+
+            fn.apply(this, arguments)
+            lastExeTime = now
+        }
+    }
+
+    function say() {
+        console.log('say')
+    }
+
+    // var newFunc = 标准实现(200, say)
+    var newFunc = throttle(say, 200)
+
+    newFunc()
+    setTimeout(function () {
+        newFunc()
+    }, 100)
+    setTimeout(function () {
+        newFunc()
+    }, 150)
+    setTimeout(function () {
+        newFunc()
+    }, 200)
+    setTimeout(function () {
+        newFunc()
+    }, 250)
+    setTimeout(function () {
+        newFunc()
+    }, 300)
+    setTimeout(function () {
+        newFunc()
+    }, 350)
+    setTimeout(function () {
+        newFunc()
+    }, 400)
+    setTimeout(function () {
+        newFunc()
+    }, 450)
+    setTimeout(function () {
+        newFunc()
+    }, 500)
+    setTimeout(function () {
+        newFunc()
+    }, 800)
+</script>
+</body>
+</html>
