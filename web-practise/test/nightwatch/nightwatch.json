@@ -1,0 +1,19 @@
+{
+    "src_folders" : ["tests"],
+
+    "webdriver" : {
+        "start_process": true,
+        "server_path": "./bin/chromedriver",
+        "port": 9515
+    },
+
+    "test_settings" : {
+        "default" : {
+            "desiredCapabilities": {
+                "browserName": "chrome",
+
+                "loggingPrefs": {"driver": "INFO", "server": "OFF", "browser": "INFO"}
+            }
+        }
+    }
+}
