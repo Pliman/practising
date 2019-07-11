@@ -1,0 +1,21 @@
+{
+  "name": "nightwatch-api-node",
+  "version": "1.0.0",
+  "description": "Demonstration for using Nightwatch API from Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "test:firefox": "cross-env NIGHTWATCH_ENV=firefox npm test",
+    "debug": "cross-env NIGHTWATCH_VERBOSE=true DEBUG=nightwatch-api node --inspect-brk test.js"
+  },
+  "repository": "git@github.com:mucsi96/nightwatch-api.git",
+  "author": "Igor Mucsicska <mucsi_96@yahoo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chromedriver": "^75.0.1",
+    "cross-env": "^5.2.0",
+    "geckodriver": "^1.16.2",
+    "nightwatch": "^1.1.13",
+    "nightwatch-api": "latest"
+  }
+}

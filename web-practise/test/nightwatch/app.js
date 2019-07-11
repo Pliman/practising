@@ -1,6 +1,6 @@
 const Nightwatch = require('nightwatch')
 
-Nightwatch.runTests('/path/to/tests_folder', {
+Nightwatch.runTests('./tests/google.js', {
 // various settings
 }).then(function() {
 // Tests finished

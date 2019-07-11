@@ -2,7 +2,7 @@ module.exports = (function(settings) {
     settings.test_workers = false
 
     // 根据平台设置webdriver路径
-    settings.webdriver.server_path = `./bin/${process.platform}/chromedriver`
+    // settings.webdriver.server_path = `./bin/${process.platform}/chromedriver`
 
     // 使用headless模式
     // settings.test_settings.default.desiredCapabilities.chromeOptions = {
