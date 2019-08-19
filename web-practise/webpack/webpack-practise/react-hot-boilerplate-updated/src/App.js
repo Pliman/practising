@@ -3,6 +3,8 @@ import Home from './Home'
 
 export default class App extends Component {
   render() {
+      console.log('render App')
+
     return (
         <div>
             <Home />
