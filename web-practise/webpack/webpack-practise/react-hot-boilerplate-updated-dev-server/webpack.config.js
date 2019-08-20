@@ -11,6 +11,11 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/static/'
     },
+    resolve: {
+        alias: {
+            'react-dom': '@hot-loader/react-dom'
+        }
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
