@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>要使用的图像：</p>
+<img id="tulip" src="https://www.w3school.com.cn/i/eg_tulip.jpg" alt="The Tulip"/>
+
+<div>
+    <ul>
+        <li id="ordinaryElement">一般元素</li>
+    </ul>
+</div>
+
+<p>画布：</p>
+<canvas id="myCanvas" width="500" height="300"
+        style="border:1px solid #d3d3d3;background:#ffffff;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+    setTimeout(function () {
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        // var img = document.getElementById("ordinaryElement"); // 报错，不是CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas其中一个类型
+        var img = document.getElementById("tulip");
+        ctx.drawImage(img, 10, 10);
+    }, 2000)
+</script>
+
+</body>
+</html>

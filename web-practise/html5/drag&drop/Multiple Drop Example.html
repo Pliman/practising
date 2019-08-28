@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        ul {
+            width: 200px;
+        }
+
+        .dragImage {
+            width: 200px;
+        }
+
+        .dragImage li {
+            border-bottom: 1px solid dashed;
+        }
+
+        li.selected {
+            background-color: yellow;
+        }
+
+        li {
+            cursor: pointer;
+            list-style: none;
+
+        }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
+</head>
+<body>
+
+<ul>
+    <li>Apples</li>
+    <li>Bananas</li>
+    <li>Oranges</li>
+    <li>Grapes</li>
+    <li>Pears</li>
+</ul>
+
+<script>
+    $("li").attr("draggable", "true").on("click", function() {
+        $(this).toggleClass("selected");
+    }).on("dragstart", function(e) {
+        e = e.originalEvent;
+
+        var fruitList = [],
+            dragImage = document.createElement("ul");
+
+        $("li.selected").each(function() {
+            fruitList.push(this.innerHTML);
+            dragImage.appendChild(this.cloneNode(true));
+        });
+        console.debug("Dragging ", JSON.stringify(fruitList));
+        e.dataTransfer.setData("fruits", JSON.stringify(fruitList));
+        document.body.appendChild(dragImage);
+        setTimeout(function() { dragImage.parentNode.removeChild(dragImage) });
+        e.dataTransfer.setDragImage(dragImage, 50, 0);
+
+
+    });
+</script>
+</body>
+</html>

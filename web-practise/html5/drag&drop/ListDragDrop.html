@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8"/>
+
+    <title></title>
+
+    <link rel="stylesheet" href="ListDragDrop.css"/>
+
+    <script>
+        function load() {
+            var delbox = document.getElementById('del');
+            delbox.addEventListener('dragover', onDragOver, false);
+            delbox.addEventListener('drop', onDrop, false);
+            var elems = document.querySelectorAll('ul#list1 > li');
+            for (var i = 0; i < elems.length; i++) {
+                el = elems[i];
+                el.setAttribute('draggable', 'true');
+                el.addEventListener('dragstart', onDragStart, false);
+            }
+        }
+
+        function onDragStart(e) {
+            e.dataTransfer.effectAllowed = 'copy';
+            e.dataTransfer.setData('text', this.id);
+        }
+
+        function onDragOver(e) {
+            e.preventDefault();
+        }
+
+        function onDrop(e) {
+            if (e.stopPropagation) e.stopPropagation();
+            var eid = e.dataTransfer.getData('text');
+            var elem = document.getElementById(eid);
+            elem.parentNode.removeChild(elem);
+        }
+    </script>
+</head>
+
+<body onload="load();">
+<div id="del">删除</div>
+<ul id="list1">
+    <li id="1">海豚</li>
+    <li id="2">鲸鱼</li>
+    <li id="3">企鹅</li>
+    <li id="4">北极熊</li>
+    <li id="5">雪狐</li>
+</ul>
+</body>
+</html>
