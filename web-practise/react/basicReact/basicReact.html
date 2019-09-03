@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./react16.9.development.js"></script>
+    <script src="./react-dom16.9.development.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+    class App extends React.Component {
+        constructor(args) {
+            super(args)
+
+            this.state = {a: 'a'}
+        }
+
+        UNSAFE_componentWillUpdate() {
+            console.log(111)
+        }
+
+        componentDidMount() {
+            this.setState({a: 'b'}, function () {
+                console.log(document.getElementById('aaa').innerText)
+            })
+            this.setState({a: 'c'}, function () {
+                console.log(document.getElementById('aaa').innerText)
+            })
+            this.setState({a: 'd'}, function () {
+                console.log(document.getElementById('aaa').innerText)
+            })
+            this.setState({a: 'e'}, function () {
+                console.log(document.getElementById('aaa').innerText)
+            })
+        }
+
+        render() {
+            return React.createElement('div', {id: 'aaa'}, this.state.a)
+        }
+    }
+
+    ReactDOM.render(
+        React.createElement(App, null, '123'),
+        document.getElementById("root")
+    )
+</script>
+</body>
+</html>
