@@ -1,3 +1,3 @@
-import * as lodash from './lodash'
+import * as lodash from 'lodash'
 
-// lodash.fake()
+lodash.fake()
