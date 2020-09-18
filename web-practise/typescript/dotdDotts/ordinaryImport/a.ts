@@ -1,2 +1,5 @@
-import mashString from './b'
-// console.log(mashString("12345"));
+/// <reference path="./index.d.ts"/>
+
+import * as a from './index'
+
+console.log(a)
