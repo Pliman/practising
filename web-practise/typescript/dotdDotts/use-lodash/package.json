@@ -1,0 +1,15 @@
+{
+  "name": "nodts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash": "^4.14.161",
+    "lodash": "^4.17.20"
+  }
+}

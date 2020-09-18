@@ -1,0 +1,21 @@
+//{
+//    "compilerOptions": {
+//        "module": "commonjs",
+//        "experimentalDecorators": true,
+//        "emitDecoratorMetadata": true,
+//        "target": "ES5",
+//        "allowJs": true
+//
+////        "noImplicitAny": true
+//    }
+
+
+//    ,"include": [
+//        "*"
+//    ]
+
+    //    ,
+    //    "exclude": [
+    //        "node_modules"
+    //    ]
+}

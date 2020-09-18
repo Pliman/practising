@@ -1,3 +1,3 @@
 import * as a from './module'
 
-console.log(a.maxInterval)
+a.console.log(a.maxInterval)

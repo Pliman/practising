@@ -7,4 +7,5 @@ function getArrayLength(arr) {
 module.exports = {
     getArrayLength,
     maxInterval,
+    console
 };
