@@ -1,6 +1,6 @@
 function quick_sort(list, start, end) {
   if (start < end) {
-    var pivotpos = partition(list, start, end); //找出快排的基数 - 其实是找第一个pos的索引，以便将数组拆分为索引前数组和索引后数组
+    var pivotpos = partition(list, start, end); //排序并找出下一次快排的基数 - 其实是找第一个pos的索引，以便将数组拆分为索引前数组和索引后数组
     quick_sort(list, start, pivotpos - 1); //将左边的快排一次
     quick_sort(list, pivotpos + 1, end); //将右边的快排一次
   }
