@@ -6,7 +6,7 @@
 </head>
 <script src="Convert_Pinyin.js"></script>
 <script>
-    var ConvertName = function(){
+    var ConvertName = function () {
         var chinaName = document.getElementById('chinaName').value;
         //获取全写拼音（调用js中方法）
         var fullName = pinyin.getFullChars(chinaName);
@@ -16,13 +16,64 @@
         document.getElementById('fullName').value = fullName;
         document.getElementById('easyName').value = easyName;
     }
-
 </script>
 <body>
 <div>
-    输入名称：<input type="text" id="chinaName"  onBlur="ConvertName()" />  <br/>
-    全写拼音：<input type="text" id="fullName" /> <br/>
-    简写拼音：<input type="text" id="easyName" /> <br/>
+    输入名称：<input type="text" id="chinaName" onBlur="ConvertName()"/> <br/>
+    全写拼音：<input type="text" id="fullName"/> <br/>
+    简写拼音：<input type="text" id="easyName"/> <br/>
+
+    语音解析：：<input type="text" id="voiceParse"/> <br/>
 </div>
+
+<script>
+    let starKeywords = [['zhi', 'zi'], ['xing', 'xin']]
+    let matched = []
+
+    function matchCharPinyin(charPinyin, charPinyinArr) {
+        for (let i = 0; i < charPinyinArr.length; i++) {
+            let currentCharIPinyin = charPinyinArr[i]
+
+            if (charPinyin === currentCharIPinyin) {
+                matched.push(charPinyin)
+                return i
+            }
+        }
+
+        return -1
+    }
+
+    let voiceStr = '坚持之星啊啊啊啊劳动之星'
+    let firstIndex = null
+    let invalidInstruction = false
+    let pinyinArrIndex = 0 // 双指针，指到当前需要匹配的音节数组
+    let startFirstCharPos = 2, endFirstCharPos = 3
+    let toMarchLength = 2
+
+    // 从第i2个字开始匹配，匹配到第i3个字
+    for (let s = startFirstCharPos; s < voiceStr.length; s++) {
+        if (!toMarchLength || (!firstIndex && s > endFirstCharPos)) {
+            break
+        }
+
+        let ch = voiceStr.substr(s, 1)
+        let charPinyin = pinyin.getFullChars(ch).toLowerCase()
+        let charPinyinArr = starKeywords[pinyinArrIndex]
+        let index = matchCharPinyin(charPinyin, charPinyinArr);
+
+        if (index !== -1) {
+            firstIndex === null && (firstIndex = s)
+            pinyinArrIndex++
+            toMarchLength--
+        }
+    }
+
+    console.log(firstIndex)
+    invalidInstruction = !!toMarchLength
+    console.log(invalidInstruction)
+    console.log(matched)
+
+    document.getElementById('voiceParse').value = `${firstIndex} ${invalidInstruction} ${matched}`;
+</script>
 </body>
 </html>
