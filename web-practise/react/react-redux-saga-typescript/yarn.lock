@@ -3537,7 +3537,7 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-saga@*, redux-saga@^0.14.3:
+redux-saga@*:
   version "0.14.4"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.4.tgz#a09acf294ef8387a0f23043e5c6d2f9f3fd25b54"
 
@@ -4186,13 +4186,6 @@ type-is@~1.6.14:
     media-typer "0.3.0"
     mime-types "~2.1.13"
 
-typescript-fsa-redux-saga@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typescript-fsa-redux-saga/-/typescript-fsa-redux-saga-1.0.1.tgz#43e11f838c5abca62e2da320c35cf36156284aac"
-  dependencies:
-    redux-saga "^0.14.3"
-    typescript-fsa "^2.0.0"
-
 typescript-fsa@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/typescript-fsa/-/typescript-fsa-2.0.0.tgz#12d1a94d3bcfbcdd87e829a2786cb401d1f685da"
@@ -4202,8 +4195,8 @@ typescript@^2.1.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.2.tgz#606022508479b55ffa368b58fee963a03dfd7b0c"
 
 ua-parser-js@^0.7.9:
-  version "0.7.12"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
+  version "0.7.31"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
 
 uglify-js@2.8.x, uglify-js@^2.6:
   version "2.8.20"
