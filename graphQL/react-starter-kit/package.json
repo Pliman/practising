@@ -78,7 +78,7 @@
     "jest-codemods": "^0.12.0",
     "jscodeshift": "^0.3.32",
     "lint-staged": "^4.0.0",
-    "markdown-it": "^8.3.1",
+    "markdown-it": "^12.3.2",
     "mkdirp": "^0.5.1",
     "null-loader": "^0.1.1",
     "opn-cli": "^3.1.0",
